@@ -49,7 +49,7 @@ export function ProfileSummary() {
             <img
               src="/abraham_about.png"
               alt="Abraham S"
-              className="w-full h-full object-cover object-center scale-[1.3] origin-[50%_35%] transition-transform duration-500 group-hover:scale-[1.35]"
+              className="w-full h-full object-cover object-center scale-[1.18] origin-[50%_35%] transition-transform duration-500 group-hover:scale-[1.23]"
             />
           </div>
         </motion.div>
