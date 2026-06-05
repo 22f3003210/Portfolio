@@ -286,10 +286,10 @@ export function HowIThinkSection() {
               {/* Left Column: Narrative */}
               <div className="lg:col-span-6 space-y-6">
                 <div className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-gold" />
+                  <TrendingUp className="w-5 h-5 text-[#8CC63F]" />
                 </div>
                 <div>
-                  <span className="text-[9px] font-extrabold uppercase tracking-widest text-gold font-mono font-bold">THE CORE PHILOSOPHY</span>
+                  <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#8CC63F] font-mono font-bold">THE CORE PHILOSOPHY</span>
                   <h3 className="text-3xl font-extrabold mt-1 text-white leading-tight">
                     Interconnected Operating System
                   </h3>
@@ -305,8 +305,8 @@ export function HowIThinkSection() {
               </div>
 
               {/* Right Column: Connection visual list */}
-              <div className="lg:col-span-6 bg-white/[0.03] border border-white/10 p-6 md:p-8 rounded-none space-y-6">
-                <span className="text-xs font-bold text-gold uppercase tracking-wider font-mono">Cross-Functional Dependencies</span>
+              <div className="lg:col-span-6 bg-[#050F1A] border border-white/10 p-6 md:p-8 rounded-none space-y-6 transition-all duration-300 hover:border-[#8CC63F]/30 hover:shadow-[0_4px_20px_rgba(140,198,63,0.05)]">
+                <span className="text-xs font-bold text-[#8CC63F] uppercase tracking-wider font-mono">CROSS-FUNCTIONAL DEPENDENCIES</span>
                 
                 <ul className="space-y-2.5 text-xs md:text-sm font-medium text-white/90">
                   {[
@@ -318,7 +318,7 @@ export function HowIThinkSection() {
                     'Every component influences another.'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-4 h-4 text-gold shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-[#8CC63F] shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -329,7 +329,7 @@ export function HowIThinkSection() {
                 </p>
 
                 <div className="border-t border-white/10 pt-4 mt-2">
-                  <p className="text-sm md:text-base font-extrabold italic text-gold leading-relaxed">
+                  <p className="text-sm md:text-base font-extrabold italic text-[#8CC63F] leading-relaxed">
                     "Because in the end: Every outcome is produced by a process. Improve the process, and the outcome improves automatically."
                   </p>
                 </div>
