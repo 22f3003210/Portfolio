@@ -291,7 +291,7 @@ export function HowIThinkSection() {
                 <div>
                   <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#8CC63F] font-mono font-bold">THE CORE PHILOSOPHY</span>
                   <h3 className="text-3xl font-extrabold mt-1 text-white leading-tight">
-                    Interconnected Operating System
+                    Interconnected Operating Systems Expertise
                   </h3>
                 </div>
                 <div className="space-y-4 text-white/95 text-sm md:text-base leading-relaxed">
@@ -305,7 +305,7 @@ export function HowIThinkSection() {
               </div>
 
               {/* Right Column: Connection visual list */}
-              <div className="lg:col-span-6 bg-[#050F1A] border border-white/10 p-6 md:p-8 rounded-none space-y-6 transition-all duration-300 hover:border-[#8CC63F]/30 hover:shadow-[0_4px_20px_rgba(140,198,63,0.05)]">
+              <div className="lg:col-span-6 bg-gradient-to-br from-[#1F295D] to-[#121A3E] border border-white/10 p-6 md:p-8 rounded-none space-y-6 transition-all duration-300 hover:border-[#8CC63F]/30 hover:shadow-[0_4px_20px_rgba(140,198,63,0.05)]">
                 <span className="text-xs font-bold text-[#8CC63F] uppercase tracking-wider font-mono">CROSS-FUNCTIONAL DEPENDENCIES</span>
                 
                 <ul className="space-y-2.5 text-xs md:text-sm font-medium text-white/90">
