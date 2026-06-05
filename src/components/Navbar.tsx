@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Moon, Diamond } from 'lucide-react';
+import { Menu, X, Moon } from 'lucide-react';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -46,19 +46,20 @@ export function Navbar() {
       <div className="content-max">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <Diamond
-              className="w-5 h-5 text-gold"
-              strokeWidth={2}
+          <Link to="/" className="flex items-center gap-2 group">
+            <img 
+              src="/logo.jpg" 
+              alt="Scale with Abraham" 
+              className="h-10 w-10 object-cover rounded-md border border-white/20 shadow-md transition-transform duration-300 group-hover:scale-105"
             />
             <div className="flex flex-col">
-              <span className={`text-base font-bold leading-tight transition-colors duration-300 ${
-                isScrolled ? 'text-text-primary' : 'text-white'
+              <span className={`text-[15px] font-extrabold leading-tight transition-colors duration-300 ${
+                isScrolled ? 'text-[#00203f]' : 'text-white'
               }`}>
-                Abraham S
+                Scale with Abraham
               </span>
-              <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gold leading-tight">
-                JEWELLERY DIGITAL
+              <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-gold leading-tight">
+                Systems & Retail Consulting
               </span>
             </div>
           </Link>

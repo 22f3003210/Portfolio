@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Phone, MapPin, Linkedin } from 'lucide-react';
 import { GoldButton } from '../../components/GoldButton';
 import { OutlineButton } from '../../components/OutlineButton';
 import { ScrollReveal } from '../../components/ScrollReveal';
+import { CalendarBooking } from '../../components/CalendarBooking';
 
 export function CTASection() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   return (
     <section className="bg-white section-padding-lg">
       <div className="content-max">
@@ -28,13 +31,13 @@ export function CTASection() {
                 </li>
                 <li>
                   <a
-                    href="https://linkedin.com/in/abraham-s"
+                    href="https://linkedin.com/in/abrahamsayed"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors"
                   >
                     <Linkedin className="w-4 h-4 text-gold" />
-                    /in/abraham-s
+                    /in/abrahamsayed
                   </a>
                 </li>
               </ul>
@@ -46,7 +49,7 @@ export function CTASection() {
               <p className="text-sm text-text-secondary">
                 Free 30-min discovery call to scope your transformation.
               </p>
-              <GoldButton to="/contact" fullWidth className="mt-auto">
+              <GoldButton onClick={() => setIsBookingOpen(true)} fullWidth className="mt-auto">
                 Start the conversation →
               </GoldButton>
               <OutlineButton to="/about" fullWidth>
@@ -56,6 +59,8 @@ export function CTASection() {
           </div>
         </ScrollReveal>
       </div>
+
+      <CalendarBooking isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </section>
   );
 }

@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { GoldButton } from '../../components/GoldButton';
 import { OutlineButton } from '../../components/OutlineButton';
+import { CalendarBooking } from '../../components/CalendarBooking';
 
 export function HeroSection() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
 
 
@@ -103,7 +106,7 @@ export function HeroSection() {
                   Explore the Operating System
                 </GoldButton>
                 <OutlineButton 
-                  to="/contact" 
+                  onClick={() => setIsBookingOpen(true)}
                   variant="dark" 
                   className="border-navy/40 text-navy hover:bg-navy/5 hover:border-navy"
                 >
@@ -121,6 +124,9 @@ export function HeroSection() {
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
           <ChevronDown className="w-5 h-5 text-navy/40 animate-bounce" />
         </div>
+
+        {/* Calendar booking Modal popup */}
+        <CalendarBooking isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
       </section>
     </div>
   );

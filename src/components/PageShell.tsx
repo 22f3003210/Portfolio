@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
+import { logPageView, logClickEvent } from '../lib/supabase';
 
 interface PageShellProps {
   children: ReactNode;
@@ -10,6 +12,39 @@ interface PageShellProps {
 
 export function PageShell({ children }: PageShellProps) {
   const location = useLocation();
+
+  useEffect(() => {
+    // 1. Log page view on path changes
+    logPageView(location.pathname, document.referrer);
+
+    // 2. Setup global click listeners for all interactive CTAs
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      let current: HTMLElement | null = target;
+      
+      while (current && current !== document.body) {
+        if (
+          current.tagName === 'A' ||
+          current.tagName === 'BUTTON' ||
+          current.getAttribute('role') === 'button'
+        ) {
+          // Identify button by ID, href, text content, or general tag name
+          const elementId = current.id || 
+            current.getAttribute('href') || 
+            current.textContent?.trim().slice(0, 40) || 
+            current.tagName;
+          const elementText = current.textContent?.trim().slice(0, 60) || '';
+          
+          logClickEvent(elementId, elementText, location.pathname);
+          break;
+        }
+        current = current.parentElement;
+      }
+    };
+
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+  }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex flex-col">

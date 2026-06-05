@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Diamond, MapPin, Phone, Mail, Linkedin } from 'lucide-react';
+import { MapPin, Phone, Mail, Linkedin } from 'lucide-react';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -16,12 +16,16 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16">
           {/* Brand */}
           <div>
-            <Link to="/" className="flex items-center gap-2.5 mb-4">
-              <Diamond className="w-5 h-5 text-gold" strokeWidth={2} />
+            <Link to="/" className="flex items-center gap-2 mb-4 group">
+              <img 
+                src="/logo.jpg" 
+                alt="Scale with Abraham" 
+                className="h-10 w-10 object-cover rounded-md border border-white/25 shadow-md transition-transform duration-300 group-hover:scale-105"
+              />
               <div className="flex flex-col">
-                <span className="text-base font-bold leading-tight text-white">Abraham S</span>
-                <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-gold leading-tight">
-                  JEWELLERY DIGITAL
+                <span className="text-[15px] font-extrabold leading-tight text-white">Scale with Abraham</span>
+                <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-gold leading-tight">
+                  Systems & Retail Consulting
                 </span>
               </div>
             </Link>
@@ -95,7 +99,7 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-2">
-          <p className="text-xs text-white/50">© 2025 Abraham S. All rights reserved.</p>
+          <p className="text-xs text-white/50">© 2026 Scale with Abraham. All rights reserved.</p>
           <p className="text-xs text-white/50">Built for jewellery retail leaders.</p>
         </div>
       </div>

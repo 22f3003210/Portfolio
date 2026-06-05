@@ -3,8 +3,11 @@ import { Send, Phone, Mail, MapPin, Linkedin, Calendar, Download } from 'lucide-
 import { GoldButton } from '../../components/GoldButton';
 import { OutlineButton } from '../../components/OutlineButton';
 import { ScrollReveal } from '../../components/ScrollReveal';
+import { CalendarBooking } from '../../components/CalendarBooking';
+import { submitAppointment } from '../../lib/supabase';
 
 export function ContactFormSection() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,10 +15,23 @@ export function ContactFormSection() {
     message: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for reaching out! We will get back to you shortly.');
-    setFormData({ name: '', email: '', company: '', message: '' });
+    try {
+      await submitAppointment({
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        date: 'Enquiry',
+        timeSlot: 'Contact Form',
+        description: formData.message
+      });
+      alert('Thank you for reaching out! Your message was sent successfully.');
+      setFormData({ name: '', email: '', company: '', message: '' });
+    } catch (err) {
+      console.error('Failed to log contact form submission:', err);
+      alert('Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -112,11 +128,11 @@ export function ContactFormSection() {
                   </li>
                   <li>
                     <a
-                      href="mailto:abraham@example.com"
+                      href="mailto:scale.with.abraham@gmail.com"
                       className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors"
                     >
                       <Mail className="w-4 h-4 text-gold" />
-                      abraham@example.com
+                      scale.with.abraham@gmail.com
                     </a>
                   </li>
                   <li className="flex items-center gap-3 text-sm text-white/80">
@@ -125,13 +141,13 @@ export function ContactFormSection() {
                   </li>
                   <li>
                     <a
-                      href="https://linkedin.com/in/abraham-s"
+                      href="https://linkedin.com/in/abrahamsayed"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors"
                     >
                       <Linkedin className="w-4 h-4 text-gold" />
-                      /in/abraham-s
+                      /in/abrahamsayed
                     </a>
                   </li>
                 </ul>
@@ -150,7 +166,11 @@ export function ContactFormSection() {
                 <p className="text-sm text-text-secondary mb-4">
                   Skip the form — grab a calendar slot directly.
                 </p>
-                <OutlineButton fullWidth icon={<Calendar className="w-4 h-4" />}>
+                <OutlineButton 
+                  onClick={() => setIsBookingOpen(true)}
+                  fullWidth 
+                  icon={<Calendar className="w-4 h-4" />}
+                >
                   Open calendar
                 </OutlineButton>
               </div>
@@ -172,6 +192,8 @@ export function ContactFormSection() {
           </div>
         </div>
       </div>
+
+      <CalendarBooking isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </section>
   );
 }
