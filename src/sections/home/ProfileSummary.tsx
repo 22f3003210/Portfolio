@@ -15,7 +15,7 @@ export function ProfileSummary() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-          className="group bg-[#0B1E2E] rounded-none border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 w-full"
+          className="bg-[#0B1E2E] rounded-none border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 w-full"
         >
           {/* Left - Introduction details (60% / 7 columns) */}
           <div className="lg:col-span-7 flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-14 text-white">
@@ -49,7 +49,7 @@ export function ProfileSummary() {
             <img
               src="/abraham_about.png"
               alt="Abraham S"
-              className="w-full h-full object-cover object-center scale-[1.18] origin-[50%_35%] transition-transform duration-500 group-hover:scale-[1.23]"
+              className="w-full h-full object-cover object-center"
             />
           </div>
         </motion.div>
