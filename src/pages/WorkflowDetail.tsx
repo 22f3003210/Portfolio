@@ -155,6 +155,236 @@ export function WorkflowDetail() {
       {workflow.slug === 'p2p-jewellery-supply-chain' && (
         <section className="bg-[#001026] text-white py-12 px-6 border-b border-white/10 select-none">
           <div className="max-w-[1200px] mx-auto">
+            
+            {/* Major & Recurring Procurement Classifications */}
+            <div className="space-y-6 text-left mb-12">
+              <div>
+                <span className="text-[10px] font-mono font-bold tracking-widest text-gold uppercase block mb-1">
+                  Scope of Inventory
+                </span>
+                <h3 className="text-lg font-black text-white uppercase tracking-tight">
+                  Major & Recurring Procurement Classifications
+                </h3>
+                <p className="text-xs text-white/60 max-w-xl font-medium mt-1">
+                  Standard classifications utilized across showroom inventory mapping, vendor purchase orders, and karating vault controls.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* 1. Raw Materials (Indigo/Violet Gradient - "Bills" Schema) */}
+                <div className="group bg-gradient-to-b from-[#1F295D] to-[#121A3E] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  <div>
+                    {/* Header Row */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-white tracking-wide font-sans">
+                        1. RAW MATERIALS
+                      </span>
+                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Metric Number */}
+                    <div className="text-6xl font-extrabold text-white/95 mt-2 font-sans select-none">
+                      3
+                    </div>
+
+                    {/* Classifications Text */}
+                    <div className="space-y-3 mt-4 text-xs text-white/80 font-medium relative z-10">
+                      <div>
+                        <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Precious Metals</strong>
+                        Gold, Silver, Platinum
+                      </div>
+                      <div>
+                        <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Loose Stones</strong>
+                        Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, and Moissanite
+                      </div>
+                      <div>
+                        <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Findings & Components</strong>
+                        Locks, Clasps, Hooks, Ear Nuts, Chains, and Connectors
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Vector Illustration (Receipt & Cash) */}
+                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-45 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                    <svg className="w-24 h-24" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* White bill sheet */}
+                      <rect x="25" y="15" width="55" height="85" rx="5" fill="#FFFFFF" />
+                      {/* BILL title */}
+                      <text x="33" y="32" fill="#2E3A8A" fontFamily="system-ui, -apple-system, sans-serif" fontSize="10" fontWeight="900" letterSpacing="0.5">BILL</text>
+                      {/* Lines on the bill */}
+                      <rect x="33" y="42" width="38" height="4" rx="2" fill="#E2E8F0" />
+                      <rect x="33" y="52" width="38" height="4" rx="2" fill="#CBD5E1" />
+                      <rect x="33" y="62" width="25" height="4" rx="2" fill="#E2E8F0" />
+                      <rect x="33" y="72" width="38" height="4" rx="2" fill="#E2E8F0" />
+                      <rect x="33" y="82" width="30" height="4" rx="2" fill="#2E3A8A" />
+                      
+                      {/* Stack of cash green banknotes */}
+                      <g transform="translate(15, 65)">
+                        {/* Back note */}
+                        <rect x="0" y="5" width="45" height="26" rx="3" fill="#059669" stroke="#047857" strokeWidth="1" />
+                        {/* Front note */}
+                        <rect x="4" y="0" width="45" height="26" rx="3" fill="#10B981" stroke="#059669" strokeWidth="1" />
+                        {/* Oval in middle */}
+                        <ellipse cx="26.5" cy="13" rx="8" ry="5" fill="#A7F3D0" />
+                        {/* Corner decorations */}
+                        <circle cx="8" cy="4" r="1.5" fill="#34D399" />
+                        <circle cx="45" cy="4" r="1.5" fill="#34D399" />
+                        <circle cx="8" cy="22" r="1.5" fill="#34D399" />
+                        <circle cx="45" cy="22" r="1.5" fill="#34D399" />
+                      </g>
+
+                      {/* Blue credit card */}
+                      <g transform="translate(55, 75)">
+                        <rect x="0" y="0" width="45" height="28" rx="4" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1" />
+                        {/* Chip */}
+                        <rect x="6" y="8" width="8" height="6" rx="1" fill="#F59E0B" />
+                        {/* Visa/logo lines */}
+                        <circle cx="34" cy="20" r="4" fill="#EF4444" opacity="0.8" />
+                        <circle cx="38" cy="20" r="4" fill="#F59E0B" opacity="0.8" />
+                        {/* Card number line */}
+                        <rect x="6" y="18" width="18" height="2" rx="0.5" fill="#93C5FD" />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+
+                {/* 2. Finished Goods (Deep Blue/Navy Gradient - "Sales" Schema) */}
+                <div className="group bg-gradient-to-b from-[#0E3570] to-[#071C40] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  <div>
+                    {/* Header Row */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-white tracking-wide font-sans">
+                        2. FINISHED GOODS
+                      </span>
+                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Metric Number */}
+                    <div className="text-6xl font-extrabold text-white/95 mt-2 font-sans select-none">
+                      1
+                    </div>
+
+                    {/* Classifications Text */}
+                    <div className="space-y-3 mt-4 text-xs text-white/80 font-medium relative z-10">
+                      <div>
+                        <strong className="text-sky-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Ready-to-Sell Products</strong>
+                        Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, and Mangalsutras
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Vector Illustration (Store Front) */}
+                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-45 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                    <svg className="w-24 h-24" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Shop background / walls */}
+                      <rect x="25" y="55" width="70" height="45" fill="#1D4ED8" rx="2" />
+                      
+                      {/* Door */}
+                      <rect x="50" y="70" width="20" height="30" fill="#FBBF24" />
+                      {/* Door handle */}
+                      <circle cx="54" cy="85" r="2" fill="#D97706" />
+
+                      {/* Windows */}
+                      <rect x="32" y="68" width="12" height="15" fill="#93C5FD" rx="1" />
+                      <rect x="76" y="68" width="12" height="15" fill="#93C5FD" rx="1" />
+                      
+                      {/* Awning (red & white stripes) */}
+                      <g>
+                        {/* Awning backing */}
+                        <rect x="20" y="40" width="80" height="18" fill="#EF4444" rx="2" />
+                        {/* Stripes */}
+                        <path d="M20 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M28 40h8v18h-8z" fill="#FFFFFF" />
+                        <path d="M36 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M44 40h8v18h-8z" fill="#FFFFFF" />
+                        <path d="M52 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M60 40h8v18h-8z" fill="#FFFFFF" />
+                        <path d="M68 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M76 40h8v18h-8z" fill="#FFFFFF" />
+                        <path d="M84 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M92 40h8v18h-8z" fill="#FFFFFF" />
+                      </g>
+                      
+                      {/* SHOP sign */}
+                      <rect x="35" y="16" width="50" height="20" rx="4" fill="#10B981" stroke="#FFFFFF" strokeWidth="2" />
+                      <text x="60" y="30" fill="#FFFFFF" fontFamily="system-ui, -apple-system, sans-serif" fontSize="10" fontWeight="900" textAnchor="middle" letterSpacing="1">SHOP</text>
+                    </svg>
+                  </div>
+                </div>
+
+                {/* 3. Packaging Materials (Bronze/Orange Gradient - "Memo" Schema) */}
+                <div className="group bg-gradient-to-b from-[#9A5D24] to-[#5C3410] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  <div>
+                    {/* Header Row */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-xl font-bold text-white tracking-wide font-sans">
+                        3. PACKAGING & BRANDING
+                      </span>
+                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                      </div>
+                    </div>
+
+                    {/* Metric Number */}
+                    <div className="text-6xl font-extrabold text-white/95 mt-2 font-sans select-none">
+                      3
+                    </div>
+
+                    {/* Classifications Text */}
+                    <div className="space-y-3 mt-4 text-xs text-white/80 font-medium relative z-10">
+                      <div>
+                        <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Primary Packaging</strong>
+                        Jewellery Boxes, Pouches, and Zip Covers
+                      </div>
+                      <div>
+                        <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Secondary Packaging</strong>
+                        Carry Bags, Shipping Boxes, and Bubble Wrap
+                      </div>
+                      <div>
+                        <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Branding Materials</strong>
+                        Tags, Labels, Certificates, and Warranty Cards
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Vector Illustration (Notepad) */}
+                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-45 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                    <svg className="w-24 h-24" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Main notepad sheet */}
+                      <path d="M30 20h50l20 20v60a6 6 0 01-6 6H30a6 6 0 01-6-6V26a6 6 0 016-6z" fill="#F59E0B" />
+                      {/* Folded corner */}
+                      <path d="M80 20v20h20L80 20z" fill="#D97706" />
+                      
+                      {/* Lines on notepad */}
+                      <rect x="34" y="50" width="52" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+                      <rect x="34" y="60" width="52" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+                      <rect x="34" y="70" width="52" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+                      <rect x="34" y="80" width="38" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+                      
+                      {/* Paperclip */}
+                      <g transform="translate(36, 12)">
+                        <path d="M4 16v-8a6 6 0 0112 0v10a4 4 0 01-8 0v-8a2 2 0 014 0v6" stroke="#94A3B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        <path d="M4 16v-8a6 6 0 0112 0v10a4 4 0 01-8 0v-8a2 2 0 014 0v6" stroke="#E2E8F0" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-white/10 my-8" />
+
             <div className="flex items-center gap-2 mb-6">
               <SlidersHorizontal className="w-5 h-5 text-gold" />
               <span className="text-xs font-mono font-bold tracking-widest text-gold uppercase">
@@ -265,85 +495,6 @@ export function WorkflowDetail() {
               </div>
 
             </div>
-
-            {/* Divider */}
-            <div className="border-t border-white/10 my-8" />
-
-            {/* Major & Recurring Procurement Classifications */}
-            <div className="space-y-6 text-left">
-              <div>
-                <span className="text-[10px] font-mono font-bold tracking-widest text-gold uppercase block mb-1">
-                  Scope of Inventory
-                </span>
-                <h3 className="text-lg font-black text-white uppercase tracking-tight">
-                  Major & Recurring Procurement Classifications
-                </h3>
-                <p className="text-xs text-white/60 max-w-xl font-medium mt-1">
-                  Standard classifications utilized across showroom inventory mapping, vendor purchase orders, and karating vault controls.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* 1. Raw Materials */}
-                <div className="bg-[#0B1E2E]/60 border border-white/10 p-5 space-y-4 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-gold" />
-                  <span className="text-[10px] font-mono font-bold text-gold uppercase tracking-wider block border-b border-white/5 pb-2">
-                    1. Raw Materials
-                  </span>
-                  <div className="space-y-3 text-xs text-white/80">
-                    <div>
-                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-gold/80 mb-0.5">Precious Metals</strong>
-                      Gold, Silver, Platinum
-                    </div>
-                    <div>
-                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-gold/80 mb-0.5">Loose Stones</strong>
-                      Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, and Moissanite
-                    </div>
-                    <div>
-                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-gold/80 mb-0.5">Findings & Components</strong>
-                      Locks, Clasps, Hooks, Ear Nuts, Chains, and Connectors
-                    </div>
-                  </div>
-                </div>
-
-                {/* 2. Finished Goods */}
-                <div className="bg-[#0B1E2E]/60 border border-white/10 p-5 space-y-4 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-[#0170B9]" />
-                  <span className="text-[10px] font-mono font-bold text-[#0170B9] uppercase tracking-wider block border-b border-white/5 pb-2">
-                    2. Finished Goods
-                  </span>
-                  <div className="space-y-3 text-xs text-white/80">
-                    <div>
-                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-[#0170B9]/80 mb-0.5">Ready-to-Sell Products</strong>
-                      Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, and Mangalsutras
-                    </div>
-                  </div>
-                </div>
-
-                {/* 3. Packaging Materials */}
-                <div className="bg-[#0B1E2E]/60 border border-white/10 p-5 space-y-4 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-1 h-full bg-white/40" />
-                  <span className="text-[10px] font-mono font-bold text-white/70 uppercase tracking-wider block border-b border-white/5 pb-2">
-                    3. Packaging & Branding
-                  </span>
-                  <div className="space-y-3 text-xs text-white/80">
-                    <div>
-                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-white/60 mb-0.5">Primary Packaging</strong>
-                      Jewellery Boxes, Pouches, and Zip Covers
-                    </div>
-                    <div>
-                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-white/60 mb-0.5">Secondary Packaging</strong>
-                      Carry Bags, Shipping Boxes, and Bubble Wrap
-                    </div>
-                    <div>
-                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-white/60 mb-0.5">Branding Materials</strong>
-                      Tags, Labels, Certificates, and Warranty Cards
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </section>
       )}
