@@ -145,7 +145,9 @@ const problems: ProblemItem[] = [
               return (
                 <div
                   key={problem.number}
-                  className={`relative h-[140px] w-full ${
+                  className={`relative transition-all duration-300 ${
+                    isExpanded ? 'h-auto z-30' : 'h-[140px] z-10'
+                  } ${
                     isLastCard 
                       ? 'md:col-span-2 lg:col-span-3' 
                       : ''
@@ -157,7 +159,7 @@ const problems: ProblemItem[] = [
                     onClick={() => setSelectedCard(isSelected ? null : index)}
                     animate={{
                       height: isExpanded ? 'auto' : '140px',
-                      scale: isExpanded ? 1.05 : 1,
+                      scale: isExpanded ? 1.02 : 1,
                       zIndex: isExpanded ? 50 : 10,
                     }}
                     transition={{ 
@@ -169,7 +171,7 @@ const problems: ProblemItem[] = [
                     style={{
                       borderTop: `4px solid ${topColor}`
                     }}
-                    className={`absolute top-0 left-0 w-full bg-white border rounded-none overflow-hidden cursor-pointer text-text-primary transition-colors transition-shadow duration-300 ${
+                    className={`${isExpanded ? 'relative' : 'absolute'} top-0 left-0 w-full bg-white border rounded-none overflow-hidden cursor-pointer text-text-primary transition-colors transition-shadow duration-300 ${
                       isExpanded
                         ? 'border-gold shadow-2xl'
                         : 'border-gray-150 shadow-md hover:border-gold/30'

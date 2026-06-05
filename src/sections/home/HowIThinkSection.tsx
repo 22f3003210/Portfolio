@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { SectionLabel } from '../../components/SectionLabel';
+import { useIsMobile } from '../../hooks/use-mobile';
 
 interface ThinkCard {
   title: string;
@@ -11,6 +12,7 @@ interface ThinkCard {
 
 export function HowIThinkSection() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const isMobile = useIsMobile();
 
   const handleMouseEnter = useCallback((idx: number) => {
     setHoveredIdx(idx);
@@ -87,9 +89,9 @@ export function HowIThinkSection() {
             const isHovered = hoveredIdx === idx;
             return (
               /* Wrapper holds the grid cell size constant; overflow-visible lets the card grow out */
-              <div key={idx} className="relative flex items-center" style={{ zIndex: isHovered ? 50 : 1 }}>
+              <div key={idx} className={`relative flex items-center transition-all duration-300 ${isHovered ? 'h-auto z-30' : 'z-10'}`} style={{ zIndex: isHovered ? 50 : 1 }}>
                 {/* Invisible spacer — mirrors the default card content to lock the cell height */}
-                <div className="p-6 invisible pointer-events-none w-full" aria-hidden="true">
+                <div className={`p-6 invisible pointer-events-none w-full ${isMobile ? 'hidden' : 'block'}`} aria-hidden="true">
                   <div className="text-[100px] leading-none absolute right-2 -top-4 font-mono font-black opacity-0">00</div>
                   <div className="font-black tracking-tight text-[16px] uppercase">{card.title}</div>
                   <p className="text-sm mt-3 leading-relaxed font-semibold">{card.summary}</p>
@@ -100,14 +102,14 @@ export function HowIThinkSection() {
                   onMouseEnter={() => handleMouseEnter(idx)}
                   onMouseLeave={handleMouseLeave}
                   onTouchStart={() => setHoveredIdx(prev => prev === idx ? null : idx)}
-                  className="absolute left-0 right-0 border text-left flex flex-col select-none overflow-hidden"
+                  className={`${isMobile ? 'relative' : 'absolute'} left-0 right-0 border text-left flex flex-col select-none overflow-hidden`}
                   animate={{
                     borderRadius: isHovered ? 12 : 0,
                   }}
                   transition={{ type: 'tween', duration: 0.25, ease: 'easeOut' }}
                   style={{
-                    top: '50%',
-                    y: '-50%',
+                    top: isMobile ? 'auto' : '50%',
+                    y: isMobile ? '0%' : '-50%',
                     boxShadow: isHovered
                       ? '0 24px 80px rgba(0,30,60,0.35), 0 8px 30px rgba(0,30,60,0.2)'
                       : '0 1px 3px rgba(0,0,0,0.06)',
