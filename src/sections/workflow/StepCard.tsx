@@ -19,7 +19,7 @@ export function StepCard({ step, isOdd }: StepCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative rounded-xl p-6 ${
+      className={`relative rounded-none p-6 ${
         isOdd ? 'bg-navy text-white' : 'bg-warm-cream text-text-primary'
       }`}
     >
@@ -74,7 +74,7 @@ export function StepCard({ step, isOdd }: StepCardProps) {
       <div className="flex gap-2 mt-4">
         <button
           onClick={() => setExpanded(!expanded)}
-          className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md border transition-colors ${
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-none border transition-colors ${
             isOdd
               ? 'border-white/20 text-white/80 hover:border-gold hover:text-gold'
               : 'border-border-light text-text-secondary hover:border-gold hover:text-gold'

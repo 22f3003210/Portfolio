@@ -48,7 +48,7 @@ export function StepNavigator({ workflow }: StepNavigatorProps) {
             <div key={step.number} className="flex items-center gap-2 flex-shrink-0">
               <button
                 onClick={() => scrollToStep(step.number)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap ${
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-none text-xs font-medium transition-all duration-200 whitespace-nowrap ${
                   activeStep === step.number
                     ? 'bg-gold text-white'
                     : 'border border-border-light text-text-secondary hover:border-gold hover:text-gold'

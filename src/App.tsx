@@ -6,6 +6,7 @@ import { Contact } from './pages/Contact';
 import { Insights } from './pages/Insights';
 import { WorkflowDetail } from './pages/WorkflowDetail';
 import { Admin } from './pages/Admin';
+import { Portal } from './pages/Portal';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/workflows/:slug" element={<WorkflowDetail />} />
+        <Route path="/portal" element={<Portal />} />
         <Route path="/admin" element={<Admin />} />
       </Routes>
     </PageShell>

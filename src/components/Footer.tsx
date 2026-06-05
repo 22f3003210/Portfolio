@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Linkedin } from 'lucide-react';
 
@@ -6,10 +7,30 @@ const navLinks = [
   { to: '/#workflows', label: '12 Workflows' },
   { to: '/about', label: 'About' },
   { to: '/insights', label: 'Insights' },
+  { to: '/portal', label: 'Client Portal' },
   { to: '/contact', label: 'Contact' },
 ];
 
 export function Footer() {
+  const [showPortalLink, setShowPortalLink] = useState(() => {
+    return localStorage.getItem('portal_link_visible') === 'true';
+  });
+
+  useEffect(() => {
+    const handleUnlock = () => setShowPortalLink(true);
+    const handleLock = () => setShowPortalLink(false);
+    window.addEventListener('portal_unlocked', handleUnlock);
+    window.addEventListener('portal_locked', handleLock);
+    return () => {
+      window.removeEventListener('portal_unlocked', handleUnlock);
+      window.removeEventListener('portal_locked', handleLock);
+    };
+  }, []);
+
+  const visibleLinks = navLinks.filter(
+    (link) => link.to !== '/portal' || showPortalLink
+  );
+
   return (
     <footer className="bg-navy">
       <div className="content-max pt-16 md:pt-20 pb-8">
@@ -20,7 +41,7 @@ export function Footer() {
               <img 
                 src="/logo.jpg" 
                 alt="Scale with Abraham" 
-                className="h-10 w-10 object-cover rounded-md border border-white/25 shadow-md transition-transform duration-300 group-hover:scale-105"
+                className="h-10 w-10 object-cover rounded-none border border-white/25 shadow-md transition-transform duration-300 group-hover:scale-105"
               />
               <div className="flex flex-col">
                 <span className="text-[15px] font-extrabold leading-tight text-white">Scale with Abraham</span>
@@ -41,7 +62,7 @@ export function Footer() {
               NAVIGATE
             </h4>
             <ul className="space-y-2.5">
-              {navLinks.map((link) => (
+              {visibleLinks.map((link) => (
                 <li key={link.to}>
                   <Link
                     to={link.to}

@@ -23,7 +23,7 @@ export function WorkflowHero() {
               <ArrowLeft className="w-4 h-4" />
               Back to Workflows
             </Link>
-            <button className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/30 text-white text-sm rounded-md hover:border-gold hover:text-gold transition-colors">
+            <button className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/30 text-white text-sm rounded-none hover:border-gold hover:text-gold transition-colors">
               <Share2 className="w-4 h-4" />
               Share
             </button>
@@ -33,7 +33,7 @@ export function WorkflowHero() {
         {/* Content */}
         <ScrollReveal delay={0.1}>
           <div className="flex items-start gap-4 mb-4">
-            <div className="w-14 h-14 rounded-xl bg-gold/20 flex items-center justify-center text-3xl flex-shrink-0">
+            <div className="w-14 h-14 rounded-none bg-gold/20 flex items-center justify-center text-3xl flex-shrink-0">
               {workflow.icon}
             </div>
             <div>

@@ -46,6 +46,39 @@ export function PageShell({ children }: PageShellProps) {
     return () => window.removeEventListener('click', handleGlobalClick);
   }, [location.pathname]);
 
+  useEffect(() => {
+    let typedKeys = '';
+    const targetSequence = 'abc123';
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        return;
+      }
+
+      typedKeys += e.key;
+      if (typedKeys.length > targetSequence.length) {
+        typedKeys = typedKeys.slice(-targetSequence.length);
+      }
+
+      if (typedKeys === targetSequence) {
+        const currentlyVisible = localStorage.getItem('portal_link_visible') === 'true';
+        if (currentlyVisible) {
+          localStorage.removeItem('portal_link_visible');
+          window.dispatchEvent(new Event('portal_locked'));
+          alert('🔒 Client Portal hidden from navigation.');
+        } else {
+          localStorage.setItem('portal_link_visible', 'true');
+          window.dispatchEvent(new Event('portal_unlocked'));
+          alert('🔓 Client Portal unlocked and added to navigation.');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

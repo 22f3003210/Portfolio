@@ -1,38 +1,58 @@
 import { SectionLabel } from '../../components/SectionLabel';
-import { ScrollReveal } from '../../components/ScrollReveal';
+import { GoldButton } from '../../components/GoldButton';
+import { motion } from 'framer-motion';
 
 export function ProfileSummary() {
   return (
-    <section className="bg-white section-padding">
-      <div className="content-max">
-        <ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-0">
-            {/* Experience */}
-            <div className="md:border-r md:border-border-light md:pr-8">
-              <SectionLabel variant="icon" className="mb-3">EXPERIENCE</SectionLabel>
-              <h3 className="text-xl font-semibold text-text-primary mb-1">
-                Chief of Staff, HBJ Jewels
-              </h3>
-              <p className="text-sm text-text-secondary">Jan 2025 — Present</p>
+    <section className="w-full bg-[#F8FAFC] py-16 md:py-24 px-6 border-t border-b border-border-light relative overflow-hidden">
+      {/* Decorative background grid pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#0170B9_1.5px,transparent_1.5px)] [background-size:24px_24px] z-0" />
+
+      <div className="max-w-[1200px] mx-auto relative z-10">
+        {/* Outer Dark Navy Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+          className="bg-[#0B1E2E] rounded-none border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 w-full"
+        >
+          {/* Left - Introduction details (60% / 7 columns) */}
+          <div className="lg:col-span-7 flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-14 text-white">
+            <div>
+              <SectionLabel variant="pill" className="self-start inline-block mb-4 text-gold border-gold/30 bg-gold/5">
+                THE CONSULTANT
+              </SectionLabel>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                Meet Your Jewellery <span className="text-gold">Systems</span> Architect
+              </h2>
+            </div>
+            
+            <div className="space-y-4 text-white/85 text-sm md:text-base leading-relaxed">
+              <p className="font-semibold text-white">
+                A systems-first designer focused on converting retail chaos and raw, unstructured data into clean operating intelligence. I bypass legacy habits to solve major industry hurdles by designing custom data collection flows and automated architectures from first principles.
+              </p>
+              <p className="text-xs md:text-sm text-white/70 leading-relaxed border-t border-white/10 pt-4">
+                Learning from 200+ jewellery businesses. Designing systems that improve decisions, strengthen operations, and drive measurable business outcomes.
+              </p>
             </div>
 
-            {/* Expertise */}
-            <div className="md:border-r md:border-border-light md:px-8">
-              <SectionLabel variant="icon" className="mb-3">EXPERTISE</SectionLabel>
-              <h3 className="text-xl font-semibold text-text-primary mb-1">
-                Synergics ERP · Zithara CRM
-              </h3>
-              <p className="text-sm text-text-secondary">Live MCX pricing · Power BI</p>
-            </div>
-
-            {/* Education */}
-            <div className="md:pl-8">
-              <SectionLabel variant="icon" className="mb-3">EDUCATION</SectionLabel>
-              <h3 className="text-xl font-semibold text-text-primary mb-1">BS Data Science</h3>
-              <p className="text-sm text-text-secondary">IIT Madras (ongoing)</p>
+            <div className="pt-2">
+              <GoldButton to="/about">
+                Learn More
+              </GoldButton>
             </div>
           </div>
-        </ScrollReveal>
+
+          {/* Right - Profile Photo (40% / 5 columns) */}
+          <div className="lg:col-span-5 w-full h-full min-h-[380px] lg:min-h-full flex overflow-hidden">
+            <img
+              src="/abraham_about.png"
+              alt="Abraham S"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

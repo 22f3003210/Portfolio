@@ -23,7 +23,18 @@ export function OutlineButton({ children, to, href, onClick, className = '', var
     return <Link to={to} className={baseClasses}>{icon}{children}</Link>;
   }
   if (href) {
-    return <a href={href} className={baseClasses}>{icon}{children}</a>;
+    const isExternal = href.startsWith('http');
+    return (
+      <a 
+        href={href} 
+        className={baseClasses}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+      >
+        {icon}
+        {children}
+      </a>
+    );
   }
   return <button onClick={onClick} className={baseClasses}>{icon}{children}</button>;
 }

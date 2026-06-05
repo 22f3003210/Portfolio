@@ -1,192 +1,345 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { SectionLabel } from '../../components/SectionLabel';
-import { useIsMobile } from '../../hooks/use-mobile';
+import { CheckCircle2, ChevronRight, Activity, TrendingUp } from 'lucide-react';
 
-interface ThinkCard {
+interface Principle {
+  number: string;
   title: string;
-  summary: string;
-  expanded: string;
+  paragraphs: string[];
 }
 
 export function HowIThinkSection() {
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-  const isMobile = useIsMobile();
+  const [activeIdx, setActiveIdx] = useState<number>(0);
 
-  const handleMouseEnter = useCallback((idx: number) => {
-    setHoveredIdx(idx);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setHoveredIdx(null);
-  }, []);
-
-  const cards: ThinkCard[] = [
+  const principles: Principle[] = [
     {
-      title: 'Pattern Recognition',
-      summary: 'Identifying recurring operational issues and systemic loopholes across different locations.',
-      expanded: 'Analyzing data across multiple stores reveals that what looks like individual staff errors are actually systematic loopholes in inventory tracking and rate booking. I map these recurring failure modes to resolve them once and for all.'
+      number: '01',
+      title: 'Every Process Produces Variation',
+      paragraphs: [
+        'No two stores operate exactly the same way.',
+        'No two sales teams perform identically.',
+        'No two inventory teams maintain the same level of accuracy.',
+        'Variation exists everywhere.',
+        'The challenge is not variation itself.',
+        'The challenge is understanding which variations improve performance and which create inefficiencies.',
+        'Before attempting to improve any operation, I focus on identifying and measuring variation across processes, branches, teams, and workflows.',
+        'What gets measured can be understood.',
+        'What gets understood can be improved.'
+      ]
     },
     {
-      title: 'Systems Thinking',
-      summary: 'Understanding how individual policy and process changes propagate across the entire enterprise.',
-      expanded: 'A change in discount approval policies at the counter affects cash reconciliation at the end of the shift and billing margins in the ledger. I design workflows that maintain systemic integrity across all touchpoints.'
+      number: '02',
+      title: 'Most Business Problems Are Process Problems',
+      paragraphs: [
+        'When performance drops, businesses often look for individuals to blame.',
+        'In reality, many recurring problems originate from poorly designed systems.',
+        '• Inventory discrepancies.',
+        '• Delayed order fulfilment.',
+        '• Inconsistent customer experiences.',
+        '• Poor follow-up execution.',
+        '• Data inaccuracies.',
+        'These are often symptoms of process gaps rather than individual failures.',
+        'Instead of asking: "Who made the mistake?"',
+        'I prefer asking: "What allowed the mistake to happen?"',
+        'The answer usually reveals an opportunity for process improvement.'
+      ]
     },
     {
-      title: 'Architecture-Level Thinking',
-      summary: 'Designing integrated, scalable data structures connecting ERP, CRM, and dashboards.',
-      expanded: 'Structuring clean databases and API integrations between Synergics ERP, CRM, and Power BI dashboards. I build the digital backbone that enables automated real-time rates and reconciliations without manual data entries.'
+      number: '03',
+      title: 'Customers Define Value',
+      paragraphs: [
+        'Internal complexity means very little to customers.',
+        'Customers care about trust, transparency, service quality, product availability, timely delivery, and a seamless buying experience.',
+        'A process has value only if it contributes to delivering a better customer experience or better business outcome.',
+        'Every workflow, system, and operational activity should ultimately support value creation.'
+      ]
     },
     {
-      title: 'Analytical Structuring',
-      summary: 'Breaking complex, qualitative retail challenges into clear, measurable data points.',
-      expanded: 'Every gram of gold and every rupee of margin is mapped to an owner, timestamp, and location. I turn chaotic operations into structured data pipelines that make audit, loss prevention, and compliance automatic.'
+      number: '04',
+      title: 'Waste Exists in Every Business',
+      paragraphs: [
+        'Over the years, I have observed that businesses often lose resources not because of major strategic mistakes, but because of small operational inefficiencies repeated every day.',
+        '• Duplicate work.',
+        '• Excess inventory.',
+        '• Manual reconciliation.',
+        '• Communication gaps.',
+        '• Approval bottlenecks.',
+        '• Unnecessary movement of information or stock.',
+        'These hidden inefficiencies accumulate into significant costs over time.',
+        'One of my key objectives is identifying and eliminating activities that consume effort without creating value.'
+      ]
     },
     {
-      title: 'Product + Process Mindset',
-      summary: 'Building repeatable systems that ensure compliance without relying on personal heroics.',
-      expanded: 'Store operations should not rely on personal heroics or memory. I document and build SOP playbooks, HUID scan triggers, and POS interfaces that guarantee consistent operational execution shift after shift.'
+      number: '05',
+      title: 'Flow Matters More Than Activity',
+      paragraphs: [
+        'Many organizations are busy.',
+        'Few are truly efficient.',
+        'A business can have employees working constantly while critical information, approvals, inventory, or customer requests remain stuck in the system.',
+        'The goal is not to maximize activity.',
+        'The goal is to maximize flow.',
+        'Work should move smoothly across departments with minimal delays, minimal handoffs, and minimal friction.',
+        'Efficient flow creates faster execution, better visibility, and stronger business performance.'
+      ]
     },
     {
-      title: 'Retail & Jewellery Awareness',
-      summary: 'Applying deep domain knowledge of live MCX rate costing, gold purity, and exchange rules.',
-      expanded: 'Understanding live MCX Rate cost calculations, karatometer purities, old gold exchange margins, and savings schemes. My systems are designed around the unique, high-value realities of jewellery retail.'
+      number: '06',
+      title: 'Decisions Should Be Driven by Data',
+      paragraphs: [
+        'Many decisions are made based on assumptions.',
+        'Assumptions create blind spots.',
+        'Data creates clarity.',
+        'Whenever I design dashboards, workflows, reports, or data collection frameworks, the first question I ask is: "What decision will this information support?"',
+        'Data should not exist for reporting purposes alone.',
+        'It should enable better decisions, faster responses, and greater operational control.'
+      ]
     },
     {
-      title: 'Communication of Vision',
-      summary: 'Aligning business directors and showroom staff on-site to drive adoption of new workflows.',
-      expanded: 'Systems are only as good as their adoption. I work side-by-side with store staff, managers, and directors on-site, communicating the value of system compliance and training teams to ensure a smooth transition.'
+      number: '07',
+      title: 'Continuous Improvement Creates Competitive Advantage',
+      paragraphs: [
+        'Exceptional businesses are rarely built through one breakthrough initiative.',
+        'They are built through hundreds of small improvements accumulated over time.',
+        'Every process can be improved.',
+        'Every workflow can be simplified.',
+        'Every system can be refined.',
+        'My focus is creating environments where improvement becomes a continuous capability rather than a one-time project.'
+      ]
     },
     {
-      title: 'Transformation Curiosity',
-      summary: 'Auditing physical showroom realities to discover hidden leakages that have been normalized.',
-      expanded: 'I constantly audit workflows in real operating conditions to find the leakages you have normalized. I ask the hard questions about why discrepancies exist and design the fail-safes to prevent them.'
+      number: '08',
+      title: 'Focus on Root Causes, Not Symptoms',
+      paragraphs: [
+        'Most operational problems are symptoms.',
+        'The real challenge lies deeper within the system.',
+        'For example:',
+        '• A stock shortage may appear to be an inventory issue. The root cause may be inaccurate forecasting.',
+        '• A customer complaint may appear to be a service issue. The root cause may be poor communication between departments.',
+        '• A reporting problem may appear to be a data issue. The root cause may be a flawed process design.',
+        'Identifying root causes prevents businesses from repeatedly solving the same problems.'
+      ]
+    },
+    {
+      number: '09',
+      title: 'Improvement Must Be Sustainable',
+      paragraphs: [
+        'Temporary improvements create temporary results.',
+        'True transformation occurs when improvements become part of everyday operations.',
+        'A solution should be measurable.',
+        'A process should be repeatable.',
+        'A system should be scalable.',
+        'An improvement should survive beyond the individual who introduced it.',
+        'My goal is not simply to fix problems.',
+        'My goal is to design systems that continuously produce better outcomes.'
+      ]
     }
   ];
 
   return (
-    <section id="how-i-think" className="bg-warm-white py-20 md:py-[120px] px-6 select-none border-b border-[#E2E8F0]">
-      <div className="max-w-[1200px] mx-auto">
+    <section id="how-i-think" className="bg-[#F8FAFC] py-20 md:py-28 px-6 border-b border-border-light relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#0170B9]/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-[1200px] mx-auto space-y-16 relative z-10">
         
-        {/* Header */}
-        <div className="mb-12 md:mb-16">
-          <ScrollReveal className="flex flex-col gap-2">
-            <SectionLabel variant="plain">APPROACH</SectionLabel>
-            <h2
-              className="font-extrabold text-text-primary tracking-tight"
-              style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', lineHeight: 1.2 }}
-            >
-              How I Think About <br />
-              <span className="text-navy">Business Systems</span>
-            </h2>
-          </ScrollReveal>
+        {/* Header Block - Split Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Badge and Title */}
+          <div className="lg:col-span-5 space-y-4">
+            <ScrollReveal>
+              <SectionLabel variant="pill">APPROACH</SectionLabel>
+              <h2 className="text-3xl md:text-5xl font-black text-navy tracking-tight leading-tight mt-3">
+                My Engineering Approach <br />
+                <span className="text-[#0170B9]">to Jewellery Retail</span>
+              </h2>
+            </ScrollReveal>
+          </div>
+
+          {/* Right Column: Intro Copy & Quote */}
+          <div className="lg:col-span-7 space-y-4 text-text-secondary text-sm md:text-base leading-relaxed">
+            <ScrollReveal delay={0.1}>
+              <p className="font-semibold text-text-primary">
+                After working with jewellery retailers across South India, one observation has remained consistent:
+              </p>
+              <div className="bg-white border-l-4 border-[#0170B9] p-4 rounded-none shadow-sm italic text-navy font-medium text-lg leading-relaxed">
+                "Business outcomes are not random. Every outcome is produced by a process. If you improve the process, the outcome improves automatically."
+              </div>
+              <p className="text-sm">
+                Whether it is inventory accuracy, sales conversion, customer retention, cash flow, stock ageing, employee productivity, or profitability — each outcome is a reflection of the systems and processes operating behind the scenes.
+              </p>
+              <p className="text-sm font-semibold text-text-primary">
+                This belief forms the foundation of how I approach jewellery retail transformation.
+              </p>
+            </ScrollReveal>
+          </div>
         </div>
 
-        {/* Typographic Cards Grid — extra bottom padding so expanded cards have room to overflow */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-20">
-          {cards.map((card, idx) => {
-            const isHovered = hoveredIdx === idx;
-            return (
-              /* Wrapper holds the grid cell size constant; overflow-visible lets the card grow out */
-              <div key={idx} className={`relative flex items-center transition-all duration-300 ${isHovered ? 'h-auto z-30' : 'z-10'}`} style={{ zIndex: isHovered ? 50 : 1 }}>
-                {/* Invisible spacer — mirrors the default card content to lock the cell height */}
-                <div className={`p-6 invisible pointer-events-none w-full ${isMobile ? 'hidden' : 'block'}`} aria-hidden="true">
-                  <div className="text-[100px] leading-none absolute right-2 -top-4 font-mono font-black opacity-0">00</div>
-                  <div className="font-black tracking-tight text-[16px] uppercase">{card.title}</div>
-                  <p className="text-sm mt-3 leading-relaxed font-semibold">{card.summary}</p>
+        {/* 9 Principles Split Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch pt-4">
+          
+          {/* Left: Interactive Selector List */}
+          <div className="lg:col-span-5 space-y-2.5">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0170B9] bg-[#0170B9]/5 px-3 py-1 border border-[#0170B9]/15 rounded-none inline-block mb-3">
+              9 CORE PRINCIPLES
+            </span>
+            <div className="space-y-2">
+              {principles.map((item, idx) => {
+                const isActive = activeIdx === idx;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveIdx(idx)}
+                    onMouseEnter={() => setActiveIdx(idx)}
+                    className={`w-full text-left p-4 rounded-none border transition-all duration-200 flex items-center justify-between group ${
+                      isActive 
+                        ? 'bg-[#0B1E2E] border-[#0B1E2E] text-white shadow-md' 
+                        : 'bg-white border-border-light hover:border-navy text-text-primary hover:bg-[#F8FAFC]'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className={`font-mono text-xs font-bold px-2 py-0.5 rounded-none ${
+                        isActive ? 'bg-gold text-navy' : 'bg-[#0170B9]/10 text-[#0170B9]'
+                      }`}>
+                        {item.number}
+                      </span>
+                      <span className="text-xs md:text-sm font-bold tracking-tight">
+                        {item.title}
+                      </span>
+                    </div>
+                    <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${
+                      isActive ? 'text-gold translate-x-1' : 'text-text-secondary group-hover:translate-x-1'
+                    }`} />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: Active Detail Content Card */}
+          <div className="lg:col-span-7 h-full min-h-[460px] flex">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIdx}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="bg-white border border-border-light rounded-none p-8 shadow-sm flex flex-col justify-between w-full relative overflow-hidden"
+              >
+                {/* Background watermarked number */}
+                <div className="absolute right-4 -top-6 font-mono font-black text-navy/[0.03] text-[150px] leading-none pointer-events-none select-none">
+                  {principles[activeIdx].number}
                 </div>
 
-                {/* Actual card — positioned over the spacer, grows symmetrically from the center on hover */}
-                <motion.div
-                  onMouseEnter={() => handleMouseEnter(idx)}
-                  onMouseLeave={handleMouseLeave}
-                  onTouchStart={() => setHoveredIdx(prev => prev === idx ? null : idx)}
-                  className={`${isMobile ? 'relative' : 'absolute'} left-0 right-0 border text-left flex flex-col select-none overflow-hidden`}
-                  animate={{
-                    borderRadius: isHovered ? 12 : 0,
-                  }}
-                  transition={{ type: 'tween', duration: 0.25, ease: 'easeOut' }}
-                  style={{
-                    top: isMobile ? 'auto' : '50%',
-                    y: isMobile ? '0%' : '-50%',
-                    boxShadow: isHovered
-                      ? '0 24px 80px rgba(0,30,60,0.35), 0 8px 30px rgba(0,30,60,0.2)'
-                      : '0 1px 3px rgba(0,0,0,0.06)',
-                    background: isHovered
-                      ? 'linear-gradient(160deg, #003D6B 0%, #005C9E 60%, #0170B9 100%)'
-                      : 'linear-gradient(135deg, #ffffff 0%, #EBF1F6 100%)',
-                    borderColor: isHovered ? '#003D6B' : '#D0D9E0',
-                  }}
-                >
-                  {/* Top section — always visible, matches the spacer height */}
-                  <div className="p-6 relative">
-                    {/* Watermark number */}
-                    <div
-                      className={`absolute right-3 -top-2 font-mono font-black select-none pointer-events-none text-[100px] leading-none transition-colors duration-300 ${
-                        isHovered ? 'text-white/[0.06]' : 'text-navy/[0.04]'
-                      }`}
-                    >
-                      {(idx + 1).toString().padStart(2, '0')}
-                    </div>
-
-                    {/* Title */}
-                    <h3
-                      className={`font-black tracking-tight text-[16px] uppercase relative z-10 transition-colors duration-250 ${
-                        isHovered ? 'text-white' : 'text-text-primary'
-                      }`}
-                    >
-                      {card.title}
-                    </h3>
-
-                    {/* Summary */}
-                    <p
-                      className={`text-sm mt-3 leading-relaxed font-semibold relative z-10 transition-colors duration-250 ${
-                        isHovered ? 'text-white/80' : 'text-text-secondary'
-                      }`}
-                    >
-                      {card.summary}
-                    </p>
+                <div className="space-y-6 relative z-10">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-gold uppercase tracking-wider font-mono">
+                      PRINCIPLE {principles[activeIdx].number}
+                    </span>
                   </div>
 
-                  {/* Bottom panel — slides open on hover, JioHotstar style */}
-                  <AnimatePresence>
-                    {isHovered && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-6">
-                          {/* Divider */}
-                          <div className="border-t border-white/15 mb-4" />
+                  <h3 className="text-2xl font-black text-navy tracking-tight leading-tight">
+                    {principles[activeIdx].title}
+                  </h3>
 
-                          {/* Detail text */}
-                          <p className="text-[13px] leading-relaxed text-white/90">
-                            {card.expanded}
-                          </p>
+                  <div className="space-y-3.5 text-text-secondary text-sm md:text-base leading-relaxed">
+                    {principles[activeIdx].paragraphs.map((p, pIdx) => {
+                      const isBullet = p.startsWith('•');
+                      const isHighlighted = p.startsWith('What gets') || p.startsWith('I prefer asking');
+                      
+                      return (
+                        <p 
+                          key={pIdx} 
+                          className={`
+                            ${isBullet ? 'pl-4 font-semibold text-text-primary' : ''} 
+                            ${isHighlighted ? 'font-bold text-navy border-l-2 border-gold pl-3 italic bg-gold/5 py-1 rounded-none' : ''}
+                          `}
+                        >
+                          {p}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                          {/* Bottom accent bar — like Hotstar's action row */}
-                          <div className="mt-4 flex items-center gap-2">
-                            <span className="inline-block w-8 h-[3px] rounded-full bg-gold" />
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-gold/80">
-                              Deep Dive
-                            </span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              </div>
-            );
-          })}
+                <div className="mt-8 pt-6 border-t border-border-light flex items-center gap-2 relative z-10">
+                  <Activity className="w-4 h-4 text-[#0170B9] animate-pulse" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">
+                    Systems Transformation Engineering Framework
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
+
+        {/* Section Footer: The Core Philosophy */}
+        <ScrollReveal className="w-full">
+          <div className="bg-[#0B1E2E] rounded-none border border-white/10 p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
+            <div className="absolute bottom-0 right-0 w-[450px] h-[400px] bg-[#0170B9]/15 rounded-full blur-[100px] pointer-events-none" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              
+              {/* Left Column: Narrative */}
+              <div className="lg:col-span-6 space-y-6">
+                <div className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <span className="text-[9px] font-extrabold uppercase tracking-widest text-gold font-mono font-bold">THE CORE PHILOSOPHY</span>
+                  <h3 className="text-3xl font-extrabold mt-1 text-white leading-tight">
+                    Interconnected Operating System
+                  </h3>
+                </div>
+                <div className="space-y-4 text-white/95 text-sm md:text-base leading-relaxed">
+                  <p className="font-semibold">
+                    I don't view jewellery retail as a collection of departments.
+                  </p>
+                  <p className="font-medium text-white/80">
+                    I view it as an interconnected operating system.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Column: Connection visual list */}
+              <div className="lg:col-span-6 bg-white/[0.03] border border-white/10 p-6 md:p-8 rounded-none space-y-6">
+                <span className="text-xs font-bold text-gold uppercase tracking-wider font-mono">Cross-Functional Dependencies</span>
+                
+                <ul className="space-y-2.5 text-xs md:text-sm font-medium text-white/90">
+                  {[
+                    'Sales affects inventory.',
+                    'Inventory affects procurement.',
+                    'Procurement affects cash flow.',
+                    'Customer experience affects repeat business.',
+                    'Data affects decision-making.',
+                    'Every component influences another.'
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-gold shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="text-white/85 text-xs md:text-sm leading-relaxed pt-2">
+                  My role is to understand those connections, identify operational gaps, and engineer systems that help businesses operate with greater clarity, consistency, efficiency, and control.
+                </p>
+
+                <div className="border-t border-white/10 pt-4 mt-2">
+                  <p className="text-sm md:text-base font-extrabold italic text-gold leading-relaxed">
+                    "Because in the end: Every outcome is produced by a process. Improve the process, and the outcome improves automatically."
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </ScrollReveal>
 
       </div>
     </section>
   );
 }
-

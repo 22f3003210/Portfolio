@@ -7,13 +7,32 @@ const navLinks = [
   { to: '/#workflows', label: 'Workflows' },
   { to: '/about', label: 'About' },
   { to: '/insights', label: 'Insights' },
+  { to: '/portal', label: 'Client Portal' },
   { to: '/contact', label: 'Contact' },
 ];
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showPortalLink, setShowPortalLink] = useState(() => {
+    return localStorage.getItem('portal_link_visible') === 'true';
+  });
   const location = useLocation();
+
+  useEffect(() => {
+    const handleUnlock = () => setShowPortalLink(true);
+    const handleLock = () => setShowPortalLink(false);
+    window.addEventListener('portal_unlocked', handleUnlock);
+    window.addEventListener('portal_locked', handleLock);
+    return () => {
+      window.removeEventListener('portal_unlocked', handleUnlock);
+      window.removeEventListener('portal_locked', handleLock);
+    };
+  }, []);
+
+  const visibleLinks = navLinks.filter(
+    (link) => link.to !== '/portal' || showPortalLink
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,7 +69,7 @@ export function Navbar() {
             <img 
               src="/logo.jpg" 
               alt="Scale with Abraham" 
-              className="h-10 w-10 object-cover rounded-md border border-white/20 shadow-md transition-transform duration-300 group-hover:scale-105"
+              className="h-10 w-10 object-cover rounded-none border border-white/20 shadow-md transition-transform duration-300 group-hover:scale-105"
             />
             <div className="flex flex-col">
               <span className={`text-[15px] font-extrabold leading-tight transition-colors duration-300 ${
@@ -66,7 +85,7 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {visibleLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
@@ -121,7 +140,7 @@ export function Navbar() {
             : 'bg-[#00203f]/95 backdrop-blur-md border-white/10'
         }`}>
           <div className="content-max py-4 flex flex-col gap-2">
-            {navLinks.map((link) => (
+            {visibleLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}

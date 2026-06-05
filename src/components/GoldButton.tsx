@@ -25,8 +25,14 @@ export function GoldButton({ children, to, href, onClick, className = '', fullWi
   }
 
   if (href) {
+    const isExternal = href.startsWith('http');
     return (
-      <a href={href} className={baseClasses}>
+      <a 
+        href={href} 
+        className={baseClasses}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+      >
         {icon}
         {children}
       </a>

@@ -12,7 +12,7 @@ export interface Article {
 export const articles: Article[] = [
   {
     id: 1,
-    title: '₹9.8 Cr Loss Leakage Elimination: A Playbook',
+    title: 'Loss Leakage Elimination: A Systems Playbook',
     excerpt: 'Six leakage archetypes inside jewellery retail — and the rule-engine + ML detection stack that recovers margin in 90 days.',
     category: 'Loss Prevention',
     categoryColor: '#1e293b',
@@ -42,7 +42,7 @@ export const articles: Article[] = [
   },
   {
     id: 4,
-    title: '90% Reconciliation Reduction: Token-Based Inventory',
+    title: 'Automated Reconciliation: Token-Based Inventory',
     excerpt: 'Why per-piece tokenisation collapsed reconciliation cycles from days to minutes — and what stopped working.',
     category: 'Inventory',
     categoryColor: '#1e3a5f',

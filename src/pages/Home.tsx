@@ -7,16 +7,18 @@ import { ProblemsSection } from '../sections/home/ProblemsSection';
 import { WorkflowsGrid } from '../sections/home/WorkflowsGrid';
 import { PhilosophySection } from '../sections/home/PhilosophySection';
 import { HowIWorkSection } from '../sections/home/HowIWorkSection';
+import { ProfileSummary } from '../sections/home/ProfileSummary';
 import { CTASection } from '../sections/home/CTASection';
 
 export function Home() {
   return (
     <>
       <HeroSection />
+      <ProfileSummary />
+      <HowIThinkSection />
       <SystemsProblemSection />
       <OutcomeEngineSection />
       <BusinessOSSection />
-      <HowIThinkSection />
       <ProblemsSection />
       <WorkflowsGrid />
       <PhilosophySection />

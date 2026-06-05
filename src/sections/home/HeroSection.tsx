@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { GoldButton } from '../../components/GoldButton';
 import { OutlineButton } from '../../components/OutlineButton';
-import { CalendarBooking } from '../../components/CalendarBooking';
 
 export function HeroSection() {
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
 
 
@@ -63,13 +60,35 @@ export function HeroSection() {
                 <mpath href="#left-trace-1" />
               </animateMotion>
             </circle>
-            <circle r="3" fill="#8CC63F" opacity="0.8">
-              <animateMotion dur="8s" repeatCount="indefinite">
-                <mpath href="#left-trace-2" />
-              </animateMotion>
-            </circle>
+            {/* Honeycomb grid path */}
+            <path 
+              d="M 50 50 L 100 25 L 150 50 L 150 100 L 100 125 L 50 100 Z M 150 100 L 200 75 L 250 100 L 250 150 L 200 175 L 150 150 Z" 
+              fill="none" 
+              stroke="#D4DFE6" 
+              strokeWidth="1.5" 
+              opacity="0.6" 
+            />
+            <path 
+              d="M 800 200 L 850 175 L 900 200 L 900 250 L 850 275 L 800 250 Z M 900 250 L 950 225 L 1000 250 L 1000 300 L 950 325 L 900 300 Z M 700 350 L 750 325 L 800 350 L 800 400 L 750 425 L 700 400 Z" 
+              fill="none" 
+              stroke="#D4DFE6" 
+              strokeWidth="1.5" 
+              opacity="0.4" 
+            />
 
+            {/* Digital flow lines and nodes */}
+            <circle cx="100" cy="25" r="3" fill="#8CC63F" opacity="0.8" />
+            <circle cx="250" cy="150" r="3.5" fill="#0170B9" opacity="0.6" />
+            <circle cx="850" cy="175" r="3" fill="#0170B9" opacity="0.5" />
+            <circle cx="950" cy="325" r="4.5" fill="#8CC63F" opacity="0.7" />
 
+            <path 
+              d="M 100 25 L 150 50 L 150 100 M 200 75 L 200 150 M 850 175 L 900 200 L 900 250 M 750 325 L 750 400" 
+              fill="none" 
+              stroke="url(#neonGlow)" 
+              strokeWidth="2.5" 
+              strokeDasharray="4 6" 
+            />
           </svg>
         </div>
 
@@ -81,17 +100,12 @@ export function HeroSection() {
                 HYDERABAD · JEWELLERY RETAIL TRANSFORMATION ARCHITECT
               </span>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.85rem] font-extrabold leading-[1.12] tracking-tight">
-                <span className="text-text-primary">Systems Define</span>
-                <br />
-                <span className="text-navy">the Future of Retail</span>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-navy uppercase tracking-tight leading-[1.05] mb-4 md:mb-5">
+                Scale Your <br className="hidden sm:inline" />
+                Jewellery Brand
               </h1>
 
-              <p className="text-base md:text-lg font-medium text-text-primary">
-                Design the system. Control the growth.
-              </p>
-
-              <p className="text-sm md:text-base text-text-secondary leading-relaxed max-w-lg font-medium">
+              <p className="text-sm md:text-base text-text-secondary font-medium leading-relaxed max-w-xl mb-4 md:mb-6">
                 Jewellery business transformation architect designing intelligence‑driven operating
                 systems across ERP, finance, CRM, inventory, and store operations.
               </p>
@@ -106,7 +120,7 @@ export function HeroSection() {
                   Explore the Operating System
                 </GoldButton>
                 <OutlineButton 
-                  onClick={() => setIsBookingOpen(true)}
+                  to="/contact"
                   variant="dark" 
                   className="border-navy/40 text-navy hover:bg-navy/5 hover:border-navy"
                 >
@@ -124,9 +138,6 @@ export function HeroSection() {
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
           <ChevronDown className="w-5 h-5 text-navy/40 animate-bounce" />
         </div>
-
-        {/* Calendar booking Modal popup */}
-        <CalendarBooking isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
       </section>
     </div>
   );

@@ -12,14 +12,14 @@ export function ArticleGrid() {
             <ScrollReveal key={article.id} delay={index * 0.08}>
               <Link
                 to={article.link}
-                className="block bg-white rounded-xl border border-border-light overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group"
+                className="block bg-white rounded-none border border-border-light overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group"
               >
                 {/* Category banner */}
                 <div
                   className="h-[120px] flex items-center justify-center relative"
                   style={{ backgroundColor: article.categoryColor }}
                 >
-                  <span className="absolute top-3 left-3 px-3 py-1 text-xs font-medium text-white bg-white/20 rounded-full backdrop-blur-sm">
+                  <span className="absolute top-3 left-3 px-3 py-1 text-xs font-medium text-white bg-white/20 rounded-none backdrop-blur-sm">
                     {article.category}
                   </span>
                   <BookOpen className="w-10 h-10 text-white/80" />
