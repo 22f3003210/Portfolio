@@ -80,13 +80,13 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://linkedin.com/in/abraham-s"
+                  href="https://linkedin.com/in/abrahamsayed"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <Linkedin className="w-3.5 h-3.5 text-gold flex-shrink-0" />
-                  /in/abraham-s
+                  /in/abrahamsayed
                 </a>
               </li>
             </ul>
