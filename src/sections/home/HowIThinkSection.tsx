@@ -278,7 +278,7 @@ export function HowIThinkSection() {
 
         {/* Section Footer: The Core Philosophy */}
         <ScrollReveal className="w-full">
-          <div className="bg-[#0B1E2E] rounded-none border border-white/10 p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
+          <div className="bg-gradient-to-br from-[#0B1E2E] to-[#05101A] rounded-none border border-white/10 p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
             <div className="absolute bottom-0 right-0 w-[450px] h-[400px] bg-[#0170B9]/15 rounded-full blur-[100px] pointer-events-none" />
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -305,7 +305,7 @@ export function HowIThinkSection() {
               </div>
 
               {/* Right Column: Connection visual list */}
-              <div className="lg:col-span-6 bg-gradient-to-br from-[#1F295D] to-[#121A3E] border border-white/10 p-6 md:p-8 rounded-none space-y-6 transition-all duration-300 hover:border-[#8CC63F]/30 hover:shadow-[0_4px_20px_rgba(140,198,63,0.05)]">
+              <div className="lg:col-span-6 bg-gradient-to-br from-[#0E3570] to-[#071C40] border border-white/10 p-6 md:p-8 rounded-none space-y-6 transition-all duration-300 hover:border-[#8CC63F]/30 hover:shadow-[0_4px_20px_rgba(140,198,63,0.05)]">
                 <span className="text-xs font-bold text-[#8CC63F] uppercase tracking-wider font-mono">CROSS-FUNCTIONAL DEPENDENCIES</span>
                 
                 <ul className="space-y-2.5 text-xs md:text-sm font-medium text-white/90">
