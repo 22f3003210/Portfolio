@@ -1,0 +1,335 @@
+export interface WorkflowStep {
+  number: number;
+  icon: string;
+  title: string;
+  description: string;
+  bullets: string[];
+  duration: string;
+  output: string;
+  details?: string[];
+}
+
+export interface Workflow {
+  id: number;
+  slug: string;
+  name: string;
+  category: string;
+  description: string;
+  icon: string;
+  metrics: string[];
+  steps: WorkflowStep[];
+}
+
+export const workflows: Workflow[] = [
+  {
+    id: 1,
+    slug: 'p2p-jewellery-supply-chain',
+    name: 'Procure-to-Pay (P2P)',
+    category: 'Jewellery Supply Chain',
+    description: 'End-to-end raw material procurement → supplier payment with live gold rates',
+    icon: '📦',
+    metrics: ['~ 5–10 days cycle', '~ 90% reconciliation reduction', 'Live MCX integration'],
+    steps: [
+      {
+        number: 1,
+        icon: '📋',
+        title: 'Supplier Onboarding',
+        description: 'Live MCX gold price feed setup (15-min refresh)',
+        bullets: [
+          'GST/PAN/metal purity certificates',
+          'Wastage rates & making charges config',
+          'New supplier approval workflow',
+          'Primary/secondary classification',
+        ],
+        duration: '45 min',
+        output: 'Rate-linked supplier profile',
+      },
+      {
+        number: 2,
+        icon: '📈',
+        title: 'Purchase Requisition',
+        description: 'Real-time gold rate COGS calculation',
+        bullets: [
+          'Gold qty / purity / design specs',
+          'Auto: MCX + wastage + making charges',
+          'Budget vs store targets validation',
+          'Margin threshold approval',
+        ],
+        duration: '10 min',
+        output: 'Rate-locked requisition',
+      },
+      {
+        number: 3,
+        icon: '🛒',
+        title: 'Purchase Order',
+        description: 'Legal PO with rate protection clause',
+        bullets: [
+          'Live rate snapshot in PO',
+          'Supplier delivery timeline confirmation',
+          'Token ID reconciliation tracking',
+          'WhatsApp / digital signature',
+        ],
+        duration: '8 min',
+        output: 'Confirmed PO',
+      },
+      {
+        number: 4,
+        icon: '🔍',
+        title: 'Goods Receipt',
+        description: 'Token-based quality verification',
+        bullets: [
+          'Physical weighing & purity test',
+          'Token prevents duplicate logging',
+          'Weight / design specs inspection',
+          'Production / Karat storage move',
+        ],
+        duration: '30 min',
+        output: 'Verified receipt',
+      },
+      {
+        number: 5,
+        icon: '⚖️',
+        title: 'Invoice Matching',
+        description: 'Three-way match + rate reconciliation',
+        bullets: [
+          'PO rate ↔ Receipt weight ↔ Invoice',
+          '±2% rate variance tolerance',
+          'Margin validation pre-approval',
+          'Auto-discrepancy flagging',
+        ],
+        duration: '5 min',
+        output: 'Matched payable',
+      },
+      {
+        number: 6,
+        icon: '💳',
+        title: 'Supplier Payment',
+        description: 'GST-compliant processing',
+        bullets: [
+          'Match approval → payment queue',
+          'GST invoice validation',
+          'NEFT / RTGS batch payment',
+          'Supplier portal update',
+        ],
+        duration: 'Weekly 2 hr',
+        output: 'Paid supplier',
+      },
+      {
+        number: 7,
+        icon: '📊',
+        title: 'Reconciliation & Reporting',
+        description: 'Weekly P2P performance dashboard',
+        bullets: [
+          'Cycle time tracking (req → payment)',
+          'Supplier scorecard (delivery / quality)',
+          'Loss detection (rate delays / schemes)',
+          'Power BI: 7.2 days avg | 98% accuracy',
+        ],
+        duration: 'Weekly 3 hr',
+        output: '+15% vs last month',
+      },
+    ],
+  },
+  {
+    id: 2,
+    slug: 'o2c-retail-sales',
+    name: 'Order-to-Cash (O2C)',
+    category: 'Retail Sales Pipeline',
+    description: 'Tokenized sale booking from customer walk-in to cash reconciliation',
+    icon: '🛍️',
+    metrics: ['Tokenized sale booking', '~ 64% walkout conversion', 'Real-time sync'],
+    steps: [
+      { number: 1, icon: '👤', title: 'Customer Walk-in', description: 'CRM capture + need analysis', bullets: ['Walk-in logging', 'Purchase intent tagging', 'Salesperson assignment', 'Estimated value capture'], duration: '5 min', output: 'Qualified lead' },
+      { number: 2, icon: '💍', title: 'Product Selection', description: 'Catalogue browsing with live rates', bullets: ['Live MCX pricing display', 'Design / purity filter', 'Availability check', 'Alternatives suggestion'], duration: '15 min', output: 'Shortlisted items' },
+      { number: 3, icon: '📝', title: 'Token Generation', description: 'Unique token per transaction', bullets: ['Auto-token ID generation', 'Weight / rate snapshot', 'Customer KYC linking', 'Scheme eligibility check'], duration: '3 min', output: 'Active token' },
+      { number: 4, icon: '💰', title: 'Pricing & Discount', description: 'Dynamic pricing with margin guardrails', bullets: ['Live rate + making charges', 'Discount approval matrix', 'Margin threshold check', 'Scheme integration'], duration: '5 min', output: 'Locked price' },
+      { number: 5, icon: '✅', title: 'Order Confirmation', description: 'Digital order with payment terms', bullets: ['Digital signature capture', 'Payment schedule config', 'Delivery timeline', 'Order acknowledgement'], duration: '5 min', output: 'Confirmed order' },
+      { number: 6, icon: '💵', title: 'Payment Collection', description: 'Multi-mode payment processing', bullets: ['Cash / card / UPI', 'Gold scheme redemption', 'EMI integration', 'Receipt generation'], duration: '5 min', output: 'Payment received' },
+      { number: 7, icon: '📈', title: 'Reconciliation', description: 'Daily sales reconciliation', bullets: ['Token → sale matching', 'Cash drawer reconciliation', 'CRM + ERP sync', 'Daily sales report'], duration: 'Daily 30 min', output: 'Reconciled sales' },
+    ],
+  },
+  {
+    id: 3,
+    slug: 'inventory-management',
+    name: 'Inventory Management',
+    category: 'Karat-wise reconciliation',
+    description: 'Real-time inventory tracking with karat-wise reconciliation and token-based auditing',
+    icon: '📊',
+    metrics: ['90% faster audits', 'Karat-wise tracking', 'Token-based control'],
+    steps: [
+      { number: 1, icon: '🏷️', title: 'Item Tagging', description: 'Unique ID per jewellery piece', bullets: ['Barcode / RFID tagging', 'Karat / weight / design entry', 'Initial stock entry', 'Category classification'], duration: '2 min/item', output: 'Tagged inventory' },
+      { number: 2, icon: '📥', title: 'Stock Inward', description: 'Receive and verify new stock', bullets: ['GRN generation', 'Weight verification', 'Quality check', 'Storage location assign'], duration: '15 min/batch', output: 'Verified stock' },
+      { number: 3, icon: '🔄', title: 'Stock Movement', description: 'Track inter-store transfers', bullets: ['Transfer request', 'Approval workflow', 'Transit tracking', 'Receiving confirmation'], duration: 'Varies', output: 'Transferred stock' },
+      { number: 4, icon: '🔢', title: 'Physical Count', description: 'Cycle counting with token matching', bullets: ['Zone-wise counting', 'Token reconciliation', 'Variance detection', 'Audit trail'], duration: 'Daily 1 hr', output: 'Count report' },
+      { number: 5, icon: '⚖️', title: 'Karat Reconciliation', description: 'Gold purity-wise balance', bullets: ['24K / 22K / 18K buckets', 'Weight reconciliation', 'Purity verification', 'Adjustment posting'], duration: 'Weekly 2 hr', output: 'Karat balance' },
+      { number: 6, icon: '🚨', title: 'Discrepancy Handling', description: 'Resolve inventory mismatches', bullets: ['Variance analysis', 'Root cause identification', 'Correction posting', 'Prevention measure'], duration: 'As needed', output: 'Resolved variance' },
+      { number: 7, icon: '📋', title: 'Reporting', description: 'Real-time inventory dashboards', bullets: ['Stock position by store', 'Karat-wise valuation', 'Ageing analysis', 'Reorder alerts'], duration: 'Real-time', output: 'Live dashboard' },
+    ],
+  },
+  {
+    id: 4,
+    slug: 'commodity-costing-engine',
+    name: 'Commodity Costing Engine',
+    category: 'Live MCX integration',
+    description: 'Automated gold pricing with 15-minute MCX refresh and multi-purity costing',
+    icon: '📈',
+    metrics: ['15-min COGS refresh', 'Multi-purity costing', 'Zero manual override'],
+    steps: [
+      { number: 1, icon: '📡', title: 'MCX Rate Fetch', description: 'Live MCX gold price ingestion', bullets: ['15-min interval API call', 'Rate validation', 'Historical comparison', 'Alert on anomaly'], duration: 'Auto', output: 'Live MCX rate' },
+      { number: 2, icon: '🔢', title: 'Purity Conversion', description: 'Convert to store purity levels', bullets: ['24K → 22K / 18K formula', 'Wastage factor apply', 'Making charges config', 'Purity premium calc'], duration: 'Auto', output: 'Purity-wise rates' },
+      { number: 3, icon: '💰', title: 'COGS Calculation', description: 'Real-time cost of goods sold', bullets: ['Raw material cost', 'Labour / making charges', 'Overhead allocation', 'Margin calculation'], duration: 'Auto', output: 'Live COGS' },
+      { number: 4, icon: '📋', title: 'Price List Update', description: 'Auto-publish to POS', bullets: ['Category-wise pricing', 'Store-specific overrides', 'Promotional pricing', 'Customer display update'], duration: 'Auto', output: 'Updated price list' },
+      { number: 5, icon: '⚠️', title: 'Margin Monitoring', description: 'Real-time margin alerts', bullets: ['Threshold config', 'Alert on margin drop', 'Approval workflow', 'Escalation matrix'], duration: 'Real-time', output: 'Margin alerts' },
+      { number: 6, icon: '📊', title: 'Variance Analysis', description: 'Planned vs actual costing', bullets: ['Standard vs actual', 'Variance breakdown', 'Trend analysis', 'Corrective action'], duration: 'Weekly', output: 'Variance report' },
+      { number: 7, icon: '🔄', title: 'Audit Trail', description: 'Complete rate change history', bullets: ['Rate change log', 'Approver tracking', 'Impact analysis', 'Compliance report'], duration: 'Always on', output: 'Audit trail' },
+    ],
+  },
+  {
+    id: 5,
+    slug: 'crm-growth-engine',
+    name: 'CRM Growth Engine',
+    category: 'Zithara loyalty engine',
+    description: 'Unified customer journey management with 64% walkout-to-sale conversion',
+    icon: '❤️',
+    metrics: ['64% walkout conversion', 'Zithara CRM', 'Unified buyer journey'],
+    steps: [
+      { number: 1, icon: '👤', title: 'Customer Capture', description: 'Walk-in and lead capture', bullets: ['Walk-in logging', 'Contact capture', 'Interest tagging', 'Source tracking'], duration: '2 min', output: 'CRM entry' },
+      { number: 2, icon: '🎯', title: 'Lead Scoring', description: 'AI-powered lead qualification', bullets: ['Purchase intent score', 'Budget estimation', 'Timeline prediction', 'Priority ranking'], duration: 'Auto', output: 'Scored lead' },
+      { number: 3, icon: '💬', title: 'Follow-up Automation', description: 'Multi-channel nurturing', bullets: ['WhatsApp campaigns', 'SMS reminders', 'Call scheduling', 'Personalized offers'], duration: 'Ongoing', output: 'Engaged lead' },
+      { number: 4, icon: '🏪', title: 'Store Visit', description: 'Appointment and visit tracking', bullets: ['Appointment booking', 'Salesperson prep', 'Visit logging', 'Feedback capture'], duration: 'Varies', output: 'Visit completed' },
+      { number: 5, icon: '🎁', title: 'Offer Conversion', description: 'Targeted offer delivery', bullets: ['Personalized offer', 'Scheme presentation', 'Competitive comparison', 'Urgency creation'], duration: '10 min', output: 'Offer presented' },
+      { number: 6, icon: '✅', title: 'Sale Closure', description: 'Final conversion tracking', bullets: ['Token generation', 'Pricing lock', 'Payment terms', 'Delivery schedule'], duration: '5 min', output: 'Sale closed' },
+      { number: 7, icon: '📈', title: 'Retention', description: 'Post-sale engagement', bullets: ['Thank you message', 'Referral request', 'Repeat purchase nudge', 'Loyalty program'], duration: 'Ongoing', output: 'Loyal customer' },
+    ],
+  },
+  {
+    id: 6,
+    slug: 'loss-leakage-detection',
+    name: 'Loss & Leakage Detection',
+    category: 'Invisible profit recovery',
+    description: 'AI-powered detection of profit leakages across procurement, inventory, and sales',
+    icon: '🔎',
+    metrics: ['₹9.8 Cr identified', 'ML detection stack', '90-day recovery'],
+    steps: [
+      { number: 1, icon: '📊', title: 'Data Collection', description: 'Aggregate transaction data', bullets: ['ERP data extraction', 'CRM sync', 'Finance records', 'External feeds'], duration: 'Auto', output: 'Unified dataset' },
+      { number: 2, icon: '🔍', title: 'Pattern Analysis', description: 'ML-based anomaly detection', bullets: ['Statistical modelling', 'Historical comparison', 'Peer benchmarking', 'Trend analysis'], duration: 'Auto', output: 'Anomaly flags' },
+      { number: 3, icon: '⚠️', title: 'Leakage Identification', description: 'Categorize leakages', bullets: ['Rate leakage', 'Weight discrepancy', 'Process gap', 'Fraud pattern'], duration: 'Auto', output: 'Leakage report' },
+      { number: 4, icon: '💰', title: 'Impact Quantification', description: 'Calculate financial impact', bullets: ['Per-incident value', 'Aggregated loss', 'Trend projection', 'Root cause'], duration: 'Auto', output: '₹ impact' },
+      { number: 5, icon: '🔧', title: 'Remediation', description: 'Fix and prevent', bullets: ['Process fix', 'System config', 'Approval matrix', 'Alert setup'], duration: 'Varies', output: 'Fixed process' },
+      { number: 6, icon: '👁️', title: 'Monitoring', description: 'Continuous surveillance', bullets: ['Real-time alerts', 'Dashboard monitoring', 'Escalation rules', 'Periodic review'], duration: 'Always on', output: 'Monitored ops' },
+      { number: 7, icon: '📈', title: 'Reporting', description: 'Recovery tracking', bullets: ['Recovery amount', 'Prevention value', 'ROI calculation', 'Executive dashboard'], duration: 'Monthly', output: 'Recovery report' },
+    ],
+  },
+  {
+    id: 7,
+    slug: 'erp-crm-finance-integration',
+    name: 'ERP–CRM–Finance Integration',
+    category: 'Single revenue engine',
+    description: 'Unified data flow between Synergics ERP, Zithara CRM, and finance systems',
+    icon: '🔗',
+    metrics: ['One source of truth', 'Real-time sync', 'Unified reporting'],
+    steps: [
+      { number: 1, icon: '🗺️', title: 'System Mapping', description: 'Identify integration points', bullets: ['Data flow diagram', 'API inventory', 'Sync frequency', 'Error handling'], duration: '1 week', output: 'Integration map' },
+      { number: 2, icon: '🔌', title: 'API Connection', description: 'Build data connectors', bullets: ['ERP API', 'CRM API', 'Finance API', 'Middleware setup'], duration: '2 weeks', output: 'Connected APIs' },
+      { number: 3, icon: '🔄', title: 'Data Sync', description: 'Real-time data exchange', bullets: ['Bidirectional sync', 'Conflict resolution', 'Queue management', 'Retry logic'], duration: 'Ongoing', output: 'Synced data' },
+      { number: 4, icon: '🧹', title: 'Data Cleansing', description: 'Standardize and deduplicate', bullets: ['Deduplication', 'Format standardization', 'Validation rules', 'Master data mgmt'], duration: '1 week', output: 'Clean data' },
+      { number: 5, icon: '🔐', title: 'Security', description: 'Access control and audit', bullets: ['Role-based access', 'Encryption', 'Audit logging', 'Compliance check'], duration: 'Ongoing', output: 'Secure flow' },
+      { number: 6, icon: '📊', title: 'Unified Dashboard', description: 'Single pane of glass', bullets: ['Cross-system KPIs', 'Drill-down reports', 'Alert consolidation', 'Mobile access'], duration: '2 weeks', output: 'Live dashboard' },
+      { number: 7, icon: '🧪', title: 'Testing', description: 'End-to-end validation', bullets: ['Unit testing', 'Integration testing', 'UAT', 'Go-live'], duration: '1 week', output: 'Validated system' },
+    ],
+  },
+  {
+    id: 8,
+    slug: 'mcx-pricing-automation',
+    name: 'MCX Pricing Automation',
+    category: 'Live gold rate engine',
+    description: 'Fully automated gold pricing with live MCX rates and zero manual intervention',
+    icon: '💱',
+    metrics: ['Zero manual override', 'Live rates', 'Multi-store sync'],
+    steps: [
+      { number: 1, icon: '📡', title: 'Rate Ingestion', description: 'MCX API integration', bullets: ['MCX API connect', 'Rate validation', 'Backup source', 'Frequency config'], duration: 'Auto', output: 'Live rate feed' },
+      { number: 2, icon: '⚙️', title: 'Rule Engine', description: 'Pricing rule configuration', bullets: ['Markup rules', 'Purity formulas', 'Store-specific rules', 'Promotional rules'], duration: '1-time', output: 'Rule set' },
+      { number: 3, icon: '🔢', title: 'Price Calculation', description: 'Automated price computation', bullets: ['Base rate + markup', 'Purity adjustment', 'Making charges', 'Tax calculation'], duration: 'Auto', output: 'Calculated prices' },
+      { number: 4, icon: '✅', title: 'Approval Matrix', description: 'Exception approval', bullets: ['Threshold config', 'Auto-approval', 'Escalation rules', 'Override logging'], duration: 'As needed', output: 'Approved prices' },
+      { number: 5, icon: '📤', title: 'Price Publish', description: 'Distribute to all channels', bullets: ['POS update', 'Online sync', 'Display boards', 'Customer app'], duration: 'Auto', output: 'Published prices' },
+      { number: 6, icon: '📈', title: 'Monitoring', description: 'Track price effectiveness', bullets: ['Competitor tracking', 'Margin analysis', 'Customer response', 'Volume impact'], duration: 'Daily', output: 'Price insights' },
+      { number: 7, icon: '📝', title: 'Audit', description: 'Complete pricing history', bullets: ['Change log', 'Approver trail', 'Impact analysis', 'Compliance report'], duration: 'Always on', output: 'Audit trail' },
+    ],
+  },
+  {
+    id: 9,
+    slug: 'scheme-gold-saving',
+    name: 'Gold Saving Schemes',
+    category: 'Liability + maturity engine',
+    description: 'Complete gold saving scheme management with compliant accounting and maturity processing',
+    icon: '🎁',
+    metrics: ['Compliant accounting', 'Auto-maturity', 'Liability tracking'],
+    steps: [
+      { number: 1, icon: '👤', title: 'Enrolment', description: 'Customer scheme registration', bullets: ['KYC collection', 'Scheme selection', 'Monthly amount', 'Tenure setup'], duration: '10 min', output: 'Enrolled customer' },
+      { number: 2, icon: '💰', title: 'Monthly Collection', description: 'Automated payment collection', bullets: ['Auto-debit setup', 'Payment reminder', 'Collection tracking', 'Missed payment handling'], duration: 'Monthly', output: 'Collected payment' },
+      { number: 3, icon: '📊', title: 'Liability Tracking', description: 'Real-time liability position', bullets: ['Principal tracking', 'Gold gram accumulation', 'Rate lock tracking', 'Milestone alerts'], duration: 'Real-time', output: 'Liability report' },
+      { number: 4, icon: '🏷️', title: 'Rate Lock', description: 'Gold rate fixation', bullets: ['Lock-in rate', 'Gram credit', 'Rate comparison', 'Best rate benefit'], duration: 'Auto', output: 'Locked rate' },
+      { number: 5, icon: '🎉', title: 'Maturity Processing', description: 'End-of-tenure conversion', bullets: ['Maturity alert', 'Gram calculation', 'Bonus application', 'Redemption options'], duration: 'Auto', output: 'Matured scheme' },
+      { number: 6, icon: '📋', title: 'Redemption', description: 'Gold or cash redemption', bullets: ['Jewellery purchase', 'Cash withdrawal', 'Partial redemption', 'Transfer option'], duration: '15 min', output: 'Redeemed' },
+      { number: 7, icon: '📈', title: 'Accounting', description: 'Compliant financial reporting', bullets: ['Liability recognition', 'Revenue deferral', 'GST compliance', 'Audit trail'], duration: 'Monthly', output: 'Compliant books' },
+    ],
+  },
+  {
+    id: 10,
+    slug: 'store-operations-sop',
+    name: 'Store Operations SOP',
+    category: 'Day-1 to Day-N playbook',
+    description: 'Standardized operating procedures deployed across 200+ stores',
+    icon: '🏪',
+    metrics: ['200+ stores rolled out', 'Day-1 readiness', 'SOP compliance'],
+    steps: [
+      { number: 1, icon: '📋', title: 'SOP Design', description: 'Process documentation', bullets: ['Process mapping', 'Role definition', 'Checklist creation', 'Template design'], duration: '2 weeks', output: 'SOP document' },
+      { number: 2, icon: '👥', title: 'Staff Training', description: 'Comprehensive training program', bullets: ['Classroom training', 'Hands-on practice', 'Assessment', 'Certification'], duration: '1 week', output: 'Trained staff' },
+      { number: 3, icon: '🖥️', title: 'System Setup', description: 'Store system configuration', bullets: ['ERP config', 'POS setup', 'User creation', 'Access rights'], duration: '3 days', output: 'Ready system' },
+      { number: 4, icon: '📦', title: 'Stock Loading', description: 'Initial inventory setup', bullets: ['Stock receipt', 'Tagging', 'System entry', 'Verification'], duration: '2 days', output: 'Loaded inventory' },
+      { number: 5, icon: '🎯', title: 'Soft Launch', description: 'Pilot operations', bullets: ['Limited operations', 'Issue tracking', 'Quick fixes', 'Feedback collection'], duration: '1 week', output: 'Stable ops' },
+      { number: 6, icon: '🚀', title: 'Go-Live', description: 'Full operations start', bullets: ['All processes live', 'Support available', 'Monitoring active', 'Issue resolution'], duration: '1 day', output: 'Live store' },
+      { number: 7, icon: '📈', title: 'Continuous Improvement', description: 'Ongoing optimization', bullets: ['Performance review', 'Feedback analysis', 'SOP updates', 'Best practice sharing'], duration: 'Ongoing', output: 'Optimized ops' },
+    ],
+  },
+  {
+    id: 11,
+    slug: 'old-gold-exchange',
+    name: 'Old Gold Exchange',
+    category: 'Trust-led valuation',
+    description: 'Transparent and trustworthy old gold buyback process with fair valuation',
+    icon: '♻️',
+    metrics: ['Transparent buyback', 'Fair valuation', 'Trust engine'],
+    steps: [
+      { number: 1, icon: '👤', title: 'Customer Request', description: 'Exchange request capture', bullets: ['Item description', 'Weight estimate', 'Purity claim', 'Photo capture'], duration: '5 min', output: 'Exchange request' },
+      { number: 2, icon: '⚖️', title: 'Weight Verification', description: 'Accurate weight measurement', bullets: ['Digital weighing', 'Customer witness', 'Photo evidence', 'Weight record'], duration: '2 min', output: 'Verified weight' },
+      { number: 3, icon: '🔬', title: 'Purity Testing', description: 'Karatometer / acid test', bullets: ['Non-destructive test', 'Purity certificate', 'Customer approval', 'Photo evidence'], duration: '3 min', output: 'Tested purity' },
+      { number: 4, icon: '💰', title: 'Rate Application', description: 'Live rate for old gold', bullets: ['Live MCX rate', 'Purity adjustment', 'Deduction transparency', 'Value calculation'], duration: '2 min', output: 'Calculated value' },
+      { number: 5, icon: '🤝', title: 'Customer Approval', description: 'Transparent offer presentation', bullets: ['Rate breakdown', 'Comparison', 'No pressure', 'Digital consent'], duration: '5 min', output: 'Customer approval' },
+      { number: 6, icon: '📝', title: 'Documentation', description: 'Complete audit trail', bullets: ['KYC verification', 'Item photos', 'Test results', 'Signed acknowledgement'], duration: '5 min', output: 'Complete docs' },
+      { number: 7, icon: '✅', title: 'Payment', description: 'Instant payment processing', bullets: ['Payment mode selection', 'Instant transfer', 'Receipt generation', 'Customer feedback'], duration: '2 min', output: 'Paid customer' },
+    ],
+  },
+  {
+    id: 12,
+    slug: 'compliance-audit',
+    name: 'Compliance & Audit',
+    category: 'GST / BIS / AML',
+    description: 'Audit-proof operations with GST, BIS hallmarking, and AML compliance',
+    icon: '🛡️',
+    metrics: ['Audit-proof operations', 'GST compliant', 'BIS ready'],
+    steps: [
+      { number: 1, icon: '📋', title: 'Compliance Mapping', description: 'Identify applicable regulations', bullets: ['GST requirements', 'BIS hallmarking', 'AML norms', 'State-specific rules'], duration: '1 week', output: 'Compliance map' },
+      { number: 2, icon: '⚙️', title: 'Process Design', description: 'Compliance-embedded processes', bullets: ['HUID tagging', 'GST invoicing', 'KYC process', 'Record keeping'], duration: '2 weeks', output: 'Compliant processes' },
+      { number: 3, icon: '🖥️', title: 'System Config', description: 'ERP compliance settings', bullets: ['GST rates', 'HUID field', 'KYC fields', 'Audit trail'], duration: '3 days', output: 'Configured system' },
+      { number: 4, icon: '👥', title: 'Team Training', description: 'Compliance awareness', bullets: ['Regulation overview', 'Process training', 'Documentation', 'Assessment'], duration: '2 days', output: 'Aware team' },
+      { number: 5, icon: '🔍', title: 'Internal Audit', description: 'Self-assessment', bullets: ['Checklist review', 'Sample testing', 'Gap identification', 'Corrective action'], duration: 'Weekly', output: 'Audit report' },
+      { number: 6, icon: '📝', title: 'Documentation', description: 'Complete record keeping', bullets: ['Invoice archive', 'KYC records', 'HUID logs', 'Audit trail'], duration: 'Ongoing', output: 'Complete records' },
+      { number: 7, icon: '🎯', title: 'External Audit', description: 'Third-party audit readiness', bullets: ['Audit preparation', 'Document compilation', 'Auditor coordination', 'Closure report'], duration: 'As needed', output: 'Audit cleared' },
+    ],
+  },
+];
+
+export function getWorkflowBySlug(slug: string): Workflow | undefined {
+  return workflows.find((w) => w.slug === slug);
+}
