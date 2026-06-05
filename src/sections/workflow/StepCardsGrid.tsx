@@ -84,7 +84,7 @@ export function StepCardsGrid({ workflow }: StepCardsGridProps) {
   }, [workflow]);
 
   const activeStep = workflow.steps.find((s) => s.number === activeStepNum) || workflow.steps[0];
-  const logs = getSimulatedLogs(activeStep.title);
+  const logs = activeStep.trace || getSimulatedLogs(activeStep.title);
 
   return (
     <section className="bg-warm-white py-16 md:py-24 px-6 border-b border-border-light select-none">

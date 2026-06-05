@@ -7,6 +7,7 @@ export interface WorkflowStep {
   duration: string;
   output: string;
   details?: string[];
+  trace?: string[];
 }
 
 export interface Workflow {
@@ -147,58 +148,578 @@ export const workflows: Workflow[] = [
     poVariants: {
       Variant_A: {
         steps: [
-          { number: 1, icon: '📋', title: 'Supplier Onboarding', description: 'Supplier registration and trade agreement lock', bullets: ['Online portal registration link', 'GST/PAN/bank verification & KYC', 'Assign payment terms & currencies', 'Pricing wastage & QC rules lock'], duration: '1 hr', output: 'Supplier Master' },
-          { number: 2, icon: '🏷️', title: 'SKU & Attribute Setup', description: 'Defining metals, stones, and finished goods parameters', bullets: ['Metal: purity, color, form rules', 'Stones: type, size, grading specs', 'Structured SKU code generation', 'Enforce SKU usage on transactions'], duration: '30 min', output: 'SKU Registry' },
-          { number: 3, icon: '📈', title: 'Requisition & PO Creation', description: 'Formal branch request converted to signed PO', bullets: ['Store/branch raises requisition', 'Value & category approval matrix', 'Procurement issues rate-locked PO', 'PO sent digitally for vendor sign'], duration: '15 min', output: 'Released PO' },
-          { number: 4, icon: '🚚', title: 'Vendor Portal Actions', description: 'Vendor pre-shipment logging & QC-1', bullets: ['Vendor uploads item list & specs', 'Scales weight feed (no manual edit)', 'Phase-1 QC check with photos', 'Transporter & shipping AWB booking'], duration: '45 min', output: 'In Transit Status' },
-          { number: 5, icon: '📥', title: 'Receiving & Storage', description: 'Shipment arrival and storage assignment', bullets: ['Match AWB & PO in system', 'Header GRN created on arrival', 'Assign vault locker or bag ID', 'Auto-assign QC inspector'], duration: '20 min', output: 'Warehouse Inward' },
-          { number: 6, icon: '🔍', title: 'GRN Entry & Variance Check', description: 'Weighing received items vs PO values', bullets: ['Physical weight entry in ERP', 'Compare PO vs Vendor vs Recd', 'Variance calculated per item', 'Exception approval trigger if error'], duration: '30 min', output: 'Approved GRN' },
-          { number: 7, icon: '🔬', title: 'QC Phase-2 & Segregation', description: 'Detailed quality audit & fail management', bullets: ['Assay/Karatometer purity check', 'Visual setting & finish inspection', 'Physical segregation (Pass/Fail bags)', 'Create return document for fails'], duration: '45 min', output: 'QC Clearance' },
-          { number: 8, icon: '⚖️', title: 'Rate-Cut Finalisation', description: 'Locking pricing based on gold rate agreements', bullets: ['Apply contract pricing rules', 'Initiate rate-cut if delays/faults', 'Vendor reviews and accepts rate-cut', 'Final commercial values locked'], duration: '20 min', output: 'Locked Rate' },
-          { number: 9, icon: '🧾', title: 'Invoice & 3-Way Match', description: 'Invoice verification vs PO & GRN', bullets: ['Vendor uploads invoice via portal', '3-way match (PO ↔ GRN ↔ Invoice)', 'Auto-flag rate & weight mismatches', 'Post clean matched invoice to AP'], duration: '10 min', output: 'Posted Payable' },
-          { number: 10, icon: '💳', title: 'Payment & AP Closing', description: 'Disbursing batch payments to vendor', bullets: ['Finance runs payment proposals', 'Payment approval workflow check', 'Execute NEFT/RTGS batch transfer', 'Clear AP ledger & notify vendor'], duration: 'Daily 30 min', output: 'Cleared Ledger' },
-          { number: 11, icon: '📊', title: 'SLA & KPI Tracking', description: 'Continuous process analytics monitoring', bullets: ['Measure timestamps across steps', 'Track on-time delivery (OTD)', 'Supplier pass rate & return score', 'P2P bottlenecks hotspot dashboard'], duration: 'Continuous', output: 'KPI Dashboard' }
+          {
+            number: 1,
+            icon: '📋',
+            title: 'Supplier Onboarding',
+            description: 'Supplier registration and trade agreement lock',
+            bullets: ['Online portal registration link', 'GST/PAN/bank verification & KYC', 'Assign payment terms & currencies', 'Pricing wastage & QC rules lock'],
+            duration: '1 hr',
+            output: 'Supplier Master',
+            trace: [
+              '[PORTAL] Supplier digital KYC & GSTIN validated successfully',
+              '[ERP] Supplier master record created under ID: VND-2026-9041',
+              '[SYS] Wastage parameters (max 3.5%) & billing cycles locked in system'
+            ]
+          },
+          {
+            number: 2,
+            icon: '🏷️',
+            title: 'SKU & Attribute Setup',
+            description: 'Defining metals, stones, and finished goods parameters',
+            bullets: ['Metal: purity, color, form rules', 'Stones: type, size, grading specs', 'Structured SKU code generation', 'Enforce SKU usage on transactions'],
+            duration: '30 min',
+            output: 'SKU Registry',
+            trace: [
+              '[ERP] SKU categories mapped: 22K Yellow Gold, 18K Diamond Jewellery',
+              '[ERP] Purity thresholds & Stone Grading guidelines configured',
+              '[SYS] System locks SKU parameter usage; ad-hoc SKU tags forbidden'
+            ]
+          },
+          {
+            number: 3,
+            icon: '📈',
+            title: 'Requisition & PO Creation',
+            description: 'Formal branch request converted to signed PO',
+            bullets: ['Store/branch raises requisition', 'Value & category approval matrix', 'Procurement issues rate-locked PO', 'PO sent digitally for vendor sign'],
+            duration: '15 min',
+            output: 'Released PO',
+            trace: [
+              '[ERP] Showroom raised stock requisition based on sales trends',
+              '[ERP] Automated validation against regional showroom procurement budget',
+              '[SYS] Signed digital PO issued with live gold rate snapshot lock'
+            ]
+          },
+          {
+            number: 4,
+            icon: '🚚',
+            title: 'Vendor Portal Actions',
+            description: 'Vendor pre-shipment logging & QC-1',
+            bullets: ['Vendor uploads item list & specs', 'Scales weight feed (no manual edit)', 'Phase-1 QC check with photos', 'Transporter & shipping AWB booking'],
+            duration: '45 min',
+            output: 'In Transit Status',
+            trace: [
+              '[PORTAL] Supplier uploaded item list and digital purity certificates',
+              '[PORTAL] Direct scale weight integration recorded package weight',
+              '[SYS] Phase-1 checklist completed; airway bill (AWB) generated'
+            ]
+          },
+          {
+            number: 5,
+            icon: '📥',
+            title: 'Receiving & Storage',
+            description: 'Shipment arrival and storage assignment',
+            bullets: ['Match AWB & PO in system', 'Header GRN created on arrival', 'Assign vault locker or bag ID', 'Auto-assign QC inspector'],
+            duration: '20 min',
+            output: 'Warehouse Inward',
+            trace: [
+              '[SYS] Package scanned at showroom; matched to airway bill in ERP',
+              '[ERP] Initial Header GRN generated on cargo arrival',
+              '[SEC] Consignment moved to Vault Locker under Bag ID: BAG-9041A'
+            ]
+          },
+          {
+            number: 6,
+            icon: '🔍',
+            title: 'GRN Entry & Variance Check',
+            description: 'Weighing received items vs PO values',
+            bullets: ['Physical weight entry in ERP', 'Compare PO vs Vendor vs Recd', 'Variance calculated per item', 'Exception approval trigger if error'],
+            duration: '30 min',
+            output: 'Approved GRN',
+            trace: [
+              '[ERP] Direct weight scale integration recorded actual received weight',
+              '[ERP] Variance analysis: weight deviation is 0.08g (within 0.1g tolerance)',
+              '[SYS] GRN approved and status updated to \'Inward Complete\''
+            ]
+          },
+          {
+            number: 7,
+            icon: '🔬',
+            title: 'QC Phase-2 & Segregation',
+            description: 'Detailed quality audit & fail management',
+            bullets: ['Assay/Karatometer purity check', 'Visual setting & finish inspection', 'Physical segregation (Pass/Fail bags)', 'Create return document for fails'],
+            duration: '45 min',
+            output: 'QC Clearance',
+            trace: [
+              '[DEV] Karatometer testing completed; gold purity verified at 91.68%',
+              '[ERP] Itemized quality status updated: 142 items PASSED, 2 items FAILED',
+              '[SYS] FAILED items moved to Return Ledger; Return Note RTN-9021 generated'
+            ]
+          },
+          {
+            number: 8,
+            icon: '⚖️',
+            title: 'Rate-Cut Finalisation',
+            description: 'Locking pricing based on gold rate agreements',
+            bullets: ['Apply contract pricing rules', 'Initiate rate-cut if delays/faults', 'Vendor reviews and accepts rate-cut', 'Final commercial values locked'],
+            duration: '20 min',
+            output: 'Locked Rate',
+            trace: [
+              '[API] Live gold rate pulled from MCX: ₹72,450 / 10g',
+              '[ERP] Executed contract rate-cut for 1.25 kg gold allotment',
+              '[PORTAL] Supplier reviewed and accepted rate-cut lock electronically'
+            ]
+          },
+          {
+            number: 9,
+            icon: '🧾',
+            title: 'Invoice & 3-Way Match',
+            description: 'Invoice verification vs PO & GRN',
+            bullets: ['Vendor uploads invoice via portal', '3-way match (PO ↔ GRN ↔ Invoice)', 'Auto-flag rate & weight mismatches', 'Post clean matched invoice to AP'],
+            duration: '10 min',
+            output: 'Posted Payable',
+            trace: [
+              '[PORTAL] Supplier uploaded tax invoice file',
+              '[ERP] Auto-matched: PO (1.25kg) ↔ GRN (1.249kg) ↔ Invoice (1.249kg)',
+              '[SYS] Rate & weight variance validation: PASSED. Posted to AP'
+            ]
+          },
+          {
+            number: 10,
+            icon: '💳',
+            title: 'Payment & AP Closing',
+            description: 'Disbursing batch payments to vendor',
+            bullets: ['Finance runs payment proposals', 'Payment approval workflow check', 'Execute NEFT/RTGS batch transfer', 'Clear AP ledger & notify vendor'],
+            duration: 'Daily 30 min',
+            output: 'Cleared Ledger',
+            trace: [
+              '[FIN] Batch payment run proposal generated for finance head',
+              '[API] Executed bank batch RTGS transfer to supplier account',
+              '[ERP] Accounts Payable ledger closed; vendor notified of transaction ID'
+            ]
+          },
+          {
+            number: 11,
+            icon: '📊',
+            title: 'SLA & KPI Tracking',
+            description: 'Continuous process analytics monitoring',
+            bullets: ['Measure timestamps across steps', 'Track on-time delivery (OTD)', 'Supplier pass rate & return score', 'P2P bottlenecks hotspot dashboard'],
+            duration: 'Continuous',
+            output: 'KPI Dashboard',
+            trace: [
+              '[BI] SLA tracked: P2P cycle time was 6.4 days (target < 7 days)',
+              '[BI] Supplier performance card updated: OTD 98.2%, QC Pass 98.5%',
+              '[SYS] Weekly operational audit logs finalized and archived'
+            ]
+          }
         ]
       },
       Variant_B: {
         steps: [
-          { number: 1, icon: '📋', title: 'Supplier Onboarding', description: 'Manual supplier setup by HO Procurement', bullets: ['GST/PAN/metal purity certificates', 'Manual trade agreements config', 'Supplier master entry in ERP', 'HO verification & approval'], duration: '1 hr', output: 'Approved supplier entry' },
-          { number: 2, icon: '🏷️', title: 'SKU & Attribute Setup', description: 'Defining metals, stones, and finished goods parameters', bullets: ['Metal: purity, color, form rules', 'Stones: type, size, grading specs', 'Structured SKU code generation', 'Enforce SKU usage on transactions'], duration: '30 min', output: 'SKU Registry' },
-          { number: 3, icon: '📈', title: 'Requisition & PO Creation', description: 'Centralized requisition review & PO creation', bullets: ['Branches raise showroom requisitions', 'Procurement validates against budget', 'Live gold price locked in PO', 'PO sent for supplier confirmation'], duration: '15 min', output: 'Supplier-confirmed PO' },
-          { number: 4, icon: '📦', title: 'Manual Inward Setup', description: 'Vendor has no portal; sends physical consignment details. Staff manually records item details and weights in ERP', bullets: ['Receive physical slip & check items', 'Staff manually registers weight data', 'No direct vendor portal connection', 'Update shipment status manually'], duration: '45 min', output: 'Consignment Logged' },
-          { number: 5, icon: '📥', title: 'Receiving & Storage', description: 'Shipment arrival and storage assignment', bullets: ['Match physical AWB & PO in system', 'Header GRN created on arrival', 'Assign vault locker or bag ID', 'Auto-assign QC inspector'], duration: '20 min', output: 'Warehouse Inward' },
-          { number: 6, icon: '🔍', title: 'GRN Entry & Variance Check', description: 'Weighing received items vs PO values', bullets: ['Physical weight entry in ERP', 'Compare PO vs Vendor vs Recd', 'Variance calculated per item', 'Exception approval trigger if error'], duration: '30 min', output: 'Approved GRN' },
-          { number: 7, icon: '🔬', title: 'QC Phase-2 & Segregation', description: 'Detailed quality audit & fail management', bullets: ['Assay/Karatometer purity check', 'Visual setting & finish inspection', 'Physical segregation (Pass/Fail bags)', 'Create return document for fails'], duration: '45 min', output: 'QC Clearance' },
-          { number: 8, icon: '⚖️', title: 'Rate-Cut Finalisation', description: 'Locking pricing based on gold rate agreements', bullets: ['Apply contract pricing rules', 'Initiate rate-cut if delays/faults', 'Vendor reviews and accepts rate-cut', 'Final commercial values locked'], duration: '20 min', output: 'Locked Rate' },
-          { number: 9, icon: '🧾', title: 'Manual Invoice Matching', description: 'Manual invoice entry and 3-way match in ERP', bullets: ['Finance manually records invoice details', 'Match PO & GRN manually in ERP', 'Resolve mismatches via WhatsApp/email', 'Post invoice to Accounts Payable queue'], duration: '15 min', output: 'Manual Posted Payable' },
-          { number: 10, icon: '💳', title: 'Payment & AP Closing', description: 'Disbursing batch payments to vendor', bullets: ['Finance runs payment proposals', 'Payment approval workflow check', 'Execute NEFT/RTGS batch transfer', 'Clear AP ledger & notify vendor'], duration: 'Daily 30 min', output: 'Cleared Ledger' },
-          { number: 11, icon: '📊', title: 'SLA & KPI Tracking', description: 'Continuous process analytics monitoring', bullets: ['Measure timestamps across steps', 'Track on-time delivery (OTD)', 'Supplier pass rate & return score', 'P2P bottlenecks hotspot dashboard'], duration: 'Continuous', output: 'KPI Dashboard' }
+          {
+            number: 1,
+            icon: '📋',
+            title: 'Supplier Onboarding',
+            description: 'Manual supplier setup by HO Procurement',
+            bullets: ['GST/PAN/metal purity certificates', 'Manual trade agreements config', 'Supplier master entry in ERP', 'HO verification & approval'],
+            duration: '1 hr',
+            output: 'Approved supplier entry',
+            trace: [
+              '[ERP] Staff manually keyed supplier bank info & KYC from physical documents',
+              '[ERP] Supplier master record created under ID: VND-2026-9042',
+              '[SYS] Manual entry approval verified by HO Procurement head'
+            ]
+          },
+          {
+            number: 2,
+            icon: '🏷️',
+            title: 'SKU & Attribute Setup',
+            description: 'Defining metals, stones, and finished goods parameters',
+            bullets: ['Metal: purity, color, form rules', 'Stones: type, size, grading specs', 'Structured SKU code generation', 'Enforce SKU usage on transactions'],
+            duration: '30 min',
+            output: 'SKU Registry',
+            trace: [
+              '[ERP] SKU categories mapped: 22K Yellow Gold, 18K Diamond',
+              '[ERP] Staff manually mapped purity & design codes in SKU catalog',
+              '[SYS] SKU validation check enabled on transaction screen'
+            ]
+          },
+          {
+            number: 3,
+            icon: '📈',
+            title: 'Requisition & PO Creation',
+            description: 'Centralized requisition review & PO creation',
+            bullets: ['Branches raise showroom requisitions', 'Procurement validates against budget', 'Live gold price locked in PO', 'PO sent for supplier confirmation'],
+            duration: '15 min',
+            output: 'Supplier-confirmed PO',
+            trace: [
+              '[ERP] Branch manager submitted physical requisition form to HO',
+              '[ERP] HO operator manually created system requisition',
+              '[SYS] Released PO sent to supplier email as PDF attachment'
+            ]
+          },
+          {
+            number: 4,
+            icon: '📦',
+            title: 'Manual Inward Setup',
+            description: 'Vendor has no portal; sends physical consignment details. Staff manually records item details and weights in ERP',
+            bullets: ['Receive physical slip & check items', 'Staff manually registers weight data', 'No direct vendor portal connection', 'Update shipment status manually'],
+            duration: '45 min',
+            output: 'Consignment Logged',
+            trace: [
+              '[ERP] Staff manually created inbound log from vendor\'s courier slip',
+              '[ERP] Consignment package weight manually typed from paper label',
+              '[SYS] Inbound shipment set to \'Expected\' state'
+            ]
+          },
+          {
+            number: 5,
+            icon: '📥',
+            title: 'Receiving & Storage',
+            description: 'Shipment arrival and storage assignment',
+            bullets: ['Match physical AWB & PO in system', 'Header GRN created on arrival', 'Assign vault locker or bag ID', 'Auto-assign QC inspector'],
+            duration: '20 min',
+            output: 'Warehouse Inward',
+            trace: [
+              '[ERP] Operator matched physical box label to PO number manually',
+              '[ERP] Header GRN generated manually in ERP',
+              '[SEC] Box stored in showroom vault under manual registry entry'
+            ]
+          },
+          {
+            number: 6,
+            icon: '🔍',
+            title: 'GRN Entry & Variance Check',
+            description: 'Weighing received items vs PO values',
+            bullets: ['Physical weight entry in ERP', 'Compare PO vs Vendor vs Recd', 'Variance calculated per item', 'Exception approval trigger if error'],
+            duration: '30 min',
+            output: 'Approved GRN',
+            trace: [
+              '[ERP] Staff manually read weight from scale and keyed 1248.5g into ERP',
+              '[ERP] Manual variance check: compared physical invoice weight with GRN',
+              '[SYS] GRN approved after manual review of 0.2g discrepancy'
+            ]
+          },
+          {
+            number: 7,
+            icon: '🔬',
+            title: 'QC Phase-2 & Segregation',
+            description: 'Detailed quality audit & fail management',
+            bullets: ['Assay/Karatometer purity check', 'Visual setting & finish inspection', 'Physical segregation (Pass/Fail bags)', 'Create return document for fails'],
+            duration: '45 min',
+            output: 'QC Clearance',
+            trace: [
+              '[DEV] Staff verified purity using Karatometer; printed physical report',
+              '[ERP] Staff manually updated item quality flags in GRN log',
+              '[SYS] Created manual return list for 3 rejected rings'
+            ]
+          },
+          {
+            number: 8,
+            icon: '⚖️',
+            title: 'Rate-Cut Finalisation',
+            description: 'Locking pricing based on gold rate agreements',
+            bullets: ['Apply contract pricing rules', 'Initiate rate-cut if delays/faults', 'Vendor reviews and accepts rate-cut', 'Final commercial values locked'],
+            duration: '20 min',
+            output: 'Locked Rate',
+            trace: [
+              '[API] Live gold rate pulled from MCX: ₹72,450 / 10g',
+              '[ERP] Staff manually keyed agreed booking rate of ₹72,380',
+              '[SYS] Saved signed rate-cut agreement PDF to supplier master attachments'
+            ]
+          },
+          {
+            number: 9,
+            icon: '🧾',
+            title: 'Manual Invoice Matching',
+            description: 'Manual invoice entry and 3-way match in ERP',
+            bullets: ['Finance manually records invoice details', 'Match PO & GRN manually in ERP', 'Resolve mismatches via WhatsApp/email', 'Post invoice to Accounts Payable queue'],
+            duration: '15 min',
+            output: 'Manual Posted Payable',
+            trace: [
+              '[ERP] Finance clerk manually recorded supplier physical invoice details',
+              '[ERP] Checked line items manually against physical PO & GRN copies',
+              '[SYS] Mismatched tax amount resolved via phone; posted manually to AP'
+            ]
+          },
+          {
+            number: 10,
+            icon: '💳',
+            title: 'Payment & AP Closing',
+            description: 'Disbursing batch payments to vendor',
+            bullets: ['Finance runs payment proposals', 'Payment approval workflow check', 'Execute NEFT/RTGS batch transfer', 'Clear AP ledger & notify vendor'],
+            duration: 'Daily 30 min',
+            output: 'Cleared Ledger',
+            trace: [
+              '[ERP] Accounts Payable clerk selected invoice for payment proposal',
+              '[FIN] Staff logged in to banking portal to execute RTGS manually',
+              '[SYS] Ledger updated manually after uploading bank receipt screenshot'
+            ]
+          },
+          {
+            number: 11,
+            icon: '📊',
+            title: 'SLA & KPI Tracking',
+            description: 'Continuous process analytics monitoring',
+            bullets: ['Measure timestamps across steps', 'Track on-time delivery (OTD)', 'Supplier pass rate & return score', 'P2P bottlenecks hotspot dashboard'],
+            duration: 'Continuous',
+            output: 'KPI Dashboard',
+            trace: [
+              '[BI] SLA tracked: total P2P cycle time was 9.8 days (delays in manual entry)',
+              '[BI] Supplier performance record updated manually',
+              '[SYS] Monthly audit records compiled via Excel spreadsheet'
+            ]
+          }
         ]
       },
       Variant_C: {
         steps: [
-          { number: 1, icon: '👤', title: 'Need Identified Informally', description: 'Ad-hoc request without system entry', bullets: ['Owner/salesperson suggests buying', 'No digital request or validation', 'No budget checking or limit check', 'Decision based on ad-hoc shortage'], duration: '10 min', output: 'Oral Need' },
-          { number: 2, icon: '💬', title: 'Owner Gathers Reqs', description: 'Owner polls staff for customer trends', bullets: ['Oral feedback from counter staff', 'Personal design taste selection', 'No sales data validation', 'Gut-based stocking decision'], duration: '1 hr', output: 'Verbal Specs' },
-          { number: 3, icon: '🏢', title: 'No Vendor Master', description: 'Buying from arbitrary local dealers', bullets: ['Street vendors & dealers selected', 'No KYC or financial risk audits', 'No locked price wastage contracts', 'Missing regulatory compliance check'], duration: 'Varies', output: 'Ad-hoc Vendor' },
-          { number: 4, icon: '🚚', title: 'Vendor Portal Ship', description: 'Vendor books shipment and uploads specs on portal', bullets: ['Vendor inputs weights on portal', 'Verify weights against verbal agreements', 'Pre-shipment photo upload', 'Online AWB shipment booking'], duration: '30 min', output: 'Shipment Logged' },
-          { number: 5, icon: '📦', title: 'Goods Arrive', description: 'Informal box receiving at showroom', bullets: ['Count boxes at showroom counter', 'Put items directly onto trays/vaults', 'No GRN matched to original order', 'Stock entry logged on manual pad'], duration: '20 min', output: 'Unchecked Stock' },
-          { number: 6, icon: '👁️', title: 'No Formal QC', description: 'Basic visual sanity check by store staff', bullets: ['Quick glance at setting/polish', 'No assay/purity verified records', 'No Pass/Fail labels or segregation', 'Faults discovered later by customer'], duration: '10 min', output: 'Assumed Good' },
-          { number: 7, icon: '🧾', title: 'Portal Invoice Upload', description: 'Vendor uploads invoice file directly to portal', bullets: ['Invoice uploaded electronically by vendor', 'Operator verifies against manual logs', 'Flag invoice amount deviations', 'Match to verbal purchase records'], duration: '10 min', output: 'Invoice Registered' },
-          { number: 8, icon: '💸', title: 'Payment Approval', description: 'Owner verbally authorizes payout', bullets: ['Owner instructs cashier via call', 'Direct showroom cash box payout', 'Or direct manual NEFT online bank', 'No validation of receipt details'], duration: '10 min', output: 'Manual Bank Payout' },
-          { number: 9, icon: '📉', title: 'No KPI Tracking', description: 'Buying details remain unmeasured', bullets: ['No lead times or delays captured', 'No vendor quality scorecards', 'Unknown leakages in gold weight/rates', 'Decisions remain gut-based'], duration: 'None', output: 'Untracked Ops' }
+          {
+            number: 1,
+            icon: '👤',
+            title: 'Need Identified Informally',
+            description: 'Ad-hoc request without system entry',
+            bullets: ['Owner/salesperson suggests buying', 'No digital request or validation', 'No budget checking or limit check', 'Decision based on ad-hoc shortage'],
+            duration: '10 min',
+            output: 'Oral Need',
+            trace: [
+              '[SYS] Warning: Step initiated without requisition or budget validation',
+              '[SYS] No PO trace exists. Ad-hoc need verbal discussion logged',
+              '[SYS] Risk: Lack of purchase planning leads to emergency stock sourcing'
+            ]
+          },
+          {
+            number: 2,
+            icon: '💬',
+            title: 'Owner Gathers Reqs',
+            description: 'Owner polls staff for customer trends',
+            bullets: ['Oral feedback from counter staff', 'Personal design taste selection', 'No sales data validation', 'Gut-based stocking decision'],
+            duration: '1 hr',
+            output: 'Verbal Specs',
+            trace: [
+              '[SYS] Owner gathered requests via WhatsApp messages from showroom staff',
+              '[SYS] Style trends and weight requirements estimated verbally',
+              '[SYS] Risk: Missing historic sales trend validation'
+            ]
+          },
+          {
+            number: 3,
+            icon: '🏢',
+            title: 'No Vendor Master',
+            description: 'Buying from arbitrary local dealers',
+            bullets: ['Street vendors & dealers selected', 'No KYC or financial risk audits', 'No locked price wastage contracts', 'Missing regulatory compliance check'],
+            duration: 'Varies',
+            output: 'Ad-hoc Vendor',
+            trace: [
+              '[SYS] Warning: Vendor master lookup failed',
+              '[SYS] Vendor set as temporary dealer without credit or risk assessment',
+              '[SYS] Risk: Purchasing from unverified source; high compliance exposure'
+            ]
+          },
+          {
+            number: 4,
+            icon: '🚚',
+            title: 'Vendor Portal Ship',
+            description: 'Vendor books shipment and uploads specs on portal',
+            bullets: ['Vendor inputs weights on portal', 'Verify weights against verbal agreements', 'Pre-shipment photo upload', 'Online AWB shipment booking'],
+            duration: '30 min',
+            output: 'Shipment Logged',
+            trace: [
+              '[PORTAL] Vendor uploaded packing slip & weights to vendor portal',
+              '[SYS] Staff verified vendor inputs against verbal agreements',
+              '[SYS] Airway bill (AWB) registered on portal'
+            ]
+          },
+          {
+            number: 5,
+            icon: '📦',
+            title: 'Goods Arrive',
+            description: 'Informal box receiving at showroom',
+            bullets: ['Count boxes at showroom counter', 'Put items directly onto trays/vaults', 'No GRN matched to original order', 'Stock entry logged on manual pad'],
+            duration: '20 min',
+            output: 'Unchecked Stock',
+            trace: [
+              '[SYS] Consignment arrived at showroom; no PO in system to match',
+              '[ERP] Manual inward receipt entry created without reference document',
+              '[SYS] Risk: Unchecked stock levels; high chance of weight discrepancies'
+            ]
+          },
+          {
+            number: 6,
+            icon: '👁️',
+            title: 'No Formal QC',
+            description: 'Basic visual sanity check by store staff',
+            bullets: ['Quick glance at setting/polish', 'No assay/purity verified records', 'No Pass/Fail labels or segregation', 'Faults discovered later by customer'],
+            duration: '10 min',
+            output: 'Assumed Good',
+            trace: [
+              '[SYS] Basic visual inspection conducted by showroom cashier',
+              '[SYS] No scientific purity verification or assay record logged',
+              '[SYS] Risk: Assumed purity; high risk of receiving under-karatage jewellery'
+            ]
+          },
+          {
+            number: 7,
+            icon: '🧾',
+            title: 'Portal Invoice Upload',
+            description: 'Vendor uploads invoice file directly to portal',
+            bullets: ['Invoice uploaded electronically by vendor', 'Operator verifies against manual logs', 'Flag invoice amount deviations', 'Match to verbal purchase records'],
+            duration: '10 min',
+            output: 'Invoice Registered',
+            trace: [
+              '[PORTAL] Vendor uploaded tax invoice directly via portal',
+              '[ERP] Operator manually matched invoice to verbal log',
+              '[SYS] Warning: Invoice marked as \'No-PO\' purchase; flagged for audit'
+            ]
+          },
+          {
+            number: 8,
+            icon: '💸',
+            title: 'Payment Approval',
+            description: 'Owner verbally authorizes payout',
+            bullets: ['Owner instructs cashier via call', 'Direct showroom cash box payout', 'Or direct manual NEFT online bank', 'No validation of receipt details'],
+            duration: '10 min',
+            output: 'Manual Bank Payout',
+            trace: [
+              '[SYS] Owner verbally authorized payment over phone call',
+              '[FIN] Cashier paid advance from showroom cash drawer or online banking',
+              '[SYS] Risk: Lack of 3-way match audit trail allows duplicate payment risk'
+            ]
+          },
+          {
+            number: 9,
+            icon: '📉',
+            title: 'No KPI Tracking',
+            description: 'Buying details remain unmeasured',
+            bullets: ['No lead times or delays captured', 'No vendor quality scorecards', 'Unknown leakages in gold weight/rates', 'Decisions remain gut-based'],
+            duration: 'None',
+            output: 'Untracked Ops',
+            trace: [
+              '[SYS] Warning: Operational KPIs cannot be calculated (missing PO timestamp)',
+              '[SYS] Vendor performance scorecards disabled',
+              '[SYS] Leakage audit: rates, weights, and wastage remain unmeasured'
+            ]
+          }
         ]
       },
       Variant_D: {
         steps: [
-          { number: 1, icon: '👤', title: 'Need Identified Informally', description: 'Ad-hoc request without system entry', bullets: ['Owner/salesperson suggests buying', 'No digital request or validation', 'No budget checking or limit check', 'Decision based on ad-hoc shortage'], duration: '10 min', output: 'Oral Need' },
-          { number: 2, icon: '💬', title: 'Owner Gathers Reqs', description: 'Owner polls staff for customer trends', bullets: ['Oral feedback from counter staff', 'Personal design taste selection', 'No sales data validation', 'Gut-based stocking decision'], duration: '1 hr', output: 'Verbal Specs' },
-          { number: 3, icon: '🏢', title: 'No Vendor Master', description: 'Buying from arbitrary local dealers', bullets: ['Street vendors & dealers selected', 'No KYC or financial risk audits', 'No locked price wastage contracts', 'Missing regulatory compliance check'], duration: 'Varies', output: 'Ad-hoc Vendor' },
-          { number: 4, icon: '📱', title: 'Direct Purchase (No PO)', description: 'Verbal purchase lock via WhatsApp/phone', bullets: ['WhatsApp photo or call purchase', 'Rate agreed verbally (unsecured)', 'Immediate UPI/NEFT bank advance', 'No reference document created'], duration: '10 min', output: 'Verbal Lock' },
-          { number: 5, icon: '📦', title: 'Goods Arrive', description: 'Informal box receiving at showroom', bullets: ['Count boxes at showroom counter', 'Put items directly onto trays/vaults', 'No GRN matched to original order', 'Stock entry logged on manual pad'], duration: '20 min', output: 'Unchecked Stock' },
-          { number: 6, icon: '👁️', title: 'No Formal QC', description: 'Basic visual sanity check by store staff', bullets: ['Quick glance at setting/polish', 'No assay/purity verified records', 'No Pass/Fail labels or segregation', 'Faults discovered later by customer'], duration: '10 min', output: 'Assumed Good' },
-          { number: 7, icon: '🧾', title: 'Manual Invoice Entry', description: 'Operator manually records bill amount', bullets: ['Photo of bill received via phone', 'Manual journal entry in backend', 'No validation vs PO or GRN weight', 'No rate-variance threshold checks'], duration: '20 min', output: 'Manual Bill Log' },
-          { number: 8, icon: '💸', title: 'Payment Approval', description: 'Owner verbally authorizes payout', bullets: ['Owner instructs cashier via call', 'Direct showroom cash box payout', 'Or direct manual NEFT online bank', 'No validation of receipt details'], duration: '10 min', output: 'Manual Bank Payout' },
-          { number: 9, icon: '📉', title: 'No KPI Tracking', description: 'Buying details remain unmeasured', bullets: ['No lead times or delays captured', 'No vendor quality scorecards', 'Unknown leakages in gold weight/rates', 'Decisions remain gut-based'], duration: 'None', output: 'Untracked Ops' }
+          {
+            number: 1,
+            icon: '👤',
+            title: 'Need Identified Informally',
+            description: 'Ad-hoc request without system entry',
+            bullets: ['Owner/salesperson suggests buying', 'No digital request or validation', 'No budget checking or limit check', 'Decision based on ad-hoc shortage'],
+            duration: '10 min',
+            output: 'Oral Need',
+            trace: [
+              '[SYS] Warning: Step initiated without requisition or budget validation',
+              '[SYS] No system log exists. Ad-hoc need verbal discussion logged',
+              '[SYS] Risk: Zero controls on store purchasing limits'
+            ]
+          },
+          {
+            number: 2,
+            icon: '💬',
+            title: 'Owner Gathers Reqs',
+            description: 'Owner polls staff for customer trends',
+            bullets: ['Oral feedback from counter staff', 'Personal design taste selection', 'No sales data validation', 'Gut-based stocking decision'],
+            duration: '1 hr',
+            output: 'Verbal Specs',
+            trace: [
+              '[SYS] Owner gathered showroom requests verbally on retail floor',
+              '[SYS] Stock selection based entirely on owner\'s personal taste',
+              '[SYS] Risk: Overstocking of slow-moving items'
+            ]
+          },
+          {
+            number: 3,
+            icon: '🏢',
+            title: 'No Vendor Master',
+            description: 'Buying from arbitrary local dealers',
+            bullets: ['Street vendors & dealers selected', 'No KYC or financial risk audits', 'No locked price wastage contracts', 'Missing regulatory compliance check'],
+            duration: 'Varies',
+            output: 'Ad-hoc Vendor',
+            trace: [
+              '[SYS] Warning: Vendor master lookup failed',
+              '[SYS] Street dealer selected for cash purchase; KYC incomplete',
+              '[SYS] Risk: Regulatory compliance alerts triggered; missing GST checks'
+            ]
+          },
+          {
+            number: 4,
+            icon: '📱',
+            title: 'Direct Purchase (No PO)',
+            description: 'Verbal purchase lock via WhatsApp/phone',
+            bullets: ['WhatsApp photo or call purchase', 'Rate agreed verbally (unsecured)', 'Immediate UPI/NEFT bank advance', 'No reference document created'],
+            duration: '10 min',
+            output: 'Verbal Lock',
+            trace: [
+              '[COM] Verbal transaction locked over phone/WhatsApp',
+              '[SYS] No PO number generated; no rate lock contract exists',
+              '[SYS] Risk: High exposure to vendor price changes during transit'
+            ]
+          },
+          {
+            number: 5,
+            icon: '📦',
+            title: 'Goods Arrive',
+            description: 'Informal box receiving at showroom',
+            bullets: ['Count boxes at showroom counter', 'Put items directly onto trays/vaults', 'No GRN matched to original order', 'Stock entry logged on manual pad'],
+            duration: '20 min',
+            output: 'Unchecked Stock',
+            trace: [
+              '[SYS] Consignment package received at showroom counter',
+              '[ERP] Manual inventory entry created without PO reference',
+              '[SYS] Risk: Loose stock counted manually on paper pad; high data entry error'
+            ]
+          },
+          {
+            number: 6,
+            icon: '👁️',
+            title: 'No Formal QC',
+            description: 'Basic visual sanity check by store staff',
+            bullets: ['Quick glance at setting/polish', 'No assay/purity verified records', 'No Pass/Fail labels or segregation', 'Faults discovered later by customer'],
+            duration: '10 min',
+            output: 'Assumed Good',
+            trace: [
+              '[SYS] Visual sanity check only; no Karatometer test performed',
+              '[SYS] No formal Pass/Fail storage segregation',
+              '[SYS] Risk: Customer return risk due to undetected quality defects'
+            ]
+          },
+          {
+            number: 7,
+            icon: '🧾',
+            title: 'Manual Invoice Entry',
+            description: 'Operator manually records bill amount',
+            bullets: ['Photo of bill received via phone', 'Manual journal entry in backend', 'No validation vs PO or GRN weight', 'No rate-variance threshold checks'],
+            duration: '20 min',
+            output: 'Manual Bill Log',
+            trace: [
+              '[ERP] Staff manually keyed in total bill amount from WhatsApp screenshot',
+              '[SYS] Warning: Invoice posted without GRN or PO verification',
+              '[SYS] Risk: Direct ledger posting bypasses all pricing gatekeepers'
+            ]
+          },
+          {
+            number: 8,
+            icon: '💸',
+            title: 'Payment Approval',
+            description: 'Owner verbally authorizes payout',
+            bullets: ['Owner instructs cashier via call', 'Direct showroom cash box payout', 'Or direct manual NEFT online bank', 'No validation of receipt details'],
+            duration: '10 min',
+            output: 'Manual Bank Payout',
+            trace: [
+              '[SYS] Owner verbally approved payout; manual bank transfer executed',
+              '[FIN] Cashier recorded payment voucher manually in ledger',
+              '[SYS] Risk: Zero matching; duplicate payment risk is extremely high'
+            ]
+          },
+          {
+            number: 9,
+            icon: '📉',
+            title: 'No KPI Tracking',
+            description: 'Buying details remain unmeasured',
+            bullets: ['No lead times or delays captured', 'No vendor quality scorecards', 'Unknown leakages in gold weight/rates', 'Decisions remain gut-based'],
+            duration: 'None',
+            output: 'Untracked Ops',
+            trace: [
+              '[SYS] Warning: Operational metrics disabled; no audit trail exists',
+              '[SYS] Cannot track supplier lead time, returns, or order accuracy',
+              '[SYS] System leakage audit: rates, weights, and wastage are untracked'
+            ]
+          }
         ]
       },
       inefficiencies: [
