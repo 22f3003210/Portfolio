@@ -166,13 +166,18 @@ export const workflows: Workflow[] = [
             number: 2,
             icon: '🏷️',
             title: 'SKU & Attribute Setup',
-            description: 'Defining metals, stones, and finished goods parameters',
-            bullets: ['Metal: purity, color, form rules', 'Stones: type, size, grading specs', 'Structured SKU code generation', 'Enforce SKU usage on transactions'],
+            description: 'Define Raw Materials, Finished Goods, and Packaging parameters',
+            bullets: [
+              'Raw Materials: metals, loose stones, findings',
+              'Finished Goods: ready-to-sell products',
+              'Packaging Materials: boxes, bags, warranty cards',
+              'Structured SKU code generation & controls'
+            ],
             duration: '30 min',
             output: 'SKU Registry',
             trace: [
-              '[ERP] SKU categories mapped: 22K Yellow Gold, 18K Diamond Jewellery',
-              '[ERP] Purity thresholds & Stone Grading guidelines configured',
+              '[ERP] Primary classifications configured: Raw Materials, Finished Goods, Packaging',
+              '[ERP] Mapped Loose Stones (Natural/LGD) & Findings (Locks/Clasps) attributes',
               '[SYS] System locks SKU parameter usage; ad-hoc SKU tags forbidden'
             ]
           },
@@ -235,15 +240,20 @@ export const workflows: Workflow[] = [
           {
             number: 7,
             icon: '🔬',
-            title: 'QC Phase-2 & Segregation',
-            description: 'Detailed quality audit & fail management',
-            bullets: ['Assay/Karatometer purity check', 'Visual setting & finish inspection', 'Physical segregation (Pass/Fail bags)', 'Create return document for fails'],
+            title: 'QC, Barcoding & Dispatch',
+            description: 'Quality audit, HUID tagging, barcoding, and branch showroom dispatch',
+            bullets: [
+              'Assay/Karatometer purity check & visual setting inspection',
+              'Physical segregation (Pass/Fail bags) & return documentation',
+              'Generate unique barcodes/RFID & HUID tags for passed stock',
+              'Initiate stock transfer (dispatch to branches) in system'
+            ],
             duration: '45 min',
-            output: 'QC Clearance',
+            output: 'Barcoded & Dispatched Stock',
             trace: [
-              '[DEV] Karatometer testing completed; gold purity verified at 91.68%',
-              '[ERP] Itemized quality status updated: 142 items PASSED, 2 items FAILED',
-              '[SYS] FAILED items moved to Return Ledger; Return Note RTN-9021 generated'
+              '[DEV] Karatometer purity verification: gold purity verified at 91.68%',
+              '[ERP] Generated item barcodes, printed labels, and registered BIS HUID tags',
+              '[SYS] Stock transfer order created for branch showroom dispatch'
             ]
           },
           {
@@ -324,13 +334,18 @@ export const workflows: Workflow[] = [
             number: 2,
             icon: '🏷️',
             title: 'SKU & Attribute Setup',
-            description: 'Defining metals, stones, and finished goods parameters',
-            bullets: ['Metal: purity, color, form rules', 'Stones: type, size, grading specs', 'Structured SKU code generation', 'Enforce SKU usage on transactions'],
+            description: 'Define Raw Materials, Finished Goods, and Packaging parameters',
+            bullets: [
+              'Raw Materials: metals, loose stones, findings',
+              'Finished Goods: ready-to-sell products',
+              'Packaging Materials: boxes, bags, warranty cards',
+              'Structured SKU code generation & controls'
+            ],
             duration: '30 min',
             output: 'SKU Registry',
             trace: [
-              '[ERP] SKU categories mapped: 22K Yellow Gold, 18K Diamond',
-              '[ERP] Staff manually mapped purity & design codes in SKU catalog',
+              '[ERP] Primary classifications configured: Raw Materials, Finished Goods, Packaging',
+              '[ERP] Mapped Loose Stones (Natural/LGD) & Findings (Locks/Clasps) attributes',
               '[SYS] SKU validation check enabled on transaction screen'
             ]
           },
@@ -393,15 +408,20 @@ export const workflows: Workflow[] = [
           {
             number: 7,
             icon: '🔬',
-            title: 'QC Phase-2 & Segregation',
-            description: 'Detailed quality audit & fail management',
-            bullets: ['Assay/Karatometer purity check', 'Visual setting & finish inspection', 'Physical segregation (Pass/Fail bags)', 'Create return document for fails'],
+            title: 'QC, Barcoding & Handover',
+            description: 'Manual quality audit, print and paste barcodes, and prepare physical branch dispatch logs',
+            bullets: [
+              'Staff verified purity using Karatometer; printed physical report',
+              'Visual inspection & Pass/Fail bag segregation',
+              'Manual generation and sticker paste of item barcodes',
+              'Log manual showroom-to-showroom branch shipment sheet'
+            ],
             duration: '45 min',
-            output: 'QC Clearance',
+            output: 'Manual Tagged & Dispatched Stock',
             trace: [
               '[DEV] Staff verified purity using Karatometer; printed physical report',
-              '[ERP] Staff manually updated item quality flags in GRN log',
-              '[SYS] Created manual return list for 3 rejected rings'
+              '[ERP] Staff manually printed barcodes and scanned tags to update inventory',
+              '[SYS] Prepared physical branch shipment bags and logs'
             ]
           },
           {
@@ -537,15 +557,20 @@ export const workflows: Workflow[] = [
           {
             number: 6,
             icon: '👁️',
-            title: 'No Formal QC',
-            description: 'Basic visual sanity check by store staff',
-            bullets: ['Quick glance at setting/polish', 'No assay/purity verified records', 'No Pass/Fail labels or segregation', 'Faults discovered later by customer'],
+            title: 'No Formal QC or Barcoding',
+            description: 'Basic visual sanity check by store staff, manual price tags, and informal branch transfer',
+            bullets: [
+              'Quick glance at setting/polish (no assay/purity verified records)',
+              'No Pass/Fail labels or segregation (faults discovered later by customer)',
+              'Manual hand-written price tag attachment (no system barcoding)',
+              'Informal branch transfer without system tracking or vault logs'
+            ],
             duration: '10 min',
-            output: 'Assumed Good',
+            output: 'Assumed Good & Untracked',
             trace: [
               '[SYS] Basic visual inspection conducted by showroom cashier',
-              '[SYS] No scientific purity verification or assay record logged',
-              '[SYS] Risk: Assumed purity; high risk of receiving under-karatage jewellery'
+              '[SYS] No scientific purity verification or system barcoding logged',
+              '[SYS] Risk: Informal branch transfer without digital transit logs'
             ]
           },
           {
@@ -667,15 +692,20 @@ export const workflows: Workflow[] = [
           {
             number: 6,
             icon: '👁️',
-            title: 'No Formal QC',
-            description: 'Basic visual sanity check by store staff',
-            bullets: ['Quick glance at setting/polish', 'No assay/purity verified records', 'No Pass/Fail labels or segregation', 'Faults discovered later by customer'],
+            title: 'No Formal QC or Barcoding',
+            description: 'Basic visual sanity check by store staff, manual price tags, and informal branch transfer',
+            bullets: [
+              'Quick glance at setting/polish (no assay/purity verified records)',
+              'No Pass/Fail labels or segregation (faults discovered later by customer)',
+              'Manual hand-written price tag attachment (no system barcoding)',
+              'Informal branch transfer without system tracking or vault logs'
+            ],
             duration: '10 min',
-            output: 'Assumed Good',
+            output: 'Assumed Good & Untracked',
             trace: [
               '[SYS] Visual sanity check only; no Karatometer test performed',
-              '[SYS] No formal Pass/Fail storage segregation',
-              '[SYS] Risk: Customer return risk due to undetected quality defects'
+              '[SYS] No system barcoding or purity audit trail exists',
+              '[SYS] Risk: Stock transfer is verbal; high leakage risk in transit'
             ]
           },
           {

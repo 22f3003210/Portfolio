@@ -220,6 +220,71 @@ export function StepCardsGrid({ workflow }: StepCardsGridProps) {
                   </ul>
                 </div>
 
+                {/* SKU Classifications Detail Panel */}
+                {activeStep.title === 'SKU & Attribute Setup' && (
+                  <div className="border-t border-[#E2E8F0] pt-5 mt-5 text-left space-y-4">
+                    <h4 className="text-xs font-black text-navy uppercase tracking-wider font-mono">
+                      Primary Procurement Classifications
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {/* Raw Materials */}
+                      <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-4 space-y-3">
+                        <span className="text-[10px] font-black text-gold uppercase tracking-wider block border-b border-[#E2E8F0] pb-1.5">
+                          Raw Materials
+                        </span>
+                        <div className="space-y-2 text-xs text-text-secondary">
+                          <div>
+                            <strong className="text-navy block">Precious Metals:</strong>
+                            Gold, Silver, Platinum
+                          </div>
+                          <div>
+                            <strong className="text-navy block">Loose Stones:</strong>
+                            Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, Moissanite
+                          </div>
+                          <div>
+                            <strong className="text-navy block">Findings & Components:</strong>
+                            Locks, Clasps, Hooks, Ear Nuts, Chains, Connectors
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Finished Goods */}
+                      <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-4 space-y-3">
+                        <span className="text-[10px] font-black text-[#0170B9] uppercase tracking-wider block border-b border-[#E2E8F0] pb-1.5">
+                          Finished Goods
+                        </span>
+                        <div className="space-y-2 text-xs text-text-secondary">
+                          <div>
+                            <strong className="text-navy block">Ready-to-Sell:</strong>
+                            Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, Mangalsutras
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Packaging Materials */}
+                      <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-4 space-y-3">
+                        <span className="text-[10px] font-black text-text-muted uppercase tracking-wider block border-b border-[#E2E8F0] pb-1.5">
+                          Packaging & Branding
+                        </span>
+                        <div className="space-y-2 text-xs text-text-secondary">
+                          <div>
+                            <strong className="text-navy block">Primary Packaging:</strong>
+                            Jewellery Boxes, Pouches, Zip Covers
+                          </div>
+                          <div>
+                            <strong className="text-navy block">Secondary Packaging:</strong>
+                            Carry Bags, Shipping Boxes, Bubble Wrap
+                          </div>
+                          <div>
+                            <strong className="text-navy block">Branding Materials:</strong>
+                            Tags, Labels, Certificates, Warranty Cards
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Metrics and Outputs Metadata Grid */}
                 <div className="grid grid-cols-2 gap-4 pt-2">
                   <div className="bg-[#F8FAFC] border border-border-light p-3.5 text-left space-y-1">
