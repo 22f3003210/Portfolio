@@ -172,44 +172,56 @@ export function WorkflowDetail() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* 1. Raw Materials (Indigo/Violet Gradient - "Bills" Schema) */}
-                <div className="group bg-gradient-to-b from-[#1F295D] to-[#121A3E] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <div>
-                    {/* Header Row */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold text-white tracking-wide font-sans">
-                        1. RAW MATERIALS
-                      </span>
-                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
+                <div className="group bg-gradient-to-b from-[#1F295D] to-[#121A3E] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[420px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Default View (fades out on hover) */}
+                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
+                    <div>
+                      {/* Header Row */}
+                      <div className="flex items-center justify-between">
+                        <span className="text-xl font-bold text-white tracking-wide font-sans">
+                          1. RAW MATERIALS
+                        </span>
+                        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                          </svg>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Metric Number */}
-                    <div className="text-6xl font-extrabold text-white/95 mt-2 font-sans select-none">
-                      3
-                    </div>
-
-                    {/* Classifications Text */}
-                    <div className="space-y-3 mt-4 text-xs text-white/80 font-medium relative z-10">
-                      <div>
-                        <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Precious Metals</strong>
-                        Gold, Silver, Platinum
-                      </div>
-                      <div>
-                        <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Loose Stones</strong>
-                        Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, and Moissanite
-                      </div>
-                      <div>
-                        <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Findings & Components</strong>
-                        Locks, Clasps, Hooks, Ear Nuts, Chains, and Connectors
+                      {/* Classifications Text (LARGER TEXT) */}
+                      <div className="space-y-4 mt-6 text-sm text-white/90 font-medium relative z-10">
+                        <div>
+                          <strong className="text-violet-200 block font-mono text-xs uppercase tracking-wider mb-1">Precious Metals</strong>
+                          Gold, Silver, Platinum
+                        </div>
+                        <div>
+                          <strong className="text-violet-200 block font-mono text-xs uppercase tracking-wider mb-1">Loose Stones</strong>
+                          Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, and Moissanite
+                        </div>
+                        <div>
+                          <strong className="text-violet-200 block font-mono text-xs uppercase tracking-wider mb-1">Findings & Components</strong>
+                          Locks, Clasps, Hooks, Ear Nuts, Chains, and Connectors
+                        </div>
                       </div>
                     </div>
                   </div>
 
+                  {/* Hover Overlay View (fades in on hover) */}
+                  <div className="absolute inset-0 p-6 bg-gradient-to-b from-[#1F295D] to-[#121A3E] opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                        <span className="text-base font-black text-white uppercase tracking-wider">
+                          Raw Materials Management
+                        </span>
+                      </div>
+                      <p className="text-[11px] md:text-[12px] text-white/90 leading-relaxed font-normal">
+                        Raw materials such as precious metals, loose stones, and jewellery components form the foundation of the manufacturing process. Once procured, these materials must be stored in secure and traceable locations using <strong>unique packet numbers, batch numbers, voucher references, and storage identifiers</strong>. Every movement of material—from <strong>receipt, storage, issue, transfer, consumption, return, and adjustment</strong>—should be recorded and linked to the responsible employee, department, work order, or product. The system should provide <strong>complete genealogy</strong> of each material, enabling businesses to identify where it is stored, who currently possesses it, how much has been consumed, and which finished products it contributed to. This level of traceability helps control inventory, reduce losses, improve accountability, and ensure accurate cost tracking throughout the manufacturing lifecycle.
+                      </p>
+                    </div>
+                  </div>
+
                   {/* Bottom Vector Illustration (Receipt & Cash) */}
-                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-45 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-5 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-24 h-24" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                       {/* White bill sheet */}
                       <rect x="25" y="15" width="55" height="85" rx="5" fill="#FFFFFF" />
@@ -253,36 +265,48 @@ export function WorkflowDetail() {
                 </div>
 
                 {/* 2. Finished Goods (Deep Blue/Navy Gradient - "Sales" Schema) */}
-                <div className="group bg-gradient-to-b from-[#0E3570] to-[#071C40] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <div>
-                    {/* Header Row */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold text-white tracking-wide font-sans">
-                        2. FINISHED GOODS
-                      </span>
-                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
+                <div className="group bg-gradient-to-b from-[#0E3570] to-[#071C40] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[420px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Default View (fades out on hover) */}
+                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
+                    <div>
+                      {/* Header Row */}
+                      <div className="flex items-center justify-between">
+                        <span className="text-xl font-bold text-white tracking-wide font-sans">
+                          2. FINISHED GOODS
+                        </span>
+                        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                          </svg>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Metric Number */}
-                    <div className="text-6xl font-extrabold text-white/95 mt-2 font-sans select-none">
-                      1
-                    </div>
-
-                    {/* Classifications Text */}
-                    <div className="space-y-3 mt-4 text-xs text-white/80 font-medium relative z-10">
-                      <div>
-                        <strong className="text-sky-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Ready-to-Sell Products</strong>
-                        Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, and Mangalsutras
+                      {/* Classifications Text (LARGER TEXT) */}
+                      <div className="space-y-4 mt-6 text-sm text-white/90 font-medium relative z-10">
+                        <div>
+                          <strong className="text-sky-200 block font-mono text-xs uppercase tracking-wider mb-1">Ready-to-Sell Products</strong>
+                          Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, and Mangalsutras
+                        </div>
                       </div>
                     </div>
                   </div>
 
+                  {/* Hover Overlay View (fades in on hover) */}
+                  <div className="absolute inset-0 p-6 bg-gradient-to-b from-[#0E3570] to-[#071C40] opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                        <span className="text-base font-black text-white uppercase tracking-wider">
+                          Finished Goods Management
+                        </span>
+                      </div>
+                      <p className="text-[11px] md:text-[12px] text-white/90 leading-relaxed font-normal">
+                        Finished goods represent ready-to-sell jewellery products received either through internal manufacturing or external procurement. Each item should be assigned a <strong>unique identity and tracked throughout its entire lifecycle</strong>, including receipt, storage, allocation, transfer, reservation, sale, exchange, return, and repair. The system should maintain <strong>complete visibility into the current location, ownership, status, and movement history</strong> of every item across branches, warehouses, exhibitions, and customer orders. By maintaining end-to-end traceability, businesses can quickly identify product availability, monitor inventory movement, improve order fulfilment accuracy, and provide customers with a seamless purchasing experience while minimizing <strong>inventory discrepancies and stock losses</strong>.
+                      </p>
+                    </div>
+                  </div>
+
                   {/* Bottom Vector Illustration (Store Front) */}
-                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-45 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-5 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-24 h-24" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                       {/* Shop background / walls */}
                       <rect x="25" y="55" width="70" height="45" fill="#1D4ED8" rx="2" />
@@ -321,44 +345,56 @@ export function WorkflowDetail() {
                 </div>
 
                 {/* 3. Packaging Materials (Bronze/Orange Gradient - "Memo" Schema) */}
-                <div className="group bg-gradient-to-b from-[#9A5D24] to-[#5C3410] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[340px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <div>
-                    {/* Header Row */}
-                    <div className="flex items-center justify-between">
-                      <span className="text-xl font-bold text-white tracking-wide font-sans">
-                        3. PACKAGING & BRANDING
-                      </span>
-                      <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
+                <div className="group bg-gradient-to-b from-[#9A5D24] to-[#5C3410] border border-white/10 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[420px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Default View (fades out on hover) */}
+                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
+                    <div>
+                      {/* Header Row */}
+                      <div className="flex items-center justify-between">
+                        <span className="text-xl font-bold text-white tracking-wide font-sans">
+                          3. PACKAGING & BRANDING
+                        </span>
+                        <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                          </svg>
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Metric Number */}
-                    <div className="text-6xl font-extrabold text-white/95 mt-2 font-sans select-none">
-                      3
-                    </div>
-
-                    {/* Classifications Text */}
-                    <div className="space-y-3 mt-4 text-xs text-white/80 font-medium relative z-10">
-                      <div>
-                        <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Primary Packaging</strong>
-                        Jewellery Boxes, Pouches, and Zip Covers
-                      </div>
-                      <div>
-                        <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Secondary Packaging</strong>
-                        Carry Bags, Shipping Boxes, and Bubble Wrap
-                      </div>
-                      <div>
-                        <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Branding Materials</strong>
-                        Tags, Labels, Certificates, and Warranty Cards
+                      {/* Classifications Text (LARGER TEXT) */}
+                      <div className="space-y-4 mt-6 text-sm text-white/90 font-medium relative z-10">
+                        <div>
+                          <strong className="text-amber-200 block font-mono text-xs uppercase tracking-wider mb-1">Primary Packaging</strong>
+                          Jewellery Boxes, Pouches, and Zip Covers
+                        </div>
+                        <div>
+                          <strong className="text-amber-200 block font-mono text-xs uppercase tracking-wider mb-1">Secondary Packaging</strong>
+                          Carry Bags, Shipping Boxes, and Bubble Wrap
+                        </div>
+                        <div>
+                          <strong className="text-amber-200 block font-mono text-xs uppercase tracking-wider mb-1">Branding Materials</strong>
+                          Tags, Labels, Certificates, and Warranty Cards
+                        </div>
                       </div>
                     </div>
                   </div>
 
+                  {/* Hover Overlay View (fades in on hover) */}
+                  <div className="absolute inset-0 p-6 bg-gradient-to-b from-[#9A5D24] to-[#5C3410] opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                        <span className="text-base font-black text-white uppercase tracking-wider">
+                          Packaging Materials Management
+                        </span>
+                      </div>
+                      <p className="text-[11px] md:text-[12px] text-white/90 leading-relaxed font-normal">
+                        Packaging materials play a critical role in product presentation, protection, branding, and customer experience. These materials include jewellery boxes, pouches, carry bags, tags, labels, certificates, warranty cards, and shipping supplies. Once procured, packaging inventory should be tracked through <strong>receipt, storage, issue, consumption, and replenishment cycles</strong>. The system should monitor <strong>stock levels, batch information, usage patterns, and allocation</strong> across departments, products, and customer orders. By maintaining visibility into packaging consumption and availability, businesses can avoid shortages, <strong>optimize procurement planning, control operational costs</strong>, and ensure that every product is delivered with the appropriate packaging and branding materials required to maintain brand standards and customer satisfaction.
+                      </p>
+                    </div>
+                  </div>
+
                   {/* Bottom Vector Illustration (Notepad) */}
-                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-45 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-5 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-24 h-24" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                       {/* Main notepad sheet */}
                       <path d="M30 20h50l20 20v60a6 6 0 01-6 6H30a6 6 0 01-6-6V26a6 6 0 016-6z" fill="#F59E0B" />
