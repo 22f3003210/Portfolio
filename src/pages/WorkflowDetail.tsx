@@ -265,6 +265,85 @@ export function WorkflowDetail() {
               </div>
 
             </div>
+
+            {/* Divider */}
+            <div className="border-t border-white/10 my-8" />
+
+            {/* Major & Recurring Procurement Classifications */}
+            <div className="space-y-6 text-left">
+              <div>
+                <span className="text-[10px] font-mono font-bold tracking-widest text-gold uppercase block mb-1">
+                  Scope of Inventory
+                </span>
+                <h3 className="text-lg font-black text-white uppercase tracking-tight">
+                  Major & Recurring Procurement Classifications
+                </h3>
+                <p className="text-xs text-white/60 max-w-xl font-medium mt-1">
+                  Standard classifications utilized across showroom inventory mapping, vendor purchase orders, and karating vault controls.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* 1. Raw Materials */}
+                <div className="bg-[#0B1E2E]/60 border border-white/10 p-5 space-y-4 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-gold" />
+                  <span className="text-[10px] font-mono font-bold text-gold uppercase tracking-wider block border-b border-white/5 pb-2">
+                    1. Raw Materials
+                  </span>
+                  <div className="space-y-3 text-xs text-white/80">
+                    <div>
+                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-gold/80 mb-0.5">Precious Metals</strong>
+                      Gold, Silver, Platinum
+                    </div>
+                    <div>
+                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-gold/80 mb-0.5">Loose Stones</strong>
+                      Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, and Moissanite
+                    </div>
+                    <div>
+                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-gold/80 mb-0.5">Findings & Components</strong>
+                      Locks, Clasps, Hooks, Ear Nuts, Chains, and Connectors
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. Finished Goods */}
+                <div className="bg-[#0B1E2E]/60 border border-white/10 p-5 space-y-4 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-[#0170B9]" />
+                  <span className="text-[10px] font-mono font-bold text-[#0170B9] uppercase tracking-wider block border-b border-white/5 pb-2">
+                    2. Finished Goods
+                  </span>
+                  <div className="space-y-3 text-xs text-white/80">
+                    <div>
+                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-[#0170B9]/80 mb-0.5">Ready-to-Sell Products</strong>
+                      Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, and Mangalsutras
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Packaging Materials */}
+                <div className="bg-[#0B1E2E]/60 border border-white/10 p-5 space-y-4 relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-white/40" />
+                  <span className="text-[10px] font-mono font-bold text-white/70 uppercase tracking-wider block border-b border-white/5 pb-2">
+                    3. Packaging & Branding
+                  </span>
+                  <div className="space-y-3 text-xs text-white/80">
+                    <div>
+                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-white/60 mb-0.5">Primary Packaging</strong>
+                      Jewellery Boxes, Pouches, and Zip Covers
+                    </div>
+                    <div>
+                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-white/60 mb-0.5">Secondary Packaging</strong>
+                      Carry Bags, Shipping Boxes, and Bubble Wrap
+                    </div>
+                    <div>
+                      <strong className="text-white block font-mono text-[9px] uppercase tracking-wider text-white/60 mb-0.5">Branding Materials</strong>
+                      Tags, Labels, Certificates, and Warranty Cards
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
       )}
