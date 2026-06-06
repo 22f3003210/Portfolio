@@ -10,30 +10,6 @@ interface Principle {
   paragraphs: string[];
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-};
-
 export function HowIThinkSection() {
   const [activeIdx, setActiveIdx] = useState<number>(0);
 
@@ -208,19 +184,20 @@ export function HowIThinkSection() {
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0170B9] bg-[#0170B9]/5 px-3 py-1 border border-[#0170B9]/15 rounded-none inline-block mb-3">
               9 CORE PRINCIPLES
             </span>
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              className="space-y-3"
-            >
+            <div className="space-y-3">
               {principles.map((item, idx) => {
                 const isActive = activeIdx === idx;
                 return (
                   <motion.div
                     key={idx}
-                    variants={cardVariants}
+                    initial={{ opacity: 0, x: -45 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.2, margin: "0px 0px -50px 0px" }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 85,
+                      damping: 14,
+                    }}
                     className="relative filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.03)] hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.06)] transition-all duration-300 hover:translate-x-2 select-none w-full group"
                   >
                     {/* Slanted Card Body - Right Slanted Parallelogram */}
@@ -248,7 +225,7 @@ export function HowIThinkSection() {
                         }}
                       >
                         <span className="text-sm md:text-base font-black select-none tracking-tighter pl-2">
-                          {item.number}
+                          {idx + 1}
                         </span>
                       </div>
 
@@ -270,7 +247,7 @@ export function HowIThinkSection() {
                   </motion.div>
                 );
               })}
-            </motion.div>
+            </div>
           </div>
 
           {/* Right: Active Detail Content Card */}
@@ -286,13 +263,13 @@ export function HowIThinkSection() {
               >
                 {/* Background watermarked number */}
                 <div className="absolute right-4 -top-6 font-mono font-black text-navy/[0.03] text-[150px] leading-none pointer-events-none select-none">
-                  {principles[activeIdx].number}
+                  {activeIdx + 1}
                 </div>
 
                 <div className="space-y-6 relative z-10">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold text-gold uppercase tracking-wider font-mono">
-                      PRINCIPLE {principles[activeIdx].number}
+                      PRINCIPLE {activeIdx + 1}
                     </span>
                   </div>
 
