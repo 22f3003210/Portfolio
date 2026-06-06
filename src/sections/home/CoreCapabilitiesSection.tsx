@@ -124,7 +124,7 @@ const capabilities = [
     tag: 'Discovery & Diagnostics',
     description: 'Understanding business performance through structured analysis, diagnostics, and stakeholder discovery.',
     subCaps: ['Business Process Analysis', 'Root Cause Analysis', 'Gap Analysis', 'Business Diagnostics', 'Requirements Gathering', 'Stakeholder Management'],
-    bg: '#1A73E8',
+    bg: '#2E5F8E',       // muted steel blue
     pattern: 'rgba(255,255,255,1)',
   },
   {
@@ -133,7 +133,7 @@ const capabilities = [
     tag: 'Direction & Change',
     description: 'Aligning business objectives, operations, and execution to drive meaningful change and long-term growth.',
     subCaps: ['Business Transformation', 'Operational Excellence', 'Systems Thinking', 'Change Management', 'Performance Improvement', 'Strategic Planning'],
-    bg: '#D97706',
+    bg: '#8A6320',       // muted dusty ochre/amber
     pattern: 'rgba(255,255,255,1)',
   },
   {
@@ -142,7 +142,7 @@ const capabilities = [
     tag: 'Process & Design',
     description: 'Designing scalable operating models that improve efficiency, consistency, and organizational effectiveness.',
     subCaps: ['Process Engineering', 'SOP Development', 'Workflow Optimization', 'Process Standardization', 'Organizational Design', 'Governance Frameworks'],
-    bg: '#0B9E7E',
+    bg: '#2A6B58',       // muted sage teal
     pattern: 'rgba(255,255,255,1)',
   },
   {
@@ -151,7 +151,7 @@ const capabilities = [
     tag: 'Visibility & Accountability',
     description: 'Creating visibility, accountability, and decision support through structured performance frameworks.',
     subCaps: ['KPI Architecture', 'Performance Management Systems', 'Executive Dashboards', 'Business Intelligence', 'Decision Support Systems', 'Management Reporting'],
-    bg: '#7C3AED',
+    bg: '#5A3F85',       // muted dusty violet
     pattern: 'rgba(255,255,255,1)',
   },
   {
@@ -160,7 +160,7 @@ const capabilities = [
     tag: 'Industry Specialization',
     description: 'Improving profitability, customer experience, inventory performance, and operational effectiveness across jewellery retail.',
     subCaps: ['Jewellery Retail Operations', 'Inventory Optimization', 'Procurement-to-Pay (P2P)', 'CRM Strategy', 'Customer Experience Design', 'Multi-Store Operations'],
-    bg: '#DC2626',
+    bg: '#8C3535',       // muted terracotta red
     pattern: 'rgba(255,255,255,1)',
   },
   {
@@ -169,7 +169,7 @@ const capabilities = [
     tag: 'Systems & Digital',
     description: 'Leveraging technology to strengthen business processes, operational visibility, and decision-making capabilities.',
     subCaps: ['ERP Implementation', 'POS Systems', 'Retail Analytics', 'Data Visualization', 'Automation Design', 'Digital Transformation'],
-    bg: '#2563EB',
+    bg: '#344E7A',       // muted slate indigo
     pattern: 'rgba(255,255,255,1)',
   },
 ] as const;
