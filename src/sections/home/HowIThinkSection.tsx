@@ -10,6 +10,30 @@ interface Principle {
   paragraphs: string[];
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, x: -50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
+
 export function HowIThinkSection() {
   const [activeIdx, setActiveIdx] = useState<number>(0);
 
@@ -184,37 +208,69 @@ export function HowIThinkSection() {
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0170B9] bg-[#0170B9]/5 px-3 py-1 border border-[#0170B9]/15 rounded-none inline-block mb-3">
               9 CORE PRINCIPLES
             </span>
-            <div className="space-y-2">
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.15 }}
+              className="space-y-3"
+            >
               {principles.map((item, idx) => {
                 const isActive = activeIdx === idx;
                 return (
-                  <button
+                  <motion.div
                     key={idx}
-                    onClick={() => setActiveIdx(idx)}
-                    onMouseEnter={() => setActiveIdx(idx)}
-                    className={`w-full text-left p-4 rounded-none border transition-all duration-200 flex items-center justify-between group ${
-                      isActive 
-                        ? 'bg-[#0B1E2E] border-[#0B1E2E] text-white shadow-md' 
-                        : 'bg-white border-border-light hover:border-navy text-text-primary hover:bg-[#F8FAFC]'
-                    }`}
+                    variants={cardVariants}
+                    className="relative filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.03)] hover:drop-shadow-[0_4px_8px_rgba(0,0,0,0.06)] transition-all duration-300 hover:translate-x-2 select-none w-full group"
                   >
-                    <div className="flex items-center gap-3">
-                      <span className={`font-mono text-xs font-bold px-2 py-0.5 rounded-none ${
-                        isActive ? 'bg-gold text-navy' : 'bg-[#0170B9]/10 text-[#0170B9]'
-                      }`}>
-                        {item.number}
-                      </span>
-                      <span className="text-xs md:text-sm font-bold tracking-tight">
-                        {item.title}
-                      </span>
-                    </div>
-                    <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${
-                      isActive ? 'text-gold translate-x-1' : 'text-text-secondary group-hover:translate-x-1'
-                    }`} />
-                  </button>
+                    {/* Slanted Card Body - Right Slanted Parallelogram */}
+                    <button
+                      onClick={() => setActiveIdx(idx)}
+                      style={{
+                        clipPath: 'polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%)'
+                      }}
+                      className={`w-full flex items-stretch min-h-[58px] transition-all duration-300 text-left relative overflow-hidden ${
+                        isActive 
+                          ? 'bg-[#0B1E2E] text-white border-y border-r border-[#0B1E2E]' 
+                          : 'bg-white border-y border-r border-slate-100 text-text-primary hover:bg-[#F8FAFC]'
+                      }`}
+                    >
+                      {/* Slanted badge on the left, stretches to full height of card body */}
+                      <div 
+                        className={`w-16 shrink-0 flex items-center justify-center transition-colors duration-300 ${
+                          isActive 
+                            ? 'bg-[#8CC63F] text-[#0B1E2E]' 
+                            : 'bg-[#0B1E2E] text-white group-hover:bg-[#0170B9]'
+                        }`}
+                        style={{
+                          clipPath: 'polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%)',
+                          fontFamily: "'Orbitron', sans-serif"
+                        }}
+                      >
+                        <span className="text-sm md:text-base font-black select-none tracking-tighter pl-2">
+                          {item.number}
+                        </span>
+                      </div>
+
+                      {/* Step Title & Chevron */}
+                      <div className="flex items-center justify-between pl-3 pr-6 py-2.5 flex-grow">
+                        <span className={`font-bold text-xs md:text-sm tracking-tight transition-colors duration-300 ${
+                          isActive ? 'text-white' : 'text-[#0B1E2E] group-hover:text-[#0170B9]'
+                        }`}>
+                          {item.title}
+                        </span>
+                        
+                        <ChevronRight className={`w-4 h-4 shrink-0 transition-all duration-300 ${
+                          isActive 
+                            ? 'text-[#8CC63F] translate-x-1' 
+                            : 'text-text-secondary group-hover:text-[#0170B9] group-hover:translate-x-1'
+                        }`} />
+                      </div>
+                    </button>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
 
           {/* Right: Active Detail Content Card */}
