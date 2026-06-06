@@ -120,6 +120,7 @@ const problemIcons = [
 ];
 
 interface ThemeStyle {
+  name: string;
   gradient: string;
   glowColor: string;
   textColor: string;
@@ -132,8 +133,10 @@ interface ThemeStyle {
   glowBgSecondary: string;
 }
 
+
 const nodeThemes: Record<string, ThemeStyle> = {
   unified: {
+    name: "Unified System",
     gradient: "from-emerald-500 via-teal-500 to-emerald-600",
     glowColor: "rgba(16, 185, 129, 0.25)",
     textColor: "text-emerald-700",
@@ -146,6 +149,7 @@ const nodeThemes: Record<string, ThemeStyle> = {
     glowBgSecondary: "rgba(20, 184, 166, 0.07)"
   },
   inventory: {
+    name: "Operational Flow",
     gradient: "from-cyan-500 via-blue-500 to-cyan-600",
     glowColor: "rgba(6, 182, 212, 0.25)",
     textColor: "text-cyan-700",
@@ -158,6 +162,7 @@ const nodeThemes: Record<string, ThemeStyle> = {
     glowBgSecondary: "rgba(59, 130, 246, 0.07)"
   },
   customer: {
+    name: "Customer Intel",
     gradient: "from-amber-500 via-orange-500 to-rose-500",
     glowColor: "rgba(249, 115, 22, 0.25)",
     textColor: "text-amber-700",
@@ -170,6 +175,7 @@ const nodeThemes: Record<string, ThemeStyle> = {
     glowBgSecondary: "rgba(244, 63, 94, 0.07)"
   },
   predictive: {
+    name: "Predictive Analytics",
     gradient: "from-purple-500 via-indigo-500 to-pink-500",
     glowColor: "rgba(168, 85, 247, 0.25)",
     textColor: "text-purple-700",
@@ -182,6 +188,7 @@ const nodeThemes: Record<string, ThemeStyle> = {
     glowBgSecondary: "rgba(99, 102, 241, 0.07)"
   },
   core: {
+    name: "Foundation OS",
     gradient: "from-lime-500 via-emerald-500 to-teal-500",
     glowColor: "rgba(132, 204, 22, 0.25)",
     textColor: "text-lime-700",
@@ -200,7 +207,7 @@ export function SystemicDiagnosisSection() {
     loop: true,
     align: 'center',
     skipSnaps: false,
-    duration: 35,
+    duration: 20, // Increased sliding speed (was 35)
   });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -223,12 +230,12 @@ export function SystemicDiagnosisSection() {
     };
   }, [emblaApi, onSelect]);
 
-  // Autoplay functionality
+  // Autoplay functionality - faster interval (was 4000ms)
   useEffect(() => {
     if (!emblaApi || isHovered) return;
     const interval = setInterval(() => {
       emblaApi.scrollNext();
-    }, 4000);
+    }, 2800);
     return () => clearInterval(interval);
   }, [emblaApi, isHovered]);
 
@@ -325,25 +332,32 @@ export function SystemicDiagnosisSection() {
                           
                           <div className="space-y-2">
                             <div className="flex items-center justify-between gap-2">
+                              {/* Replaced 'Core Symptom' with Descriptive Theme Tag */}
                               <span className={cn(
-                                "text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-none border transition-colors duration-300",
+                                "text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-none border transition-colors duration-300",
                                 isActive 
                                   ? cn(theme.badgeBg, theme.badgeText)
-                                  : "bg-red-50 text-red-600 border-red-200/55"
+                                  : "bg-slate-50 text-slate-400 border-slate-200"
                               )}>
-                                Core Symptom
+                                {theme.name}
                               </span>
                               {/* Dynamic Theme Icon */}
                               <div className={cn(
-                                "w-7 h-7 rounded-none flex items-center justify-center border transition-all duration-300",
+                                "w-8 h-8 rounded-none flex items-center justify-center border transition-all duration-300",
                                 isActive 
-                                  ? cn(theme.iconBg, theme.iconColor, "border-current/10")
+                                  ? cn(theme.iconBg, theme.iconColor, "border-current/10 scale-110")
                                   : "bg-slate-50 text-slate-400 border-slate-200"
                               )}>
-                                <Icon className="w-3.5 h-3.5" />
+                                <Icon className="w-4 h-4" />
                               </div>
                             </div>
-                            <h3 className="text-base sm:text-lg md:text-xl font-black text-navy leading-tight pt-1">
+                            {/* Card title with dynamic gradient text on active state */}
+                            <h3 className={cn(
+                              "text-base sm:text-lg md:text-xl font-black leading-tight pt-1.5 transition-all duration-300",
+                              isActive 
+                                ? cn("bg-gradient-to-r bg-clip-text text-transparent", theme.gradient)
+                                : "text-navy"
+                            )}>
                               {problem.title}
                             </h3>
                             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
@@ -361,12 +375,17 @@ export function SystemicDiagnosisSection() {
                             </ul>
                           </div>
 
-                          {/* Red Impact Box */}
-                          <div className="bg-red-50/60 border border-red-100/70 p-2.5 rounded-none mt-3">
+                          {/* Premium Redesigned Impact Box */}
+                          <div className={cn(
+                            "border-l-2 p-3 rounded-none mt-4 transition-all duration-300",
+                            isActive
+                              ? "bg-slate-50 border-red-500/80" 
+                              : "bg-slate-50/40 border-slate-200"
+                          )}>
                             <span className="text-[8px] font-black text-red-600 uppercase tracking-widest block">
                               OPERATIONAL IMPACT
                             </span>
-                            <p className="text-[10px] sm:text-[11px] text-red-700 font-semibold leading-snug mt-0.5">
+                            <p className="text-[10.5px] sm:text-[11px] text-slate-700 font-semibold leading-snug mt-0.5">
                               {problem.impact}
                             </p>
                           </div>
