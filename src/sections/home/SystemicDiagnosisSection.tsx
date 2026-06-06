@@ -1,7 +1,18 @@
-import { useState, useEffect } from 'react';
-import { Activity, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { 
+  Activity, 
+  Network, 
+  Database, 
+  Timer, 
+  GitFork, 
+  Users, 
+  EyeOff, 
+  Wrench 
+} from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { SectionLabel } from '../../components/SectionLabel';
+import useEmblaCarousel from 'embla-carousel-react';
+import { cn } from '@/lib/utils';
 
 interface ProblemItem {
   id: string;
@@ -9,7 +20,6 @@ interface ProblemItem {
   statement: string;
   bullets: string[];
   impact: string;
-  extraInfo: string;
   mapsToNode: string;
 }
 
@@ -24,7 +34,6 @@ const problems: ProblemItem[] = [
       "Inconsistent reporting"
     ],
     impact: "Businesses operate blind across functions.",
-    extraInfo: "When data is locked in siloed applications, synchronizing inventory and sales requires manual reconciliation. This delay leads to stock discrepancies, double-selling, and end-of-month reporting bottlenecks that make real-time decisions impossible.",
     mapsToNode: "unified"
   },
   {
@@ -37,7 +46,6 @@ const problems: ProblemItem[] = [
       "Underutilized sales logs"
     ],
     impact: "Businesses collect information but cannot learn from it.",
-    extraInfo: "Raw transactional logs and buyer profiles are useless without a cohesive taxonomy. Without connecting inventory turnover metrics to customer demographics, marketing teams spend budgets blindly while dead stock accumulates in warehouses.",
     mapsToNode: "customer"
   },
   {
@@ -50,7 +58,6 @@ const problems: ProblemItem[] = [
       "Sales drops analyzed too late"
     ],
     impact: "Growth becomes reactive instead of predictive.",
-    extraInfo: "Failing to implement predictive alerts means store managers only realize they are understocked after a customer walks away empty-handed. True efficiency requires preemptive triggers based on moving averages and lead times.",
     mapsToNode: "predictive"
   },
   {
@@ -63,7 +70,6 @@ const problems: ProblemItem[] = [
       "CRM used independently"
     ],
     impact: "Local improvements, global inefficiency.",
-    extraInfo: "Increasing store footfall (Sales) without training staff or aligning stock leads to long queues, staff burnout, and walkouts. Systems thinking optimizes the throughput of the entire operation, not individual components.",
     mapsToNode: "unified"
   },
   {
@@ -76,7 +82,6 @@ const problems: ProblemItem[] = [
       "No predictive understanding"
     ],
     impact: "Customers are managed, not understood.",
-    extraInfo: "Simply storing phone numbers and purchase history in a database is not CRM. An intelligent layer tracks customer lifecycles, predicts next-purchase intervals, and automates personalized follow-ups before the customer drifts.",
     mapsToNode: "customer"
   },
   {
@@ -89,7 +94,6 @@ const problems: ProblemItem[] = [
       "Store & process delays"
     ],
     impact: "Inefficiencies remain invisible until they become costly.",
-    extraInfo: "Without live audit trails, inventory shrinkage is only discovered during quarterly physical stocktaking. Live operations tracking ensures every movement of high-value jewellery is logged, attributable, and auditable instantly.",
     mapsToNode: "inventory"
   },
   {
@@ -101,115 +105,144 @@ const problems: ProblemItem[] = [
       "Tools amplify existing structure"
     ],
     impact: "Complexity increases without solving core issues.",
-    extraInfo: "Buying an expensive ERP on top of chaotic manual procedures only digitizes the chaos. The process rules must be re-engineered and systemized first; only then should software be introduced to automate and enforce them.",
     mapsToNode: "core"
   }
 ];
 
+const problemIcons = [
+  Network,
+  Database,
+  Timer,
+  GitFork,
+  Users,
+  EyeOff,
+  Wrench
+];
+
+interface ThemeStyle {
+  gradient: string;
+  glowColor: string;
+  textColor: string;
+  badgeBg: string;
+  badgeText: string;
+  iconBg: string;
+  iconColor: string;
+  bgGradient: string;
+  glowBgPrimary: string;
+  glowBgSecondary: string;
+}
+
+const nodeThemes: Record<string, ThemeStyle> = {
+  unified: {
+    gradient: "from-emerald-500 via-teal-500 to-emerald-600",
+    glowColor: "rgba(16, 185, 129, 0.25)",
+    textColor: "text-emerald-700",
+    badgeBg: "bg-emerald-50 border-emerald-200/60",
+    badgeText: "text-emerald-700",
+    iconBg: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+    bgGradient: "from-white to-emerald-50/20",
+    glowBgPrimary: "rgba(16, 185, 129, 0.14)",
+    glowBgSecondary: "rgba(20, 184, 166, 0.07)"
+  },
+  inventory: {
+    gradient: "from-cyan-500 via-blue-500 to-cyan-600",
+    glowColor: "rgba(6, 182, 212, 0.25)",
+    textColor: "text-cyan-700",
+    badgeBg: "bg-cyan-50 border-cyan-200/60",
+    badgeText: "text-cyan-700",
+    iconBg: "bg-cyan-50",
+    iconColor: "text-cyan-600",
+    bgGradient: "from-white to-cyan-50/20",
+    glowBgPrimary: "rgba(6, 182, 212, 0.14)",
+    glowBgSecondary: "rgba(59, 130, 246, 0.07)"
+  },
+  customer: {
+    gradient: "from-amber-500 via-orange-500 to-rose-500",
+    glowColor: "rgba(249, 115, 22, 0.25)",
+    textColor: "text-amber-700",
+    badgeBg: "bg-amber-50 border-amber-200/60",
+    badgeText: "text-amber-700",
+    iconBg: "bg-amber-50",
+    iconColor: "text-amber-600",
+    bgGradient: "from-white to-amber-50/20",
+    glowBgPrimary: "rgba(249, 115, 22, 0.14)",
+    glowBgSecondary: "rgba(244, 63, 94, 0.07)"
+  },
+  predictive: {
+    gradient: "from-purple-500 via-indigo-500 to-pink-500",
+    glowColor: "rgba(168, 85, 247, 0.25)",
+    textColor: "text-purple-700",
+    badgeBg: "bg-purple-50 border-purple-200/60",
+    badgeText: "text-purple-700",
+    iconBg: "bg-purple-50",
+    iconColor: "text-purple-600",
+    bgGradient: "from-white to-purple-50/20",
+    glowBgPrimary: "rgba(168, 85, 247, 0.14)",
+    glowBgSecondary: "rgba(99, 102, 241, 0.07)"
+  },
+  core: {
+    gradient: "from-lime-500 via-emerald-500 to-teal-500",
+    glowColor: "rgba(132, 204, 22, 0.25)",
+    textColor: "text-lime-700",
+    badgeBg: "bg-lime-50 border-lime-200/60",
+    badgeText: "text-lime-700",
+    iconBg: "bg-lime-50",
+    iconColor: "text-lime-600",
+    bgGradient: "from-white to-lime-50/20",
+    glowBgPrimary: "rgba(132, 204, 22, 0.14)",
+    glowBgSecondary: "rgba(16, 185, 129, 0.07)"
+  }
+};
+
 export function SystemicDiagnosisSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: 'center',
+    skipSnaps: false,
+    duration: 35,
+  });
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Auto-sliding effect
+  // Update selected index on scroll
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
   useEffect(() => {
-    if (isHovered) return;
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  // Autoplay functionality
+  useEffect(() => {
+    if (!emblaApi || isHovered) return;
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % problems.length);
-    }, 4000); // Slide every 4 seconds
+      emblaApi.scrollNext();
+    }, 4000);
     return () => clearInterval(interval);
-  }, [isHovered]);
-
-  const topColors: Record<string, string> = {
-    unified: "#6e8d75",   // Sage Green
-    inventory: "#5d7d8a", // Teal
-    customer: "#9c7c68",  // Terracotta
-    predictive: "#766e8d", // Lavender
-    core: "#8CC63F"       // Systems Lime Green
-  };
-
-  const getSolutionName = (nodeId: string) => {
-    const names: Record<string, string> = {
-      unified: "Unified Operations",
-      inventory: "Transparent Inventory",
-      customer: "Structured Customer Intelligence",
-      predictive: "Predictive Decision-Making",
-      core: "Process Re-Engineering"
-    };
-    return names[nodeId] || "";
-  };
-
-  const getSolutionDesc = (nodeId: string) => {
-    const descs: Record<string, string> = {
-      unified: "UNIFY SILOS: Build a single, interconnected digital nervous system that links sales, inventory, and finance in real-time, eliminating manual reconciliations and duplicate data entries.",
-      inventory: "SYNC STOCKS: Track every movement of high-value stock and loose stones with real-time voucher attribution, securing inventory and eliminating showrooms blind spots.",
-      customer: "LINK PROFILE: Consolidate fragmented data points across branches to generate complete buying profiles and automate personalized clienteling journeys.",
-      predictive: "PRE-EMPTIVE TRIGGERS: Replace guess-work and historical analysis with real-time lead time averages, stock moving metrics, and automated replenishment alerts.",
-      core: "CORE SYSTEMS ENGINEERING: Re-engineer the operational rules before buying software. Build the foundational process architecture first, then automate and enforce."
-    };
-    return descs[nodeId] || "";
-  };
-
-  const getSolutionIcon = (nodeId: string) => {
-    switch (nodeId) {
-      case 'unified':
-        return (
-          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-            <rect x="3" y="3" width="7" height="7" />
-            <rect x="14" y="3" width="7" height="7" />
-            <rect x="3" y="14" width="7" height="7" />
-            <rect x="14" y="14" width="7" height="7" />
-            <path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4" />
-          </svg>
-        );
-      case 'inventory':
-        return (
-          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg>
-        );
-      case 'customer':
-        return (
-          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-        );
-      case 'predictive':
-        return (
-          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-          </svg>
-        );
-      default:
-        return (
-          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 6v6l4 2" />
-          </svg>
-        );
-    }
-  };
+  }, [emblaApi, isHovered]);
 
   const handleCardClick = (idx: number) => {
-    const total = problems.length;
-    const prev = (activeIndex - 1 + total) % total;
-    const next = (activeIndex + 1) % total;
-    
-    if (idx === prev) {
-      setActiveIndex(prev);
-    } else if (idx === next) {
-      setActiveIndex(next);
+    if (emblaApi) {
+      emblaApi.scrollTo(idx);
     }
   };
 
-  const total = problems.length;
-  const prevIdx = (activeIndex - 1 + total) % total;
-  const nextIdx = (activeIndex + 1) % total;
+  const activeProblem = problems[selectedIndex];
+  const activeTheme = nodeThemes[activeProblem.mapsToNode] || nodeThemes.core;
 
   return (
-    <section id="systemic-diagnosis" className="bg-[#F8FAFC] py-20 md:py-28 px-6 border-b border-border-light relative overflow-hidden select-none">
+    <section id="systemic-diagnosis" className="bg-white py-20 md:py-28 px-6 border-b border-border-light relative overflow-hidden select-none">
       <div className="max-w-[1200px] mx-auto space-y-12 relative z-10">
         
         {/* Main Heading Block */}
@@ -221,7 +254,7 @@ export function SystemicDiagnosisSection() {
               <span className="text-[#0170B9]">They Lack an Operational Core.</span>
             </h2>
             <p className="text-sm md:text-base text-text-secondary leading-relaxed mt-2 max-w-2xl mx-auto">
-              Before fixing software, we must identify where systems fail. Explore the 7 core problems and their systemic operating solutions below.
+              Before fixing software, we must identify where systems fail. Explore the core problems below.
             </p>
           </ScrollReveal>
         </div>
@@ -231,148 +264,164 @@ export function SystemicDiagnosisSection() {
           <div 
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className="bg-gradient-to-br from-[#0B1E2E] to-[#05101A] rounded-none border border-white/10 p-6 md:p-10 text-white shadow-xl relative overflow-hidden flex flex-col justify-center min-h-[640px] sm:min-h-[580px] md:min-h-[480px] lg:min-h-[440px]"
+            className="bg-gradient-to-br from-slate-50 to-white rounded-none border border-slate-200/80 p-6 md:p-10 text-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.03)] relative overflow-hidden flex flex-col justify-center min-h-[500px] sm:min-h-[460px] md:min-h-[420px] lg:min-h-[380px]"
           >
-            {/* Subtle background dot grid */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden select-none bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:20px_20px] opacity-70">
-              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#0170B9]/5 rounded-full blur-[100px]" />
-              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[100px]" />
+            {/* Dynamic shifting background glow */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden select-none bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] opacity-60">
+              <div 
+                style={{ 
+                  backgroundColor: activeTheme.glowBgPrimary, 
+                  transition: "background-color 800ms ease" 
+                }} 
+                className="absolute top-0 right-0 w-[450px] h-[450px] rounded-full blur-[110px]" 
+              />
+              <div 
+                style={{ 
+                  backgroundColor: activeTheme.glowBgSecondary, 
+                  transition: "background-color 800ms ease" 
+                }} 
+                className="absolute bottom-0 left-0 w-[450px] h-[450px] rounded-full blur-[110px]" 
+              />
             </div>
 
-            {/* Carousel Track */}
-            <div className="w-full relative flex items-center justify-center overflow-visible h-[480px] sm:h-[420px] md:h-[350px] lg:h-[300px]">
-              
-              {problems.map((problem, index) => {
-                const isCenter = index === activeIndex;
-                const isPrev = index === prevIdx;
-                const isNext = index === nextIdx;
+            {/* Carousel Viewport (Embla) */}
+            <div 
+              ref={emblaRef}
+              className="w-full overflow-hidden relative h-[420px] xs:h-[380px] sm:h-[320px] md:h-[280px] flex items-center justify-center"
+            >
+              {/* Embla Container */}
+              <div className="flex w-full h-full items-center">
+                {problems.map((problem, index) => {
+                  const isActive = index === selectedIndex;
+                  const theme = nodeThemes[problem.mapsToNode] || nodeThemes.core;
+                  const Icon = problemIcons[index] || Network;
 
-                let positionClass = "opacity-0 scale-75 pointer-events-none z-0 translate-x-0";
-                if (isCenter) {
-                  positionClass = "opacity-100 scale-100 md:scale-[1.03] lg:scale-[1.05] z-20 translate-x-0 border-white/20 shadow-[0_15px_35px_rgba(140,198,63,0.12)] bg-[#071324]";
-                } else if (isPrev) {
-                  positionClass = "opacity-25 scale-[0.85] z-10 -translate-x-[110%] sm:-translate-x-[110%] md:-translate-x-[55%] lg:-translate-x-[45%] cursor-pointer hover:opacity-40 blur-[0.5px] bg-[#050D17]/80";
-                } else if (isNext) {
-                  positionClass = "opacity-25 scale-[0.85] z-10 translate-x-[110%] sm:translate-x-[110%] md:translate-x-[55%] lg:translate-x-[45%] cursor-pointer hover:opacity-40 blur-[0.5px] bg-[#050D17]/80";
-                }
+                  return (
+                    <div
+                      key={problem.id}
+                      className="flex-none w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] px-3 md:px-4 h-full flex items-center"
+                    >
+                      <div
+                        onClick={() => handleCardClick(index)}
+                        style={{
+                          boxShadow: isActive ? `0 20px 45px -10px ${theme.glowColor}` : 'none',
+                          transition: "transform 600ms cubic-bezier(0.16, 1, 0.3, 1), opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), scale 600ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 600ms ease"
+                        }}
+                        className={cn(
+                          "border rounded-none overflow-hidden select-none h-full w-full relative flex flex-col justify-between",
+                          isActive
+                            ? cn("opacity-100 scale-100 md:scale-[1.02] border-slate-200/80 bg-gradient-to-br bg-white", theme.bgGradient)
+                            : "opacity-35 scale-90 md:scale-[0.88] lg:scale-[0.85] border-slate-100 bg-white/40 backdrop-blur-[3px] cursor-pointer hover:opacity-55 blur-[0.2px]"
+                        )}
+                      >
+                        {/* Gradient Accent Bar at Top of Active Card */}
+                        <div className={cn(
+                          "h-[4px] w-full bg-gradient-to-r transition-opacity duration-300", 
+                          theme.gradient,
+                          isActive ? "opacity-100" : "opacity-30"
+                        )} />
 
-                const cardColor = topColors[problem.mapsToNode] || "#8CC63F";
-
-                return (
-                  <div
-                    key={problem.id}
-                    onClick={() => handleCardClick(index)}
-                    style={{
-                      borderTop: `4px solid ${cardColor}`,
-                      transitionProperty: "transform, opacity, scale, filter",
-                      transitionDuration: "600ms",
-                      transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)"
-                    }}
-                    className={`absolute w-[92%] sm:w-[85%] md:w-[75%] lg:w-[70%] h-full border border-white/5 rounded-none overflow-hidden select-none ${positionClass}`}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6 p-5 sm:p-6 md:p-8 h-full relative">
-                      
-                      {/* Left Side: The Problem */}
-                      <div className="md:col-span-6 flex flex-col justify-between space-y-3 md:space-y-0 text-left">
-                        <div className="space-y-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-[9px] font-bold text-white/40 font-mono tracking-wider">
-                              PROBLEM #{problem.id}
-                            </span>
-                            <span className="text-[9px] font-bold uppercase tracking-widest text-red-400 bg-red-950/20 border border-red-900/30 px-1.5 py-0.5 rounded-none inline-block">
-                              Core Symptom
-                            </span>
-                          </div>
-                          <h3 className="text-base sm:text-lg font-black text-white leading-tight">
-                            {problem.title}
-                          </h3>
-                          <p className="text-xs text-white/85 leading-relaxed">
-                            {problem.statement}
-                          </p>
+                        <div className="flex flex-col justify-between p-5 sm:p-6 md:p-8 h-full w-full relative text-left">
                           
-                          {/* Bullets */}
-                          <ul className="space-y-1.5 pt-1.5">
-                            {problem.bullets.map((bullet, bIdx) => (
-                              <li key={bIdx} className="flex items-start gap-2 text-[10.5px] text-white/60 font-medium leading-snug">
-                                <span className="w-1 h-1 rounded-full bg-[#8CC63F] mt-1.5 shrink-0" />
-                                <span>{bullet}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Red Impact Box */}
-                        <div className="bg-red-950/30 border border-red-900/30 p-2.5 rounded-none mt-2">
-                          <span className="text-[8px] font-black text-red-400 uppercase tracking-widest block">
-                            OPERATIONAL IMPACT
-                          </span>
-                          <p className="text-[10px] text-red-300 font-semibold leading-snug mt-0.5">
-                            {problem.impact}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Right Side: The Solution */}
-                      <div className="md:col-span-6 border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6 flex flex-col justify-between space-y-4 md:space-y-0 text-left relative">
-                        
-                        <div className="space-y-2 relative z-10">
-                          <div className="flex items-center">
-                            <span className="text-[9px] font-bold text-[#8CC63F] font-mono tracking-wider border border-[#8CC63F]/20 bg-[#8CC63F]/5 px-2 py-0.5 rounded-none uppercase">
-                              SYSTEMS SOLUTION
-                            </span>
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between gap-2">
+                              <span className={cn(
+                                "text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-none border transition-colors duration-300",
+                                isActive 
+                                  ? cn(theme.badgeBg, theme.badgeText)
+                                  : "bg-red-50 text-red-600 border-red-200/55"
+                              )}>
+                                Core Symptom
+                              </span>
+                              {/* Dynamic Theme Icon */}
+                              <div className={cn(
+                                "w-7 h-7 rounded-none flex items-center justify-center border transition-all duration-300",
+                                isActive 
+                                  ? cn(theme.iconBg, theme.iconColor, "border-current/10")
+                                  : "bg-slate-50 text-slate-400 border-slate-200"
+                              )}>
+                                <Icon className="w-3.5 h-3.5" />
+                              </div>
+                            </div>
+                            <h3 className="text-base sm:text-lg md:text-xl font-black text-navy leading-tight pt-1">
+                              {problem.title}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                              {problem.statement}
+                            </p>
+                            
+                            {/* Bullets (2 columns on tablet/desktop) */}
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 pt-2">
+                              {problem.bullets.map((bullet, bIdx) => (
+                                <li key={bIdx} className="flex items-start gap-2 text-[10.5px] sm:text-xs text-slate-600 font-medium leading-snug group/item">
+                                  <span className={cn("w-1.5 h-1.5 rounded-none mt-1.5 shrink-0 bg-gradient-to-br", theme.gradient)} />
+                                  <span className="transition-colors duration-200 group-hover/item:text-slate-800">{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
                           </div>
-                          <h4 className="text-sm sm:text-base font-extrabold text-[#8CC63F] leading-tight">
-                            {getSolutionName(problem.mapsToNode)}
-                          </h4>
-                          <p className="text-[10.5px] sm:text-[11px] text-white/70 leading-relaxed pt-1">
-                            {getSolutionDesc(problem.mapsToNode)}
-                          </p>
+
+                          {/* Red Impact Box */}
+                          <div className="bg-red-50/60 border border-red-100/70 p-2.5 rounded-none mt-3">
+                            <span className="text-[8px] font-black text-red-600 uppercase tracking-widest block">
+                              OPERATIONAL IMPACT
+                            </span>
+                            <p className="text-[10px] sm:text-[11px] text-red-700 font-semibold leading-snug mt-0.5">
+                              {problem.impact}
+                            </p>
+                          </div>
+
                         </div>
-
-                        {/* Extra info shown on larger screens */}
-                        <div className="hidden lg:block text-[9.5px] text-white/45 leading-relaxed pt-2 border-t border-white/5 relative z-10 italic">
-                          {problem.extraInfo}
-                        </div>
-
-                        {/* Mapped SVG watermark icon */}
-                        {getSolutionIcon(problem.mapsToNode)}
-
                       </div>
-
                     </div>
-                  </div>
-                );
-              })}
-
+                  );
+                })}
+              </div>
             </div>
 
             {/* Navigation Arrows */}
-            <div className="flex items-center justify-between w-full max-w-[200px] mx-auto mt-6 z-30">
+            <div className="flex items-center justify-center gap-4 w-full mt-6 z-30">
               <button 
-                onClick={() => setActiveIndex((prev) => (prev - 1 + total) % total)}
-                className="w-10 h-10 rounded-none bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#8CC63F]/40 flex items-center justify-center text-white transition-all duration-300"
+                onClick={() => emblaApi?.scrollPrev()}
+                className={cn(
+                  "w-11 h-11 rounded-none bg-white border border-slate-200 flex items-center justify-center text-slate-700 transition-all duration-300 shadow-sm",
+                  "hover:text-white hover:border-transparent hover:bg-gradient-to-br",
+                  activeTheme.gradient
+                )}
                 aria-label="Previous card"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 5l-7 7 7 7"/>
+                  <path d="M4 12h16"/>
+                </svg>
               </button>
-              
-              <span className="text-[10px] font-mono font-bold text-white/40 tracking-wider">
-                {activeIndex + 1} / {total}
-              </span>
 
               <button 
-                onClick={() => setActiveIndex((prev) => (prev + 1) % total)}
-                className="w-10 h-10 rounded-none bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#8CC63F]/40 flex items-center justify-center text-white transition-all duration-300"
+                onClick={() => emblaApi?.scrollNext()}
+                className={cn(
+                  "w-11 h-11 rounded-none bg-white border border-slate-200 flex items-center justify-center text-slate-700 transition-all duration-300 shadow-sm",
+                  "hover:text-white hover:border-transparent hover:bg-gradient-to-br",
+                  activeTheme.gradient
+                )}
                 aria-label="Next card"
               >
-                <ChevronRight className="w-5 h-5" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M4 12h16"/>
+                  <path d="M13 5l7 7-7 7"/>
+                </svg>
               </button>
             </div>
 
             {/* Bottom Centered Quote */}
-            <div className="border-t border-dashed border-white/10 pt-5 mt-6 text-center relative z-10 flex items-center justify-center gap-2">
-              <Activity className="w-4 h-4 text-[#8CC63F] animate-pulse" />
-              <p className="text-xs sm:text-sm font-bold text-[#8CC63F] italic">
+            <div className="border-t border-slate-200/50 pt-6 mt-8 text-center relative z-10 flex flex-col items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-3">
+                <span className="h-[1.5px] w-8 bg-gradient-to-r from-transparent to-[#0170B9]/60" />
+                <div className="p-1 bg-[#0170B9]/5 border border-[#0170B9]/20 rounded-none flex items-center justify-center">
+                  <Activity className="w-3.5 h-3.5 text-[#0170B9] animate-pulse" />
+                </div>
+                <span className="h-[1.5px] w-8 bg-gradient-to-l from-transparent to-[#0170B9]/60" />
+              </div>
+              <p className="text-xs sm:text-sm font-bold italic tracking-wide text-navy mt-1">
                 &quot;Scale begins where operational friction ends.&quot;
               </p>
             </div>

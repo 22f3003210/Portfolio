@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { to: '/', label: 'Home' },
-  { to: '/#workflows', label: 'Workflows' },
+  { to: '/#how-i-work', label: 'How I Work' },
+  { to: '/#testimonials', label: 'Testimonials' },
   { to: '/about', label: 'About' },
   { to: '/insights', label: 'Insights' },
   { to: '/portal', label: 'Client Portal' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/contact', label: 'Get in Touch' },
 ];
 
 export function Navbar() {
@@ -30,6 +31,20 @@ export function Navbar() {
     };
   }, []);
 
+  // Smooth scroll to sections when hash changes
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        const timer = setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [location.hash, location.pathname]);
+
   const visibleLinks = navLinks.filter(
     (link) => link.to !== '/portal' || showPortalLink
   );
@@ -49,8 +64,11 @@ export function Navbar() {
   }, []);
 
   const isActive = (to: string) => {
-    if (to === '/') return location.pathname === '/';
-    if (to.startsWith('/#')) return location.pathname === '/';
+    if (to === '/') return location.pathname === '/' && !location.hash;
+    if (to.startsWith('/#')) {
+      const hash = to.substring(1);
+      return location.pathname === '/' && location.hash === hash;
+    }
     return location.pathname === to;
   };
 
@@ -62,8 +80,8 @@ export function Navbar() {
           : 'bg-gradient-to-r from-[#00203f] to-[#0170B9] text-white py-1.5'
       }`}
     >
-      <div className="content-max">
-        <div className="flex items-center justify-between h-16">
+      <div className="w-full px-6">
+        <div className="max-w-[1200px] mx-auto flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <img 
@@ -84,39 +102,44 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {visibleLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`text-sm font-medium transition-all duration-300 ${
-                  isActive(link.to)
-                    ? isScrolled
-                      ? 'text-navy font-bold'
-                      : 'text-gold font-bold scale-105'
-                    : isScrolled
-                      ? 'text-text-secondary hover:text-text-primary'
-                      : 'text-white/80 hover:text-white'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+            {visibleLinks.map((link) => {
+              const isContact = link.label === 'Get in Touch';
+              if (isContact) {
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className={`text-[11px] font-extrabold uppercase tracking-wider border px-4 py-2 transition-all duration-300 rounded-none shadow-sm ${
+                      isScrolled
+                        ? 'bg-[#00203f] text-white border-[#00203f] hover:bg-[#8CC63F] hover:border-[#8CC63F] hover:text-white'
+                        : 'bg-white text-[#00203f] border-white hover:bg-[#8CC63F] hover:border-[#8CC63F] hover:text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+
+              const active = isActive(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`relative py-1 text-sm font-semibold tracking-wide transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                    isScrolled
+                      ? `${active ? 'text-[#00203f] after:scale-x-100' : 'text-slate-600 hover:text-[#00203f]'} after:bg-[#00203f]`
+                      : `${active ? 'text-white after:scale-x-100' : 'text-white/80 hover:text-white'} after:bg-[#8CC63F]`
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Theme Toggle + Mobile Menu */}
+          {/* Mobile Menu Toggle */}
           <div className="flex items-center gap-2">
-            <button
-              className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-                isScrolled
-                  ? 'hover:bg-gray-100 text-text-secondary'
-                  : 'hover:bg-white/10 text-white/90'
-              }`}
-              aria-label="Toggle theme"
-            >
-              <Moon className="w-4 h-4" />
-            </button>
-
             <button
               className={`md:hidden w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
                 isScrolled
@@ -139,25 +162,48 @@ export function Navbar() {
             ? 'bg-white/95 backdrop-blur-md border-border-light'
             : 'bg-[#00203f]/95 backdrop-blur-md border-white/10'
         }`}>
-          <div className="content-max py-4 flex flex-col gap-2">
-            {visibleLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setMobileOpen(false)}
-                className={`px-4 py-2.5 rounded-none text-sm font-medium transition-colors ${
-                  isActive(link.to)
-                    ? isScrolled
-                      ? 'text-navy font-semibold bg-navy/5'
-                      : 'text-gold font-semibold bg-white/5'
-                    : isScrolled
-                      ? 'text-text-secondary hover:text-text-primary hover:bg-gray-50'
-                      : 'text-white/80 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="w-full px-6 py-4 flex flex-col gap-2">
+            <div className="max-w-[1200px] mx-auto flex flex-col gap-2">
+            {visibleLinks.map((link) => {
+              const isContact = link.label === 'Get in Touch';
+              if (isContact) {
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className={`mx-4 my-2 px-4 py-3 rounded-none text-center text-xs font-bold uppercase tracking-wider border transition-all duration-300 ${
+                      isScrolled
+                        ? 'bg-[#00203f] text-white border-[#00203f] hover:bg-[#8CC63F] hover:border-[#8CC63F]'
+                        : 'bg-white text-[#00203f] border-white hover:bg-[#8CC63F] hover:border-[#8CC63F] hover:text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+
+              const active = isActive(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
+                  className={`px-4 py-2.5 rounded-none text-sm font-semibold transition-colors ${
+                    active
+                      ? isScrolled
+                        ? 'text-[#00203f] bg-slate-50 font-bold'
+                        : 'text-white bg-white/5 font-bold'
+                      : isScrolled
+                        ? 'text-slate-600 hover:text-[#00203f] hover:bg-slate-50'
+                        : 'text-white/80 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            </div>
           </div>
         </div>
       )}

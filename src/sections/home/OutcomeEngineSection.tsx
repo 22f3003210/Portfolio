@@ -85,7 +85,7 @@ export function OutcomeEngineSection() {
   };
 
   return (
-    <section className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] py-20 md:py-24 px-6 select-none border-b border-white/10 relative overflow-hidden">
+    <section id="outcome-engine" className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] py-20 md:py-24 px-6 select-none border-b border-white/10 relative overflow-hidden">
       
       {/* High-tech background accent glows */}
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-navy/10 rounded-full blur-[100px] pointer-events-none" />

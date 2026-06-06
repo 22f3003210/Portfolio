@@ -92,45 +92,46 @@ export function HeroSection() {
           </svg>
         </div>
 
-        <div className="content-max w-full py-3 lg:py-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left column */}
-            <div className="lg:col-span-7 flex flex-col gap-3.5 pb-6">
-              <span className="inline-block self-start px-3.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-navy border border-navy/30 rounded-none bg-navy/5">
-                HYDERABAD · JEWELLERY RETAIL TRANSFORMATION ARCHITECT
-              </span>
+        <div className="w-full px-6 py-3 lg:py-4 relative z-10">
+          <div className="max-w-[1200px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              {/* Left column */}
+              <div className="lg:col-span-7 flex flex-col gap-3.5 pb-6">
+                <span className="inline-block self-start px-3.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.08em] text-[#0170B9] border border-[#0170B9]/30 rounded-none bg-[#0170B9]/5 transition-all duration-300 hover:bg-[#8CC63F] hover:border-[#8CC63F] hover:text-white cursor-pointer select-none">
+                  Retail Business Management Consultant
+                </span>
 
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-navy uppercase tracking-tight leading-[1.05] mb-4 md:mb-5">
-                Scale Your <br className="hidden sm:inline" />
-                Jewellery Brand
-              </h1>
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#0B1E2E] uppercase tracking-tight leading-[1.05] mb-4 md:mb-5">
+                  YOU CAN'T SCALE <br className="hidden sm:inline" />
+                  <span className="text-[#0170B9]">WHAT YOU CAN'T SEE.</span>
+                </h1>
 
-              <p className="text-sm md:text-base text-text-secondary font-medium leading-relaxed max-w-xl mb-4 md:mb-6">
-                Jewellery business transformation architect designing intelligence‑driven operating
-                systems across ERP, finance, CRM, inventory, and store operations.
-              </p>
+                <p className="text-sm md:text-base text-text-secondary font-medium leading-relaxed max-w-xl mb-4 md:mb-6 italic">
+                  &quot;The next decade of jewellery retail belongs to the systemized. The rest will be
+                  managed out of existence.&quot;
+                </p>
 
-              <p className="text-xs md:text-sm text-text-secondary/70 italic border-l-2 border-gold pl-3 max-w-lg">
-                &quot;The next decade of jewellery retail belongs to the systemized. The rest will be
-                managed out of existence.&quot;
-              </p>
+                <p className="text-xs md:text-sm text-text-secondary/70 border-l-2 border-gold pl-3 max-w-lg">
+                  I design the operational frameworks, KPI architectures, and decision systems that help retail businesses scale with confidence.
+                </p>
 
-              <div className="flex flex-wrap gap-4 pt-1">
-                <GoldButton to="/#workflows" icon={<ChevronDown className="w-4 h-4" />}>
-                  Explore the Operating System
-                </GoldButton>
-                <OutlineButton 
-                  to="/contact"
-                  variant="dark" 
-                  className="border-navy/40 text-navy hover:bg-navy/5 hover:border-navy"
-                >
-                  Book a 30‑min call
-                </OutlineButton>
+                <div className="flex flex-wrap gap-4 pt-1">
+                  <GoldButton to="/#workflows" icon={<ChevronDown className="w-4 h-4" />}>
+                    Explore the Operating System
+                  </GoldButton>
+                  <OutlineButton 
+                    to="/contact"
+                    variant="dark" 
+                    className="border-navy/40 text-navy hover:bg-navy/5 hover:border-navy"
+                  >
+                    Book a 30‑min call
+                  </OutlineButton>
+                </div>
               </div>
-            </div>
 
-            {/* Right column - Empty to expose the honeycomb graphic completely */}
-            <div className="lg:col-span-5 hidden lg:block" />
+              {/* Right column - Empty to expose the honeycomb graphic completely */}
+              <div className="lg:col-span-5 hidden lg:block" />
+            </div>
           </div>
         </div>
 

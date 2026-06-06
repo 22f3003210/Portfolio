@@ -1,5 +1,6 @@
-import { CheckCircle2, Lightbulb, Compass, Award } from 'lucide-react';
+import { CheckCircle2, Lightbulb, Compass } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
+import { FocusAreaFramework } from '../home/FocusAreaFramework';
 
 export function DetailedBioSection() {
   const stats = [
@@ -219,63 +220,7 @@ export function DetailedBioSection() {
         </div>
 
         {/* Section 5: How I Work */}
-        <ScrollReveal className="w-full">
-          <div className="bg-[#0B1E2E] rounded-none border border-white/10 p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-            <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#0170B9]/10 rounded-full blur-[100px] pointer-events-none" />
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-              
-              {/* Left Column: Narrative intro */}
-              <div className="lg:col-span-5 space-y-6">
-                <div className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center">
-                  <Award className="w-5 h-5 text-gold" />
-                </div>
-                <div>
-                  <span className="text-[9px] font-extrabold uppercase tracking-widest text-gold font-mono">METHODOLOGY</span>
-                  <h3 className="text-3xl font-extrabold mt-1 text-white leading-tight">
-                    How I Work
-                  </h3>
-                </div>
-                <div className="space-y-4 text-white/90 text-sm leading-relaxed">
-                  <p className="font-semibold text-white">
-                    I don't see data, technology, and operations as separate functions.
-                  </p>
-                  <p className="font-medium text-white/80">
-                    I see them as interconnected parts of a larger business system.
-                  </p>
-                  <p className="text-white/70 text-xs md:text-sm">
-                    Whether I am evaluating a process, designing a workflow, implementing technology, creating a dashboard, or solving an operational challenge, my focus remains the same:
-                  </p>
-                </div>
-              </div>
-
-              {/* Right Column: Interactive Process Cards/List */}
-              <div className="lg:col-span-7 bg-white/[0.02] border border-white/10 p-6 md:p-8 rounded-none">
-                <span className="text-xs font-bold text-gold uppercase tracking-wider font-mono">My Focus Area Framework</span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
-                  {[
-                    { title: 'Understand the business objective.', color: 'border-l-[#0170B9]' },
-                    { title: 'Identify the gaps.', color: 'border-l-gold' },
-                    { title: 'Design the system.', color: 'border-l-green-500' },
-                    { title: 'Generate meaningful insights.', color: 'border-l-purple-500' },
-                    { title: 'Enable better decisions.', color: 'border-l-amber-500' },
-                    { title: 'Create measurable business impact.', color: 'border-l-rose-500' }
-                  ].map((item, idx) => (
-                    <div key={idx} className={`bg-white/[0.03] border border-white/5 border-l-4 ${item.color} p-4 rounded-none flex items-start gap-3`}>
-                      <span className="text-xs font-mono font-bold text-white/40 bg-white/5 w-6 h-6 rounded-full flex items-center justify-center shrink-0">
-                        {idx + 1}
-                      </span>
-                      <p className="text-xs md:text-sm text-white/90 leading-relaxed font-medium">
-                        {item.title}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </ScrollReveal>
+        <FocusAreaFramework />
 
       </div>
     </section>

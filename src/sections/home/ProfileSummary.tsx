@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export function ProfileSummary() {
   return (
-    <section className="w-full bg-[#F8FAFC] py-16 md:py-24 px-6 border-t border-b border-border-light relative overflow-hidden">
+    <section id="about" className="w-full bg-[#F8FAFC] py-16 md:py-24 px-6 border-t border-b border-border-light relative overflow-hidden">
       {/* Decorative background grid pattern */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#0170B9_1.5px,transparent_1.5px)] [background-size:24px_24px] z-0" />
 
