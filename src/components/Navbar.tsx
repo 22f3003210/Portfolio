@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { usePortal } from '../context/PortalContext';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -16,21 +17,8 @@ const navLinks = [
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [showPortalLink, setShowPortalLink] = useState(() => {
-    return localStorage.getItem('portal_link_visible') === 'true';
-  });
+  const { isPortalVisible } = usePortal();
   const location = useLocation();
-
-  useEffect(() => {
-    const handleUnlock = () => setShowPortalLink(true);
-    const handleLock = () => setShowPortalLink(false);
-    window.addEventListener('portal_unlocked', handleUnlock);
-    window.addEventListener('portal_locked', handleLock);
-    return () => {
-      window.removeEventListener('portal_unlocked', handleUnlock);
-      window.removeEventListener('portal_locked', handleLock);
-    };
-  }, []);
 
   // Smooth scroll to sections when hash changes
   useEffect(() => {
@@ -47,7 +35,7 @@ export function Navbar() {
   }, [location.hash, location.pathname]);
 
   const visibleLinks = navLinks.filter(
-    (link) => link.to !== '/portal' || showPortalLink
+    (link) => link.to !== '/portal' || isPortalVisible
   );
 
   useEffect(() => {

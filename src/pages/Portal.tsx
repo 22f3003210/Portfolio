@@ -16,6 +16,7 @@ import {
   TrendingDown
 } from 'lucide-react';
 import { workflows } from '../data/workflows';
+import { usePortal } from '../context/PortalContext';
 
 // KPI Definition Interface
 interface RetailKPI {
@@ -239,14 +240,13 @@ async function sha256(message: string) {
 }
 
 export function Portal() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('portal_authenticated') === 'true';
-  });
+  const { isPortalAuthenticated, setPortalAuthenticated, hidePortal } = usePortal();
+  const isAuthenticated = isPortalAuthenticated;
   const [passcode, setPasscode] = useState('');
   const [authError, setAuthError] = useState('');
   const [activeTab, setActiveTab] = useState<'workflows' | 'kpis' | 'checklist' | 'report'>('workflows');
 
-  // Checklist State
+  // Checklist State — kept in localStorage so audit progress persists across sessions
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>(() => {
     const saved = localStorage.getItem('portal_checklist_state');
     if (saved) {
@@ -278,8 +278,7 @@ export function Portal() {
     const correctHash = '1824b346dfd511433da2bc62b5e59b98a2e635b132fc71df1c1d9eccd5d1fad7'; // Dhonijohny
     
     if (inputHash === correctHash) {
-      localStorage.setItem('portal_authenticated', 'true');
-      setIsAuthenticated(true);
+      setPortalAuthenticated(true);
       setAuthError('');
       setPasscode(''); // Clear immediately to wipe from DOM/React state
     } else {
@@ -291,10 +290,7 @@ export function Portal() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('portal_authenticated');
-    localStorage.removeItem('portal_link_visible');
-    window.dispatchEvent(new Event('portal_locked'));
-    setIsAuthenticated(false);
+    hidePortal(); // clears both portal visibility and auth in one call
     navigate('/');
   };
 

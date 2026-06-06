@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { logPageView, logClickEvent } from '../lib/supabase';
+import { usePortal } from '../context/PortalContext';
 
 interface PageShellProps {
   children: ReactNode;
@@ -12,29 +13,41 @@ interface PageShellProps {
 
 export function PageShell({ children }: PageShellProps) {
   const location = useLocation();
+  const { isPortalVisible, showPortal, hidePortal } = usePortal();
+  const [toast, setToast] = useState<{ msg: string; type: 'unlock' | 'lock' } | null>(null);
 
+  // Keep a ref so the keydown handler always reads the latest state
+  // without needing to re-register the listener on every state change.
+  const portalVisibleRef = useRef(isPortalVisible);
   useEffect(() => {
-    // 1. Log page view on path changes
+    portalVisibleRef.current = isPortalVisible;
+  }, [isPortalVisible]);
+
+  const fireToast = (msg: string, type: 'unlock' | 'lock') => {
+    setToast({ msg, type });
+    setTimeout(() => setToast(null), 3500);
+  };
+
+  // ── Page-view + click analytics ──────────────────────────────────────
+  useEffect(() => {
     logPageView(location.pathname, document.referrer);
 
-    // 2. Setup global click listeners for all interactive CTAs
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       let current: HTMLElement | null = target;
-      
+
       while (current && current !== document.body) {
         if (
           current.tagName === 'A' ||
           current.tagName === 'BUTTON' ||
           current.getAttribute('role') === 'button'
         ) {
-          // Identify button by ID, href, text content, or general tag name
-          const elementId = current.id || 
-            current.getAttribute('href') || 
-            current.textContent?.trim().slice(0, 40) || 
+          const elementId =
+            current.id ||
+            current.getAttribute('href') ||
+            current.textContent?.trim().slice(0, 40) ||
             current.tagName;
           const elementText = current.textContent?.trim().slice(0, 60) || '';
-          
           logClickEvent(elementId, elementText, location.pathname);
           break;
         }
@@ -46,42 +59,41 @@ export function PageShell({ children }: PageShellProps) {
     return () => window.removeEventListener('click', handleGlobalClick);
   }, [location.pathname]);
 
+  // ── Hotkey listener (registered once) ────────────────────────────────
+  // Sequence: abc123  — toggles the Client Portal nav link visibility.
+  // State is in-memory only; page refresh always resets to hidden.
   useEffect(() => {
-    let typedKeys = '';
-    const targetSequence = 'abc123';
+    let typed = '';
+    const SEQ = 'abc123';
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
-        return;
-      }
+      const t = e.target as HTMLElement;
+      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') return;
 
-      typedKeys += e.key;
-      if (typedKeys.length > targetSequence.length) {
-        typedKeys = typedKeys.slice(-targetSequence.length);
-      }
+      typed += e.key;
+      if (typed.length > SEQ.length) typed = typed.slice(-SEQ.length);
 
-      if (typedKeys === targetSequence) {
-        const currentlyVisible = localStorage.getItem('portal_link_visible') === 'true';
-        if (currentlyVisible) {
-          localStorage.removeItem('portal_link_visible');
-          window.dispatchEvent(new Event('portal_locked'));
-          alert('🔒 Client Portal hidden from navigation.');
+      if (typed === SEQ) {
+        typed = '';
+        if (portalVisibleRef.current) {
+          hidePortal();
+          fireToast('Client Portal hidden. Enter hotkey again to re-open.', 'lock');
         } else {
-          localStorage.setItem('portal_link_visible', 'true');
-          window.dispatchEvent(new Event('portal_unlocked'));
-          alert('🔓 Client Portal unlocked and added to navigation.');
+          showPortal();
+          fireToast('Client Portal unlocked and added to navigation.', 'unlock');
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // intentionally empty — uses refs for current values
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+
       <AnimatePresence mode="wait">
         <motion.main
           key={location.pathname}
@@ -94,7 +106,30 @@ export function PageShell({ children }: PageShellProps) {
           {children}
         </motion.main>
       </AnimatePresence>
+
       <Footer />
+
+      {/* ── Portal unlock / lock toast ── */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            key="portal-toast"
+            initial={{ opacity: 0, x: 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 80 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+            className="fixed top-5 right-5 z-[9999] flex items-center gap-3 bg-[#00203f] text-white pl-4 pr-5 py-3.5 shadow-2xl border-l-4 border-gold min-w-[260px]"
+          >
+            <span className="text-xl shrink-0">{toast.type === 'unlock' ? '🔓' : '🔒'}</span>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-widest text-gold">
+                {toast.type === 'unlock' ? 'Portal Unlocked' : 'Portal Locked'}
+              </p>
+              <p className="text-xs font-semibold text-white/80 leading-snug">{toast.msg}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

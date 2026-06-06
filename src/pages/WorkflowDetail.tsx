@@ -6,6 +6,7 @@ import { StepNavigator } from '../sections/workflow/StepNavigator';
 import { StepCardsGrid } from '../sections/workflow/StepCardsGrid';
 import { DashboardImpact } from '../sections/workflow/DashboardImpact';
 import { getWorkflowBySlug } from '../data/workflows';
+import { usePortal } from '../context/PortalContext';
 
 // Helper to hash string to SHA-256 hex
 async function sha256(message: string) {
@@ -18,10 +19,9 @@ async function sha256(message: string) {
 export function WorkflowDetail() {
   const { slug } = useParams<{ slug: string }>();
   const workflow = getWorkflowBySlug(slug || '');
+  const { isPortalAuthenticated, setPortalAuthenticated } = usePortal();
 
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('portal_authenticated') === 'true';
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(isPortalAuthenticated);
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
   
@@ -38,7 +38,7 @@ export function WorkflowDetail() {
     const correctHash = '1824b346dfd511433da2bc62b5e59b98a2e635b132fc71df1c1d9eccd5d1fad7'; // Dhonijohny
     
     if (inputHash === correctHash) {
-      localStorage.setItem('portal_authenticated', 'true');
+      setPortalAuthenticated(true);
       setIsAuthenticated(true);
       setError('');
       setPasscode(''); // Clear immediately to wipe from DOM/React state
