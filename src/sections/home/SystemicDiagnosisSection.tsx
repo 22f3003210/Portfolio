@@ -317,16 +317,10 @@ export function SystemicDiagnosisSection() {
                         className={cn(
                           "border rounded-none overflow-hidden select-none h-full w-full relative flex flex-col justify-between",
                           isActive
-                            ? "opacity-100 scale-100 md:scale-[1.02] border-transparent bg-gradient-to-br from-[#2195A9] via-[#1A6D94] to-[#124680] text-white"
+                            ? cn("opacity-100 scale-100 md:scale-[1.02] border-transparent bg-gradient-to-br text-white", theme.gradient)
                             : "opacity-55 scale-90 md:scale-[0.88] lg:scale-[0.85] border-slate-300/80 bg-slate-100/50 backdrop-blur-[3px] cursor-pointer hover:opacity-80 hover:border-slate-400 blur-[0.2px]"
                         )}
                       >
-                        {/* Gradient Accent Bar at Top of Active Card */}
-                        <div className={cn(
-                          "h-[4px] w-full transition-opacity duration-300", 
-                          isActive ? "bg-[#8CC63F] opacity-100" : "bg-slate-300/30 opacity-30"
-                        )} />
-
                         <div className="flex flex-col justify-between p-5 sm:p-6 md:p-8 h-full w-full relative text-left">
                           
                           <div className="space-y-2">
@@ -374,7 +368,7 @@ export function SystemicDiagnosisSection() {
                                 <li key={bIdx} className="flex items-start gap-2 text-[10.5px] sm:text-xs font-medium leading-snug group/item">
                                   <span className={cn(
                                     "w-1.5 h-1.5 rounded-none mt-1.5 shrink-0 transition-colors duration-300",
-                                    isActive ? "bg-[#8CC63F]" : "bg-slate-400"
+                                    isActive ? "bg-white" : "bg-slate-400"
                                   )} />
                                   <span className={cn(
                                     "transition-colors duration-300",
@@ -389,7 +383,7 @@ export function SystemicDiagnosisSection() {
                           <div className={cn(
                             "border-l-2 p-3 rounded-none mt-4 transition-all duration-300",
                             isActive
-                              ? "bg-white/10 border-[#8CC63F]" 
+                              ? "bg-white/10 border-white/30" 
                               : "bg-slate-50/40 border-slate-200"
                           )}>
                             <span className={cn(
