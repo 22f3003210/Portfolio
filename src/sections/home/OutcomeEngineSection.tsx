@@ -171,7 +171,7 @@ export function OutcomeEngineSection() {
       <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-navy/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-[1000px] mx-auto text-left relative z-10">
+      <div className="max-w-[1150px] mx-auto text-left relative z-10">
         
         {/* Module Badge */}
         <ScrollReveal>
@@ -196,15 +196,16 @@ export function OutcomeEngineSection() {
 
         {/* Main Telemetry Box */}
         <ScrollReveal delay={0.15}>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-white/10 bg-white/[0.02] p-5 md:p-7 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center border border-white/10 bg-white/[0.02] p-6 md:p-10 relative z-10">
             
             {/* SVG Semicircle Dial */}
-            <div className="lg:col-span-6 flex flex-col items-center justify-center">
+            <div className="lg:col-span-5 flex flex-col items-center justify-center">
               <div className="relative w-full max-w-[500px] flex items-center justify-center">
-                <svg width="100%" height="300" viewBox="90 5 320 195" className="overflow-visible select-none">
+                <svg width="100%" height="340" viewBox="60 -20 380 250" className="overflow-visible select-none">
                   
-                  <path d="M 120,40 A 130,130 0 0,0 380,40" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" strokeDasharray="3 3" />
-                  <path d="M 180,40 A 70,70 0 0,0 320,40" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" strokeDasharray="2 2" />
+                  {/* Semicircular Guide Rings updated for larger radii */}
+                  <path d="M 90,40 A 160,160 0 0,0 410,40" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" strokeDasharray="3 3" />
+                  <path d="M 160,40 A 90,90 0 0,0 340,40" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" strokeDasharray="2 2" />
 
                   {petals.map((petal, idx) => {
                     const isActive = activePetal === idx;
@@ -222,10 +223,10 @@ export function OutcomeEngineSection() {
                     
                     const cx = 250;
                     const cy = 40;
-                    const r1 = 70;
-                    const r2 = 145;
+                    const r1 = 90;  // Increased from 70
+                    const r2 = 175; // Increased from 145
                     
-                    const d = isActive ? 8 : 0;
+                    const d = isActive ? 10 : 0;
                     const shiftX = d * Math.cos(degToRad(am));
                     const shiftY = d * Math.sin(degToRad(am));
                     
@@ -267,9 +268,9 @@ export function OutcomeEngineSection() {
 
                         <text
                           x={xIcon}
-                          y={yIcon + 14}
+                          y={yIcon + 16}
                           textAnchor="middle"
-                          fontSize="8"
+                          fontSize="9"
                           fontWeight="extrabold"
                           fill={isActive ? '#0B1E2E' : 'rgba(255, 255, 255, 0.5)'}
                           className="transition-colors duration-300 font-mono tracking-wider"
@@ -287,51 +288,73 @@ export function OutcomeEngineSection() {
                     </linearGradient>
                   </defs>
 
-                  {/* Brain & Engineering Hybrid Center Graphic */}
+                  {/* Brain & Engineering Hybrid Center Graphic (Larger, more detailed, and aligned properly) */}
                   <g transform="translate(250, 40)">
                     {/* Rotating outer gear/circuit ring */}
-                    <g style={{ animation: 'spin 20s linear infinite', transformOrigin: '0px 0px' }}>
-                      <circle cx="0" cy="0" r="34" fill="none" stroke="#00E5FF" strokeWidth="1" strokeDasharray="3 3" opacity="0.3" />
-                      <circle cx="0" cy="0" r="28" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="3" strokeDasharray="6 4" />
+                    <g style={{ animation: 'spin 25s linear infinite', transformOrigin: '0px 0px' }}>
+                      <circle cx="0" cy="0" r="60" fill="none" stroke="#00E5FF" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.3" />
+                      <circle cx="0" cy="0" r="54" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" strokeDasharray="8 6" />
                     </g>
                     
-                    {/* Center solid dashboard button */}
-                    <circle cx="0" cy="0" r="24" fill="#0A1826" stroke="#0170B9" strokeWidth="2.5" />
+                    {/* Center solid dashboard button (Enlarged) */}
+                    <circle cx="0" cy="0" r="46" fill="#0A1826" stroke="#0170B9" strokeWidth="3" />
                     
-                    {/* Left brain hemisphere (organic curves) in neon cyan */}
-                    <path 
-                      d="M -2,-12 C -6,-12 -9,-9 -9,-6 C -9,-4 -8,-3 -6,-2 C -10,-2 -11,2 -8,5 C -10,7 -8,10 -5,10 C -3,10 -2,8 -2,5 Z" 
-                      fill="none" 
-                      stroke="#00E5FF" 
-                      strokeWidth="1.5" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                    />
-                    <path d="M -5,-6 C -6,-6 -7,-5 -5,-3" fill="none" stroke="#00E5FF" strokeWidth="1" strokeLinecap="round" />
-                    <path d="M -4,2 C -6,2 -7,3 -5,5" fill="none" stroke="#00E5FF" strokeWidth="1" strokeLinecap="round" />
-                    
-                    {/* Right brain hemisphere (circuits & engineering lines) in parrot green */}
-                    <path 
-                      d="M 2,-12 L 6,-12 L 8,-9 L 8,-5 L 4,-5 L 4,-1 L 9,4 L 9,8 L 5,11 L 2,11 Z" 
-                      fill="none" 
-                      stroke="#8CC63F" 
-                      strokeWidth="1.5" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                    />
-                    {/* Circuit connections */}
-                    <path d="M 2,-7 L 5,-7 L 6.5,-5.5" fill="none" stroke="#8CC63F" strokeWidth="1" />
-                    <circle cx="6.5" cy="-5.5" r="0.8" fill="#8CC63F" />
-                    
-                    <path d="M 2,1 L 5,1 L 6.5,2.5" fill="none" stroke="#8CC63F" strokeWidth="1" />
-                    <circle cx="6.5" cy="2.5" r="0.8" fill="#8CC63F" />
-                    
-                    <circle cx="8" cy="-9" r="0.8" fill="#8CC63F" />
-                    <circle cx="9" cy="8" r="0.8" fill="#8CC63F" />
-                    
-                    {/* Center junction node */}
-                    <circle cx="0" cy="0" r="3" fill="#0A1826" stroke="#8CC63F" strokeWidth="1" />
-                    <path d="M -1.5,0 L 1.5,0 M 0,-1.5 L 0,1.5" stroke="#8CC63F" strokeWidth="0.8" />
+                    {/* Gear outline in background of brain */}
+                    <circle cx="0" cy="0" r="34" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="4" strokeDasharray="6 4" />
+
+                    {/* Highly detailed Brain Outline + Engineering Concept */}
+                    <g transform="scale(1.75)">
+                      {/* Left brain hemisphere (organic curves) in neon cyan */}
+                      <path 
+                        d="M -1,-12 
+                           C -5,-12 -8,-9 -8,-6 
+                           C -8,-4.5 -6.5,-3.5 -5,-3 
+                           C -9,-3 -10,1 -7,4 
+                           C -9,5.5 -7.5,8 -4,8 
+                           C -2.5,8 -1,6.5 -1,4 
+                           Z" 
+                        fill="none" 
+                        stroke="#00E5FF" 
+                        strokeWidth="1.6" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                      />
+                      <path d="M -4,-6.5 C -5.5,-6.5 -6,-5 -4.5,-4" fill="none" stroke="#00E5FF" strokeWidth="1.1" strokeLinecap="round" />
+                      <path d="M -3.5,1.5 C -5,1.5 -5.5,2.5 -4,3.5" fill="none" stroke="#00E5FF" strokeWidth="1.1" strokeLinecap="round" />
+                      
+                      {/* Right brain hemisphere (circuits & engineering lines) in parrot green */}
+                      <path 
+                        d="M 1,-12 
+                           L 6,-12 
+                           L 9,-9 
+                           L 9,-5 
+                           L 5,-5 
+                           L 5,-1 
+                           L 10,4 
+                           L 10,8 
+                           L 6,10 
+                           L 1,10 
+                           Z" 
+                        fill="none" 
+                        stroke="#8CC63F" 
+                        strokeWidth="1.6" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                      />
+                      {/* Circuit connections and larger distinct nodes */}
+                      <path d="M 1,-7 L 5,-7 L 6.5,-5.5" fill="none" stroke="#8CC63F" strokeWidth="1.1" />
+                      <circle cx="6.5" cy="-5.5" r="1.2" fill="#8CC63F" />
+                      
+                      <path d="M 1,1 L 5,1 L 6.5,2.5" fill="none" stroke="#8CC63F" strokeWidth="1.1" />
+                      <circle cx="6.5" cy="2.5" r="1.2" fill="#8CC63F" />
+                      
+                      <circle cx="9" cy="-9" r="1.2" fill="#8CC63F" />
+                      <circle cx="10" cy="8" r="1.2" fill="#8CC63F" />
+                      
+                      {/* Center junction node */}
+                      <circle cx="0" cy="-1" r="2.2" fill="#0A1826" stroke="#8CC63F" strokeWidth="1" />
+                      <path d="M -1,-1 L 1,-1 M 0,-2 L 0,0" stroke="#8CC63F" strokeWidth="0.8" />
+                    </g>
                   </g>
 
                 </svg>
@@ -343,39 +366,41 @@ export function OutcomeEngineSection() {
             </div>
 
             {/* Content Details Panel */}
-            <div className="lg:col-span-6 flex flex-col gap-6">
+            <div className="lg:col-span-7 flex flex-col gap-6 justify-between self-stretch">
               
-              {/* Header with Wedge Subtitle & Title */}
-              <div className="border-l-2 border-gold pl-3">
-                <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block">
-                  {petals[activePetal].subtitle}
-                </span>
-                <h4 className="text-xl font-black text-white uppercase tracking-tight mt-1">
-                  {petals[activePetal].title}
-                </h4>
-              </div>
+              <div className="flex flex-col gap-4">
+                {/* Header with Wedge Subtitle & Title */}
+                <div className="border-l-2 border-gold pl-3">
+                  <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block">
+                    {petals[activePetal].subtitle}
+                  </span>
+                  <h4 className="text-xl font-black text-white uppercase tracking-tight mt-1">
+                    {petals[activePetal].title}
+                  </h4>
+                </div>
 
-              {/* Wedge Description */}
-              <p className="text-xs sm:text-[13px] text-white/80 leading-relaxed font-semibold">
-                {petals[activePetal].description}
-              </p>
+                {/* Wedge Description */}
+                <p className="text-xs sm:text-[13px] text-white/80 leading-relaxed font-semibold">
+                  {petals[activePetal].description}
+                </p>
 
-              {/* Examined/Defined Areas list */}
-              <div>
-                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest font-mono block mb-2.5">
-                  {petals[activePetal].bulletHeader}
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {petals[activePetal].bullets.map((bullet, idx) => (
-                    <div key={idx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-gold shrink-0"></span>
-                      <span className="text-xs text-white/95 font-medium">{bullet}</span>
-                    </div>
-                  ))}
+                {/* Examined/Defined Areas list */}
+                <div>
+                  <span className="text-[10px] font-black text-white/40 uppercase tracking-widest font-mono block mb-2.5">
+                    {petals[activePetal].bulletHeader}
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {petals[activePetal].bullets.map((bullet, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-[#8CC63F] shrink-0"></span>
+                        <span className="text-xs text-white/95 font-medium">{bullet}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 mt-1">
+              <div className="flex flex-col gap-4 mt-2">
                 {/* Key Question Box */}
                 <div className="bg-gold/[0.03] border border-gold/20 p-4 rounded-none flex items-start gap-3">
                   <HelpCircle className="w-5 h-5 text-gold shrink-0 mt-0.5" />
