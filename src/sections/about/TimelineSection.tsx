@@ -109,7 +109,8 @@ export function TimelineSection() {
                   integrated revenue engine."
                 </p>
                 <p className="text-sm text-white/70">
-                  Converting person-dependent chaos into scalable digital operations.
+                  What gets measured can be understood.<br /><br />
+                  What gets understood can be improved.
                 </p>
               </div>
             </ScrollReveal>
