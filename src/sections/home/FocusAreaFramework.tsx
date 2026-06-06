@@ -44,17 +44,24 @@ export function FocusAreaFramework() {
   return (
     <ScrollReveal className="w-full">
       <div className="space-y-10">
-        {/* Section Header */}
-        <div>
-          <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0170B9] bg-[#0170B9]/5 px-3 py-1 border border-[#0170B9]/15 rounded-none inline-block font-mono">
-            METHODOLOGY
-          </span>
-          <h2 className="text-3xl md:text-5xl font-black mt-3 text-[#0B1E2E] leading-tight uppercase tracking-tight">
-            What I Do
-          </h2>
-          <p className="text-sm md:text-base font-extrabold text-[#8CC63F] uppercase tracking-wider mt-2 font-mono">
-            From Root Cause to Business Impact
-          </p>
+        {/* Section Header - Split Grid to align intro text to the right of title */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <div className="lg:col-span-6">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0170B9] bg-[#0170B9]/5 px-3 py-1 border border-[#0170B9]/15 rounded-none inline-block font-mono">
+              METHODOLOGY
+            </span>
+            <h2 className="text-3xl md:text-5xl font-black mt-3 text-[#0B1E2E] leading-tight uppercase tracking-tight">
+              What I Do
+            </h2>
+            <p className="text-sm md:text-base font-extrabold text-[#8CC63F] uppercase tracking-wider mt-2 font-mono">
+              From Root Cause to Business Impact
+            </p>
+          </div>
+          <div className="lg:col-span-6 lg:pt-8 text-[#3A3A3A] font-bold text-base md:text-lg leading-relaxed text-left">
+            <p>
+              I help organizations uncover operational gaps, quantify business risks, design scalable systems, and build decision frameworks that drive measurable growth.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
@@ -107,25 +114,22 @@ export function FocusAreaFramework() {
             })}
           </div>
 
-          {/* Right Column: Narrative intro & objectives */}
-          <div className="lg:col-span-6 flex flex-col lg:h-full gap-6 lg:gap-8">
-            {/* Narrative */}
-            <div className="space-y-4 text-[#4B4F58] text-sm md:text-base leading-relaxed font-semibold">
-              <p className="text-[#3A3A3A] font-bold text-base md:text-lg">
-                I help organizations uncover operational gaps, quantify business risks, design scalable systems, and build decision frameworks that drive measurable growth.
-              </p>
-              <p className="text-xs md:text-sm font-medium">
+          {/* Right Column: Narrative objectives shifted up with flex height to align bottoms */}
+          <div className="lg:col-span-6 flex flex-col justify-between gap-4">
+            {/* Narrative secondary text */}
+            <div className="text-[#4B4F58] text-xs md:text-sm leading-relaxed font-semibold text-left">
+              <p>
                 I DON'T focus on simply fixing problems. I do root-cause analysis: why it happened, what it is costing.
               </p>
             </div>
             
             {/* Quote Box */}
-            <div className="bg-white border-l-4 border-[#0170B9] p-5 shadow-sm italic text-[#0B1E2E] font-bold text-base md:text-lg leading-relaxed">
+            <div className="bg-white border-l-4 border-[#0170B9] p-5 shadow-sm italic text-[#0B1E2E] font-bold text-base md:text-lg leading-relaxed text-left">
               "I design systems that prevent them."
             </div>
 
-            {/* Transformation Focus Card (Fills the space) */}
-            <div className="bg-white border border-slate-100 p-6 shadow-sm space-y-4 rounded-none flex-grow flex flex-col justify-center">
+            {/* Transformation Focus Card (Fills the remaining height and centers contents) */}
+            <div className="bg-white border border-slate-100 p-6 shadow-sm space-y-4 rounded-none flex-grow flex flex-col justify-center text-left">
               <h4 className="text-xs font-bold text-[#0170B9] uppercase tracking-wider font-mono">
                 System Goals & Objectives
               </h4>
@@ -136,7 +140,7 @@ export function FocusAreaFramework() {
                   { title: 'Drive Decisions', desc: 'Converting raw ERP data into actionable dashboards for procurement and growth.' }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-2.5 items-start text-xs md:text-sm">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#8CC63F] shrink-0 mt-2" />
+                    <div className="w-1.5 h-1.5 rounded-none bg-[#8CC63F] shrink-0 mt-2" />
                     <div>
                       <span className="font-bold text-[#0B1E2E]">{item.title}: </span>
                       <span className="text-[#4B4F58] font-medium leading-relaxed">{item.desc}</span>
