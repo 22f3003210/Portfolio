@@ -1,61 +1,142 @@
 import { useState } from 'react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { GoldButton } from '../../components/GoldButton';
-import { AlertTriangle, CheckCircle2, Phone, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Phone, ArrowRight, HelpCircle } from 'lucide-react';
+
+interface Petal {
+  title: string;
+  label: string;
+  subtitle: string;
+  description: string;
+  bulletHeader: string;
+  bullets: string[];
+  keyQuestion: string;
+  outcome: string;
+  icon: React.ReactNode;
+}
 
 export function OutcomeEngineSection() {
-  const [activePetal, setActivePetal] = useState<number>(2); // Default to Profits (index 2)
+  const [activePetal, setActivePetal] = useState<number>(0); // Default to WORKING (index 0)
 
-  const petals = [
+  const petals: Petal[] = [
     {
-      title: 'TRACK UPDATES',
-      label: 'TRACKING',
-      before: 'Offline store reports are updated manually every 24-48 hours, leaving leadership blind to sales velocity, billing anomalies, and stock movements.',
-      after: 'Continuous live updates of inventory movement, register logs, and billing volume accessible instantly on a secure mobile dashboard.',
+      title: "WHAT'S WORKING?",
+      label: 'WORKING',
+      subtitle: 'Identify the strengths driving performance.',
+      description: "Not every process needs fixing. The first step is understanding what's already creating results.",
+      bulletHeader: 'We examine:',
+      bullets: [
+        'Best-performing stores',
+        'High-converting sales teams',
+        'Top-selling product categories',
+        'Most profitable customer segments',
+        'Successful operational practices',
+        'Strong-performing inventory groups'
+      ],
+      keyQuestion: "What's driving success, and how can it be replicated across the business?",
+      outcome: 'Scale proven practices, strengthen competitive advantages, and accelerate growth.',
       icon: (
-        <path d="M-6,-4 h12 v8 h-12 z M-3,-1 l2,2 l4,-4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M-4,-4 h8 v3 c0,2 -2,4 -4,4 c-2,0 -4,-2 -4,-4 z M-4,-2 h-2 v-1 h2 M4,-2 h2 v-1 h-2 M0,3 v3 M-2,6 h4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       )
     },
     {
-      title: 'MORE PRODUCTIVE',
-      label: 'EFFICIENT',
-      before: 'Showroom billing desks manually double-key customer details, invoices, and estimates into separate spreadsheets, creating heavy staff friction.',
-      after: 'Automated ERP processes sync sales ledger, CRM profile, and inventory count in a single workflow, saving 1.5 hours per desk shift.',
+      title: "WHAT'S BROKEN?",
+      label: 'BROKEN',
+      subtitle: 'Identify the bottlenecks limiting performance.',
+      description: 'Every growing business develops friction points that slow execution and create inconsistency.',
+      bulletHeader: 'We examine:',
+      bullets: [
+        'Process breakdowns',
+        'Communication gaps',
+        'Delayed approvals',
+        'Manual dependencies',
+        'Operational inefficiencies',
+        'Accountability issues'
+      ],
+      keyQuestion: 'What is preventing the business from performing at its full potential?',
+      outcome: 'Eliminate bottlenecks, improve execution speed, and create operational consistency.',
       icon: (
-        <>
-          <circle cx="0" cy="-1" r="4" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M0,-5 L0,-6 M0,3 L0,4 M-4,-1 L-5,-1 M4,-1 L5,-1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </>
+        <path d="M0,-6 L-4,0 L1,0 L-1,6 L4,0 L-1,0 Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       )
     },
     {
-      title: 'HIGHER PROFITS',
-      label: 'PROFITS',
-      before: 'Sales staff manually calculate metal rates, making charges, or apply unauthorized discounts that directly erode gross profit margins.',
-      after: 'Automated live MCX-linked pricing engine computes tags, making charges, and limits discounts dynamically to safeguard profitability.',
+      title: "WHAT'S COSTING?",
+      label: 'COSTING',
+      subtitle: 'Quantify hidden losses and profit leakage.',
+      description: 'Many businesses focus on revenue growth while overlooking the silent costs reducing profitability.',
+      bulletHeader: 'We examine:',
+      bullets: [
+        'Dead inventory',
+        'Margin leakage',
+        'Discount misuse',
+        'Excess operational costs',
+        'Rework and errors',
+        'Working capital inefficiencies'
+      ],
+      keyQuestion: 'Where is the business losing money without realizing it?',
+      outcome: 'Protect margins, improve cash flow, and increase profitability.',
       icon: (
-        <path d="M-6,4 L-2,0 L2,2 L6,-2 M2,-2 H6 V2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M-6,-4 L-2,2 L2,0 L6,5 M2,5 H6 V1" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       )
     },
     {
-      title: 'CONTROL ON INVENTORY',
-      label: 'INVENTORY',
-      before: 'Gold weight and stock discrepancies are only caught during high-stress quarterly physical audits, masking ongoing stock shrinkage.',
-      after: 'Automated check-ins and live item audit logs track high-value jewellery pieces to the nearest 0.01g during every register handoff.',
+      title: "WHAT'S RISKY?",
+      label: 'RISKY',
+      subtitle: 'Uncover vulnerabilities before they become problems.',
+      description: 'Most business risks are visible long before they become crises.',
+      bulletHeader: 'We examine:',
+      bullets: [
+        'Key-person dependency',
+        'Lack of process ownership',
+        'Inventory concentration risks',
+        'Customer concentration risks',
+        'Compliance gaps',
+        'Data visibility issues'
+      ],
+      keyQuestion: 'What could negatively impact growth if left unaddressed?',
+      outcome: 'Reduce uncertainty, improve resilience, and strengthen long-term stability.',
       icon: (
-        <>
-          <rect x="-5" y="-6" width="10" height="12" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M-2.5,-3 H2.5 M-2.5,0 H2.5 M-2.5,3 H2.5" stroke="currentColor" strokeWidth="1" />
-        </>
+        <path d="M0,-6 L6,4 H-6 Z M0,-2 V1 M0,3 H0.1" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       )
     },
     {
-      title: 'BEAT COMPETITION',
-      label: 'COMPETE',
-      before: 'Slow, person-dependent processes delay replenishments and fail to engage registered customers at critical purchase intervals.',
-      after: 'Predictive replenishment triggers and automated CRM recall touchpoints turn inventory twice as fast and lock in customer loyalty.',
+      title: "WHAT'S POSSIBLE?",
+      label: 'POSSIBLE',
+      subtitle: 'Discover untapped opportunities for growth.',
+      description: 'Once constraints are understood, opportunities become easier to identify.',
+      bulletHeader: 'We examine:',
+      bullets: [
+        'Revenue expansion opportunities',
+        'Process automation opportunities',
+        'Inventory optimization opportunities',
+        'Customer retention opportunities',
+        'Store performance improvements',
+        'New business capabilities'
+      ],
+      keyQuestion: 'What opportunities are being overlooked today?',
+      outcome: 'Unlock growth, improve customer experience, and create competitive advantage.',
       icon: (
-        <path d="M-4,-4 H4 V0 C4,2.5 2,4.5 0,4.5 C-2,4.5 -4,2.5 -4,0 Z M-4,-2 H-6 V-1 H-4 M4,-2 H6 V-1 H-4 V-4 Z M0,4.5 V6 M-2,6 H2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M-3,-4 C-3,-6 3,-6 3,-4 C3,-1 1,1 1,3 H-1 C-1,1 -3,-1 -3,-4 Z M-2,5 H2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      )
+    },
+    {
+      title: "WHAT'S NEXT?",
+      label: 'NEXT',
+      subtitle: 'Prioritize actions that create measurable impact.',
+      description: 'Insights are only valuable when translated into action.',
+      bulletHeader: 'We define:',
+      bullets: [
+        'Immediate priorities',
+        'Quick wins',
+        'Strategic initiatives',
+        'Ownership responsibilities',
+        'Success metrics',
+        'Review mechanisms'
+      ],
+      keyQuestion: 'What should be done first, and what impact will it create?',
+      outcome: 'Clear direction, better decisions, and sustainable business transformation.',
+      icon: (
+        <path d="M-4,-4 L2,0 L-4,4 Z M2,-4 L8,0 L2,4 Z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       )
     }
   ];
@@ -129,11 +210,12 @@ export function OutcomeEngineSection() {
                   {petals.map((petal, idx) => {
                     const isActive = activePetal === idx;
                     const angles = [
-                      { a1: 166, a2: 138 },
-                      { a1: 134, a2: 106 },
-                      { a1: 102, a2: 74 },
-                      { a1: 70, a2: 42 },
-                      { a1: 38, a2: 10 }
+                      { a1: 166.5, a2: 143.5 },
+                      { a1: 140.5, a2: 117.5 },
+                      { a1: 114.5, a2: 91.5 },
+                      { a1: 88.5, a2: 65.5 },
+                      { a1: 62.5, a2: 39.5 },
+                      { a1: 36.5, a2: 13.5 }
                     ];
                     const { a1, a2 } = angles[idx];
                     const am = (a1 + a2) / 2;
@@ -206,11 +288,53 @@ export function OutcomeEngineSection() {
                     </linearGradient>
                   </defs>
 
-                  <circle cx="250" cy="40" r="30" fill="#0B1E2E" stroke="#0170B9" strokeWidth="2.5" />
-                  <g transform="translate(250, 40) scale(0.85)">
-                    <path d="M-12,-8 C-12,-8 -4,-12 4,-8 C12,-4 12,8 4,12 C-4,16 -12,8 -12,8" fill="none" stroke="#0170B9" strokeWidth="3" strokeLinecap="round" />
-                    <path d="M-4,-4 C-4,-4 4,-8 8,-4 C12,0 12,8 8,12 C4,16 -4,12 -4,12 L-8,17" fill="none" stroke="#8CC63F" strokeWidth="3" strokeLinecap="round" />
+                  {/* Brain & Engineering Hybrid Center Graphic */}
+                  <g transform="translate(250, 40)">
+                    {/* Rotating outer gear/circuit ring */}
+                    <g style={{ animation: 'spin 20s linear infinite', transformOrigin: '0px 0px' }}>
+                      <circle cx="0" cy="0" r="34" fill="none" stroke="#00E5FF" strokeWidth="1" strokeDasharray="3 3" opacity="0.3" />
+                      <circle cx="0" cy="0" r="28" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="3" strokeDasharray="6 4" />
+                    </g>
+                    
+                    {/* Center solid dashboard button */}
+                    <circle cx="0" cy="0" r="24" fill="#0A1826" stroke="#0170B9" strokeWidth="2.5" />
+                    
+                    {/* Left brain hemisphere (organic curves) in neon cyan */}
+                    <path 
+                      d="M -2,-12 C -6,-12 -9,-9 -9,-6 C -9,-4 -8,-3 -6,-2 C -10,-2 -11,2 -8,5 C -10,7 -8,10 -5,10 C -3,10 -2,8 -2,5 Z" 
+                      fill="none" 
+                      stroke="#00E5FF" 
+                      strokeWidth="1.5" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                    />
+                    <path d="M -5,-6 C -6,-6 -7,-5 -5,-3" fill="none" stroke="#00E5FF" strokeWidth="1" strokeLinecap="round" />
+                    <path d="M -4,2 C -6,2 -7,3 -5,5" fill="none" stroke="#00E5FF" strokeWidth="1" strokeLinecap="round" />
+                    
+                    {/* Right brain hemisphere (circuits & engineering lines) in parrot green */}
+                    <path 
+                      d="M 2,-12 L 6,-12 L 8,-9 L 8,-5 L 4,-5 L 4,-1 L 9,4 L 9,8 L 5,11 L 2,11 Z" 
+                      fill="none" 
+                      stroke="#8CC63F" 
+                      strokeWidth="1.5" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                    />
+                    {/* Circuit connections */}
+                    <path d="M 2,-7 L 5,-7 L 6.5,-5.5" fill="none" stroke="#8CC63F" strokeWidth="1" />
+                    <circle cx="6.5" cy="-5.5" r="0.8" fill="#8CC63F" />
+                    
+                    <path d="M 2,1 L 5,1 L 6.5,2.5" fill="none" stroke="#8CC63F" strokeWidth="1" />
+                    <circle cx="6.5" cy="2.5" r="0.8" fill="#8CC63F" />
+                    
+                    <circle cx="8" cy="-9" r="0.8" fill="#8CC63F" />
+                    <circle cx="9" cy="8" r="0.8" fill="#8CC63F" />
+                    
+                    {/* Center junction node */}
+                    <circle cx="0" cy="0" r="3" fill="#0A1826" stroke="#8CC63F" strokeWidth="1" />
+                    <path d="M -1.5,0 L 1.5,0 M 0,-1.5 L 0,1.5" stroke="#8CC63F" strokeWidth="0.8" />
                   </g>
+
                 </svg>
               </div>
               
@@ -219,41 +343,64 @@ export function OutcomeEngineSection() {
               </span>
             </div>
 
-            {/* Before/After Telemetry Cards */}
-            <div className="lg:col-span-6 flex flex-col gap-4">
+            {/* Content Details Panel */}
+            <div className="lg:col-span-6 flex flex-col gap-6">
               
+              {/* Header with Wedge Subtitle & Title */}
               <div className="border-l-2 border-gold pl-3">
                 <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block">
-                  SYSTEM OUTCOME UNIT
+                  {petals[activePetal].subtitle}
                 </span>
-                <h4 className="text-lg font-black text-white uppercase tracking-tight">
+                <h4 className="text-xl font-black text-white uppercase tracking-tight mt-1">
                   {petals[activePetal].title}
                 </h4>
               </div>
 
-              {/* Before Card */}
-              <div className="bg-red-500/[0.04] border border-red-500/25 p-4 rounded-none flex items-start gap-3">
-                <AlertTriangle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-[9px] font-black text-red-500 uppercase tracking-widest block mb-1">
-                    Operational Leak (Before)
-                  </span>
-                  <p className="text-xs sm:text-[13px] text-white/80 leading-relaxed font-semibold">
-                    {petals[activePetal].before}
-                  </p>
+              {/* Wedge Description */}
+              <p className="text-xs sm:text-[13px] text-white/80 leading-relaxed font-semibold">
+                {petals[activePetal].description}
+              </p>
+
+              {/* Examined/Defined Areas list */}
+              <div>
+                <span className="text-[10px] font-black text-white/40 uppercase tracking-widest font-mono block mb-2.5">
+                  {petals[activePetal].bulletHeader}
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {petals[activePetal].bullets.map((bullet, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-gold shrink-0"></span>
+                      <span className="text-xs text-white/95 font-medium">{bullet}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* After Card */}
-              <div className="bg-gold/[0.04] border border-gold/25 p-4 rounded-none flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-gold shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-[9px] font-black text-gold uppercase tracking-widest block mb-1">
-                    Engineered System (After)
-                  </span>
-                  <p className="text-xs sm:text-[13px] text-white/90 leading-relaxed font-semibold">
-                    {petals[activePetal].after}
-                  </p>
+              <div className="flex flex-col gap-4 mt-1">
+                {/* Key Question Box */}
+                <div className="bg-gold/[0.03] border border-gold/20 p-4 rounded-none flex items-start gap-3">
+                  <HelpCircle className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-[9px] font-black text-gold uppercase tracking-widest block mb-1 font-mono">
+                      Key Audit Question
+                    </span>
+                    <p className="text-xs sm:text-[13px] text-white/95 leading-relaxed font-semibold italic">
+                      "{petals[activePetal].keyQuestion}"
+                    </p>
+                  </div>
+                </div>
+
+                {/* Outcome Box */}
+                <div className="bg-[#8CC63F]/[0.03] border border-[#8CC63F]/20 p-4 rounded-none flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#8CC63F] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-[9px] font-black text-[#8CC63F] uppercase tracking-widest block mb-1 font-mono">
+                      Target Outcome
+                    </span>
+                    <p className="text-xs sm:text-[13px] text-white/95 leading-relaxed font-semibold">
+                      {petals[activePetal].outcome}
+                    </p>
+                  </div>
                 </div>
               </div>
 
