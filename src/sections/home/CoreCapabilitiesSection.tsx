@@ -30,8 +30,8 @@ const capabilities = [
       'Stakeholder Management',
     ],
     accent: '#0170B9',
-    bg: 'from-[#EFF6FF] to-white',
-    hoverBg: 'group-hover:from-[#dbeafe] group-hover:to-[#eff6ff]',
+    iconBg: '#EFF6FF',
+    iconBorder: '#BFDBFE',
   },
   {
     id: 2,
@@ -48,9 +48,9 @@ const capabilities = [
       'Performance Improvement',
       'Strategic Planning',
     ],
-    accent: '#C5A028',
-    bg: 'from-[#FFFBEB] to-white',
-    hoverBg: 'group-hover:from-[#fef3c7] group-hover:to-[#fffbeb]',
+    accent: '#B45309',
+    iconBg: '#FFFBEB',
+    iconBorder: '#FDE68A',
   },
   {
     id: 3,
@@ -68,8 +68,8 @@ const capabilities = [
       'Governance Frameworks',
     ],
     accent: '#0B7A5E',
-    bg: 'from-[#ECFDF5] to-white',
-    hoverBg: 'group-hover:from-[#d1fae5] group-hover:to-[#ecfdf5]',
+    iconBg: '#ECFDF5',
+    iconBorder: '#A7F3D0',
   },
   {
     id: 4,
@@ -86,9 +86,9 @@ const capabilities = [
       'Decision Support Systems',
       'Management Reporting',
     ],
-    accent: '#7C3AED',
-    bg: 'from-[#F5F3FF] to-white',
-    hoverBg: 'group-hover:from-[#ede9fe] group-hover:to-[#f5f3ff]',
+    accent: '#6D28D9',
+    iconBg: '#F5F3FF',
+    iconBorder: '#DDD6FE',
   },
   {
     id: 5,
@@ -105,9 +105,9 @@ const capabilities = [
       'Customer Experience Design',
       'Multi-Store Operations',
     ],
-    accent: '#B91C1C',
-    bg: 'from-[#FFF1F2] to-white',
-    hoverBg: 'group-hover:from-[#ffe4e6] group-hover:to-[#fff1f2]',
+    accent: '#BE123C',
+    iconBg: '#FFF1F2',
+    iconBorder: '#FECDD3',
   },
   {
     id: 6,
@@ -124,9 +124,9 @@ const capabilities = [
       'Automation Design',
       'Digital Transformation',
     ],
-    accent: '#0170B9',
-    bg: 'from-[#F0F9FF] to-white',
-    hoverBg: 'group-hover:from-[#e0f2fe] group-hover:to-[#f0f9ff]',
+    accent: '#0369A1',
+    iconBg: '#F0F9FF',
+    iconBorder: '#BAE6FD',
   },
 ] as const;
 
@@ -134,14 +134,8 @@ type Capability = (typeof capabilities)[number];
 
 // ─── Modal ───────────────────────────────────────────────────────────────────
 
-function CapabilityModal({
-  cap,
-  onClose,
-}: {
-  cap: Capability;
-  onClose: () => void;
-}) {
-  const { Icon, title, tag, description, subCaps, accent } = cap;
+function CapabilityModal({ cap, onClose }: { cap: Capability; onClose: () => void }) {
+  const { Icon, title, tag, description, subCaps, accent, iconBg, iconBorder } = cap;
   return (
     <motion.div
       key="modal-backdrop"
@@ -149,71 +143,65 @@ function CapabilityModal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-[9990] flex items-center justify-center p-4 bg-navy/70 backdrop-blur-sm"
+      className="fixed inset-0 z-[9990] flex items-center justify-center p-4 bg-navy/60 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
-        initial={{ opacity: 0, y: 30, scale: 0.96 }}
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 20, scale: 0.96 }}
-        transition={{ duration: 0.28, ease: 'easeOut' }}
-        className="bg-white w-full max-w-lg shadow-2xl relative overflow-hidden"
+        exit={{ opacity: 0, y: 16, scale: 0.97 }}
+        transition={{ duration: 0.26, ease: 'easeOut' }}
+        className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Accent top bar */}
-        <div className="h-1 w-full" style={{ background: accent }} />
+        {/* Accent bar */}
+        <div className="h-1.5" style={{ background: accent }} />
 
         {/* Header */}
-        <div className="p-7 pb-5 border-b border-border-light">
+        <div className="px-7 pt-6 pb-5 border-b border-gray-100">
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-center gap-4">
               <div
-                className="w-12 h-12 flex items-center justify-center flex-shrink-0"
-                style={{ background: `${accent}18`, border: `1px solid ${accent}30` }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: iconBg, border: `1.5px solid ${iconBorder}` }}
               >
                 <Icon className="w-6 h-6" style={{ color: accent }} />
               </div>
               <div>
                 <span
-                  className="text-[9px] font-black uppercase tracking-widest font-mono block mb-0.5"
+                  className="text-[9px] font-black uppercase tracking-widest font-mono block mb-1"
                   style={{ color: accent }}
                 >
                   {tag}
                 </span>
-                <h3 className="text-xl font-extrabold text-navy uppercase tracking-tight leading-tight">
+                <h3 className="text-lg font-extrabold uppercase tracking-tight" style={{ color: accent }}>
                   {title}
                 </h3>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="text-text-muted hover:text-navy transition-colors p-1 flex-shrink-0"
+              className="text-gray-400 hover:text-gray-700 transition-colors p-1 flex-shrink-0 mt-0.5"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
-
-          <p className="text-sm text-text-secondary font-medium leading-relaxed mt-4">
-            {description}
-          </p>
+          <p className="text-sm text-gray-500 font-medium leading-relaxed mt-4">{description}</p>
         </div>
 
         {/* Sub-capabilities */}
-        <div className="p-7">
-          <span className="text-[10px] font-black uppercase tracking-widest text-text-muted font-mono block mb-4">
+        <div className="px-7 py-6">
+          <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 font-mono block mb-4">
             Sub-Capabilities
           </span>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {subCaps.map((sub) => (
               <li
                 key={sub}
-                className="flex items-center gap-2.5 text-xs font-semibold text-navy bg-warm-white border border-border-light px-3 py-2.5"
+                className="flex items-center gap-2.5 text-xs font-semibold text-navy bg-gray-50 border border-gray-100 rounded-lg px-3 py-2.5"
               >
-                <span
-                  className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                  style={{ background: accent }}
-                />
+                <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: accent }} />
                 {sub}
               </li>
             ))}
@@ -224,7 +212,7 @@ function CapabilityModal({
         <div className="px-7 pb-6">
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white px-5 py-2.5 transition-all"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white px-5 py-2.5 rounded-lg transition-opacity hover:opacity-90"
             style={{ background: accent }}
             onClick={onClose}
           >
@@ -239,66 +227,56 @@ function CapabilityModal({
 
 // ─── Card ────────────────────────────────────────────────────────────────────
 
-function CapabilityCard({
-  cap,
-  onOpen,
-}: {
-  cap: Capability;
-  onOpen: () => void;
-}) {
-  const { Icon, title, tag, description, accent, bg } = cap;
+function CapabilityCard({ cap, onOpen }: { cap: Capability; onOpen: () => void }) {
+  const { Icon, title, tag, description, accent, iconBg, iconBorder } = cap;
   return (
     <button
       onClick={onOpen}
-      className={`group text-left w-full bg-gradient-to-br ${bg} border border-border-light
-        hover:border-transparent hover:shadow-xl hover:-translate-y-1
-        transition-all duration-300 ease-out p-7 flex flex-col gap-5 relative overflow-hidden`}
+      className="group text-left w-full h-full bg-white border border-gray-200 rounded-2xl
+        hover:shadow-xl hover:-translate-y-1 hover:border-transparent
+        transition-all duration-300 ease-out p-6 flex flex-col gap-4"
       aria-label={`Open ${title} details`}
     >
-      {/* Hover accent line */}
-      <div
-        className="absolute left-0 top-0 bottom-0 w-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: accent }}
-      />
-
-      {/* Top row */}
-      <div className="flex items-start justify-between gap-3">
+      {/* Icon row */}
+      <div className="flex items-start justify-between gap-2">
         <div
-          className="w-11 h-11 flex items-center justify-center flex-shrink-0 transition-all duration-300"
-          style={{
-            background: `${accent}15`,
-            border: `1px solid ${accent}25`,
-          }}
+          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ background: iconBg, border: `1.5px solid ${iconBorder}` }}
         >
-          <Icon className="w-5 h-5 transition-colors duration-300" style={{ color: accent }} />
+          <Icon className="w-5 h-5" style={{ color: accent }} />
         </div>
         <ChevronRight
-          className="w-4 h-4 text-text-muted group-hover:text-navy group-hover:translate-x-0.5 transition-all duration-300 mt-1 flex-shrink-0"
+          className="w-4 h-4 text-gray-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300 mt-1 flex-shrink-0"
+          style={{ color: accent + '88' }}
         />
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col gap-2 flex-1">
+      {/* Body */}
+      <div className="flex flex-col gap-1.5 flex-1">
         <span
           className="text-[9px] font-black uppercase tracking-widest font-mono"
           style={{ color: accent }}
         >
           {tag}
         </span>
-        <h3 className="text-base font-extrabold text-navy uppercase tracking-tight leading-snug group-hover:text-navy transition-colors">
+        <h3
+          className="text-sm font-extrabold uppercase tracking-tight leading-snug"
+          style={{ color: accent }}
+        >
           {title}
         </h3>
-        <p className="text-xs text-text-secondary font-medium leading-relaxed">
+        <p className="text-xs text-gray-500 font-medium leading-relaxed mt-1">
           {description}
         </p>
       </div>
 
-      {/* Footer hint */}
-      <div className="flex items-center gap-1.5 pt-2 border-t border-border-light">
-        <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted group-hover:text-navy transition-colors">
-          View Sub-Capabilities
-        </span>
-        <ChevronRight className="w-3 h-3 text-text-muted group-hover:text-navy group-hover:translate-x-0.5 transition-all" />
+      {/* Footer link */}
+      <div
+        className="flex items-center gap-1.5 pt-3 border-t border-gray-100 text-[10px] font-black uppercase tracking-widest transition-colors duration-200"
+        style={{ color: accent + 'aa' }}
+      >
+        View Sub-Capabilities
+        <ChevronRight className="w-3 h-3" />
       </div>
     </button>
   );
@@ -310,28 +288,27 @@ export function CoreCapabilitiesSection() {
   const [selected, setSelected] = useState<Capability | null>(null);
 
   return (
-    <section id="core-capabilities" className="bg-warm-white py-20 md:py-28 px-6 border-b border-border-light">
+    <section id="core-capabilities" className="bg-[#F4F6F8] py-20 md:py-28 px-6">
       <div className="max-w-[1200px] mx-auto">
 
         {/* Header */}
-        <div className="mb-14 max-w-3xl">
+        <div className="mb-12 max-w-3xl">
           <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block mb-3">
             Core Capabilities
           </span>
-          <h2 className="text-3xl md:text-4xl font-black text-navy uppercase tracking-tight leading-tight mb-5">
+          <h2 className="text-3xl md:text-4xl font-black text-navy uppercase tracking-tight leading-tight mb-4">
             A Structured Approach to{' '}
             <span className="text-[#0170B9]">Business Excellence</span>
           </h2>
-          <p className="text-sm text-text-secondary font-medium leading-relaxed mb-3 max-w-2xl">
+          <p className="text-sm text-gray-500 font-medium leading-relaxed mb-3 max-w-2xl">
             A structured approach to understanding business challenges, improving operational
             performance, and enabling sustainable growth through systems thinking, process
             excellence, and decision intelligence.
           </p>
-          <p className="text-xs text-text-secondary/80 leading-relaxed border-l-2 border-gold pl-3 max-w-2xl">
+          <p className="text-xs text-gray-400 leading-relaxed border-l-2 border-gold pl-3 max-w-2xl">
             My expertise spans business analysis, transformation strategy, operational excellence,
-            performance management, retail optimization, and technology enablement. These
-            capabilities work together to help organizations identify constraints, uncover
-            opportunities, improve decision-making, and build scalable operating systems.
+            performance management, retail optimization, and technology enablement — working together
+            to build scalable, high-performing organizations.
           </p>
         </div>
 
@@ -343,7 +320,8 @@ export function CoreCapabilitiesSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
+              className="h-full"
             >
               <CapabilityCard cap={cap} onOpen={() => setSelected(cap)} />
             </motion.div>
@@ -351,7 +329,7 @@ export function CoreCapabilitiesSection() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-text-secondary font-medium mt-12 max-w-2xl mx-auto leading-relaxed border-t border-border-light pt-8">
+        <p className="text-center text-xs text-gray-400 font-medium mt-12 max-w-2xl mx-auto leading-relaxed border-t border-gray-200 pt-8">
           Combining business insight, operational excellence, performance intelligence, and
           technology enablement to create scalable, high-performing organizations.
         </p>
@@ -359,9 +337,7 @@ export function CoreCapabilitiesSection() {
 
       {/* Modal */}
       <AnimatePresence>
-        {selected && (
-          <CapabilityModal cap={selected} onClose={() => setSelected(null)} />
-        )}
+        {selected && <CapabilityModal cap={selected} onClose={() => setSelected(null)} />}
       </AnimatePresence>
     </section>
   );
