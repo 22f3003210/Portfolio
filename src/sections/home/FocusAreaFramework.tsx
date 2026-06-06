@@ -124,7 +124,7 @@ export function FocusAreaFramework() {
             </div>
             
             {/* Quote Box */}
-            <div className="bg-white border-l-4 border-[#0170B9] p-5 shadow-sm italic text-[#0B1E2E] font-bold text-base md:text-lg leading-relaxed text-left">
+            <div className="bg-[#0B1E2E] border-l-4 border-[#0170B9] p-5 shadow-sm italic text-[#8CC63F] font-bold text-base md:text-lg leading-relaxed text-left">
               "I design systems that prevent them."
             </div>
 
