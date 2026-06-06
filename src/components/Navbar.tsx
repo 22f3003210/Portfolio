@@ -82,7 +82,7 @@ export function Navbar() {
       }`}
     >
       <div className="w-full px-6">
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between h-16">
+        <div className="max-w-[1380px] mx-auto flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <img 
@@ -140,7 +140,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 md:hidden">
             <button
               className={`md:hidden w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
                 isScrolled

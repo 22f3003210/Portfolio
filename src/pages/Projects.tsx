@@ -25,6 +25,266 @@ interface Project {
   icon: React.ReactNode;
 }
 
+// Custom inline SVG logos for project technologies
+const PythonLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M52.1 4.2C30.6 4.2 32.5 13.5 32.5 13.5L32.6 23H52.5C62.9 23 63 32.5 63 32.5H73.1C73.1 32.5 82.2 31.7 82.2 23C82.2 14.3 74 13.6 74 13.6L67.1 13.5C57.6 13.5 54.4 4.2 52.1 4.2Z" fill="#3776AB"/>
+    <path d="M52.9 100.8C74.4 100.8 72.5 91.5 72.5 91.5L72.4 82H52.5C42.1 82 42 72.5 42 72.5H31.9C31.9 72.5 22.8 73.3 22.8 82C22.8 90.7 31 91.4 31 91.4L37.9 91.5C47.4 91.5 50.6 100.8 52.9 100.8Z" fill="#FFE873"/>
+    <path d="M42.2 29.8C31.7 29.8 32.5 39.3 32.5 39.3L32.6 48.7H52.5C62 48.7 63 56.4 63 56.4H73.1C73.1 56.4 72.5 44 72.5 39.3C72.5 34.6 63.6 29.8 52.1 29.8H42.2Z" fill="#3776AB"/>
+    <path d="M62.8 75.2C73.3 75.2 72.5 65.7 72.5 65.7L72.4 56.3H52.5C43 56.3 42 48.6 42 48.6H31.9C31.9 48.6 32.5 61 32.5 65.7C32.5 70.4 41.4 75.2 52.9 75.2H62.8Z" fill="#FFE873"/>
+    <circle cx="43" cy="13.5" r="3.5" fill="white"/>
+    <circle cx="62" cy="91.5" r="3.5" fill="black"/>
+  </svg>
+);
+
+const PandasLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="2" width="4" height="20" rx="1" fill="#150458" />
+    <rect x="10" y="6" width="4" height="16" rx="1" fill="#150458" />
+    <rect x="17" y="2" width="4" height="20" rx="1" fill="#150458" />
+    <rect x="3" y="6" width="4" height="6" rx="0.5" fill="#FF8F00" />
+    <rect x="10" y="10" width="4" height="8" rx="0.5" fill="#E91E63" />
+    <rect x="17" y="4" width="4" height="5" rx="0.5" fill="#00C853" />
+  </svg>
+);
+
+const ScikitLearnLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="8" cy="12" r="5" fill="#F89939" opacity="0.9" />
+    <circle cx="16" cy="12" r="5" fill="#3499CD" opacity="0.9" />
+    <circle cx="12" cy="7" r="3" fill="#F15A24" />
+    <circle cx="12" cy="17" r="3" fill="#2E3192" />
+  </svg>
+);
+
+const ExcelLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="3" width="20" height="18" rx="2" fill="#107C41" />
+    <path d="M12 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-8V3z" fill="#1F9A55" />
+    <rect x="5" y="7" width="8" height="10" rx="1" fill="#FFFFFF" />
+    <text x="9" y="14.5" textAnchor="middle" fill="#107C41" fontSize="9" fontWeight="900" fontFamily="sans-serif">X</text>
+  </svg>
+);
+
+const MatplotlibLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="4" fill="#11557C" />
+    <text x="12" y="16" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="900" fontFamily="monospace">MT</text>
+  </svg>
+);
+
+const PowerBILogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 14h3.5v7H4v-7z" fill="#E6AD12" />
+    <path d="M10 8h3.5v13H10V8z" fill="#F2C811" />
+    <path d="M16 3h3.5v18H16V3z" fill="#F9E016" />
+  </svg>
+);
+
+const DaxLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="4" fill="#D97706" />
+    <text x="12" y="17" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontWeight="900" fontFamily="serif" fontStyle="italic">fx</text>
+  </svg>
+);
+
+const SqlLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 4.02 2 6.5v11c0 2.48 4.48 4.5 10 4.5s10-2.02 10-4.5v-11C22 4.02 17.52 2 12 2zm8 4.5c0 .97-3.22 2.5-8 2.5s-8-1.53-8-2.5 3.22-2.5 8-2.5 8 1.53 8 2.5zM4 9.4c0 .85 2.72 2.1 8 2.1s8-1.25 8-2.1v2.1c0 .85-2.72 2.1-8 2.1s-8-1.25-8-2.1V9.4zm0 4.8c0 .85 2.72 2.1 8 2.1s8-1.25 8-2.1v2.3c0 .85-2.72 2.1-8 2.1s-8-1.25-8-2.1v-2.3z" fill="#00758F" />
+  </svg>
+);
+
+const FlaskLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 19c-1.5 2-4.5 3-7 3s-5.5-1-7-3c-1.2-1.6-1.5-3.8-.5-5.5L8.5 7h7l4 6.5c1 1.7.7 3.9-.5 5.5z" fill="#E6F4EA" stroke="#137333" strokeWidth="2" />
+    <path d="M9 7V4h6v3" stroke="#137333" strokeWidth="2" strokeLinecap="round" />
+    <path d="M7 16c2-1 4-1 6 0" stroke="#137333" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+const SqliteLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M21 2c-3 1-8 4-11 8-1.5 2-2.5 4.5-2.5 7 0 3 1.5 4 3 4s3.5-1 4.5-2.5c3-3 6-8 7-11 .5-1.5-.5-1.5-1-5.5z" fill="#0F80CC" />
+    <path d="M10 10c-1-1-2.5-1.5-4-1.5-3 0-5 2-5 5 0 3.5 3 6 7.5 7.5L10 10z" fill="#003B57" />
+  </svg>
+);
+
+const JinjaLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" fill="#B01B1B" />
+    <text x="12" y="15.5" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold" fontFamily="monospace">{"{{"}</text>
+  </svg>
+);
+
+const BootstrapLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="6" fill="#7952B3" />
+    <text x="12" y="17" textAnchor="middle" fill="#FFFFFF" fontSize="15" fontWeight="900" fontFamily="sans-serif">B</text>
+  </svg>
+);
+
+const PyTorchLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C8.5 2 4.5 4 4.5 8c0 3 2.5 5 5 7 1.5 1.2 2.5 2.8 2.5 4.5s-1.5 2.5-3 2.5c-1 0-2-.5-2.5-1.5L4.5 19c1.2 2.5 3.5 3.5 6 3.5 3.5 0 6.5-2 6.5-6.5S14 10 11.5 8.5C9.5 7.2 8.5 6 8.5 5s1.2-1.5 2.5-1.5 2.5.5 3.2 1.5l2.3-1.2C15.3 2.5 13.8 2 12 2z" fill="#EE4C2C" />
+  </svg>
+);
+
+const HuggingFaceLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" fill="#FFD21E" />
+    <circle cx="9" cy="10" r="1.5" fill="#000" />
+    <circle cx="15" cy="10" r="1.5" fill="#000" />
+    <path d="M8 14.5c1 1.5 2.5 2 4 2s3-.5 4-2" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M4 16c.5-1 2-2 3.5-1M20 16c-.5-1-2-2-3.5-1" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+  </svg>
+);
+
+const WandbLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="4" fill="#FFD200" />
+    <path d="M6 18h2V9H6v9zm4 0h2V6h-2v12zm4 0h2v-8h-2v8zm4 0h2v-5h-2v5z" fill="#000000" />
+  </svg>
+);
+
+const KaggleLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.8 20L13.2 13.8L18.4 4H14.7L10.3 12.3V4H7V20H10.3V15.2L14.9 20H18.8Z" fill="#20BEFF" />
+  </svg>
+);
+
+const ErpLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="2" width="9" height="9" rx="1.5" fill="#4B5563" />
+    <rect x="13" y="2" width="9" height="9" rx="1.5" fill="#0170B9" />
+    <rect x="2" y="13" width="9" height="9" rx="1.5" fill="#8CC63F" />
+    <rect x="13" y="13" width="9" height="9" rx="1.5" fill="#F59E0B" />
+  </svg>
+);
+
+const PosLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="2" width="16" height="20" rx="2" fill="#10B981" />
+    <rect x="7" y="5" width="10" height="5" rx="1" fill="#FFFFFF" />
+    <circle cx="8" cy="14" r="1.2" fill="#FFFFFF" />
+    <circle cx="12" cy="14" r="1.2" fill="#FFFFFF" />
+    <circle cx="16" cy="14" r="1.2" fill="#FFFFFF" />
+    <circle cx="8" cy="18" r="1.2" fill="#FFFFFF" />
+    <circle cx="12" cy="18" r="1.2" fill="#FFFFFF" />
+    <circle cx="16" cy="18" r="1.2" fill="#FFFFFF" />
+  </svg>
+);
+
+const CrmLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="8" r="4" fill="#3B82F6" />
+    <path d="M5 20c0-3 3-5 7-5s7 2 7 5" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" />
+    <circle cx="18" cy="15" r="3" fill="#10B981" />
+    <path d="M18 13.5v3M16.5 15h3" stroke="#FFFFFF" strokeWidth="1" />
+  </svg>
+);
+
+const DataMigrationLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17 13l4-4-4-4M7 11l-4 4 4 4" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M21 9H9a4 4 0 0 0-4 4v2M3 15h12a4 4 0 0 0 4-4V9" stroke="#6366F1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const TransactionAnalyticsLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="6" width="18" height="12" rx="2" fill="#059669" />
+    <rect x="6" y="9" width="3" height="6" fill="#FFFFFF" opacity="0.5" />
+    <path d="M12 9l3 3 4-4" stroke="#FFFFFF" strokeWidth="2" fill="none" strokeLinecap="round" />
+  </svg>
+);
+
+const ProcurementLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 3h2l3.6 7.6a2 2 0 0 0 2 1.4h6.8a2 2 0 0 0 2-1.4L21 5H6.5" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <circle cx="9" cy="19" r="1.5" fill="#F59E0B" />
+    <circle cx="17" cy="19" r="1.5" fill="#F59E0B" />
+  </svg>
+);
+
+const WorkflowsLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="6" cy="12" r="3" fill="#EC4899" />
+    <circle cx="18" cy="6" r="3" fill="#EC4899" />
+    <circle cx="18" cy="18" r="3" fill="#EC4899" />
+    <line x1="9" y1="12" x2="15" y2="7" stroke="#EC4899" strokeWidth="2" />
+    <line x1="9" y1="12" x2="15" y2="17" stroke="#EC4899" strokeWidth="2" />
+  </svg>
+);
+
+const BiReportingLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="3" width="16" height="18" rx="2" fill="#2563EB" />
+    <line x1="8" y1="7" x2="16" y2="7" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+    <line x1="8" y1="11" x2="14" y2="11" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const AuditsLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="#DC2626" />
+    <path d="M9 11l2 2 4-4" stroke="#FFFFFF" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const AuditDashboardsLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="4" width="20" height="14" rx="2" fill="#7C3AED" />
+    <circle cx="12" cy="11" r="3" fill="none" stroke="#FFFFFF" strokeWidth="1.5" />
+    <line x1="14" y1="13" x2="18" y2="17" stroke="#FFFFFF" strokeWidth="2" />
+  </svg>
+);
+
+const QcAnalyticsLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="3" width="18" height="18" rx="3" fill="#0D9488" />
+    <path d="M7 11l3 3 7-7" stroke="#FFFFFF" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const DefaultTechLogo = () => (
+  <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 18l6-6-6-6M8 6L2 12l6 6" stroke="#94A3B8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+function getTechLogo(tech: string): React.ReactNode {
+  const normalized = tech.toLowerCase().trim();
+  if (normalized === 'python') return <PythonLogo />;
+  if (normalized === 'pandas') return <PandasLogo />;
+  if (normalized === 'scikit-learn') return <ScikitLearnLogo />;
+  if (normalized === 'excel') return <ExcelLogo />;
+  if (normalized === 'matplotlib') return <MatplotlibLogo />;
+  if (normalized === 'power bi') return <PowerBILogo />;
+  if (normalized === 'dax') return <DaxLogo />;
+  if (normalized === 'sql') return <SqlLogo />;
+  if (normalized === 'flask') return <FlaskLogo />;
+  if (normalized === 'sqlite') return <SqliteLogo />;
+  if (normalized === 'jinja2') return <JinjaLogo />;
+  if (normalized === 'bootstrap') return <BootstrapLogo />;
+  if (normalized === 'pytorch') return <PyTorchLogo />;
+  if (normalized === 'hugging face') return <HuggingFaceLogo />;
+  if (normalized === 'w&b' || normalized === 'weights & biases') return <WandbLogo />;
+  if (normalized === 'kaggle') return <KaggleLogo />;
+  if (normalized === 'erp' || normalized === 'erp implementation') return <ErpLogo />;
+  if (normalized === 'pos') return <PosLogo />;
+  if (normalized === 'crm integration' || normalized === 'crm analytics' || normalized === 'crm') return <CrmLogo />;
+  if (normalized === 'data migration' || normalized === 'data pipelines') return <DataMigrationLogo />;
+  if (normalized === 'transaction analytics') return <TransactionAnalyticsLogo />;
+  if (normalized === 'procurement analytics' || normalized === 'procurement intelligence') return <ProcurementLogo />;
+  if (normalized === 'engagement workflows') return <WorkflowsLogo />;
+  if (normalized === 'bi reporting') return <BiReportingLogo />;
+  if (normalized === 'erp analytics') return <ErpLogo />;
+  if (normalized === 'process audits' || normalized === 'process governance') return <AuditsLogo />;
+  if (normalized === 'audit dashboards') return <AuditDashboardsLogo />;
+  if (normalized === 'qc analytics') return <QcAnalyticsLogo />;
+  return <DefaultTechLogo />;
+}
+
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState<string>('all');
 
@@ -211,13 +471,14 @@ export function Projects() {
                   </p>
 
                   {/* Tech Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-5 mt-auto">
+                  <div className="flex flex-wrap gap-2 mb-5 mt-auto">
                     {project.techStack.map((tech) => (
                       <span 
                         key={tech} 
-                        className="px-2.5 py-1 text-[10px] font-bold text-slate-700 bg-slate-100 border border-slate-200/60 rounded-none font-mono"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#374151] hover:bg-[#4B5563] text-[#F3F4F6] rounded-md text-[11px] font-bold select-none transition-all duration-200 border border-gray-600/30"
                       >
-                        {tech}
+                        {getTechLogo(tech)}
+                        <span className="font-sans tracking-wide">{tech}</span>
                       </span>
                     ))}
                   </div>
