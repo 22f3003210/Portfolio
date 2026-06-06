@@ -131,6 +131,8 @@ interface ThemeStyle {
   bgGradient: string;
   glowBgPrimary: string;
   glowBgSecondary: string;
+  impactTextColor: string;
+  impactBorderColor: string;
 }
 
 
@@ -146,7 +148,9 @@ const nodeThemes: Record<string, ThemeStyle> = {
     iconColor: "text-emerald-600",
     bgGradient: "from-white to-emerald-50/20",
     glowBgPrimary: "rgba(16, 185, 129, 0.14)",
-    glowBgSecondary: "rgba(20, 184, 166, 0.07)"
+    glowBgSecondary: "rgba(20, 184, 166, 0.07)",
+    impactTextColor: "text-emerald-200",
+    impactBorderColor: "border-emerald-300/40"
   },
   inventory: {
     name: "Operational Flow",
@@ -159,7 +163,9 @@ const nodeThemes: Record<string, ThemeStyle> = {
     iconColor: "text-cyan-600",
     bgGradient: "from-white to-cyan-50/20",
     glowBgPrimary: "rgba(6, 182, 212, 0.14)",
-    glowBgSecondary: "rgba(59, 130, 246, 0.07)"
+    glowBgSecondary: "rgba(59, 130, 246, 0.07)",
+    impactTextColor: "text-cyan-200",
+    impactBorderColor: "border-cyan-300/40"
   },
   customer: {
     name: "Customer Intel",
@@ -172,7 +178,9 @@ const nodeThemes: Record<string, ThemeStyle> = {
     iconColor: "text-amber-600",
     bgGradient: "from-white to-amber-50/20",
     glowBgPrimary: "rgba(249, 115, 22, 0.14)",
-    glowBgSecondary: "rgba(244, 63, 94, 0.07)"
+    glowBgSecondary: "rgba(244, 63, 94, 0.07)",
+    impactTextColor: "text-amber-200",
+    impactBorderColor: "border-amber-300/40"
   },
   predictive: {
     name: "Predictive Analytics",
@@ -185,7 +193,9 @@ const nodeThemes: Record<string, ThemeStyle> = {
     iconColor: "text-purple-600",
     bgGradient: "from-white to-purple-50/20",
     glowBgPrimary: "rgba(168, 85, 247, 0.14)",
-    glowBgSecondary: "rgba(99, 102, 241, 0.07)"
+    glowBgSecondary: "rgba(99, 102, 241, 0.07)",
+    impactTextColor: "text-purple-200",
+    impactBorderColor: "border-purple-300/40"
   },
   core: {
     name: "Foundation OS",
@@ -198,7 +208,9 @@ const nodeThemes: Record<string, ThemeStyle> = {
     iconColor: "text-lime-600",
     bgGradient: "from-white to-lime-50/20",
     glowBgPrimary: "rgba(132, 204, 22, 0.14)",
-    glowBgSecondary: "rgba(16, 185, 129, 0.07)"
+    glowBgSecondary: "rgba(16, 185, 129, 0.07)",
+    impactTextColor: "text-lime-200",
+    impactBorderColor: "border-lime-300/40"
   }
 };
 
@@ -383,12 +395,12 @@ export function SystemicDiagnosisSection() {
                           <div className={cn(
                             "border-l-2 p-3 rounded-none mt-4 transition-all duration-300",
                             isActive
-                              ? "bg-white/10 border-white/30" 
+                              ? cn("bg-white/10", theme.impactBorderColor) 
                               : "bg-slate-50/40 border-slate-200"
                           )}>
                             <span className={cn(
                               "text-[8px] font-black uppercase tracking-widest block",
-                              isActive ? "text-[#8CC63F]" : "text-red-600"
+                              isActive ? theme.impactTextColor : "text-red-600"
                             )}>
                               OPERATIONAL IMPACT
                             </span>
