@@ -306,26 +306,25 @@ export function SystemicDiagnosisSection() {
                   return (
                     <div
                       key={problem.id}
-                      className="flex-none w-[90%] sm:w-[75%] md:w-[60%] lg:w-[50%] px-3 md:px-4 h-full flex items-center"
+                      className="flex-none w-[85%] sm:w-[72%] md:w-[58%] lg:w-[48%] px-3 md:px-4 h-full flex items-center"
                     >
                       <div
                         onClick={() => handleCardClick(index)}
                         style={{
-                          boxShadow: isActive ? `0 20px 45px -10px ${theme.glowColor}` : 'none',
+                          boxShadow: isActive ? '0 20px 45px -10px rgba(18, 70, 128, 0.25)' : 'none',
                           transition: "transform 600ms cubic-bezier(0.16, 1, 0.3, 1), opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), scale 600ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 600ms ease"
                         }}
                         className={cn(
                           "border rounded-none overflow-hidden select-none h-full w-full relative flex flex-col justify-between",
                           isActive
-                            ? cn("opacity-100 scale-100 md:scale-[1.02] border-slate-200/80 bg-gradient-to-br bg-white", theme.bgGradient)
-                            : "opacity-35 scale-90 md:scale-[0.88] lg:scale-[0.85] border-slate-100 bg-white/40 backdrop-blur-[3px] cursor-pointer hover:opacity-55 blur-[0.2px]"
+                            ? "opacity-100 scale-100 md:scale-[1.02] border-transparent bg-gradient-to-br from-[#2195A9] via-[#1A6D94] to-[#124680] text-white"
+                            : "opacity-55 scale-90 md:scale-[0.88] lg:scale-[0.85] border-slate-300/80 bg-slate-100/50 backdrop-blur-[3px] cursor-pointer hover:opacity-80 hover:border-slate-400 blur-[0.2px]"
                         )}
                       >
                         {/* Gradient Accent Bar at Top of Active Card */}
                         <div className={cn(
-                          "h-[4px] w-full bg-gradient-to-r transition-opacity duration-300", 
-                          theme.gradient,
-                          isActive ? "opacity-100" : "opacity-30"
+                          "h-[4px] w-full transition-opacity duration-300", 
+                          isActive ? "bg-[#8CC63F] opacity-100" : "bg-slate-300/30 opacity-30"
                         )} />
 
                         <div className="flex flex-col justify-between p-5 sm:p-6 md:p-8 h-full w-full relative text-left">
@@ -336,7 +335,7 @@ export function SystemicDiagnosisSection() {
                               <span className={cn(
                                 "text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-none border transition-colors duration-300",
                                 isActive 
-                                  ? cn(theme.badgeBg, theme.badgeText)
+                                  ? "bg-white/10 text-white border-white/20"
                                   : "bg-slate-50 text-slate-400 border-slate-200"
                               )}>
                                 {theme.name}
@@ -345,31 +344,42 @@ export function SystemicDiagnosisSection() {
                               <div className={cn(
                                 "w-8 h-8 rounded-none flex items-center justify-center border transition-all duration-300",
                                 isActive 
-                                  ? cn(theme.iconBg, theme.iconColor, "border-current/10 scale-110")
+                                  ? "bg-white/10 text-white border-white/20 scale-110"
                                   : "bg-slate-50 text-slate-400 border-slate-200"
                               )}>
                                 <Icon className="w-4 h-4" />
                               </div>
                             </div>
+                            
                             {/* Card title with dynamic gradient text on active state */}
                             <h3 className={cn(
                               "text-base sm:text-lg md:text-xl font-black leading-tight pt-1.5 transition-all duration-300",
                               isActive 
-                                ? cn("bg-gradient-to-r bg-clip-text text-transparent", theme.gradient)
+                                ? "text-white"
                                 : "text-navy"
                             )}>
                               {problem.title}
                             </h3>
-                            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            
+                            <p className={cn(
+                              "text-xs sm:text-sm leading-relaxed transition-colors duration-300",
+                              isActive ? "text-white/90" : "text-slate-600"
+                            )}>
                               {problem.statement}
                             </p>
                             
                             {/* Bullets (2 columns on tablet/desktop) */}
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 pt-2">
                               {problem.bullets.map((bullet, bIdx) => (
-                                <li key={bIdx} className="flex items-start gap-2 text-[10.5px] sm:text-xs text-slate-600 font-medium leading-snug group/item">
-                                  <span className={cn("w-1.5 h-1.5 rounded-none mt-1.5 shrink-0 bg-gradient-to-br", theme.gradient)} />
-                                  <span className="transition-colors duration-200 group-hover/item:text-slate-800">{bullet}</span>
+                                <li key={bIdx} className="flex items-start gap-2 text-[10.5px] sm:text-xs font-medium leading-snug group/item">
+                                  <span className={cn(
+                                    "w-1.5 h-1.5 rounded-none mt-1.5 shrink-0 transition-colors duration-300",
+                                    isActive ? "bg-[#8CC63F]" : "bg-slate-400"
+                                  )} />
+                                  <span className={cn(
+                                    "transition-colors duration-300",
+                                    isActive ? "text-white/95" : "text-slate-600"
+                                  )}>{bullet}</span>
                                 </li>
                               ))}
                             </ul>
@@ -379,13 +389,19 @@ export function SystemicDiagnosisSection() {
                           <div className={cn(
                             "border-l-2 p-3 rounded-none mt-4 transition-all duration-300",
                             isActive
-                              ? "bg-slate-50 border-red-500/80" 
+                              ? "bg-white/10 border-[#8CC63F]" 
                               : "bg-slate-50/40 border-slate-200"
                           )}>
-                            <span className="text-[8px] font-black text-red-600 uppercase tracking-widest block">
+                            <span className={cn(
+                              "text-[8px] font-black uppercase tracking-widest block",
+                              isActive ? "text-[#8CC63F]" : "text-red-600"
+                            )}>
                               OPERATIONAL IMPACT
                             </span>
-                            <p className="text-[10.5px] sm:text-[11px] text-slate-700 font-semibold leading-snug mt-0.5">
+                            <p className={cn(
+                              "text-[10.5px] sm:text-[11px] font-semibold leading-snug mt-0.5",
+                              isActive ? "text-white" : "text-slate-700"
+                            )}>
                               {problem.impact}
                             </p>
                           </div>
