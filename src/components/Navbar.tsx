@@ -65,19 +65,19 @@ export function Navbar() {
       <div className="content-max">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
+          <Link to="/" className="flex items-center gap-2.5 group">
             <img 
               src="/logo.jpg" 
               alt="Scale with Abraham" 
-              className="h-10 w-10 object-cover rounded-none border border-white/20 shadow-md transition-transform duration-300 group-hover:scale-105"
+              className="h-12 w-12 object-cover rounded-none border border-white/20 shadow-md transition-transform duration-300 group-hover:scale-105"
             />
             <div className="flex flex-col">
-              <span className={`text-[15px] font-extrabold leading-tight transition-colors duration-300 ${
+              <span className={`text-[16px] font-extrabold leading-tight transition-colors duration-300 ${
                 isScrolled ? 'text-[#00203f]' : 'text-white'
               }`}>
                 Scale with Abraham
               </span>
-              <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-gold leading-tight">
+              <span className="text-[9.5px] font-bold uppercase tracking-[0.12em] text-gold leading-tight mt-0.5">
                 Systems & Retail Consulting
               </span>
             </div>
