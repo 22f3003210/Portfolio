@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { AlertCircle, Activity } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Activity, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { SectionLabel } from '../../components/SectionLabel';
 
@@ -108,9 +107,17 @@ const problems: ProblemItem[] = [
 ];
 
 export function SystemicDiagnosisSection() {
-  const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
-  const [hoveredProblemIdx, setHoveredProblemIdx] = useState<number | null>(null);
-  const [activeTab, setActiveTab] = useState<'problems' | 'diagram'>('problems');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Auto-sliding effect
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % problems.length);
+    }, 4000); // Slide every 4 seconds
+    return () => clearInterval(interval);
+  }, [isHovered]);
 
   const topColors: Record<string, string> = {
     unified: "#6e8d75",   // Sage Green
@@ -120,408 +127,250 @@ export function SystemicDiagnosisSection() {
     core: "#8CC63F"       // Systems Lime Green
   };
 
-  const getNodeColor = (nodeId: string) => {
-    return topColors[nodeId] || "#8CC63F";
+  const getSolutionName = (nodeId: string) => {
+    const names: Record<string, string> = {
+      unified: "Unified Operations",
+      inventory: "Transparent Inventory",
+      customer: "Structured Customer Intelligence",
+      predictive: "Predictive Decision-Making",
+      core: "Process Re-Engineering"
+    };
+    return names[nodeId] || "";
   };
 
-  // Check if a problem is currently highlighted based on activeNodeId
-  const isProblemHighlighted = (problem: ProblemItem, index: number) => {
-    if (hoveredProblemIdx !== null) {
-      return hoveredProblemIdx === index;
-    }
-    if (activeNodeId !== null) {
-      return problem.mapsToNode === activeNodeId;
-    }
-    return false;
+  const getSolutionDesc = (nodeId: string) => {
+    const descs: Record<string, string> = {
+      unified: "UNIFY SILOS: Build a single, interconnected digital nervous system that links sales, inventory, and finance in real-time, eliminating manual reconciliations and duplicate data entries.",
+      inventory: "SYNC STOCKS: Track every movement of high-value stock and loose stones with real-time voucher attribution, securing inventory and eliminating showrooms blind spots.",
+      customer: "LINK PROFILE: Consolidate fragmented data points across branches to generate complete buying profiles and automate personalized clienteling journeys.",
+      predictive: "PRE-EMPTIVE TRIGGERS: Replace guess-work and historical analysis with real-time lead time averages, stock moving metrics, and automated replenishment alerts.",
+      core: "CORE SYSTEMS ENGINEERING: Re-engineer the operational rules before buying software. Build the foundational process architecture first, then automate and enforce."
+    };
+    return descs[nodeId] || "";
   };
+
+  const getSolutionIcon = (nodeId: string) => {
+    switch (nodeId) {
+      case 'unified':
+        return (
+          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <rect x="14" y="14" width="7" height="7" />
+            <path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4" />
+          </svg>
+        );
+      case 'inventory':
+        return (
+          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+        );
+      case 'customer':
+        return (
+          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        );
+      case 'predictive':
+        return (
+          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          </svg>
+        );
+      default:
+        return (
+          <svg className="w-16 h-16 text-[#8CC63F]/10 absolute bottom-4 right-4 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 6v6l4 2" />
+          </svg>
+        );
+    }
+  };
+
+  const handleCardClick = (idx: number) => {
+    const total = problems.length;
+    const prev = (activeIndex - 1 + total) % total;
+    const next = (activeIndex + 1) % total;
+    
+    if (idx === prev) {
+      setActiveIndex(prev);
+    } else if (idx === next) {
+      setActiveIndex(next);
+    }
+  };
+
+  const total = problems.length;
+  const prevIdx = (activeIndex - 1 + total) % total;
+  const nextIdx = (activeIndex + 1) % total;
 
   return (
-    <section id="systemic-diagnosis" className="bg-[#F8FAFC] py-20 md:py-28 px-6 border-b border-border-light relative overflow-hidden">
-      <div className="max-w-[1200px] mx-auto space-y-10 relative z-10">
+    <section id="systemic-diagnosis" className="bg-[#F8FAFC] py-20 md:py-28 px-6 border-b border-border-light relative overflow-hidden select-none">
+      <div className="max-w-[1200px] mx-auto space-y-12 relative z-10">
         
-        {/* Header Block */}
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
+        {/* Main Heading Block */}
+        <div className="text-center space-y-3 max-w-4xl mx-auto">
           <ScrollReveal>
             <SectionLabel variant="pill">DIAGNOSIS</SectionLabel>
             <h2 className="text-3xl md:text-5xl font-black text-navy tracking-tight leading-tight mt-3">
-              Systemic Diagnosis & Core Problems
+              Most Retail Systems Don't Scale. <br />
+              <span className="text-[#0170B9]">They Lack an Operational Core.</span>
             </h2>
-            <p className="text-sm md:text-base text-text-secondary leading-relaxed mt-2">
-              Before fixing software, we must identify where systems fail. Interact with the core problems on the left to see how they map to systemic operating solutions on the right.
+            <p className="text-sm md:text-base text-text-secondary leading-relaxed mt-2 max-w-2xl mx-auto">
+              Before fixing software, we must identify where systems fail. Explore the 7 core problems and their systemic operating solutions below.
             </p>
           </ScrollReveal>
         </div>
 
-        {/* Dashboard Card Container */}
+        {/* Sliding Cards Container */}
         <ScrollReveal className="w-full">
-          <div className="bg-gradient-to-br from-[#0B1E2E] to-[#05101A] rounded-none border border-white/10 p-6 md:p-10 text-white shadow-xl relative overflow-hidden">
-            
+          <div 
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="bg-gradient-to-br from-[#0B1E2E] to-[#05101A] rounded-none border border-white/10 p-6 md:p-10 text-white shadow-xl relative overflow-hidden flex flex-col justify-center min-h-[640px] sm:min-h-[580px] md:min-h-[480px] lg:min-h-[440px]"
+          >
             {/* Subtle background dot grid */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden select-none bg-[radial-gradient(#ffffff04_1px,transparent_1px)] [background-size:20px_20px] opacity-70">
               <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#0170B9]/5 rounded-full blur-[100px]" />
               <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[100px]" />
             </div>
 
-            {/* Mobile Tab Toggle */}
-            <div className="flex lg:hidden w-full border-b border-white/10 mb-6 relative z-20">
-              <button
-                onClick={() => setActiveTab('problems')}
-                className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider text-center border-b-2 transition-all ${
-                  activeTab === 'problems'
-                    ? 'border-[#8CC63F] text-[#8CC63F]'
-                    : 'border-transparent text-white/50 hover:text-white'
-                }`}
-              >
-                1. Core Problems
-              </button>
-              <button
-                onClick={() => setActiveTab('diagram')}
-                className={`flex-1 py-3 text-xs font-bold uppercase tracking-wider text-center border-b-2 transition-all ${
-                  activeTab === 'diagram'
-                    ? 'border-[#8CC63F] text-[#8CC63F]'
-                    : 'border-transparent text-white/50 hover:text-white'
-                }`}
-              >
-                2. Systemic Solution
-              </button>
-            </div>
-
-            {/* Content Layout Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10">
+            {/* Carousel Track */}
+            <div className="w-full relative flex items-center justify-center overflow-visible h-[480px] sm:h-[420px] md:h-[350px] lg:h-[300px]">
               
-              {/* Left Column: 7 Core Problems List */}
-              <div className={`lg:col-span-5 space-y-3 ${activeTab === 'problems' ? 'block' : 'hidden lg:block'}`}>
-                <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-1 select-none">
-                  <span className="text-xs font-extrabold uppercase tracking-widest text-[#8CC63F] font-mono">
-                    7 CORE RETAIL PROBLEMS
-                  </span>
-                  <span className="text-[10px] font-semibold text-white/40">
-                    Hover to map solution
-                  </span>
-                </div>
+              {problems.map((problem, index) => {
+                const isCenter = index === activeIndex;
+                const isPrev = index === prevIdx;
+                const isNext = index === nextIdx;
 
-                <div className="space-y-2.5 max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
-                  {problems.map((problem, index) => {
-                    const isHighlighted = isProblemHighlighted(problem, index);
-                    const cardColor = getNodeColor(problem.mapsToNode);
-                    
-                    return (
-                      <div
-                        key={problem.id}
-                        onMouseEnter={() => {
-                          setHoveredProblemIdx(index);
-                          setActiveNodeId(problem.mapsToNode);
-                        }}
-                        onMouseLeave={() => {
-                          setHoveredProblemIdx(null);
-                          setActiveNodeId(null);
-                        }}
-                        style={{
-                          borderLeftWidth: '4px',
-                          borderLeftColor: isHighlighted ? cardColor : 'rgba(255, 255, 255, 0.1)'
-                        }}
-                        className={`p-4 bg-[#071324]/80 border border-white/5 transition-all duration-300 rounded-none cursor-pointer ${
-                          isHighlighted
-                            ? 'shadow-[0_4px_15px_rgba(140,198,63,0.05)] border-white/25 bg-[#091a30]'
-                            : 'opacity-75 hover:opacity-100'
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-2">
-                              <span className="text-[9px] font-bold text-white/40 font-mono">
-                                #{problem.id}
-                              </span>
-                              <h3 className="text-sm font-bold text-white leading-tight">
-                                {problem.title}
-                              </h3>
-                            </div>
-                            <p className="text-xs text-white/70 leading-normal mt-1">
-                              {problem.statement}
-                            </p>
+                let positionClass = "opacity-0 scale-75 pointer-events-none z-0 translate-x-0";
+                if (isCenter) {
+                  positionClass = "opacity-100 scale-100 md:scale-[1.03] lg:scale-[1.05] z-20 translate-x-0 border-white/20 shadow-[0_15px_35px_rgba(140,198,63,0.12)] bg-[#071324]";
+                } else if (isPrev) {
+                  positionClass = "opacity-25 scale-[0.85] z-10 -translate-x-[110%] sm:-translate-x-[110%] md:-translate-x-[55%] lg:-translate-x-[45%] cursor-pointer hover:opacity-40 blur-[0.5px] bg-[#050D17]/80";
+                } else if (isNext) {
+                  positionClass = "opacity-25 scale-[0.85] z-10 translate-x-[110%] sm:translate-x-[110%] md:translate-x-[55%] lg:translate-x-[45%] cursor-pointer hover:opacity-40 blur-[0.5px] bg-[#050D17]/80";
+                }
+
+                const cardColor = topColors[problem.mapsToNode] || "#8CC63F";
+
+                return (
+                  <div
+                    key={problem.id}
+                    onClick={() => handleCardClick(index)}
+                    style={{
+                      borderTop: `4px solid ${cardColor}`,
+                      transitionProperty: "transform, opacity, scale, filter",
+                      transitionDuration: "600ms",
+                      transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)"
+                    }}
+                    className={`absolute w-[92%] sm:w-[85%] md:w-[75%] lg:w-[70%] h-full border border-white/5 rounded-none overflow-hidden select-none ${positionClass}`}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6 p-5 sm:p-6 md:p-8 h-full relative">
+                      
+                      {/* Left Side: The Problem */}
+                      <div className="md:col-span-6 flex flex-col justify-between space-y-3 md:space-y-0 text-left">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[9px] font-bold text-white/40 font-mono tracking-wider">
+                              PROBLEM #{problem.id}
+                            </span>
+                            <span className="text-[9px] font-bold uppercase tracking-widest text-red-400 bg-red-950/20 border border-red-900/30 px-1.5 py-0.5 rounded-none inline-block">
+                              Core Symptom
+                            </span>
                           </div>
-                          <AlertCircle 
-                            className="w-3.5 h-3.5 shrink-0 mt-0.5" 
-                            style={{ color: isHighlighted ? cardColor : 'rgba(255,255,255,0.2)' }}
-                          />
+                          <h3 className="text-base sm:text-lg font-black text-white leading-tight">
+                            {problem.title}
+                          </h3>
+                          <p className="text-xs text-white/85 leading-relaxed">
+                            {problem.statement}
+                          </p>
+                          
+                          {/* Bullets */}
+                          <ul className="space-y-1.5 pt-1.5">
+                            {problem.bullets.map((bullet, bIdx) => (
+                              <li key={bIdx} className="flex items-start gap-2 text-[10.5px] text-white/60 font-medium leading-snug">
+                                <span className="w-1 h-1 rounded-full bg-[#8CC63F] mt-1.5 shrink-0" />
+                                <span>{bullet}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
 
-                        {/* Collapsible Details */}
-                        <AnimatePresence initial={false}>
-                          {isHighlighted && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: 'auto' }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.2, ease: 'easeOut' }}
-                              className="overflow-hidden mt-3 pt-3 border-t border-white/10 space-y-3"
-                            >
-                              <ul className="space-y-1.5 pl-1.5">
-                                {problem.bullets.map((bullet, bIdx) => (
-                                  <li key={bIdx} className="flex items-start gap-2 text-[10px] text-white/60 font-medium">
-                                    <span className="w-1 h-1 rounded-full bg-[#8CC63F] mt-1.5 shrink-0" />
-                                    <span>{bullet}</span>
-                                  </li>
-                                ))}
-                              </ul>
-
-                              <div className="bg-red-950/30 border border-red-900/30 p-2.5 rounded-none">
-                                <span className="text-[8px] font-black text-red-400 uppercase tracking-widest block">
-                                  OPERATIONAL IMPACT
-                                </span>
-                                <p className="text-[10px] text-red-300 leading-snug font-semibold mt-0.5">
-                                  {problem.impact}
-                                </p>
-                              </div>
-
-                              <p className="text-[10.5px] text-white/50 leading-relaxed italic border-t border-white/5 pt-2">
-                                {problem.extraInfo}
-                              </p>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                        {/* Red Impact Box */}
+                        <div className="bg-red-950/30 border border-red-900/30 p-2.5 rounded-none mt-2">
+                          <span className="text-[8px] font-black text-red-400 uppercase tracking-widest block">
+                            OPERATIONAL IMPACT
+                          </span>
+                          <p className="text-[10px] text-red-300 font-semibold leading-snug mt-0.5">
+                            {problem.impact}
+                          </p>
+                        </div>
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
 
-              {/* Right Column: Interactive SVG Diagnosis Canvas */}
-              <div className={`lg:col-span-7 flex flex-col justify-center select-none ${activeTab === 'diagram' ? 'block' : 'hidden lg:block'}`}>
-                <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-3 lg:hidden select-none">
-                  <span className="text-xs font-extrabold uppercase tracking-widest text-[#8CC63F] font-mono">
-                    01. SYSTEMIC DIAGNOSIS
-                  </span>
-                </div>
+                      {/* Right Side: The Solution */}
+                      <div className="md:col-span-6 border-t md:border-t-0 md:border-l border-white/10 pt-4 md:pt-0 md:pl-6 flex flex-col justify-between space-y-4 md:space-y-0 text-left relative">
+                        
+                        <div className="space-y-2 relative z-10">
+                          <div className="flex items-center">
+                            <span className="text-[9px] font-bold text-[#8CC63F] font-mono tracking-wider border border-[#8CC63F]/20 bg-[#8CC63F]/5 px-2 py-0.5 rounded-none uppercase">
+                              SYSTEMS SOLUTION
+                            </span>
+                          </div>
+                          <h4 className="text-sm sm:text-base font-extrabold text-[#8CC63F] leading-tight">
+                            {getSolutionName(problem.mapsToNode)}
+                          </h4>
+                          <p className="text-[10.5px] sm:text-[11px] text-white/70 leading-relaxed pt-1">
+                            {getSolutionDesc(problem.mapsToNode)}
+                          </p>
+                        </div>
 
-                <div className="relative w-full aspect-[2/1] min-h-[300px] sm:min-h-[360px] lg:min-h-0 bg-[#071324]/30 border border-white/5 p-2 select-none overflow-hidden">
-                  
-                  {/* SVG Connecting Canvas */}
-                  <svg viewBox="0 0 800 400" className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
-                    
-                    {/* Connecting Dotted Lines routing from center box left/right edges, then 90-degrees to corner centers */}
-                    {/* Top-Left Path: Starts at Y=200, X=220 -> goes left to X=110 -> goes up to Y=95 */}
-                    <path 
-                      id="path-tl" 
-                      d="M 220,200 L 110,200 L 110,95" 
-                      fill="none" 
-                      stroke={activeNodeId === 'unified' ? '#8CC63F' : '#0170B9'} 
-                      strokeWidth={activeNodeId === 'unified' ? '2' : '1.5'} 
-                      strokeDasharray="4 4" 
-                      className="transition-all duration-300" 
-                      opacity={activeNodeId === 'unified' ? '0.9' : '0.4'} 
-                    />
-                    
-                    {/* Bottom-Left Path: Starts at Y=200, X=220 -> goes left to X=110 -> goes down to Y=305 */}
-                    <path 
-                      id="path-bl" 
-                      d="M 220,200 L 110,200 L 110,305" 
-                      fill="none" 
-                      stroke={activeNodeId === 'customer' ? '#8CC63F' : '#0170B9'} 
-                      strokeWidth={activeNodeId === 'customer' ? '2' : '1.5'} 
-                      strokeDasharray="4 4" 
-                      className="transition-all duration-300" 
-                      opacity={activeNodeId === 'customer' ? '0.9' : '0.4'} 
-                    />
-                    
-                    {/* Top-Right Path: Starts at Y=200, X=580 -> goes right to X=690 -> goes up to Y=95 */}
-                    <path 
-                      id="path-tr" 
-                      d="M 580,200 L 690,200 L 690,95" 
-                      fill="none" 
-                      stroke={activeNodeId === 'inventory' ? '#8CC63F' : '#0170B9'} 
-                      strokeWidth={activeNodeId === 'inventory' ? '2' : '1.5'} 
-                      strokeDasharray="4 4" 
-                      className="transition-all duration-300" 
-                      opacity={activeNodeId === 'inventory' ? '0.9' : '0.4'} 
-                    />
-                    
-                    {/* Bottom-Right Path: Starts at Y=200, X=580 -> goes right to X=690 -> goes down to Y=305 */}
-                    <path 
-                      id="path-br" 
-                      d="M 580,200 L 690,200 L 690,305" 
-                      fill="none" 
-                      stroke={activeNodeId === 'predictive' ? '#8CC63F' : '#0170B9'} 
-                      strokeWidth={activeNodeId === 'predictive' ? '2' : '1.5'} 
-                      strokeDasharray="4 4" 
-                      className="transition-all duration-300" 
-                      opacity={activeNodeId === 'predictive' ? '0.9' : '0.4'} 
-                    />
+                        {/* Extra info shown on larger screens */}
+                        <div className="hidden lg:block text-[9.5px] text-white/45 leading-relaxed pt-2 border-t border-white/5 relative z-10 italic">
+                          {problem.extraInfo}
+                        </div>
 
-                    {/* Animated Data Packets traveling along the paths (glow in lime green when hovered) */}
-                    <g fill="#8CC63F">
-                      <circle r={activeNodeId === 'unified' ? "4" : "3"}>
-                        <animateMotion dur={activeNodeId === 'unified' ? "1.2s" : "3.5s"} repeatCount="indefinite">
-                          <mpath href="#path-tl" />
-                        </animateMotion>
-                      </circle>
-                      <circle r={activeNodeId === 'customer' ? "4" : "3"}>
-                        <animateMotion dur={activeNodeId === 'customer' ? "1.2s" : "3.5s"} repeatCount="indefinite">
-                          <mpath href="#path-bl" />
-                        </animateMotion>
-                      </circle>
-                      <circle r={activeNodeId === 'inventory' ? "4" : "3"}>
-                        <animateMotion dur={activeNodeId === 'inventory' ? "1.2s" : "3.5s"} repeatCount="indefinite">
-                          <mpath href="#path-tr" />
-                        </animateMotion>
-                      </circle>
-                      <circle r={activeNodeId === 'predictive' ? "4" : "3"}>
-                        <animateMotion dur={activeNodeId === 'predictive' ? "1.2s" : "3.5s"} repeatCount="indefinite">
-                          <mpath href="#path-br" />
-                        </animateMotion>
-                      </circle>
-                    </g>
-                  </svg>
+                        {/* Mapped SVG watermark icon */}
+                        {getSolutionIcon(problem.mapsToNode)}
 
-                  {/* HTML nodes mapped into the SVG coordinate space using absolute placements based on % */}
-                  {/* Central Core Box */}
-                  <div 
-                    onMouseEnter={() => setActiveNodeId('core')}
-                    onMouseLeave={() => setActiveNodeId(null)}
-                    style={{
-                      left: "50%",
-                      top: "50%",
-                      transform: "translate(-50%, -50%)",
-                      width: "42%"
-                    }}
-                    className={`absolute z-20 text-center p-3 sm:p-4 bg-[#071324]/95 border transition-all duration-300 cursor-pointer ${
-                      activeNodeId === 'core'
-                        ? 'border-[#8CC63F] shadow-[0_0_20px_rgba(140,198,63,0.15)] bg-[#0c233a]'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
-                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-[#0170B9]" />
-                    <h3 className="font-extrabold text-[10.5px] sm:text-xs text-white leading-tight">
-                      Most Retail Systems Don't Scale.
-                    </h3>
-                    <h3 className="font-extrabold text-[10.5px] sm:text-xs text-[#8CC63F] leading-tight mt-1">
-                      They Lack an Operational Core.
-                    </h3>
-                  </div>
+                      </div>
 
-                  {/* Top-Left Corner Box: Unified Operations */}
-                  <div 
-                    onMouseEnter={() => setActiveNodeId('unified')}
-                    onMouseLeave={() => setActiveNodeId(null)}
-                    style={{
-                      left: "1.5%",
-                      top: "2.5%",
-                      width: "25%",
-                      height: "21.5%"
-                    }}
-                    className={`absolute z-20 p-2 md:p-2.5 flex flex-col justify-between border transition-all duration-300 bg-[#071324]/95 cursor-pointer ${
-                      activeNodeId === 'unified'
-                        ? 'border-[#8CC63F] shadow-[0_0_15px_rgba(140,198,63,0.12)] bg-[#091f24]'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <span className="text-[6.5px] font-mono font-bold px-1.5 py-0.5 bg-[#6e8d75]/10 border border-[#6e8d75]/25 text-[#6e8d75] uppercase tracking-wider">
-                        UNIFY SILOS
-                      </span>
                     </div>
-                    <h4 className="text-[9.5px] sm:text-[10px] md:text-[11px] font-bold text-white leading-tight">
-                      Unified Operations
-                    </h4>
-                    <p className="text-[8px] sm:text-[8.5px] text-white/50 leading-tight hidden sm:block">
-                      Breaking down silos to build a digital nervous system.
-                    </p>
                   </div>
+                );
+              })}
 
-                  {/* Top-Right Corner Box: Transparent Inventory */}
-                  <div 
-                    onMouseEnter={() => setActiveNodeId('inventory')}
-                    onMouseLeave={() => setActiveNodeId(null)}
-                    style={{
-                      right: "1.5%",
-                      top: "2.5%",
-                      width: "25%",
-                      height: "21.5%"
-                    }}
-                    className={`absolute z-20 p-2 md:p-2.5 flex flex-col justify-between border transition-all duration-300 bg-[#071324]/95 cursor-pointer ${
-                      activeNodeId === 'inventory'
-                        ? 'border-[#8CC63F] shadow-[0_0_15px_rgba(140,198,63,0.12)] bg-[#091f24]'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <span className="text-[6.5px] font-mono font-bold px-1.5 py-0.5 bg-[#5d7d8a]/10 border border-[#5d7d8a]/25 text-[#5d7d8a] uppercase tracking-wider">
-                        SYNC STOCKS
-                      </span>
-                    </div>
-                    <h4 className="text-[9.5px] sm:text-[10px] md:text-[11px] font-bold text-white leading-tight">
-                      Transparent Inventory
-                    </h4>
-                    <p className="text-[8px] sm:text-[8.5px] text-white/50 leading-tight hidden sm:block">
-                      Real-time stock tracking to ensure capital is never trapped.
-                    </p>
-                  </div>
+            </div>
 
-                  {/* Bottom-Left Corner Box: Structured Customer Intelligence */}
-                  <div 
-                    onMouseEnter={() => setActiveNodeId('customer')}
-                    onMouseLeave={() => setActiveNodeId(null)}
-                    style={{
-                      left: "1.5%",
-                      bottom: "2.5%",
-                      width: "25%",
-                      height: "21.5%"
-                    }}
-                    className={`absolute z-20 p-2 md:p-2.5 flex flex-col justify-between border transition-all duration-300 bg-[#071324]/95 cursor-pointer ${
-                      activeNodeId === 'customer'
-                        ? 'border-[#8CC63F] shadow-[0_0_15px_rgba(140,198,63,0.12)] bg-[#091f24]'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <span className="text-[6.5px] font-mono font-bold px-1.5 py-0.5 bg-[#9c7c68]/10 border border-[#9c7c68]/25 text-[#9c7c68] uppercase tracking-wider">
-                        LINK PROFILE
-                      </span>
-                    </div>
-                    <h4 className="text-[9.5px] sm:text-[10px] md:text-[11px] font-bold text-white leading-tight">
-                      Customer Intelligence
-                    </h4>
-                    <p className="text-[8px] sm:text-[8.5px] text-white/50 leading-tight hidden sm:block">
-                      Consolidating data points to fuel clienteling journeys.
-                    </p>
-                  </div>
+            {/* Navigation Arrows */}
+            <div className="flex items-center justify-between w-full max-w-[200px] mx-auto mt-6 z-30">
+              <button 
+                onClick={() => setActiveIndex((prev) => (prev - 1 + total) % total)}
+                className="w-10 h-10 rounded-none bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#8CC63F]/40 flex items-center justify-center text-white transition-all duration-300"
+                aria-label="Previous card"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              
+              <span className="text-[10px] font-mono font-bold text-white/40 tracking-wider">
+                {activeIndex + 1} / {total}
+              </span>
 
-                  {/* Bottom-Right Corner Box: Predictive Decision-Making */}
-                  <div 
-                    onMouseEnter={() => setActiveNodeId('predictive')}
-                    onMouseLeave={() => setActiveNodeId(null)}
-                    style={{
-                      right: "1.5%",
-                      bottom: "2.5%",
-                      width: "25%",
-                      height: "21.5%"
-                    }}
-                    className={`absolute z-20 p-2 md:p-2.5 flex flex-col justify-between border transition-all duration-300 bg-[#071324]/95 cursor-pointer ${
-                      activeNodeId === 'predictive'
-                        ? 'border-[#8CC63F] shadow-[0_0_15px_rgba(140,198,63,0.12)] bg-[#091f24]'
-                        : 'border-white/10 hover:border-white/20'
-                    }`}
-                  >
-                    <div className="flex items-center">
-                      <span className="text-[6.5px] font-mono font-bold px-1.5 py-0.5 bg-[#766e8d]/10 border border-[#766e8d]/25 text-[#766e8d] uppercase tracking-wider">
-                        PRE-EMPT
-                      </span>
-                    </div>
-                    <h4 className="text-[9.5px] sm:text-[10px] md:text-[11px] font-bold text-white leading-tight">
-                      Predictive Decisions
-                    </h4>
-                    <p className="text-[8px] sm:text-[8.5px] text-white/50 leading-tight hidden sm:block">
-                      Replacing guesswork with real-time indicators and averages.
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-
+              <button 
+                onClick={() => setActiveIndex((prev) => (prev + 1) % total)}
+                className="w-10 h-10 rounded-none bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#8CC63F]/40 flex items-center justify-center text-white transition-all duration-300"
+                aria-label="Next card"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
 
             {/* Bottom Centered Quote */}
-            <div className="border-t border-dashed border-white/10 pt-5 mt-8 text-center relative z-10 flex items-center justify-center gap-2">
+            <div className="border-t border-dashed border-white/10 pt-5 mt-6 text-center relative z-10 flex items-center justify-center gap-2">
               <Activity className="w-4 h-4 text-[#8CC63F] animate-pulse" />
               <p className="text-xs sm:text-sm font-bold text-[#8CC63F] italic">
                 &quot;Scale begins where operational friction ends.&quot;
