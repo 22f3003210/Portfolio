@@ -286,25 +286,44 @@ export function HowIThinkSection() {
               <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#0170B9]/5 rounded-full blur-[100px]" />
               
               {/* Stars SVG overlay */}
-              <svg className="absolute inset-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg">
+              <svg className="absolute inset-0 w-full h-full opacity-55" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                  <path id="sparkle" d="M0,-3 Q0,0 -3,0 Q0,0 0,3 Q0,0 3,0 Q0,0 0,-3" fill="#ffffff" />
+                  <path id="sparkle" d="M0,-3.5 Q0,0 -3.5,0 Q0,0 0,3.5 Q0,0 3.5,0 Q0,0 0,-3.5" fill="#ffffff" />
                 </defs>
                 <g fill="#ffffff">
-                  {/* Fewer Tiny Stars */}
-                  <circle cx="8%" cy="15%" r="0.8" opacity="0.6" />
-                  <circle cx="28%" cy="75%" r="1" opacity="0.5" />
-                  <circle cx="42%" cy="25%" r="0.7" opacity="0.7" />
-                  <circle cx="60%" cy="85%" r="1.2" opacity="0.4" />
-                  <circle cx="78%" cy="30%" r="0.8" opacity="0.8" />
-                  <circle cx="92%" cy="65%" r="1" opacity="0.5" />
-                  <circle cx="15%" cy="50%" r="0.7" opacity="0.6" />
-                  <circle cx="85%" cy="80%" r="0.9" opacity="0.7" />
+                  {/* Rich Star Field - 24 Stars */}
+                  <circle cx="5%" cy="12%" r="0.7" opacity="0.5" />
+                  <circle cx="12%" cy="35%" r="1.2" opacity="0.7" />
+                  <circle cx="25%" cy="80%" r="0.8" opacity="0.4" />
+                  <circle cx="32%" cy="18%" r="1.5" opacity="0.6" className="animate-pulse" />
+                  <circle cx="45%" cy="65%" r="1" opacity="0.8" />
+                  <circle cx="58%" cy="15%" r="0.7" opacity="0.5" />
+                  <circle cx="64%" cy="85%" r="1.8" opacity="0.7" className="animate-pulse" />
+                  <circle cx="72%" cy="40%" r="1" opacity="0.9" />
+                  <circle cx="80%" cy="20%" r="1.5" opacity="0.6" />
+                  <circle cx="87%" cy="72%" r="0.8" opacity="0.8" />
+                  <circle cx="95%" cy="30%" r="1.2" opacity="0.5" />
+                  <circle cx="3%" cy="68%" r="1" opacity="0.4" />
+                  <circle cx="18%" cy="55%" r="0.7" opacity="0.6" />
+                  <circle cx="28%" cy="92%" r="1.5" opacity="0.5" />
+                  <circle cx="38%" cy="42%" r="1.2" opacity="0.8" />
+                  <circle cx="50%" cy="90%" r="0.9" opacity="0.4" />
+                  <circle cx="54%" cy="50%" r="1.5" opacity="0.7" />
+                  <circle cx="68%" cy="28%" r="0.7" opacity="0.6" />
+                  <circle cx="76%" cy="78%" r="1.2" opacity="0.8" className="animate-pulse" />
+                  <circle cx="89%" cy="55%" r="1.8" opacity="0.4" />
+                  <circle cx="93%" cy="90%" r="0.8" opacity="0.7" />
+                  <circle cx="20%" cy="22%" r="1" opacity="0.5" />
+                  <circle cx="60%" cy="62%" r="0.7" opacity="0.8" />
+                  <circle cx="82%" cy="82%" r="1.5" opacity="0.6" className="animate-pulse" />
                   
-                  {/* Fewer Sparkles */}
-                  <use href="#sparkle" x="15%" y="20%" opacity="0.6" className="animate-pulse" />
-                  <use href="#sparkle" x="50%" y="60%" opacity="0.7" className="animate-pulse" />
-                  <use href="#sparkle" x="80%" y="35%" opacity="0.5" />
+                  {/* Sparkle Stars - 6 Sparkles */}
+                  <use href="#sparkle" x="10%" y="25%" opacity="0.75" className="animate-pulse" />
+                  <use href="#sparkle" x="45%" y="55%" opacity="0.8" className="animate-pulse" />
+                  <use href="#sparkle" x="82%" y="15%" opacity="0.6" />
+                  <use href="#sparkle" x="25%" y="75%" opacity="0.7" />
+                  <use href="#sparkle" x="72%" y="68%" opacity="0.9" className="animate-pulse" />
+                  <use href="#sparkle" x="90%" y="45%" opacity="0.5" />
                 </g>
               </svg>
             </div>
