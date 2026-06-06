@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { ScrollReveal } from '../../components/ScrollReveal';
-import { GoldButton } from '../../components/GoldButton';
-import { CheckCircle2, Phone, ArrowRight, HelpCircle } from 'lucide-react';
+import { CheckCircle2, HelpCircle } from 'lucide-react';
 
 interface Petal {
   title: string;
@@ -411,45 +410,10 @@ export function OutcomeEngineSection() {
 
         {/* Dashboard Footer */}
         <ScrollReveal delay={0.2}>
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
-            
-            {/* Live Contact Triggers */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 w-full md:w-auto">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-none border border-white/10 flex items-center justify-center bg-white/[0.02] shadow-sm">
-                  <Phone className="w-3.5 h-3.5 text-gold" />
-                </div>
-                <div>
-                  <span className="text-[9px] text-white/40 uppercase tracking-widest font-mono block leading-none mb-1">FOR SALES</span>
-                  <a href="tel:+919160863406" className="text-xs font-bold text-white hover:text-gold transition-colors font-mono">+91 9160863406</a>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-none border border-white/10 flex items-center justify-center bg-white/[0.02] shadow-sm">
-                  <Phone className="w-3.5 h-3.5 text-gold" />
-                </div>
-                <div>
-                  <span className="text-[9px] text-white/40 uppercase tracking-widest font-mono block leading-none mb-1">FOR SUPPORT</span>
-                  <a href="tel:+919160863406" className="text-xs font-bold text-white hover:text-gold transition-colors font-mono">+91 9160863406</a>
-                </div>
-              </div>
-            </div>
-
-            {/* Audit / Call-to-action button */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto sm:justify-end">
-              <p className="text-xs text-white/60 font-semibold max-w-xs text-left sm:text-right leading-snug">
-                If your operational infrastructure is holding back your growth, it's time to rebuild.
-              </p>
-              <GoldButton 
-                to="/contact" 
-                icon={<ArrowRight className="w-4 h-4" />}
-                className="w-full sm:w-auto shadow-lg shadow-gold/20 font-bold uppercase tracking-wider text-xs px-8"
-              >
-                Schedule an Architecture Audit
-              </GoldButton>
-            </div>
-
+          <div className="mt-8 pt-6 border-t border-white/10 flex justify-center text-center relative z-10">
+            <p className="text-xs sm:text-sm text-[#8CC63F] font-bold max-w-2xl leading-relaxed">
+              If your operational infrastructure is holding back your growth, it's time to rebuild.
+            </p>
           </div>
         </ScrollReveal>
 
