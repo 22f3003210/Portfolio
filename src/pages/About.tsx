@@ -2,6 +2,7 @@ import { AboutHero } from '../sections/about/AboutHero';
 import { DetailedBioSection } from '../sections/about/DetailedBioSection';
 import { SystemsPhilosophySection } from '../sections/about/SystemsPhilosophySection';
 import { TimelineSection } from '../sections/about/TimelineSection';
+import { ProjectsAndResponsibilities } from '../sections/about/ProjectsAndResponsibilities';
 import { motion } from 'framer-motion';
 
 export function About() {
@@ -61,6 +62,7 @@ export function About() {
       <DetailedBioSection />
       <SystemsPhilosophySection />
       <TimelineSection />
+      <ProjectsAndResponsibilities />
     </>
   );
 }
