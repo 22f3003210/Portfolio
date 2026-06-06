@@ -17,11 +17,9 @@ export function PhilosophySection() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="text-white">"Converting </span>
-              <span className="text-gold">person-dependent chaos</span>
-              <br className="hidden md:block" />
-              <span className="text-white"> into scalable digital operations."</span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white leading-relaxed">
+              "What gets measured can be <span className="text-gold">understood</span>.<br />
+              What gets understood can be <span className="text-gold">improved</span>."
             </h2>
           </ScrollReveal>
 
