@@ -1,7 +1,7 @@
-import { Download, Target } from 'lucide-react';
+import { Target } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { SectionLabel } from '../../components/SectionLabel';
-import { GoldButton } from '../../components/GoldButton';
+
 
 interface TimelineItem {
   year: string;
@@ -168,17 +168,6 @@ export function TimelineSection() {
               </div>
             </ScrollReveal>
 
-            {/* Download CV */}
-            <ScrollReveal delay={0.2}>
-              <div className="bg-white border border-border-light rounded-none p-6 text-center">
-                <Download className="w-8 h-8 text-gold mx-auto mb-3" />
-                <h3 className="text-lg font-semibold text-text-primary mb-1">Download CV</h3>
-                <p className="text-sm text-text-secondary mb-4">
-                  Detailed track record + case studies.
-                </p>
-                <GoldButton fullWidth>Get the PDF</GoldButton>
-              </div>
-            </ScrollReveal>
           </div>
         </div>
       </div>
