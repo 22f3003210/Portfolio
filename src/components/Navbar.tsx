@@ -81,8 +81,8 @@ export function Navbar() {
           : 'bg-gradient-to-r from-[#00203f] to-[#0170B9] text-white py-1.5'
       }`}
     >
-      <div className="w-full px-6">
-        <div className="max-w-[1380px] mx-auto flex items-center justify-between h-16">
+      <div className="w-full px-6 md:px-10 lg:px-16">
+        <div className="max-w-[1280px] mx-auto flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <img 
