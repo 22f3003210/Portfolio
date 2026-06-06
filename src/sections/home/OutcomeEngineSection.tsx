@@ -15,7 +15,7 @@ interface Petal {
 }
 
 export function OutcomeEngineSection() {
-  const [activePetal, setActivePetal] = useState<number>(0); // Default to WORKING (index 0)
+  const [activePetal, setActivePetal] = useState<number>(0);
 
   const petals: Petal[] = [
     {
@@ -142,70 +142,57 @@ export function OutcomeEngineSection() {
 
   const getPetalPath = (cx: number, cy: number, r1: number, r2: number, a1: number, a2: number) => {
     const degToRad = (deg: number) => (deg * Math.PI) / 180;
-    
     const x1 = cx + r2 * Math.cos(degToRad(a1));
     const y1 = cy + r2 * Math.sin(degToRad(a1));
-    
     const x2 = cx + r2 * Math.cos(degToRad(a2));
     const y2 = cy + r2 * Math.sin(degToRad(a2));
-    
     const x3 = cx + r1 * Math.cos(degToRad(a2));
     const y3 = cy + r1 * Math.sin(degToRad(a2));
-    
     const x4 = cx + r1 * Math.cos(degToRad(a1));
     const y4 = cy + r1 * Math.sin(degToRad(a1));
-    
-    return `
-      M ${x1} ${y1}
-      A ${r2} ${r2} 0 0 0 ${x2} ${y2}
-      L ${x3} ${y3}
-      A ${r1} ${r1} 0 0 1 ${x4} ${y4}
-      Z
-    `;
+    return `M ${x1} ${y1} A ${r2} ${r2} 0 0 0 ${x2} ${y2} L ${x3} ${y3} A ${r1} ${r1} 0 0 1 ${x4} ${y4} Z`;
   };
 
   return (
-    <section id="outcome-engine" className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] py-20 md:py-24 px-6 select-none border-b border-white/10 relative overflow-hidden">
-      
-      {/* High-tech background accent glows */}
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-navy/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[120px] pointer-events-none" />
+    <section
+      id="outcome-engine"
+      className="bg-white py-20 md:py-24 px-6 select-none border-b border-border-light"
+    >
+      <div className="max-w-[1150px] mx-auto text-left">
 
-      <div className="max-w-[1150px] mx-auto text-left relative z-10">
-        
         {/* Module Badge */}
         <ScrollReveal>
           <span className="text-[10px] font-extrabold uppercase tracking-widest text-gold bg-gold/10 px-2.5 py-0.5 border border-gold/25 self-start inline-block mb-4">
-            03 . OUTCOME ENGINE & PROCESS LEAK AUDIT
+            03 . OUTCOME ENGINE &amp; PROCESS LEAK AUDIT
           </span>
         </ScrollReveal>
 
         {/* Section Title */}
         <ScrollReveal delay={0.05}>
-          <h2 className="font-extrabold text-2xl sm:text-[2.25rem] text-white tracking-tight leading-tight mb-4">
+          <h2 className="font-extrabold text-2xl sm:text-[2.25rem] text-navy tracking-tight leading-tight mb-4">
             Stop fighting the market. <span className="text-gold">Engineer it.</span>
           </h2>
         </ScrollReveal>
 
         {/* Subtitle */}
         <ScrollReveal delay={0.1}>
-          <p className="text-sm lg:text-base text-white/80 leading-relaxed font-medium mb-8 max-w-3xl">
+          <p className="text-sm lg:text-base text-text-secondary leading-relaxed font-medium mb-8 max-w-3xl">
             Every broken integration, manual spreadsheet, and data blind spot is a leak in your profit margin. The market is moving too fast for intuition-based retail.
           </p>
         </ScrollReveal>
 
-        {/* Main Telemetry Box */}
+        {/* Main Content Box */}
         <ScrollReveal delay={0.15}>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center border border-white/10 bg-white/[0.02] p-6 md:p-10 relative z-10">
-            
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center border border-border-light bg-[#F8FAFC] p-6 md:p-10">
+
             {/* SVG Semicircle Dial */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center">
               <div className="relative w-full max-w-[500px] flex items-center justify-center">
                 <svg width="100%" height="340" viewBox="60 -20 380 250" className="overflow-visible select-none">
-                  
-                  {/* Semicircular Guide Rings updated for larger radii */}
-                  <path d="M 90,40 A 160,160 0 0,0 410,40" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" strokeDasharray="3 3" />
-                  <path d="M 160,40 A 90,90 0 0,0 340,40" fill="none" stroke="rgba(255, 255, 255, 0.05)" strokeWidth="1" strokeDasharray="2 2" />
+
+                  {/* Guide rings — subtle navy tint */}
+                  <path d="M 90,40 A 160,160 0 0,0 410,40" fill="none" stroke="rgba(11,30,46,0.08)" strokeWidth="1" strokeDasharray="3 3" />
+                  <path d="M 160,40 A 90,90 0 0,0 340,40" fill="none" stroke="rgba(11,30,46,0.08)" strokeWidth="1" strokeDasharray="2 2" />
 
                   {petals.map((petal, idx) => {
                     const isActive = activePetal === idx;
@@ -213,34 +200,26 @@ export function OutcomeEngineSection() {
                       { a1: 166.5, a2: 143.5 },
                       { a1: 140.5, a2: 117.5 },
                       { a1: 114.5, a2: 91.5 },
-                      { a1: 88.5, a2: 65.5 },
-                      { a1: 62.5, a2: 39.5 },
-                      { a1: 36.5, a2: 13.5 }
+                      { a1: 88.5,  a2: 65.5  },
+                      { a1: 62.5,  a2: 39.5  },
+                      { a1: 36.5,  a2: 13.5  }
                     ];
                     const { a1, a2 } = angles[idx];
                     const am = (a1 + a2) / 2;
                     const degToRad = (deg: number) => (deg * Math.PI) / 180;
-                    
-                    const cx = 250;
-                    const cy = 40;
-                    const r1 = 90;  // Increased from 70
-                    const r2 = 175; // Increased from 145
-                    
+                    const cx = 250, cy = 40, r1 = 90, r2 = 175;
                     const d = isActive ? 10 : 0;
                     const shiftX = d * Math.cos(degToRad(am));
                     const shiftY = d * Math.sin(degToRad(am));
-                    
                     const shiftedCx = cx + shiftX;
                     const shiftedCy = cy + shiftY;
-                    
                     const pathString = getPetalPath(shiftedCx, shiftedCy, r1, r2, a1, a2);
-                    
                     const rIcon = (r1 + r2) / 2;
                     const xIcon = shiftedCx + rIcon * Math.cos(degToRad(am));
                     const yIcon = shiftedCy + rIcon * Math.sin(degToRad(am));
 
                     return (
-                      <g 
+                      <g
                         key={idx}
                         className="cursor-pointer group"
                         onMouseEnter={() => setActivePetal(idx)}
@@ -248,19 +227,19 @@ export function OutcomeEngineSection() {
                       >
                         <path
                           d={pathString}
-                          fill={isActive ? 'url(#active-green-gradient-home)' : 'rgba(255, 255, 255, 0.03)'}
-                          stroke={isActive ? '#8CC63F' : 'rgba(255, 255, 255, 0.15)'}
+                          fill={isActive ? 'url(#active-green-gradient-home)' : 'rgba(11,30,46,0.04)'}
+                          stroke={isActive ? '#8CC63F' : 'rgba(11,30,46,0.18)'}
                           strokeWidth={isActive ? '2.5' : '1'}
-                          className="transition-all duration-300 group-hover:stroke-gold/50"
-                          style={{ 
-                            filter: isActive ? 'drop-shadow(0px 0px 15px rgba(140, 198, 99, 0.35))' : 'none'
+                          className="transition-all duration-300"
+                          style={{
+                            filter: isActive ? 'drop-shadow(0px 0px 12px rgba(140,198,99,0.4))' : 'none'
                           }}
                         />
-                        
-                        <g 
-                          transform={`translate(${xIcon}, ${yIcon - 7})`} 
+
+                        <g
+                          transform={`translate(${xIcon}, ${yIcon - 7})`}
                           className={`transition-colors duration-300 ${
-                            isActive ? 'text-[#0B1E2E]' : 'text-white/60 group-hover:text-white'
+                            isActive ? 'text-[#0B1E2E]' : 'text-navy/50 group-hover:text-navy'
                           }`}
                         >
                           {petal.icon}
@@ -271,8 +250,8 @@ export function OutcomeEngineSection() {
                           y={yIcon + 16}
                           textAnchor="middle"
                           fontSize="9"
-                          fontWeight="extrabold"
-                          fill={isActive ? '#0B1E2E' : 'rgba(255, 255, 255, 0.5)'}
+                          fontWeight="800"
+                          fill={isActive ? '#0B1E2E' : 'rgba(11,30,46,0.45)'}
                           className="transition-colors duration-300 font-mono tracking-wider"
                         >
                           {petal.label}
@@ -288,70 +267,37 @@ export function OutcomeEngineSection() {
                     </linearGradient>
                   </defs>
 
-                  {/* Brain & Engineering Hybrid Center Graphic (Larger, more detailed, and aligned properly) */}
+                  {/* Center Brain + Engineering Graphic */}
                   <g transform="translate(250, 40)">
-                    {/* Rotating outer gear/circuit ring */}
                     <g style={{ animation: 'spin 25s linear infinite', transformOrigin: '0px 0px' }}>
-                      <circle cx="0" cy="0" r="60" fill="none" stroke="#00E5FF" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.3" />
-                      <circle cx="0" cy="0" r="54" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" strokeDasharray="8 6" />
+                      <circle cx="0" cy="0" r="60" fill="none" stroke="#0170B9" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.25" />
+                      <circle cx="0" cy="0" r="54" fill="none" stroke="rgba(11,30,46,0.08)" strokeWidth="4" strokeDasharray="8 6" />
                     </g>
-                    
-                    {/* Center solid dashboard button (Enlarged) */}
-                    <circle cx="0" cy="0" r="46" fill="#0A1826" stroke="#0170B9" strokeWidth="3" />
-                    
-                    {/* Gear outline in background of brain */}
-                    <circle cx="0" cy="0" r="34" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="4" strokeDasharray="6 4" />
 
-                    {/* Highly detailed Brain Outline + Engineering Concept */}
+                    {/* Center circle — dark, makes inner detail pop */}
+                    <circle cx="0" cy="0" r="46" fill="#0A1826" stroke="#0170B9" strokeWidth="3" />
+                    <circle cx="0" cy="0" r="34" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" strokeDasharray="6 4" />
+
                     <g transform="scale(1.75)">
-                      {/* Left brain hemisphere (organic curves) in neon cyan */}
-                      <path 
-                        d="M -1,-12 
-                           C -5,-12 -8,-9 -8,-6 
-                           C -8,-4.5 -6.5,-3.5 -5,-3 
-                           C -9,-3 -10,1 -7,4 
-                           C -9,5.5 -7.5,8 -4,8 
-                           C -2.5,8 -1,6.5 -1,4 
-                           Z" 
-                        fill="none" 
-                        stroke="#00E5FF" 
-                        strokeWidth="1.6" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
+                      {/* Left hemisphere — cyan */}
+                      <path
+                        d="M -1,-12 C -5,-12 -8,-9 -8,-6 C -8,-4.5 -6.5,-3.5 -5,-3 C -9,-3 -10,1 -7,4 C -9,5.5 -7.5,8 -4,8 C -2.5,8 -1,6.5 -1,4 Z"
+                        fill="none" stroke="#00E5FF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
                       />
                       <path d="M -4,-6.5 C -5.5,-6.5 -6,-5 -4.5,-4" fill="none" stroke="#00E5FF" strokeWidth="1.1" strokeLinecap="round" />
                       <path d="M -3.5,1.5 C -5,1.5 -5.5,2.5 -4,3.5" fill="none" stroke="#00E5FF" strokeWidth="1.1" strokeLinecap="round" />
-                      
-                      {/* Right brain hemisphere (circuits & engineering lines) in parrot green */}
-                      <path 
-                        d="M 1,-12 
-                           L 6,-12 
-                           L 9,-9 
-                           L 9,-5 
-                           L 5,-5 
-                           L 5,-1 
-                           L 10,4 
-                           L 10,8 
-                           L 6,10 
-                           L 1,10 
-                           Z" 
-                        fill="none" 
-                        stroke="#8CC63F" 
-                        strokeWidth="1.6" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
+
+                      {/* Right hemisphere — green */}
+                      <path
+                        d="M 1,-12 L 6,-12 L 9,-9 L 9,-5 L 5,-5 L 5,-1 L 10,4 L 10,8 L 6,10 L 1,10 Z"
+                        fill="none" stroke="#8CC63F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
                       />
-                      {/* Circuit connections and larger distinct nodes */}
                       <path d="M 1,-7 L 5,-7 L 6.5,-5.5" fill="none" stroke="#8CC63F" strokeWidth="1.1" />
                       <circle cx="6.5" cy="-5.5" r="1.2" fill="#8CC63F" />
-                      
                       <path d="M 1,1 L 5,1 L 6.5,2.5" fill="none" stroke="#8CC63F" strokeWidth="1.1" />
                       <circle cx="6.5" cy="2.5" r="1.2" fill="#8CC63F" />
-                      
                       <circle cx="9" cy="-9" r="1.2" fill="#8CC63F" />
                       <circle cx="10" cy="8" r="1.2" fill="#8CC63F" />
-                      
-                      {/* Center junction node */}
                       <circle cx="0" cy="-1" r="2.2" fill="#0A1826" stroke="#8CC63F" strokeWidth="1" />
                       <path d="M -1,-1 L 1,-1 M 0,-2 L 0,0" stroke="#8CC63F" strokeWidth="0.8" />
                     </g>
@@ -359,69 +305,69 @@ export function OutcomeEngineSection() {
 
                 </svg>
               </div>
-              
-              <span className="text-[10px] font-bold text-white/40 tracking-widest uppercase font-mono mt-3">
+
+              <span className="text-[10px] font-bold text-text-muted tracking-widest uppercase font-mono mt-3">
                 Hover or Tap Wedges to Interact
               </span>
             </div>
 
-            {/* Content Details Panel */}
+            {/* ── Content Details Panel ── */}
             <div className="lg:col-span-7 flex flex-col gap-6 justify-between self-stretch">
-              
+
               <div className="flex flex-col gap-4">
-                {/* Header with Wedge Subtitle & Title */}
+                {/* Active petal header */}
                 <div className="border-l-2 border-gold pl-3">
                   <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block">
                     {petals[activePetal].subtitle}
                   </span>
-                  <h4 className="text-xl font-black text-white uppercase tracking-tight mt-1">
+                  <h4 className="text-xl font-black text-navy uppercase tracking-tight mt-1">
                     {petals[activePetal].title}
                   </h4>
                 </div>
 
-                {/* Wedge Description */}
-                <p className="text-xs sm:text-[13px] text-white/80 leading-relaxed font-semibold">
+                {/* Description */}
+                <p className="text-sm text-text-secondary leading-relaxed font-medium">
                   {petals[activePetal].description}
                 </p>
 
-                {/* Examined/Defined Areas list */}
+                {/* Bullet list */}
                 <div>
-                  <span className="text-[10px] font-black text-white/40 uppercase tracking-widest font-mono block mb-2.5">
+                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest font-mono block mb-2.5">
                     {petals[activePetal].bulletHeader}
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {petals[activePetal].bullets.map((bullet, idx) => (
                       <div key={idx} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-[#8CC63F] shrink-0"></span>
-                        <span className="text-xs text-white/95 font-medium">{bullet}</span>
+                        <span className="w-1.5 h-1.5 bg-[#8CC63F] shrink-0" />
+                        <span className="text-xs text-navy font-semibold">{bullet}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4 mt-2">
-                {/* Key Question Box */}
-                <div className="bg-gold/[0.03] border border-gold/20 p-4 rounded-none flex items-start gap-3">
+              <div className="flex flex-col gap-3 mt-2">
+                {/* Key Question */}
+                <div className="bg-amber-50 border border-gold/30 p-4 flex items-start gap-3">
                   <HelpCircle className="w-5 h-5 text-gold shrink-0 mt-0.5" />
                   <div>
                     <span className="text-[9px] font-black text-gold uppercase tracking-widest block mb-1 font-mono">
                       Key Audit Question
                     </span>
-                    <p className="text-xs sm:text-[13px] text-white/95 leading-relaxed font-semibold italic">
+                    <p className="text-xs sm:text-[13px] text-navy leading-relaxed font-semibold italic">
                       "{petals[activePetal].keyQuestion}"
                     </p>
                   </div>
                 </div>
 
-                {/* Outcome Box */}
-                <div className="bg-[#8CC63F]/[0.03] border border-[#8CC63F]/20 p-4 rounded-none flex items-start gap-3">
+                {/* Outcome */}
+                <div className="bg-green-50 border border-[#8CC63F]/30 p-4 flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#8CC63F] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[9px] font-black text-[#8CC63F] uppercase tracking-widest block mb-1 font-mono">
+                    <span className="text-[9px] font-black text-[#4a7a1e] uppercase tracking-widest block mb-1 font-mono">
                       Target Outcome
                     </span>
-                    <p className="text-xs sm:text-[13px] text-white/95 leading-relaxed font-semibold">
+                    <p className="text-xs sm:text-[13px] text-navy leading-relaxed font-semibold">
                       {petals[activePetal].outcome}
                     </p>
                   </div>
@@ -429,14 +375,13 @@ export function OutcomeEngineSection() {
               </div>
 
             </div>
-
           </div>
         </ScrollReveal>
 
-        {/* Dashboard Footer */}
+        {/* Footer */}
         <ScrollReveal delay={0.2}>
-          <div className="mt-8 pt-6 border-t border-white/10 flex justify-center text-center relative z-10">
-            <p className="text-xs sm:text-sm text-[#8CC63F] font-bold max-w-2xl leading-relaxed">
+          <div className="mt-8 pt-6 border-t border-border-light flex justify-center text-center">
+            <p className="text-xs sm:text-sm text-[#4a7a1e] font-bold max-w-2xl leading-relaxed">
               If your operational infrastructure is holding back your growth, it's time to rebuild.
             </p>
           </div>

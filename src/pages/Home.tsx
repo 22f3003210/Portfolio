@@ -1,4 +1,5 @@
 import { HeroSection } from '../sections/home/HeroSection';
+import { CoreCapabilitiesSection } from '../sections/home/CoreCapabilitiesSection';
 import { SystemicDiagnosisSection } from '../sections/home/SystemicDiagnosisSection';
 import { OutcomeEngineSection } from '../sections/home/OutcomeEngineSection';
 import { BusinessOSSection } from '../sections/home/BusinessOSSection';
@@ -15,6 +16,7 @@ export function Home() {
     <>
       <HeroSection />
       <ProfileSummary />
+      <CoreCapabilitiesSection />
       <HowIWorkSection />
       <SystemicDiagnosisSection />
       <HowIThinkSection />

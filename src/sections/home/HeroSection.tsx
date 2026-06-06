@@ -116,8 +116,8 @@ export function HeroSection() {
                 </p>
 
                 <div className="flex flex-wrap gap-4 pt-1">
-                  <GoldButton to="/#workflows" icon={<ChevronDown className="w-4 h-4" />}>
-                    Explore the Operating System
+                  <GoldButton to="/contact" icon={<ChevronDown className="w-4 h-4" />}>
+                    Connect Me Now
                   </GoldButton>
                   <OutlineButton 
                     to="/contact"
