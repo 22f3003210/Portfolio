@@ -57,8 +57,8 @@ export function FocusAreaFramework() {
               From Root Cause to Business Impact
             </p>
           </div>
-          <div className="lg:col-span-6 lg:pt-8 text-[#3A3A3A] font-bold text-base md:text-lg leading-relaxed text-left">
-            <p>
+          <div className="lg:col-span-6 lg:pt-6 text-left">
+            <p className="text-[#0170B9] font-black text-base md:text-lg leading-relaxed border-l-2 border-[#0170B9] pl-4 bg-[#0170B9]/5 py-2">
               I help organizations uncover operational gaps, quantify business risks, design scalable systems, and build decision frameworks that drive measurable growth.
             </p>
           </div>
