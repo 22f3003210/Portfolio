@@ -58,7 +58,7 @@ export function FocusAreaFramework() {
             </p>
           </div>
           <div className="lg:col-span-6 lg:pt-6 text-left">
-            <p className="text-[#0170B9] font-black text-base md:text-lg leading-relaxed border-l-2 border-[#0170B9] pl-4 bg-[#0170B9]/5 py-2">
+            <p className="text-navy font-black text-base md:text-lg leading-relaxed border-l-2 border-gold pl-4 bg-gold/5 py-2">
               I help organizations uncover operational gaps, quantify business risks, design scalable systems, and build decision frameworks that drive measurable growth.
             </p>
           </div>
