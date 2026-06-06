@@ -279,27 +279,56 @@ export function OutcomeEngineSection() {
                     <circle cx="0" cy="0" r="34" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="4" strokeDasharray="6 4" />
 
                     <g transform="scale(1.75)">
-                      {/* Left hemisphere — cyan */}
+                      {/* ── LEFT hemisphere — cyan, organic brain shape ── */}
                       <path
-                        d="M -1,-12 C -5,-12 -8,-9 -8,-6 C -8,-4.5 -6.5,-3.5 -5,-3 C -9,-3 -10,1 -7,4 C -9,5.5 -7.5,8 -4,8 C -2.5,8 -1,6.5 -1,4 Z"
-                        fill="none" stroke="#00E5FF" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+                        d="M 0,-14
+                           C -2,-16 -6,-16 -9,-14
+                           C -12,-12 -14,-9 -14,-6
+                           C -14,-3 -12,-1 -13,1
+                           C -14,3 -13,6 -11,8
+                           C -9,10 -6,10 -3,9
+                           C -1,8 0,7 0,6
+                           Z"
+                        fill="rgba(0,229,255,0.10)"
+                        stroke="#00E5FF"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
-                      <path d="M -4,-6.5 C -5.5,-6.5 -6,-5 -4.5,-4" fill="none" stroke="#00E5FF" strokeWidth="1.1" strokeLinecap="round" />
-                      <path d="M -3.5,1.5 C -5,1.5 -5.5,2.5 -4,3.5" fill="none" stroke="#00E5FF" strokeWidth="1.1" strokeLinecap="round" />
+                      {/* Left hemisphere gyri / sulci */}
+                      <path d="M -3,-12 C -7,-10 -9,-7 -8,-4" fill="none" stroke="#00E5FF" strokeWidth="0.9" strokeLinecap="round" />
+                      <path d="M -8,-4 C -11,-2 -11,1 -9,3" fill="none" stroke="#00E5FF" strokeWidth="0.9" strokeLinecap="round" />
+                      <path d="M -10,4  C -12,5 -11,8 -9,8"  fill="none" stroke="#00E5FF" strokeWidth="0.8" strokeLinecap="round" />
 
-                      {/* Right hemisphere — green */}
+                      {/* ── RIGHT hemisphere — green, mirror of left ── */}
                       <path
-                        d="M 1,-12 L 6,-12 L 9,-9 L 9,-5 L 5,-5 L 5,-1 L 10,4 L 10,8 L 6,10 L 1,10 Z"
-                        fill="none" stroke="#8CC63F" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+                        d="M 0,-14
+                           C 2,-16 6,-16 9,-14
+                           C 12,-12 14,-9 14,-6
+                           C 14,-3 12,-1 13,1
+                           C 14,3 13,6 11,8
+                           C 9,10 6,10 3,9
+                           C 1,8 0,7 0,6
+                           Z"
+                        fill="rgba(140,198,63,0.10)"
+                        stroke="#8CC63F"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
-                      <path d="M 1,-7 L 5,-7 L 6.5,-5.5" fill="none" stroke="#8CC63F" strokeWidth="1.1" />
-                      <circle cx="6.5" cy="-5.5" r="1.2" fill="#8CC63F" />
-                      <path d="M 1,1 L 5,1 L 6.5,2.5" fill="none" stroke="#8CC63F" strokeWidth="1.1" />
-                      <circle cx="6.5" cy="2.5" r="1.2" fill="#8CC63F" />
-                      <circle cx="9" cy="-9" r="1.2" fill="#8CC63F" />
-                      <circle cx="10" cy="8" r="1.2" fill="#8CC63F" />
-                      <circle cx="0" cy="-1" r="2.2" fill="#0A1826" stroke="#8CC63F" strokeWidth="1" />
-                      <path d="M -1,-1 L 1,-1 M 0,-2 L 0,0" stroke="#8CC63F" strokeWidth="0.8" />
+                      {/* Right hemisphere gyri / sulci */}
+                      <path d="M 3,-12 C 7,-10 9,-7  8,-4"  fill="none" stroke="#8CC63F" strokeWidth="0.9" strokeLinecap="round" />
+                      <path d="M 8,-4  C 11,-2 11,1  9,3"   fill="none" stroke="#8CC63F" strokeWidth="0.9" strokeLinecap="round" />
+                      <path d="M 10,4  C 12,5  11,8  9,8"   fill="none" stroke="#8CC63F" strokeWidth="0.8" strokeLinecap="round" />
+
+                      {/* Central longitudinal fissure */}
+                      <line x1="0" y1="-14" x2="0" y2="6" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" strokeDasharray="2 1.5" />
+
+                      {/* Corpus callosum hint */}
+                      <path d="M -2,0 C -1,-1 1,-1 2,0" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="0.9" strokeLinecap="round" />
+
+                      {/* Brainstem */}
+                      <path d="M -3,9 C -2,13 2,13 3,9" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2" strokeLinecap="round" />
                     </g>
                   </g>
 
