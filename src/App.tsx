@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { PageShell } from './components/PageShell';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
+import { Projects } from './pages/Projects';
 import { Contact } from './pages/Contact';
 import { Insights } from './pages/Insights';
 import { WorkflowDetail } from './pages/WorkflowDetail';
@@ -14,6 +15,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/workflows/:slug" element={<WorkflowDetail />} />
