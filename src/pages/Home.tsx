@@ -4,7 +4,6 @@ import { OutcomeEngineSection } from '../sections/home/OutcomeEngineSection';
 import { BusinessOSSection } from '../sections/home/BusinessOSSection';
 import { HowIThinkSection } from '../sections/home/HowIThinkSection';
 import { ProblemsSection } from '../sections/home/ProblemsSection';
-import { WorkflowsGrid } from '../sections/home/WorkflowsGrid';
 import { PhilosophySection } from '../sections/home/PhilosophySection';
 import { HowIWorkSection } from '../sections/home/HowIWorkSection';
 import { ProfileSummary } from '../sections/home/ProfileSummary';
@@ -20,7 +19,6 @@ export function Home() {
       <OutcomeEngineSection />
       <BusinessOSSection />
       <ProblemsSection />
-      <WorkflowsGrid />
       <PhilosophySection />
       <HowIWorkSection />
       <CTASection />
