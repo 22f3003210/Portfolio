@@ -82,7 +82,7 @@ export function Navbar() {
       }`}
     >
       <div className="w-full px-6">
-        <div className="max-w-[1060px] mx-auto flex items-center justify-between h-16">
+        <div className="max-w-[1200px] mx-auto flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
             <img 
