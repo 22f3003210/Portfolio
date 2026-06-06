@@ -1,6 +1,5 @@
 import { CheckCircle2, Lightbulb, Compass } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
-import { FocusAreaFramework } from '../home/FocusAreaFramework';
 
 export function DetailedBioSection() {
   const stats = [
@@ -218,9 +217,6 @@ export function DetailedBioSection() {
             </div>
           </ScrollReveal>
         </div>
-
-        {/* Section 5: How I Work */}
-        <FocusAreaFramework />
 
       </div>
     </section>
