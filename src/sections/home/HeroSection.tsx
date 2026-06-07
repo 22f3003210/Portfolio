@@ -99,7 +99,7 @@ export function HeroSection() {
     <div className="bg-white w-full">
 
       {/* ════════════════════ MAIN HERO ════════════════════ */}
-      <div className="relative bg-white overflow-hidden pt-8 lg:pt-14" style={{
+      <div className="relative bg-white overflow-hidden" style={{
         backgroundImage: `
           radial-gradient(#1f5fbf0a 1.2px, transparent 1.2px),
           linear-gradient(to right, #1f5fbf05 1px, transparent 1px),
@@ -115,7 +115,7 @@ export function HeroSection() {
         >
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:py-24 relative z-10">
+          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:py-14 relative z-10">
 
             {/* Badge */}
             <motion.span
@@ -191,13 +191,13 @@ export function HeroSection() {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full relative z-10 py-6 mix-blend-multiply flex items-center justify-center"
+            className="w-full relative z-10 py-2 mix-blend-multiply flex items-center justify-center"
           >
             <img
               src="/hero_background.jpg"
               alt="Retail Business Systems consulting framework"
               className="w-full h-auto block"
-              style={{ maxHeight: '600px', objectFit: 'contain' }}
+              style={{ maxHeight: '700px', objectFit: 'contain' }}
             />
           </motion.div>
 
