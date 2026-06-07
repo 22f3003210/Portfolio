@@ -92,12 +92,13 @@ export function HeroSection() {
     <div className="bg-white w-full">
 
       {/* ════════════════════ MAIN HERO ════════════════════ */}
-      <div 
-        className="relative bg-white overflow-hidden lg:bg-[url('/hero_background.jpg')] lg:bg-cover lg:bg-[position:right_center] lg:bg-no-repeat"
-      >
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-10
-                        grid grid-cols-1 lg:grid-cols-[40%_60%]
-                        items-center gap-6 lg:gap-0 relative z-10">
+      <div className="relative bg-white overflow-hidden">
+        <div 
+          className="max-w-[1280px] mx-auto px-6 lg:px-10
+                     grid grid-cols-1 lg:grid-cols-[40%_60%]
+                     items-center gap-6 lg:gap-0 relative z-10
+                     lg:bg-[url('/hero_background.jpg')] lg:bg-contain lg:bg-right lg:bg-no-repeat"
+        >
 
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:py-24 relative z-10">
@@ -214,12 +215,12 @@ export function HeroSection() {
           </div>
 
           {/* ── RIGHT COLUMN — Spacer on desktop, fallback image on mobile ── */}
-          <div className="w-full relative z-10 py-6 lg:h-[620px] pointer-events-none flex items-center">
+          <div className="w-full relative z-10 py-6 lg:h-[560px] pointer-events-none flex items-center">
             <img
               src="/hero_background.jpg"
               alt="Retail Business Systems consulting framework"
               className="w-full h-auto block lg:hidden"
-              style={{ maxHeight: '500px', objectFit: 'contain' }}
+              style={{ maxHeight: '480px', objectFit: 'contain' }}
             />
           </div>
 
