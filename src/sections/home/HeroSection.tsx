@@ -205,8 +205,8 @@ export function HeroSection() {
       </div>
 
       {/* ════════════════════ BOTTOM CAPABILITIES STRIP ════════════════════ */}
-      <div className="relative px-6 pb-16 z-20 bg-gray-50/30">
-        <div className="max-w-[1280px] mx-auto bg-white rounded-[16px] shadow-2xl border border-gray-100/60 p-4 md:p-6 -mt-8 lg:-mt-16 relative z-20">
+      <div className="relative px-6 pt-6 pb-16 z-20 bg-gray-50/30">
+        <div className="max-w-[1280px] mx-auto bg-white rounded-[16px] shadow-2xl border border-gray-100/60 p-4 md:p-6 relative z-20">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {CAPS.map((cap) => (
               <div 
