@@ -30,10 +30,10 @@ import { Link } from 'react-router-dom';
 const GREEN = '#8bc34a';
 
 const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 35 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.6, delay, ease: 'easeOut' } as const
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.7, delay, ease: 'easeOut' } as const
 });
 
 interface ObjectiveCategory {
@@ -220,11 +220,11 @@ export function Consulting() {
   const currentCategory = objectiveCategories.find(cat => cat.id === activeCategory) || objectiveCategories[0];
 
   return (
-    <div className="bg-white overflow-hidden">
+    <div className="bg-[#07111C] text-white overflow-hidden font-sans">
       {/* Hero Banner (Split Layout with Animation) */}
-      <section className="bg-[#0B1E2E] py-20 md:py-28 px-6 border-b border-white/10 relative overflow-hidden">
+      <section className="relative py-20 md:py-28 px-6 border-b border-white/5 overflow-hidden bg-gradient-to-b from-[#0A1826] to-[#07111C]">
         {/* Background subtle grid */}
-        <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute inset-0 pointer-events-none opacity-25">
           <div 
             className="absolute inset-0" 
             style={{ 
@@ -237,8 +237,8 @@ export function Consulting() {
         </div>
 
         {/* Ambient neon radial glows */}
-        <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#8bc34a]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#1f5fbf]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#8bc34a]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-[#1f5fbf]/15 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-[1280px] mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -255,7 +255,7 @@ export function Consulting() {
                   Systems That Scale.<br />
                   <span className="text-[#8bc34a]">Results That Compound.</span>
                 </h1>
-                <p className="text-base md:text-lg text-white/70 max-w-[620px] mb-8 leading-relaxed font-medium">
+                <p className="text-base md:text-lg text-slate-300 max-w-[620px] mb-8 leading-relaxed font-medium">
                   I design and deploy end-to-end retail operating systems — unifying ERP, inventory, 
                   CRM, finance, and store operations into a single architecture that eliminates 
                   inefficiency and drives measurable growth.
@@ -265,7 +265,7 @@ export function Consulting() {
                 <div className="flex flex-wrap gap-4">
                   <Link
                     to="/#contact"
-                    className="inline-flex items-center gap-2 text-white text-[12px] font-black uppercase tracking-wider px-7 py-4 transition-opacity hover:opacity-90 shadow-lg rounded-sm"
+                    className="inline-flex items-center gap-2 text-[#0b2341] text-[12px] font-black uppercase tracking-wider px-7 py-4 transition-transform hover:scale-[1.02] shadow-lg rounded-sm shadow-[#8bc34a]/10"
                     style={{ background: GREEN }}
                   >
                     <Calendar className="w-4 h-4" />
@@ -273,7 +273,7 @@ export function Consulting() {
                   </Link>
                   <Link
                     to="/#contact"
-                    className="inline-flex items-center gap-2 text-[12px] font-black uppercase tracking-wider px-7 py-4 border-2 transition-all duration-300 hover:bg-[#1f5fbf] hover:text-white hover:border-[#1f5fbf] text-white border-white/30 rounded-sm"
+                    className="inline-flex items-center gap-2 text-[12px] font-black uppercase tracking-wider px-7 py-4 border-2 transition-all duration-300 hover:bg-[#8bc34a] hover:text-[#0b2341] hover:border-[#8bc34a] text-white border-white/20 rounded-sm"
                   >
                     <Clock3 className="w-4 h-4" />
                     Book a 30-min Call
@@ -293,9 +293,8 @@ export function Consulting() {
               <div className="absolute inset-0 bg-[#8bc34a]/5 blur-3xl rounded-full" />
               
               <svg viewBox="0 0 420 420" className="w-full max-w-[420px] h-auto drop-shadow-2xl">
-                {/* Glow filter definition */}
                 <defs>
-                  <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <filter id="neon-glow-premium" x="-20%" y="-20%" width="140%" height="140%">
                     <feGaussianBlur stdDeviation="6" result="blur" />
                     <feMerge>
                       <feMergeNode in="blur" />
@@ -308,61 +307,58 @@ export function Consulting() {
                 <polygon points="210,360 380,270 210,180 40,270" fill="#0A1826" stroke="#1f5fbf" strokeWidth="1.5" strokeDasharray="5 3" opacity="0.6" />
 
                 {/* Animated Data Packet Paths */}
-                {/* Path 1: Database up to Core logic */}
                 <motion.path 
                   d="M120,290 L120,210 L210,165" 
                   fill="none" stroke="#8bc34a" strokeWidth="1.5" opacity="0.6" strokeDasharray="4 4"
                 />
-                
-                {/* Path 2: Database up to CRM */}
                 <motion.path 
                   d="M300,210 L210,165 L210,95" 
                   fill="none" stroke="#1f5fbf" strokeWidth="1.5" opacity="0.6" strokeDasharray="4 4"
                 />
 
                 {/* Moving Pulse Packets */}
-                <motion.circle r="4" fill="#8bc34a" filter="url(#neon-glow)">
+                <motion.circle r="4" fill="#8bc34a" filter="url(#neon-glow-premium)">
                   <animateMotion 
                     path="M120,290 L120,210 L210,165" 
                     dur="4s" repeatCount="indefinite" rotate="auto" 
                   />
                 </motion.circle>
                 
-                <motion.circle r="4" fill="#1f5fbf" filter="url(#neon-glow)">
+                <motion.circle r="4" fill="#1f5fbf" filter="url(#neon-glow-premium)">
                   <animateMotion 
                     path="M300,210 L210,165 L210,95" 
                     dur="3.2s" repeatCount="indefinite" rotate="auto" 
                   />
                 </motion.circle>
 
-                {/* Level 4: Analytics Core Platform (Bottom Stack) */}
-                <g className="cursor-pointer group">
+                {/* Level 4: Analytics Core Platform */}
+                <g className="cursor-pointer">
                   <polygon points="210,310 330,250 210,190 90,250" fill="#0E243A" stroke="#1f5fbf" strokeWidth="2" />
                   <polygon points="210,305 320,250 210,195 100,250" fill="#153654" opacity="0.7" />
                   <text x="210" y="253" textAnchor="middle" fill="#93C5FD" fontSize="8.5" fontWeight="900" letterSpacing="1.5">DATA & ANALYTICS WIDGET</text>
-                  <circle cx="160" cy="235" r="3" fill="#8bc34a" filter="url(#neon-glow)">
+                  <circle cx="160" cy="235" r="3" fill="#8bc34a" filter="url(#neon-glow-premium)">
                     <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" />
                   </circle>
-                  <circle cx="260" cy="235" r="3" fill="#1f5fbf" filter="url(#neon-glow)">
+                  <circle cx="260" cy="235" r="3" fill="#1f5fbf" filter="url(#neon-glow-premium)">
                     <animate attributeName="opacity" values="1;0.2;1" dur="1.5s" repeatCount="indefinite" />
                   </circle>
                 </g>
 
-                {/* Level 3: ERP & Inventory Database Platform (Middle-Lower Stack) */}
+                {/* Level 3: ERP & Inventory Database Platform */}
                 <g transform="translate(0, -50)" className="cursor-pointer">
-                  <polygon points="210,310 330,250 210,190 90,250" fill="#0F2E47" stroke="#8bc34a" strokeWidth="2" filter="url(#neon-glow)" opacity="0.9" />
+                  <polygon points="210,310 330,250 210,190 90,250" fill="#0F2E47" stroke="#8bc34a" strokeWidth="2" filter="url(#neon-glow-premium)" opacity="0.9" />
                   <polygon points="210,305 320,250 210,195 100,250" fill="#194668" />
                   <text x="210" y="253" textAnchor="middle" fill="#8bc34a" fontSize="9" fontWeight="900" letterSpacing="1.5">ERP & INVENTORY SYSTEM</text>
                 </g>
 
-                {/* Level 2: Target Operating Logic Platform (Middle-Upper Stack) */}
+                {/* Level 2: Target Operating Logic Platform */}
                 <g transform="translate(0, -100)" className="cursor-pointer">
                   <polygon points="210,310 330,250 210,190 90,250" fill="#0E243A" stroke="#1f5fbf" strokeWidth="2" />
                   <polygon points="210,305 320,250 210,195 100,250" fill="#153654" />
                   <text x="210" y="253" textAnchor="middle" fill="#93C5FD" fontSize="9" fontWeight="900" letterSpacing="1.5">PROCESS ARCHITECTURE</text>
                 </g>
 
-                {/* Level 1: User Touchpoints & CRM Platform (Top Stack) */}
+                {/* Level 1: User Touchpoints & CRM Platform */}
                 <g transform="translate(0, -150)" className="cursor-pointer">
                   <polygon points="210,310 330,250 210,190 90,250" fill="#123456" stroke="#8bc34a" strokeWidth="2" />
                   <polygon points="210,305 320,250 210,195 100,250" fill="#1A4A75" />
@@ -375,7 +371,7 @@ export function Consulting() {
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                   transform="translate(300, 80)"
                 >
-                  <rect width="90" height="42" rx="6" fill="#0E243A" stroke="#8bc34a" strokeWidth="1.5" filter="url(#neon-glow)" />
+                  <rect width="90" height="42" rx="6" fill="#0E243A" stroke="#8bc34a" strokeWidth="1.5" filter="url(#neon-glow-premium)" />
                   <text x="45" y="18" textAnchor="middle" fill="#A3BFD9" fontSize="7.5" fontWeight="900">EFFICIENCY</text>
                   <text x="45" y="32" textAnchor="middle" fill="#8bc34a" fontSize="13" fontWeight="950">98.4%</text>
                 </motion.g>
@@ -395,22 +391,25 @@ export function Consulting() {
         </div>
       </section>
 
-      {/* Mission & Vision Section (Glassmorphic Elements) */}
-      <section className="py-20 md:py-28 px-6 bg-[#F8FAFC] relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-slate-200/40 rounded-full blur-3xl pointer-events-none" />
-        
+      {/* Mission & Vision Section (Unified Dark Glassmorphism Theme) */}
+      <section className="py-20 md:py-28 px-6 bg-[#07111C] relative overflow-hidden border-b border-white/5">
+        <div className="absolute inset-0 pointer-events-none opacity-20">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#1f5fbf]/10 rounded-full blur-[100px]" />
+        </div>
+
         <div className="max-w-[1280px] mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            {/* Our Mission */}
+            {/* Our Mission Card */}
             <motion.div 
               {...fadeUp(0)}
-              className="lg:col-span-7 bg-[#0b2341] rounded-2xl shadow-xl p-8 md:p-12 text-white flex flex-col justify-between relative overflow-hidden border border-white/5"
+              whileHover={{ borderColor: 'rgba(140, 198, 63, 0.4)', boxShadow: '0 0 25px rgba(140, 198, 63, 0.08)' }}
+              className="lg:col-span-7 bg-[#0b2341]/45 backdrop-blur-md rounded-2xl p-8 md:p-12 text-white flex flex-col justify-between relative overflow-hidden border border-white/10 transition-all duration-300"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#8bc34a]/10 rounded-full blur-2xl pointer-events-none" />
               
               <div>
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/10 border border-white/10 shadow-sm">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 border border-white/10 shadow-sm">
                     <Target className="w-5 h-5 text-[#8bc34a]" />
                   </div>
                   <h2 className="text-2xl font-extrabold tracking-tight">Our Mission</h2>
@@ -431,27 +430,30 @@ export function Consulting() {
               </div>
 
               <div className="border-t border-white/10 mt-8 pt-6">
-                <p className="text-xs md:text-sm text-slate-300 font-semibold italic">
+                <p className="text-xs md:text-sm text-[#8bc34a] font-semibold italic">
                   "Our mission is to help retail jewellery businesses build a data-driven operating model by identifying the right metrics, creating visibility through systems and dashboards, understanding behavioural patterns, and translating insights into meaningful action."
                 </p>
               </div>
             </motion.div>
 
-            {/* Our Vision */}
+            {/* Our Vision Card */}
             <motion.div 
               {...fadeUp(0.15)}
-              className="lg:col-span-5 bg-white rounded-2xl border border-slate-200/70 shadow-lg p-8 md:p-12 flex flex-col justify-between relative overflow-hidden backdrop-blur-md"
+              whileHover={{ borderColor: 'rgba(140, 198, 63, 0.4)', boxShadow: '0 0 25px rgba(140, 198, 63, 0.08)' }}
+              className="lg:col-span-5 bg-[#0b2341]/25 backdrop-blur-md rounded-2xl border border-white/10 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden transition-all duration-300"
             >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[#1f5fbf]/10 rounded-full blur-2xl pointer-events-none" />
+              
               <div>
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#0b2341]/5 border border-slate-100">
-                    <Eye className="w-5 h-5 text-[#0b2341]" />
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 border border-white/10">
+                    <Eye className="w-5 h-5 text-[#8bc34a]" />
                   </div>
-                  <h2 className="text-2xl font-extrabold tracking-tight text-[#0b2341]">Our Vision</h2>
+                  <h2 className="text-2xl font-extrabold tracking-tight text-white">Our Vision</h2>
                 </div>
 
-                <div className="space-y-6 text-sm md:text-base text-slate-600 leading-relaxed font-medium">
-                  <p className="text-[#0b2341] font-bold text-base md:text-lg leading-snug">
+                <div className="space-y-6 text-sm md:text-base text-slate-300 leading-relaxed font-medium">
+                  <p className="text-[#8bc34a] font-bold text-base md:text-lg leading-snug">
                     To help retail jewellery businesses transition from reactive operations to data-driven, system-led organizations that are scalable, profitable, customer-centric, and future-ready.
                   </p>
                   <p>
@@ -460,7 +462,7 @@ export function Consulting() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-slate-100 flex items-center gap-4">
+              <div className="mt-8 pt-8 border-t border-white/10 flex items-center gap-4">
                 <div className="w-2 h-2 rounded-full" style={{ background: GREEN }} />
                 <span className="text-xs uppercase tracking-widest font-black text-slate-400">Anchor Your Growth Strategy</span>
               </div>
@@ -469,26 +471,28 @@ export function Consulting() {
         </div>
       </section>
 
-      {/* Core Pillars & Objectives Section */}
-      <section className="py-20 md:py-28 px-6 bg-white border-b border-slate-100">
-        <div className="max-w-[1280px] mx-auto">
+      {/* Core Pillars & Objectives Section (Glassmorphic dark design) */}
+      <section className="py-20 md:py-28 px-6 bg-[#07111C] border-b border-white/5 relative">
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#8bc34a]/5 rounded-full blur-[100px] pointer-events-none" />
+        
+        <div className="max-w-[1280px] mx-auto relative z-10">
           {/* Section Header */}
           <div className="text-center max-w-[800px] mx-auto mb-16">
             <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#8bc34a] block mb-3">Core Pillars & Objectives</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2341] tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
               Strategic Philosophy & Direction
             </h2>
-            <p className="text-sm md:text-base text-slate-500 font-medium">
+            <p className="text-sm md:text-base text-slate-300 font-medium">
               We anchor every growth strategy in systems, technology, and customer experience.
             </p>
           </div>
 
-          {/* Three Main Pillars Cards (Glowing Borders on Hover) */}
+          {/* Three Main Pillars Cards (Glassmorphic Glows) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <motion.div 
               {...fadeUp(0)}
-              whileHover={{ y: -6, boxShadow: `0 10px 30px rgba(140, 198, 63, 0.15)` }}
-              className="bg-[#0b2341] text-white p-8 rounded-2xl shadow-md border-t-4 border-[#8bc34a] flex flex-col justify-between transition-all duration-300"
+              whileHover={{ y: -6, borderColor: 'rgba(140, 198, 63, 0.5)', boxShadow: '0 0 30px rgba(140, 198, 63, 0.15)' }}
+              className="bg-[#0b2341]/40 backdrop-blur-md text-white p-8 rounded-2xl border border-white/10 border-t-4 border-t-[#8bc34a] flex flex-col justify-between transition-all duration-300"
             >
               <div>
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#8bc34a] block mb-3">Pillar 01</span>
@@ -503,8 +507,8 @@ export function Consulting() {
 
             <motion.div 
               {...fadeUp(0.1)}
-              whileHover={{ y: -6, boxShadow: `0 10px 30px rgba(140, 198, 63, 0.15)` }}
-              className="bg-[#0b2341] text-white p-8 rounded-2xl shadow-md border-t-4 border-[#8bc34a] flex flex-col justify-between transition-all duration-300"
+              whileHover={{ y: -6, borderColor: 'rgba(140, 198, 63, 0.5)', boxShadow: '0 0 30px rgba(140, 198, 63, 0.15)' }}
+              className="bg-[#0b2341]/40 backdrop-blur-md text-white p-8 rounded-2xl border border-white/10 border-t-4 border-t-[#8bc34a] flex flex-col justify-between transition-all duration-300"
             >
               <div>
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#8bc34a] block mb-3">Pillar 02</span>
@@ -519,8 +523,8 @@ export function Consulting() {
 
             <motion.div 
               {...fadeUp(0.2)}
-              whileHover={{ y: -6, boxShadow: `0 10px 30px rgba(140, 198, 63, 0.15)` }}
-              className="bg-[#0b2341] text-white p-8 rounded-2xl shadow-md border-t-4 border-[#8bc34a] flex flex-col justify-between transition-all duration-300"
+              whileHover={{ y: -6, borderColor: 'rgba(140, 198, 63, 0.5)', boxShadow: '0 0 30px rgba(140, 198, 63, 0.15)' }}
+              className="bg-[#0b2341]/40 backdrop-blur-md text-white p-8 rounded-2xl border border-white/10 border-t-4 border-t-[#8bc34a] flex flex-col justify-between transition-all duration-300"
             >
               <div>
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#8bc34a] block mb-3">Pillar 03</span>
@@ -534,26 +538,26 @@ export function Consulting() {
             </motion.div>
           </div>
 
-          {/* Formula Ribbon */}
+          {/* Formula Ribbon (Dark theme) */}
           <motion.div 
             {...fadeUp(0.15)}
-            className="bg-[#F8FAFC] border border-slate-200/60 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-20 text-center md:text-left shadow-sm"
+            className="bg-[#0b2341]/20 border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-20 text-center md:text-left shadow-sm backdrop-blur-md"
           >
-            <span className="text-xs font-black uppercase tracking-widest text-slate-400">Core Equation:</span>
-            <div className="flex flex-wrap items-center justify-center gap-3 text-xs md:text-sm font-extrabold tracking-wide text-[#0b2341]">
-              <span className="bg-white px-3 py-2 border border-slate-200 rounded shadow-sm hover:border-[#8bc34a] transition-all">Better Systems</span>
+            <span className="text-xs font-black uppercase tracking-widest text-[#8bc34a]">Core Equation:</span>
+            <div className="flex flex-wrap items-center justify-center gap-3 text-xs md:text-sm font-extrabold tracking-wide text-white">
+              <span className="bg-[#0B1E2E] px-3 py-2 border border-white/5 rounded shadow-sm hover:border-[#8bc34a] transition-all">Better Systems</span>
               <ArrowRight className="w-4 h-4 text-[#8bc34a] animate-pulse" />
-              <span className="bg-white px-3 py-2 border border-slate-200 rounded shadow-sm hover:border-[#8bc34a] transition-all">Better Operations</span>
+              <span className="bg-[#0B1E2E] px-3 py-2 border border-white/5 rounded shadow-sm hover:border-[#8bc34a] transition-all">Better Operations</span>
               <ArrowRight className="w-4 h-4 text-[#8bc34a] animate-pulse" />
-              <span className="bg-white px-3 py-2 border border-slate-200 rounded shadow-sm hover:border-[#8bc34a] transition-all">Better Customer Experience</span>
+              <span className="bg-[#0B1E2E] px-3 py-2 border border-white/5 rounded shadow-sm hover:border-[#8bc34a] transition-all">Better Customer Experience</span>
               <ArrowRight className="w-4 h-4 text-[#8bc34a] animate-pulse" />
-              <span className="bg-[#8bc34a] text-white px-3 py-2 rounded shadow-sm shadow-[#8bc34a]/20">Better Business Outcomes</span>
+              <span className="bg-[#8bc34a] text-[#0b2341] px-3 py-2 rounded shadow-sm shadow-[#8bc34a]/20">Better Business Outcomes</span>
             </div>
           </motion.div>
 
-          {/* Functional Categorized Switcher */}
-          <div className="bg-[#F8FAFC] border border-slate-200/50 rounded-2xl p-6 md:p-8">
-            <h3 className="text-xl font-extrabold text-[#0b2341] tracking-tight mb-6 text-center lg:text-left">
+          {/* Functional Categorized Switcher (Dark Mode Interface) */}
+          <div className="bg-[#0b2341]/25 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-md">
+            <h3 className="text-xl font-extrabold text-white tracking-tight mb-6 text-center lg:text-left">
               Detailed Functional Objectives
             </h3>
             
@@ -569,8 +573,8 @@ export function Consulting() {
                       onClick={() => setActiveCategory(cat.id)}
                       className={`flex items-center gap-3 px-4 py-3.5 text-xs font-black uppercase tracking-wider text-left transition-all duration-300 rounded-lg border ${
                         isActive
-                          ? 'bg-[#0b2341] text-white border-[#0b2341] shadow-md'
-                          : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-[#0b2341]'
+                          ? 'bg-[#8bc34a] text-[#0b2341] border-[#8bc34a] shadow-md shadow-[#8bc34a]/10 font-black'
+                          : 'bg-[#0B1E2E] text-slate-300 border-white/5 hover:bg-white/5 hover:text-white'
                       }`}
                     >
                       <Icon className="w-4 h-4 shrink-0" />
@@ -580,8 +584,14 @@ export function Consulting() {
                 })}
               </div>
 
-              {/* Points display column */}
-              <div className="lg:col-span-8 bg-white border border-slate-200/60 rounded-xl p-6 md:p-8 min-h-[340px] shadow-inner">
+              {/* Points display column (Terminals style) */}
+              <div className="lg:col-span-8 bg-[#0B1E2E] border border-white/10 rounded-xl p-6 md:p-8 min-h-[340px] shadow-inner relative">
+                <div className="absolute top-3 right-4 flex gap-1.5 opacity-40">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                </div>
+                
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeCategory}
@@ -589,17 +599,17 @@ export function Consulting() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -15 }}
                     transition={{ duration: 0.3 }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3"
                   >
                     {currentCategory.points.map((point, idx) => (
                       <div 
                         key={idx}
-                        className="flex items-start gap-3 bg-[#F8FAFC] border border-slate-100 p-4 rounded-lg hover:border-slate-200 hover:bg-white hover:shadow-md transition-all duration-300"
+                        className="flex items-start gap-3 bg-[#0c2340]/40 border border-white/5 p-4 rounded-lg hover:border-[#8bc34a]/30 hover:bg-[#0c2340]/70 hover:shadow-md transition-all duration-300"
                       >
                         <div className="w-5 h-5 rounded-full bg-[#8bc34a]/20 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
                           <Check className="w-3 h-3 text-[#8bc34a]" />
                         </div>
-                        <span className="text-xs md:text-sm text-slate-700 font-semibold leading-relaxed">
+                        <span className="text-xs md:text-sm text-slate-200 font-semibold leading-relaxed">
                           {point}
                         </span>
                       </div>
@@ -613,24 +623,25 @@ export function Consulting() {
         </div>
       </section>
 
-      {/* NEW: Step-by-Step Consulting Roadmap Timeline */}
-      <section className="py-20 md:py-28 px-6 bg-white border-b border-slate-100 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-slate-50 rounded-full blur-3xl pointer-events-none" />
-        
+      {/* Step-by-Step Consulting Roadmap Timeline (Unified Dark Glassmorphism Theme) */}
+      <section className="py-20 md:py-28 px-6 bg-[#07111C] border-b border-white/5 relative overflow-hidden">
+        {/* Animated timeline background radial */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-[#1f5fbf]/5 rounded-full blur-[120px] pointer-events-none" />
+
         <div className="max-w-[1280px] mx-auto relative z-10">
           <div className="text-center max-w-[800px] mx-auto mb-20">
             <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#8bc34a] block mb-3">Engagement Process</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2341] tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
               The Consulting Engagement Roadmap
             </h2>
-            <p className="text-sm md:text-base text-slate-500 font-medium">
+            <p className="text-sm md:text-base text-slate-300 font-medium">
               A structured, 4-phase lifecycle to transform your retail jewellery operations from reactive firefighting to data-driven scale.
             </p>
           </div>
 
           <div className="relative">
-            {/* Pulsing Connector Line (Dotted Track) */}
-            <div className="hidden lg:block absolute top-[55px] left-[5%] right-[5%] h-[2px] bg-slate-200/60 border-t-2 border-dashed border-slate-300 z-0" />
+            {/* Connector Line (Dotted Track) */}
+            <div className="hidden lg:block absolute top-[55px] left-[5%] right-[5%] h-[2px] bg-white/5 border-t-2 border-dashed border-white/10 z-0" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
               {roadmapSteps.map((step, idx) => {
@@ -639,27 +650,27 @@ export function Consulting() {
                   <motion.div
                     key={idx}
                     {...fadeUp(idx * 0.1)}
-                    whileHover={{ y: -6 }}
-                    className="flex flex-col items-center lg:items-start text-center lg:text-left bg-white border border-slate-200/70 p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-xl hover:border-[#8bc34a] transition-all duration-300"
+                    whileHover={{ y: -6, borderColor: 'rgba(140, 198, 63, 0.4)', boxShadow: '0 0 25px rgba(140, 198, 63, 0.08)' }}
+                    className="flex flex-col items-center lg:items-start text-center lg:text-left bg-[#0b2341]/20 backdrop-blur-md border border-white/10 p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300"
                   >
                     {/* Circle Node with Icon */}
-                    <div className="w-16 h-16 rounded-full bg-[#0b2341] text-white flex items-center justify-center mb-6 shadow-lg relative border-4 border-white">
+                    <div className="w-16 h-16 rounded-full bg-[#0b2341] text-white border-2 border-white/10 flex items-center justify-center mb-6 shadow-lg relative">
                       <Icon className="w-6 h-6 text-[#8bc34a]" />
-                      <span className="absolute -top-1 -right-1 bg-[#8bc34a] text-white text-[8px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow">
+                      <span className="absolute -top-1 -right-1 bg-[#8bc34a] text-[#0b2341] text-[8px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#0b2341] shadow">
                         {step.phase}
                       </span>
                     </div>
 
-                    <h3 className="text-base md:text-lg font-black text-[#0b2341] mb-3">
+                    <h3 className="text-base md:text-lg font-black text-white mb-3">
                       {step.title}
                     </h3>
-                    <p className="text-xs text-slate-500 leading-relaxed font-medium mb-5">
+                    <p className="text-xs text-slate-300 leading-relaxed font-medium mb-5">
                       {step.description}
                     </p>
 
-                    <div className="mt-auto w-full pt-4 border-t border-slate-100 flex flex-col gap-2">
+                    <div className="mt-auto w-full pt-4 border-t border-white/5 flex flex-col gap-2">
                       {step.details.map((detail, dIdx) => (
-                        <div key={dIdx} className="flex items-center gap-2 text-[10.5px] font-bold text-slate-600">
+                        <div key={dIdx} className="flex items-center gap-2 text-[10.5px] font-bold text-slate-300">
                           <div className="w-1 h-1 rounded-full bg-[#8bc34a] shrink-0" />
                           <span>{detail}</span>
                         </div>
@@ -673,15 +684,15 @@ export function Consulting() {
         </div>
       </section>
 
-      {/* What We Help Businesses Achieve (Glassmorphic Gradients) */}
-      <section className="py-20 md:py-28 px-6 bg-[#F8FAFC]">
+      {/* What We Help Businesses Achieve (Unified Dark Glassmorphism Theme) */}
+      <section className="py-20 md:py-28 px-6 bg-[#07111C] border-b border-white/5">
         <div className="max-w-[1280px] mx-auto">
           <div className="text-center max-w-[800px] mx-auto mb-16">
             <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#8bc34a] block mb-3">Strategic Outcomes</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2341] tracking-tight mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
               What We Help Businesses Achieve
             </h2>
-            <p className="text-sm md:text-base text-slate-500 font-medium">
+            <p className="text-sm md:text-base text-slate-300 font-medium">
               We focus on building critical foundational blocks that allow retail jewellery enterprises to grow with predictability and efficiency.
             </p>
           </div>
@@ -693,24 +704,24 @@ export function Consulting() {
                 <motion.div
                   key={idx}
                   {...fadeUp(idx * 0.05)}
-                  whileHover={{ y: -6 }}
-                  className="bg-white border border-slate-200/50 hover:border-slate-300 hover:shadow-lg transition-all duration-300 rounded-xl p-6 md:p-8 flex flex-col gap-4 group relative overflow-hidden"
+                  whileHover={{ y: -6, borderColor: 'rgba(140, 198, 63, 0.4)', boxShadow: '0 0 25px rgba(140, 198, 63, 0.08)' }}
+                  className="bg-[#0b2341]/20 backdrop-blur-md border border-white/10 hover:shadow-lg transition-all duration-300 rounded-xl p-6 md:p-8 flex flex-col gap-4 group relative overflow-hidden"
                 >
                   {/* Glowing background card element */}
                   <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#8bc34a]/5 to-[#1f5fbf]/5 rounded-bl-full pointer-events-none group-hover:scale-110 transition-transform duration-300" />
                   
-                  <div className="w-12 h-12 rounded-lg bg-[#0b2341]/5 flex items-center justify-center group-hover:bg-[#0b2341] transition-colors duration-300 z-10">
-                    <Icon className="w-6 h-6 text-[#0b2341] group-hover:text-white transition-colors duration-300" />
+                  <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center group-hover:bg-[#8bc34a] transition-colors duration-300 z-10">
+                    <Icon className="w-6 h-6 text-[#8bc34a] group-hover:text-[#0b2341] transition-colors duration-300" />
                   </div>
                   
                   <div className="flex items-center gap-2 z-10">
-                    <span className="text-slate-300 text-xs font-black select-none">0{idx + 1}.</span>
-                    <h3 className="text-base md:text-lg font-bold text-[#0b2341]">
+                    <span className="text-slate-500 text-xs font-black select-none">0{idx + 1}.</span>
+                    <h3 className="text-base md:text-lg font-bold text-white">
                       {item.title}
                     </h3>
                   </div>
                   
-                  <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium z-10">
+                  <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-medium z-10">
                     {item.description}
                   </p>
                 </motion.div>
@@ -720,8 +731,8 @@ export function Consulting() {
         </div>
       </section>
 
-      {/* Our Core Beliefs */}
-      <section className="py-20 md:py-28 px-6 bg-[#0b2341] text-white relative overflow-hidden">
+      {/* Our Core Beliefs (Unified Dark Glassmorphism Theme) */}
+      <section className="py-20 md:py-28 px-6 bg-[#0B1E2E] border-b border-white/5 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-5">
           <div 
             className="absolute inset-0" 
@@ -740,7 +751,7 @@ export function Consulting() {
             {/* Header Column */}
             <div className="lg:col-span-5 flex flex-col justify-center gap-4">
               <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#8bc34a]">Guiding Principles</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight">
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white">
                 Our Core Beliefs
               </h2>
               <p className="text-sm md:text-base text-slate-300 leading-relaxed font-medium max-w-[450px]">
@@ -771,7 +782,7 @@ export function Consulting() {
       </section>
 
       {/* Interconnected System Section */}
-      <section className="border-t border-slate-100 bg-white">
+      <section className="border-t border-white/5 bg-[#07111C]">
         <BusinessOSSection />
       </section>
     </div>
