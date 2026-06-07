@@ -92,16 +92,16 @@ export function HeroSection() {
     <div className="bg-white w-full">
 
       {/* ════════════════════ MAIN HERO ════════════════════ */}
-      <div className="relative bg-white overflow-hidden">
+      <div className="relative bg-white overflow-hidden pt-8 lg:pt-14">
         <div 
           className="max-w-[1280px] mx-auto px-6 lg:px-10
                      grid grid-cols-1 lg:grid-cols-[40%_60%]
-                     items-center gap-6 lg:gap-0 relative z-10
+                     items-start gap-6 lg:gap-0 relative z-10
                      lg:bg-[url('/hero_background.jpg')] lg:bg-contain lg:bg-right lg:bg-no-repeat"
         >
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:py-24 relative z-10">
+          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:pt-36 lg:pb-16 relative z-10">
 
             {/* Badge */}
             <motion.span
@@ -171,51 +171,10 @@ export function HeroSection() {
                 Book a 30-min Call
               </a>
             </motion.div>
-
-            {/* Trusted by Retail Leaders */}
-            <motion.div
-              {...fadeUp(0.30)}
-              className="mt-8 pt-6 border-t border-gray-100 flex flex-col gap-3.5"
-            >
-              <span className="text-[9.5px] font-black uppercase tracking-[0.14em] text-gray-400">
-                Trusted by Retail Leaders
-              </span>
-              <div className="flex flex-wrap items-center gap-x-6 gap-y-4 opacity-[0.45] grayscale hover:grayscale-0 transition-all duration-300">
-                {/* Tanishq */}
-                <div className="flex items-center gap-1.5">
-                  <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#0b2341] fill-current">
-                    <path d="M12 2L2 22h20L12 2zm0 3.8L18.4 18H5.6L12 5.8z" />
-                  </svg>
-                  <span className="font-serif text-[10px] font-extrabold tracking-[0.15em] text-[#0b2341]">TANISHQ</span>
-                </div>
-                {/* Kalyan */}
-                <div className="flex flex-col items-start leading-none">
-                  <span className="font-serif text-[10.5px] font-black tracking-wider text-[#0b2341]">KALYAN</span>
-                  <span className="text-[6px] font-bold tracking-[0.18em] text-[#0b2341] mt-0.5">JEWELLERS</span>
-                </div>
-                {/* GRT */}
-                <div className="flex items-center gap-1 leading-none">
-                  <span className="font-sans text-[11px] font-black tracking-tight text-[#0b2341]">GRT</span>
-                  <span className="text-[5.5px] font-black tracking-widest text-[#0b2341] border-l border-current pl-1 py-0.5">JEWELLERS</span>
-                </div>
-                {/* Jos Alukkas */}
-                <div className="flex items-center gap-1">
-                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-[#0b2341] fill-current">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-10 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                  </svg>
-                  <span className="font-serif text-[8.5px] font-bold tracking-wider text-[#0b2341] leading-none">JOS ALUKKAS</span>
-                </div>
-                {/* Senco */}
-                <div className="flex flex-col items-start leading-none">
-                  <span className="font-serif text-[10.5px] font-black tracking-wider text-[#0b2341]">SENCO</span>
-                  <span className="text-[5px] font-black tracking-[0.2em] text-[#0b2341] mt-0.5">GOLD & DIAMONDS</span>
-                </div>
-              </div>
-            </motion.div>
           </div>
 
           {/* ── RIGHT COLUMN — Spacer on desktop, fallback image on mobile ── */}
-          <div className="w-full relative z-10 py-6 lg:h-[560px] pointer-events-none flex items-center">
+          <div className="w-full relative z-10 py-6 lg:h-[600px] pointer-events-none flex items-center">
             <img
               src="/hero_background.jpg"
               alt="Retail Business Systems consulting framework"
