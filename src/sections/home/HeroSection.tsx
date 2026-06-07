@@ -220,7 +220,7 @@ export function HeroSection() {
             style={{ mixBlendMode: 'multiply', isolation: 'auto' }}
           >
             <img
-              src="/hero_illustration.png"
+              src="/hero_illustration.jpg"
               alt="Retail Business Systems consulting framework — consultant, architecture stack, team, jewellery store"
               className="w-full h-auto block"
               style={{ maxHeight: '620px', objectFit: 'contain', mixBlendMode: 'multiply' }}
