@@ -8,6 +8,7 @@ import { Insights } from './pages/Insights';
 import { WorkflowDetail } from './pages/WorkflowDetail';
 import { Admin } from './pages/Admin';
 import { Portal } from './pages/Portal';
+import { Consulting } from './pages/Consulting';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/consulting" element={<Consulting />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/insights" element={<Insights />} />
