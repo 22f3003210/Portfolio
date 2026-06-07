@@ -8,7 +8,7 @@ import { CalendarBooking } from '../../components/CalendarBooking';
 export function CTASection() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   return (
-    <section className="bg-white section-padding-lg">
+    <section id="contact" className="bg-white section-padding-lg">
       <div className="w-full px-6">
         <div className="max-w-[1200px] mx-auto">
           <ScrollReveal>

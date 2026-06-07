@@ -28,6 +28,13 @@ export function PageShell({ children }: PageShellProps) {
     setTimeout(() => setToast(null), 3500);
   };
 
+  // Scroll to top on pathname change (unless there is a hash)
+  useEffect(() => {
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.hash]);
+
   // ── Page-view + click analytics ──────────────────────────────────────
   useEffect(() => {
     logPageView(location.pathname, document.referrer);

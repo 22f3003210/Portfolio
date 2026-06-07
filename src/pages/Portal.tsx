@@ -240,11 +240,19 @@ async function sha256(message: string) {
 }
 
 export function Portal() {
-  const { isPortalAuthenticated, setPortalAuthenticated, hidePortal } = usePortal();
+  const { isPortalAuthenticated, setPortalAuthenticated, hidePortal, isPortalVisible } = usePortal();
   const isAuthenticated = isPortalAuthenticated;
+  const navigate = useNavigate();
   const [passcode, setPasscode] = useState('');
   const [authError, setAuthError] = useState('');
   const [activeTab, setActiveTab] = useState<'workflows' | 'kpis' | 'checklist' | 'report'>('workflows');
+
+  // Redirect to home if portal visibility is off and not authenticated (e.g. on page refresh)
+  useEffect(() => {
+    if (!isPortalVisible && !isPortalAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [isPortalVisible, isPortalAuthenticated, navigate]);
 
   // Checklist State — kept in localStorage so audit progress persists across sessions
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>(() => {
@@ -287,7 +295,6 @@ export function Portal() {
     }
   };
 
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     hidePortal(); // clears both portal visibility and auth in one call

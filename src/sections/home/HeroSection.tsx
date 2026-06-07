@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Calendar, Clock3 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 // ─── Brand colours ────────────────────────────────────────────────────────────
 const NAVY  = '#0b2341';
@@ -18,6 +19,7 @@ const CAPS = [
     ),
     title: 'BUSINESS ANALYSIS',
     desc: 'Uncover gaps, root causes and growth opportunities.',
+    hoverClass: 'hover:border-[#1f5fbf]/30 hover:bg-blue-50/20',
   },
   {
     icon: (
@@ -29,6 +31,7 @@ const CAPS = [
     ),
     title: 'STRATEGY &\nTRANSFORMATION',
     desc: 'Design strategies that drive real change.',
+    hoverClass: 'hover:border-[#8bc34a]/30 hover:bg-green-50/20',
   },
   {
     icon: (
@@ -41,6 +44,7 @@ const CAPS = [
     ),
     title: 'OPERATIONS',
     desc: 'Design efficient, scalable and standard processes.',
+    hoverClass: 'hover:border-[#1f5fbf]/30 hover:bg-blue-50/20',
   },
   {
     icon: (
@@ -53,6 +57,7 @@ const CAPS = [
     ),
     title: 'PERFORMANCE\nMANAGEMENT',
     desc: 'Build KPI systems that drive accountability.',
+    hoverClass: 'hover:border-[#8bc34a]/30 hover:bg-green-50/20',
   },
   {
     icon: (
@@ -63,6 +68,7 @@ const CAPS = [
     ),
     title: 'RETAIL &\nJEWELLERY',
     desc: 'Optimize retail operations, inventory and customer experience.',
+    hoverClass: 'hover:border-[#8bc34a]/30 hover:bg-green-50/20',
   },
   {
     icon: (
@@ -76,6 +82,7 @@ const CAPS = [
     ),
     title: 'TECHNOLOGY\nENABLEMENT',
     desc: 'Leverage technology to automate and scale.',
+    hoverClass: 'hover:border-[#1f5fbf]/30 hover:bg-blue-50/20',
   },
 ];
 
@@ -92,21 +99,21 @@ export function HeroSection() {
     <div className="bg-white w-full">
 
       {/* ════════════════════ MAIN HERO ════════════════════ */}
-      <div className="relative bg-white overflow-hidden pt-8 lg:pt-14">
+      <div className="relative bg-white overflow-hidden">
         <div 
           className="max-w-[1280px] mx-auto px-6 lg:px-10
-                     grid grid-cols-1 lg:grid-cols-[40%_60%]
-                     items-start gap-6 lg:gap-0 relative z-10
-                     lg:bg-[url('/hero_background.jpg')] lg:bg-contain lg:bg-right lg:bg-no-repeat"
+                     grid grid-cols-1 lg:grid-cols-[38%_62%]
+                     items-stretch gap-6 lg:gap-0 relative z-10
+                     lg:bg-[url('/hero_background.jpg')] lg:bg-cover lg:bg-[position:right_center] lg:bg-no-repeat"
         >
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:pt-36 lg:pb-16 relative z-10">
+          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:pt-20 lg:pb-32 relative z-10 max-w-[460px] justify-center">
 
             {/* Badge */}
             <motion.span
               {...fadeUp(0)}
-              className="self-start px-3 py-[5px] text-[9px] font-black uppercase tracking-[0.14em] border"
+              className="self-start px-3 py-[5px] text-[11px] font-black uppercase tracking-[0.14em] border rounded-sm"
               style={{ color: BLUE, borderColor: `${BLUE}55` }}
             >
               Retail Business Management Consultant
@@ -116,60 +123,59 @@ export function HeroSection() {
             <motion.h1 {...fadeUp(0.07)} className="leading-[1.04] tracking-tight">
               <span
                 className="block font-black uppercase whitespace-nowrap"
-                style={{ color: NAVY, fontSize: 'clamp(26px, 3.8vw, 44px)' }}
+                style={{ color: NAVY, fontSize: 'clamp(28px, 3.8vw, 48px)' }}
               >
-                YOU CAN'T SCALE
+                YOU CAN’T SCALE
               </span>
               <span
                 className="block font-black uppercase whitespace-nowrap"
-                style={{ color: BLUE, fontSize: 'clamp(26px, 3.8vw, 44px)' }}
+                style={{ color: BLUE, fontSize: 'clamp(28px, 3.8vw, 48px)' }}
               >
-                WHAT YOU CAN'T SEE.
+                WHAT YOU CAN’T SEE.
               </span>
             </motion.h1>
 
             {/* Green rule */}
             <motion.div
               {...fadeUp(0.12)}
-              className="w-9 h-[3px] rounded-full"
+              className="w-12 h-[3.5px] rounded-full"
               style={{ background: GREEN }}
             />
 
             {/* Description */}
-            <motion.p {...fadeUp(0.16)} className="text-[13px] text-gray-700 leading-relaxed max-w-[340px]">
-              I design operational frameworks, KPI architectures,
-              and decision systems that help retail businesses
-              scale with confidence.
+            <motion.p {...fadeUp(0.16)} className="text-[14.5px] text-gray-700 leading-relaxed max-w-[500px] lg:max-w-none">
+              I design operational frameworks, KPI architectures, and decision systems<br className="hidden sm:inline" /> that help retail businesses scale with confidence.
             </motion.p>
 
             {/* Quote */}
-            <motion.div {...fadeUp(0.20)} className="max-w-[340px]">
-              <span className="text-[40px] font-black leading-none block -mb-2" style={{ color: GREEN }}>"</span>
-              <p className="text-[12.5px] italic text-gray-600 leading-relaxed">
-                "The next decade of jewellery retail belongs to the systemized.
-                The rest will be managed out of existence."
-              </p>
-              <span className="text-[40px] font-black leading-none block text-right -mt-3" style={{ color: GREEN }}>"</span>
+            <motion.div {...fadeUp(0.20)} className="max-w-[500px] lg:max-w-none relative flex gap-1.5">
+              <span className="text-[42px] font-serif font-black leading-none shrink-0" style={{ color: GREEN }}>“</span>
+              <div className="flex flex-col">
+                <p className="text-[14px] italic text-gray-600 leading-relaxed font-semibold">
+                  The next decade of jewellery retail belongs to the systemized.<br className="hidden sm:inline" /> The rest will be managed out of existence.
+                </p>
+              </div>
+              <span className="text-[42px] font-serif font-black leading-none self-end shrink-0" style={{ color: GREEN }}>”</span>
             </motion.div>
 
             {/* CTA Buttons */}
             <motion.div {...fadeUp(0.25)} className="flex flex-wrap gap-3 pt-1 clear-both">
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 text-white text-[10.5px] font-black uppercase tracking-wider px-5 py-[11px] transition-opacity hover:opacity-90 shadow-md"
+              <Link
+                to="/#contact"
+                className="inline-flex items-center gap-2 text-white text-[12px] font-black uppercase tracking-wider px-6 py-[13px] transition-opacity hover:opacity-90 shadow-md rounded-sm"
                 style={{ background: GREEN }}
               >
                 <Calendar className="w-4 h-4" />
                 Connect Me Now
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 text-[10.5px] font-black uppercase tracking-wider px-5 py-[11px] border-2 transition-colors hover:bg-gray-50/50 backdrop-blur-sm"
-                style={{ color: NAVY, borderColor: NAVY }}
+              </Link>
+              <Link
+                to="/#contact"
+                className="inline-flex items-center gap-2 text-[12px] font-black uppercase tracking-wider px-6 py-[13px] border-2 transition-all duration-300 hover:bg-[#1f5fbf] hover:text-white hover:border-[#1f5fbf] backdrop-blur-sm rounded-sm"
+                style={{ color: BLUE, borderColor: BLUE }}
               >
                 <Clock3 className="w-4 h-4" />
                 Book a 30-min Call
-              </a>
+              </Link>
             </motion.div>
           </div>
 
@@ -188,24 +194,22 @@ export function HeroSection() {
 
       {/* ════════════════════ BOTTOM CAPABILITIES STRIP ════════════════════ */}
       <div className="relative px-6 pb-16 z-20 bg-gray-50/30">
-        <div className="max-w-[1280px] mx-auto bg-white rounded-[16px] shadow-xl border border-gray-100/60 p-6 md:p-8 -mt-8 relative z-20">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-0">
-            {CAPS.map((cap, index) => (
+        <div className="max-w-[1280px] mx-auto bg-white rounded-[16px] shadow-2xl border border-gray-100/60 p-4 md:p-6 -mt-8 lg:-mt-16 relative z-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            {CAPS.map((cap) => (
               <div 
                 key={cap.title} 
-                className={`flex flex-col gap-2 ${
-                  index !== 0 ? 'lg:border-l lg:border-gray-100 lg:pl-6' : ''
-                }`}
+                className={`group p-4 flex flex-col gap-2.5 border border-transparent rounded-xl transition-all duration-300 cursor-pointer hover:shadow-md hover:-translate-y-1 ${cap.hoverClass}`}
               >
-                <div className="mb-1">{cap.icon}</div>
+                <div className="mb-1 transition-transform duration-300 group-hover:scale-105">{cap.icon}</div>
                 <p
-                  className="text-[8.5px] font-black uppercase tracking-wide leading-tight whitespace-pre-line"
+                  className="text-[11.5px] font-black uppercase tracking-wide leading-tight whitespace-pre-line"
                   style={{ color: NAVY }}
                 >
                   {cap.title}
                 </p>
-                <p className="text-[8.5px] text-gray-500 leading-snug">{cap.desc}</p>
-                <div className="w-6 h-[2.5px] rounded-full mt-1" style={{ background: GREEN }} />
+                <p className="text-[11px] text-gray-500 leading-relaxed">{cap.desc}</p>
+                <div className="w-10 h-[3px] rounded-full mt-auto transition-all duration-300 group-hover:w-16" style={{ background: GREEN }} />
               </div>
             ))}
           </div>
