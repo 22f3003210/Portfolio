@@ -92,13 +92,54 @@ export function HeroSection() {
     <div className="bg-white w-full">
 
       {/* ════════════════════ MAIN HERO ════════════════════ */}
-      <div className="bg-white border-b border-gray-100 overflow-hidden">
+      <div className="relative bg-white border-b border-gray-100 overflow-hidden" style={{
+        backgroundImage: `
+          radial-gradient(#1f5fbf0a 1.2px, transparent 1.2px),
+          linear-gradient(to right, #1f5fbf05 1px, transparent 1px),
+          linear-gradient(to bottom, #1f5fbf05 1px, transparent 1px)
+        `,
+        backgroundSize: '24px 24px',
+        backgroundPosition: 'center center'
+      }}>
+        {/* Decorative blueprint elements in background */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.15] select-none">
+          {/* Circular blueprint grid lines */}
+          <svg className="absolute w-[800px] h-[800px] -right-[100px] -top-[100px] text-[#1f5fbf]" viewBox="0 0 800 800" fill="none">
+            <circle cx="400" cy="400" r="380" stroke="currentColor" strokeWidth="0.8" strokeDasharray="4 6" />
+            <circle cx="400" cy="400" r="300" stroke="currentColor" strokeWidth="0.5" />
+            <circle cx="400" cy="400" r="200" stroke="currentColor" strokeWidth="0.8" strokeDasharray="8 4" />
+            <circle cx="400" cy="400" r="100" stroke="currentColor" strokeWidth="0.5" />
+            
+            {/* Crosshair lines */}
+            <line x1="400" y1="0" x2="400" y2="800" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" />
+            <line x1="0" y1="400" x2="800" y2="400" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" />
+            
+            {/* Angle lines */}
+            <line x1="117.2" y1="117.2" x2="682.8" y2="682.8" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+            <line x1="117.2" y1="682.8" x2="682.8" y2="117.2" stroke="currentColor" strokeWidth="0.5" opacity="0.5" />
+            
+            {/* Coordinate markings */}
+            <text x="410" y="50" fill="currentColor" fontSize="10" className="font-mono" opacity="0.6">Y: 800</text>
+            <text x="410" y="760" fill="currentColor" fontSize="10" className="font-mono" opacity="0.6">Y: 0</text>
+            <text x="50" y="390" fill="currentColor" fontSize="10" className="font-mono" opacity="0.6">X: 0</text>
+            <text x="710" y="390" fill="currentColor" fontSize="10" className="font-mono" opacity="0.6">X: 800</text>
+          </svg>
+
+          {/* Secondary grid detail on the bottom left */}
+          <svg className="absolute w-[400px] h-[400px] -left-[100px] bottom-[50px] text-[#1f5fbf]" viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="0.5" />
+            <circle cx="200" cy="200" r="120" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
+            <line x1="200" y1="0" x2="200" y2="400" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+            <line x1="0" y1="200" x2="400" y2="200" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
+          </svg>
+        </div>
+
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10
                         grid grid-cols-1 lg:grid-cols-[40%_60%]
-                        items-center gap-0">
+                        items-center gap-0 relative z-10">
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8">
+          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 relative z-10">
 
             {/* Badge */}
             <motion.span
@@ -153,7 +194,7 @@ export function HeroSection() {
             <motion.div {...fadeUp(0.25)} className="flex flex-wrap gap-3 pt-1 clear-both">
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 text-white text-[10.5px] font-black uppercase tracking-wider px-5 py-[11px] transition-opacity hover:opacity-90"
+                className="inline-flex items-center gap-2 text-white text-[10.5px] font-black uppercase tracking-wider px-5 py-[11px] transition-opacity hover:opacity-90 shadow-md"
                 style={{ background: GREEN }}
               >
                 <Calendar className="w-4 h-4" />
@@ -161,7 +202,7 @@ export function HeroSection() {
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 text-[10.5px] font-black uppercase tracking-wider px-5 py-[11px] border-2 transition-colors hover:bg-gray-50"
+                className="inline-flex items-center gap-2 text-[10.5px] font-black uppercase tracking-wider px-5 py-[11px] border-2 transition-colors hover:bg-gray-50/50 backdrop-blur-sm"
                 style={{ color: NAVY, borderColor: NAVY }}
               >
                 <Clock3 className="w-4 h-4" />
@@ -175,13 +216,13 @@ export function HeroSection() {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full"
+            className="w-full relative z-10 py-6"
           >
             <img
               src="/hero_illustration.jpg"
               alt="Retail Business Systems consulting framework — consultant, architecture stack, team, jewellery store"
               className="w-full h-auto block"
-              style={{ maxHeight: '620px', objectFit: 'contain' }}
+              style={{ maxHeight: '620px', objectFit: 'contain', mixBlendMode: 'multiply' }}
             />
           </motion.div>
 

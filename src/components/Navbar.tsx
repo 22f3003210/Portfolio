@@ -66,7 +66,7 @@ export function Navbar() {
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm py-0'
-          : 'bg-gradient-to-r from-[#00203f] to-[#0170B9] text-white py-1.5'
+          : 'bg-gradient-to-r from-[#0b2341] to-[#1f5fbf] text-white py-1.5'
       }`}
     >
       <div className="w-full px-6">
@@ -80,7 +80,7 @@ export function Navbar() {
             />
             <div className="flex flex-col">
               <span className={`text-[16px] font-extrabold leading-tight transition-colors duration-300 ${
-                isScrolled ? 'text-[#00203f]' : 'text-white'
+                isScrolled ? 'text-[#0b2341]' : 'text-white'
               }`}>
                 Scale with Abraham
               </span>
@@ -89,7 +89,7 @@ export function Navbar() {
               </span>
             </div>
           </Link>
-
+ 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-5 lg:gap-7">
             {visibleLinks.map((link) => {
@@ -101,15 +101,15 @@ export function Navbar() {
                     to={link.to}
                     className={`text-[11px] font-extrabold uppercase tracking-wider border px-4 py-2 transition-all duration-300 rounded-none shadow-sm ${
                       isScrolled
-                        ? 'bg-[#00203f] text-white border-[#00203f] hover:bg-[#8CC63F] hover:border-[#8CC63F] hover:text-white'
-                        : 'bg-white text-[#00203f] border-white hover:bg-[#8CC63F] hover:border-[#8CC63F] hover:text-white'
+                        ? 'bg-[#0b2341] text-white border-[#0b2341] hover:bg-[#8bc34a] hover:border-[#8bc34a] hover:text-white'
+                        : 'bg-white text-[#0b2341] border-white hover:bg-[#8bc34a] hover:border-[#8bc34a] hover:text-white'
                     }`}
                   >
                     {link.label}
                   </Link>
                 );
               }
-
+ 
               const active = isActive(link.to);
               return (
                 <Link
@@ -117,8 +117,8 @@ export function Navbar() {
                   to={link.to}
                   className={`relative py-1 text-sm font-semibold tracking-wide transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${
                     isScrolled
-                      ? `${active ? 'text-[#00203f] after:scale-x-100' : 'text-slate-600 hover:text-[#00203f]'} after:bg-[#00203f]`
-                      : `${active ? 'text-white after:scale-x-100' : 'text-white/80 hover:text-white'} after:bg-[#8CC63F]`
+                      ? `${active ? 'text-[#0b2341] after:scale-x-100' : 'text-slate-600 hover:text-[#0b2341]'} after:bg-[#0b2341]`
+                      : `${active ? 'text-white after:scale-x-100' : 'text-white/80 hover:text-white'} after:bg-[#8bc34a]`
                   }`}
                 >
                   {link.label}
@@ -149,7 +149,7 @@ export function Navbar() {
         <div className={`md:hidden border-t ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md border-border-light'
-            : 'bg-[#00203f]/95 backdrop-blur-md border-white/10'
+            : 'bg-[#0b2341]/95 backdrop-blur-md border-white/10'
         }`}>
           <div className="w-full px-6 py-4 flex flex-col gap-2">
             <div className="max-w-[1200px] mx-auto flex flex-col gap-2">
@@ -163,15 +163,15 @@ export function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className={`mx-4 my-2 px-4 py-3 rounded-none text-center text-xs font-bold uppercase tracking-wider border transition-all duration-300 ${
                       isScrolled
-                        ? 'bg-[#00203f] text-white border-[#00203f] hover:bg-[#8CC63F] hover:border-[#8CC63F]'
-                        : 'bg-white text-[#00203f] border-white hover:bg-[#8CC63F] hover:border-[#8CC63F] hover:text-white'
+                        ? 'bg-[#0b2341] text-white border-[#0b2341] hover:bg-[#8bc34a] hover:border-[#8bc34a]'
+                        : 'bg-white text-[#0b2341] border-white hover:bg-[#8bc34a] hover:border-[#8bc34a] hover:text-white'
                     }`}
                   >
                     {link.label}
                   </Link>
                 );
               }
-
+ 
               const active = isActive(link.to);
               return (
                 <Link
@@ -181,10 +181,10 @@ export function Navbar() {
                   className={`px-4 py-2.5 rounded-none text-sm font-semibold transition-colors ${
                     active
                       ? isScrolled
-                        ? 'text-[#00203f] bg-slate-50 font-bold'
+                        ? 'text-[#0b2341] bg-slate-50 font-bold'
                         : 'text-white bg-white/5 font-bold'
                       : isScrolled
-                        ? 'text-slate-600 hover:text-[#00203f] hover:bg-slate-50'
+                        ? 'text-slate-600 hover:text-[#0b2341] hover:bg-slate-50'
                         : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
