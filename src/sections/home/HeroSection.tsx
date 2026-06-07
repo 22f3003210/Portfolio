@@ -127,9 +127,9 @@ export function HeroSection() {
               <div className="flex flex-col">
                 <p className="text-[14px] italic text-gray-600 leading-relaxed font-semibold">
                   The next decade of jewellery retail belongs to the systemized.<br className="hidden sm:inline" /> The rest will be managed out of existence.
+                  <span className="text-[42px] font-serif font-black leading-[0] inline-block align-middle ml-1" style={{ color: GREEN }}>”</span>
                 </p>
               </div>
-              <span className="text-[42px] font-serif font-black leading-none self-end shrink-0" style={{ color: GREEN }}>”</span>
             </motion.div>
 
             {/* CTA Buttons */}
