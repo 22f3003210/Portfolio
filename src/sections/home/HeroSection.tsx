@@ -99,16 +99,23 @@ export function HeroSection() {
     <div className="bg-white w-full">
 
       {/* ════════════════════ MAIN HERO ════════════════════ */}
-      <div className="relative bg-white overflow-hidden">
+      <div className="relative bg-white overflow-hidden pt-8 lg:pt-14" style={{
+        backgroundImage: `
+          radial-gradient(#1f5fbf0a 1.2px, transparent 1.2px),
+          linear-gradient(to right, #1f5fbf05 1px, transparent 1px),
+          linear-gradient(to bottom, #1f5fbf05 1px, transparent 1px)
+        `,
+        backgroundSize: '24px 24px',
+        backgroundPosition: 'center center'
+      }}>
         <div 
           className="max-w-[1280px] mx-auto px-6 lg:px-10
-                     grid grid-cols-1 lg:grid-cols-[38%_62%]
-                     items-stretch gap-6 lg:gap-0 relative z-10
-                     lg:bg-[url('/hero_background.jpg')] lg:bg-cover lg:bg-[position:right_center] lg:bg-no-repeat"
+                     grid grid-cols-1 lg:grid-cols-[40%_60%]
+                     items-center gap-6 lg:gap-0 relative z-10"
         >
 
           {/* ── LEFT COLUMN ── */}
-          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:pt-20 lg:pb-32 relative z-10 max-w-[460px] justify-center">
+          <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 lg:py-24 relative z-10">
 
             {/* Badge */}
             <motion.span
@@ -179,15 +186,20 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* ── RIGHT COLUMN — Spacer on desktop, fallback image on mobile ── */}
-          <div className="w-full relative z-10 py-6 lg:h-[600px] pointer-events-none flex items-center">
+          {/* ── RIGHT COLUMN — Full illustration inside the grid column ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full relative z-10 py-6 mix-blend-multiply flex items-center justify-center"
+          >
             <img
               src="/hero_background.jpg"
               alt="Retail Business Systems consulting framework"
-              className="w-full h-auto block lg:hidden"
-              style={{ maxHeight: '480px', objectFit: 'contain' }}
+              className="w-full h-auto block"
+              style={{ maxHeight: '600px', objectFit: 'contain' }}
             />
-          </div>
+          </motion.div>
 
         </div>
       </div>
