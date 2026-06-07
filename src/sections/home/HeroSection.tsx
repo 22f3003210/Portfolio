@@ -115,14 +115,14 @@ export function HeroSection() {
             {/* Headline — 2 lines, large, no wrap */}
             <motion.h1 {...fadeUp(0.07)} className="leading-[1.04] tracking-tight">
               <span
-                className="block font-black uppercase"
-                style={{ color: NAVY, fontSize: 'clamp(32px, 4.5vw, 52px)' }}
+                className="block font-black uppercase whitespace-nowrap"
+                style={{ color: NAVY, fontSize: 'clamp(26px, 3.8vw, 44px)' }}
               >
                 YOU CAN'T SCALE
               </span>
               <span
-                className="block font-black uppercase"
-                style={{ color: BLUE, fontSize: 'clamp(32px, 4.5vw, 52px)' }}
+                className="block font-black uppercase whitespace-nowrap"
+                style={{ color: BLUE, fontSize: 'clamp(26px, 3.8vw, 44px)' }}
               >
                 WHAT YOU CAN'T SEE.
               </span>
