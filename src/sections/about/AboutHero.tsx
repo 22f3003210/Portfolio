@@ -15,6 +15,16 @@ export function AboutHero() {
         >
           {/* Left - Introduction (60% / 7 columns) */}
           <div className="lg:col-span-7 flex flex-col justify-center gap-6 text-white p-8 md:p-12 lg:p-16">
+            
+            {/* Proverb Quote (at the top, in the blue marked position) */}
+            <p className="text-2xl md:text-3xl text-white/90 leading-relaxed font-medium italic border-b border-white/10 pb-4">
+              “A young person who travels a lot is older than old man who stays in the village.” 
+              <span className="block text-sm md:text-base text-gold font-bold uppercase tracking-[0.08em] not-italic mt-2">
+                — Gabon (African Poet)
+              </span>
+            </p>
+
+            {/* Badge & Name */}
             <div>
               <SectionLabel variant="pill" className="self-start inline-block mb-4 text-gold border-gold/30 bg-gold/5">
                 ABOUT
@@ -24,6 +34,7 @@ export function AboutHero() {
               </h1>
             </div>
 
+            {/* About Context Subtitle (below the name, in the red marked position) */}
             <p className="text-sm md:text-base text-white/80 leading-relaxed font-medium">
               Learning from 200+ jewellery businesses. Designing systems that improve decisions, strengthen operations, and drive measurable business outcomes.
             </p>

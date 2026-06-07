@@ -11,7 +11,7 @@ interface TimelineItem {
   bullets?: string[];
 }
 
-export function TimelineSection() {
+export function TimelineSection({ hideSidebar = false }: { hideSidebar?: boolean }) {
   const timelineData: TimelineItem[] = [
     {
       year: 'Jan 2025 – Present',
@@ -69,11 +69,11 @@ export function TimelineSection() {
   ];
 
   return (
-    <section className="bg-[#F8FAFC] py-20 md:py-[120px] px-6 select-none border-b border-[#E2E8F0]">
+    <section className="bg-[#F8FAFC] py-12 px-6 select-none border-b border-[#E2E8F0]">
       <div className="max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 items-start">
+        <div className={`grid grid-cols-1 ${hideSidebar ? 'lg:grid-cols-1 max-w-3xl mx-auto' : 'lg:grid-cols-6'} gap-12 items-start`}>
           {/* Left - Narrative */}
-          <div className="lg:col-span-4 space-y-8">
+          <div className={hideSidebar ? 'w-full space-y-8' : 'lg:col-span-4 space-y-8'}>
             <ScrollReveal className="flex flex-col gap-2">
               <SectionLabel variant="pill">EXPERIENCE</SectionLabel>
               <h2 className="text-3xl md:text-5xl font-black text-navy uppercase tracking-tight leading-tight mt-3">
@@ -132,43 +132,44 @@ export function TimelineSection() {
           </div>
 
           {/* Right - Sidebar cards */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Skills */}
-            <ScrollReveal>
-              <div className="bg-white border border-border-light rounded-none p-6">
-                <div className="flex items-center gap-2 mb-4">
-                  <Target className="w-5 h-5 text-gold" />
-                  <h3 className="text-lg font-semibold text-text-primary">Skills</h3>
+          {!hideSidebar && (
+            <div className="lg:col-span-2 space-y-6">
+              {/* Skills */}
+              <ScrollReveal>
+                <div className="bg-white border border-border-light rounded-none p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Target className="w-5 h-5 text-gold" />
+                    <h3 className="text-lg font-semibold text-text-primary">Skills</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-1.5 text-xs font-medium text-text-secondary border border-border-light rounded-none"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1.5 text-xs font-medium text-text-secondary border border-border-light rounded-none"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+              </ScrollReveal>
+
+              {/* Philosophy */}
+              <ScrollReveal delay={0.1}>
+                <div className="bg-navy rounded-none p-6">
+                  <h3 className="text-lg font-semibold text-white mb-3">Philosophy</h3>
+                  <p className="text-sm text-white/80 italic mb-3">
+                    "I don't see ERP, Finance, and CRM as separate systems. I see them as one
+                    integrated revenue engine."
+                  </p>
+                  <p className="text-sm text-white/70">
+                    What gets measured can be understood.<br /><br />
+                    What gets understood can be improved.
+                  </p>
                 </div>
-              </div>
-            </ScrollReveal>
-
-            {/* Philosophy */}
-            <ScrollReveal delay={0.1}>
-              <div className="bg-navy rounded-none p-6">
-                <h3 className="text-lg font-semibold text-white mb-3">Philosophy</h3>
-                <p className="text-sm text-white/80 italic mb-3">
-                  "I don't see ERP, Finance, and CRM as separate systems. I see them as one
-                  integrated revenue engine."
-                </p>
-                <p className="text-sm text-white/70">
-                  What gets measured can be understood.<br /><br />
-                  What gets understood can be improved.
-                </p>
-              </div>
-            </ScrollReveal>
-
-          </div>
+              </ScrollReveal>
+            </div>
+          )}
         </div>
       </div>
     </section>

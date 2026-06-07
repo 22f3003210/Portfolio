@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, Clock3 } from 'lucide-react';
+import { Calendar, Clock3, BarChart3, TrendingUp, Workflow, PieChart, Gem, Laptop } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // ─── Brand colours ────────────────────────────────────────────────────────────
@@ -10,76 +10,43 @@ const GREEN = '#8bc34a';
 // ─── Bottom capability cards ──────────────────────────────────────────────────
 const CAPS = [
   {
-    icon: (
-      <svg viewBox="0 0 36 36" className="w-9 h-9" fill="none">
-        <circle cx="18" cy="18" r="17" stroke={BLUE} strokeWidth="1.8"/>
-        <polyline points="10,23 14,16 18,19 23,13 28,10" stroke={BLUE} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="28" cy="10" r="2.5" fill={BLUE}/>
-      </svg>
-    ),
+    icon: BarChart3,
+    colorType: 'blue',
     title: 'BUSINESS ANALYSIS',
     desc: 'Uncover gaps, root causes and growth opportunities.',
     hoverClass: 'hover:border-[#1f5fbf]/30 hover:bg-blue-50/20',
   },
   {
-    icon: (
-      <svg viewBox="0 0 36 36" className="w-9 h-9" fill="none">
-        <circle cx="18" cy="18" r="17" stroke={BLUE} strokeWidth="1.8"/>
-        <path d="M11 19 L15 13 L21 20 L27 15" stroke={GREEN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M23 11 L28 11 L28 16" stroke={GREEN} strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
+    icon: TrendingUp,
+    colorType: 'green',
     title: 'STRATEGY &\nTRANSFORMATION',
     desc: 'Design strategies that drive real change.',
     hoverClass: 'hover:border-[#8bc34a]/30 hover:bg-green-50/20',
   },
   {
-    icon: (
-      <svg viewBox="0 0 36 36" className="w-9 h-9" fill="none">
-        <circle cx="18" cy="18" r="17" stroke={BLUE} strokeWidth="1.8"/>
-        <circle cx="18" cy="18" r="4.5" stroke={BLUE} strokeWidth="2"/>
-        <path d="M18 7 L18 11M18 25 L18 29M7 18 L11 18M25 18 L29 18" stroke={BLUE} strokeWidth="2" strokeLinecap="round"/>
-        <path d="M10.8 10.8 L13.5 13.5M22.5 22.5 L25.2 25.2M25.2 10.8 L22.5 13.5M13.5 22.5 L10.8 25.2" stroke={BLUE} strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
+    icon: Workflow,
+    colorType: 'blue',
     title: 'OPERATIONS',
     desc: 'Design efficient, scalable and standard processes.',
     hoverClass: 'hover:border-[#1f5fbf]/30 hover:bg-blue-50/20',
   },
   {
-    icon: (
-      <svg viewBox="0 0 36 36" className="w-9 h-9" fill="none">
-        <circle cx="18" cy="18" r="17" stroke={GREEN} strokeWidth="1.8"/>
-        <path d="M18 18 L18 7 A11 11 0 0 1 27.5 12.5 Z" fill={GREEN} opacity="0.85"/>
-        <path d="M18 18 L27.5 23.5 A11 11 0 0 1 8.5 23.5 Z" fill={BLUE} opacity="0.7"/>
-        <path d="M18 18 L8.5 12.5 A11 11 0 0 1 18 7 Z" fill={BLUE} opacity="0.4"/>
-      </svg>
-    ),
+    icon: PieChart,
+    colorType: 'green',
     title: 'PERFORMANCE\nMANAGEMENT',
     desc: 'Build KPI systems that drive accountability.',
     hoverClass: 'hover:border-[#8bc34a]/30 hover:bg-green-50/20',
   },
   {
-    icon: (
-      <svg viewBox="0 0 36 36" className="w-9 h-9" fill="none">
-        <circle cx="18" cy="18" r="17" stroke={GREEN} strokeWidth="1.8"/>
-        <polygon points="18,9 21.5,15 29,16 23.5,21.5 25,29 18,25.5 11,29 12.5,21.5 7,16 14.5,15" stroke={GREEN} strokeWidth="1.8" fill="none"/>
-      </svg>
-    ),
+    icon: Gem,
+    colorType: 'green',
     title: 'RETAIL &\nJEWELLERY',
     desc: 'Optimize retail operations, inventory and customer experience.',
     hoverClass: 'hover:border-[#8bc34a]/30 hover:bg-green-50/20',
   },
   {
-    icon: (
-      <svg viewBox="0 0 36 36" className="w-9 h-9" fill="none">
-        <circle cx="18" cy="18" r="17" stroke={BLUE} strokeWidth="1.8"/>
-        <rect x="9" y="12" width="18" height="11" rx="2" stroke={BLUE} strokeWidth="1.8"/>
-        <path d="M13 23 L13 26 M23 23 L23 26 M11 26 L25 26" stroke={BLUE} strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="24" cy="24" r="3.5" fill={GREEN}/>
-        <path d="M22.8 24 L24 25.2 L26 23" stroke="white" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    icon: Laptop,
+    colorType: 'blue',
     title: 'TECHNOLOGY\nENABLEMENT',
     desc: 'Leverage technology to automate and scale.',
     hoverClass: 'hover:border-[#1f5fbf]/30 hover:bg-blue-50/20',
@@ -205,25 +172,38 @@ export function HeroSection() {
       </div>
 
       {/* ════════════════════ BOTTOM CAPABILITIES STRIP ════════════════════ */}
-      <div className="relative px-6 pt-6 pb-16 z-20 bg-gray-50/30">
-        <div className="max-w-[1280px] mx-auto bg-white rounded-[16px] shadow-2xl border border-gray-100/60 p-4 md:p-6 relative z-20">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-            {CAPS.map((cap) => (
-              <div 
-                key={cap.title} 
-                className={`group p-4 flex flex-col gap-2.5 border border-transparent rounded-xl transition-all duration-300 cursor-pointer hover:shadow-md hover:-translate-y-1 ${cap.hoverClass}`}
-              >
-                <div className="mb-1 transition-transform duration-300 group-hover:scale-105">{cap.icon}</div>
-                <p
-                  className="text-[11.5px] font-black uppercase tracking-wide leading-tight whitespace-pre-line"
-                  style={{ color: NAVY }}
+      <div className="relative px-6 pt-1 pb-4 z-20 bg-gray-50/30">
+        <div className="max-w-[1280px] mx-auto bg-white rounded-[12px] shadow-xl border border-gray-100/60 py-2 px-3 md:py-2.5 md:px-4 relative z-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+            {CAPS.map((cap) => {
+              const IconComponent = cap.icon;
+              const isBlue = cap.colorType === 'blue';
+              return (
+                <div 
+                  key={cap.title} 
+                  className={`group p-2 flex flex-col gap-1 border border-transparent rounded-lg transition-all duration-300 cursor-pointer hover:shadow-sm hover:-translate-y-0.5 ${cap.hoverClass}`}
                 >
-                  {cap.title}
-                </p>
-                <p className="text-[11px] text-gray-500 leading-relaxed">{cap.desc}</p>
-                <div className="w-10 h-[3px] rounded-full mt-auto transition-all duration-300 group-hover:w-16" style={{ background: GREEN }} />
-              </div>
-            ))}
+                  <div className="mb-0.5 transition-transform duration-300 group-hover:scale-105">
+                    <div className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300
+                      ${isBlue 
+                        ? 'bg-blue-50/60 text-[#1f5fbf] border-blue-100/50 group-hover:bg-[#1f5fbf] group-hover:text-white group-hover:border-[#1f5fbf]' 
+                        : 'bg-green-50/60 text-[#8bc34a] border-green-100/50 group-hover:bg-[#8bc34a] group-hover:text-white group-hover:border-[#8bc34a]'
+                      }`}
+                    >
+                      <IconComponent size={18} strokeWidth={2.2} />
+                    </div>
+                  </div>
+                  <p
+                    className="text-[10.5px] font-black uppercase tracking-wide leading-tight whitespace-pre-line"
+                    style={{ color: NAVY }}
+                  >
+                    {cap.title}
+                  </p>
+                  <p className="text-[10px] text-gray-500 leading-relaxed">{cap.desc}</p>
+                  <div className="w-8 h-[2px] rounded-full mt-auto transition-all duration-300 group-hover:w-12" style={{ background: GREEN }} />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -1,68 +1,69 @@
+import { useState } from 'react';
 import { AboutHero } from '../sections/about/AboutHero';
 import { DetailedBioSection } from '../sections/about/DetailedBioSection';
 import { SystemsPhilosophySection } from '../sections/about/SystemsPhilosophySection';
 import { TimelineSection } from '../sections/about/TimelineSection';
-import { ProjectsAndResponsibilities } from '../sections/about/ProjectsAndResponsibilities';
-import { motion } from 'framer-motion';
+import { EducationSection } from '../sections/about/EducationSection';
+import { SkillsSection } from '../sections/about/SkillsSection';
+import { ProjectsSection } from '../sections/about/ProjectsSection';
+import { ResponsibilitiesSection } from '../sections/about/ResponsibilitiesSection';
+import { User, GraduationCap, Target, Code, Award } from 'lucide-react';
 
 export function About() {
-  const quote = "“A young person who travels a lot is older than old man who stays in the village.” — Gabon (African Proverb)";
-  const words = quote.split(" ");
+  const [activeTab, setActiveTab] = useState<string>('summary');
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.04,
-      }
-    }
-  } as const;
-
-  const wordVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 10
-      }
-    }
-  } as const;
+  const tabs = [
+    { id: 'summary', label: 'Professional Summary', icon: User },
+    { id: 'education', label: 'Education', icon: GraduationCap },
+    { id: 'skills', label: 'Skills', icon: Target },
+    { id: 'projects', label: 'Projects', icon: Code },
+    { id: 'responsibilities', label: 'Position of Responsibilities', icon: Award }
+  ];
 
   return (
     <>
       <AboutHero />
       
-      {/* Gabon Proverb Transition Quote Banner (No Card with Text Reveal Motion) */}
-      <div className="bg-white pt-10 pb-6 px-4 sm:px-6 lg:px-8 flex justify-center">
-        <motion.div 
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="max-w-[1380px] w-full text-center select-none"
-        >
-          <p className="italic text-base md:text-lg font-extrabold leading-relaxed tracking-tight flex flex-wrap justify-center">
-            {words.map((word, idx) => (
-              <motion.span
-                key={idx}
-                variants={wordVariants}
-                whileHover={{ y: -4, scale: 1.08, color: "#0170B9" }}
-                className="inline-block mr-1.5 text-[#0B1E2E] cursor-default transition-colors duration-200"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </p>
-        </motion.div>
+      {/* Dynamic Slicer Tabs Capsule Bar (Light Pill Design with Icons) */}
+      <div className="bg-[#F8FAFC] pt-8 pb-5 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80">
+        <div className="max-w-[1280px] mx-auto flex justify-center">
+          <div className="inline-flex flex-wrap items-center bg-slate-100 p-1.5 rounded-full border border-slate-200/60 shadow-sm gap-1">
+            {tabs.map((tab) => {
+              const active = activeTab === tab.id;
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center gap-2 px-5 py-2.5 text-[11px] font-black uppercase tracking-wider transition-all duration-300 rounded-full whitespace-nowrap ${
+                    active
+                      ? 'bg-white text-[#0b2341] shadow-md border border-slate-200/40 font-extrabold'
+                      : 'text-slate-500 hover:text-[#0b2341] hover:bg-slate-200/40'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
-      <DetailedBioSection />
-      <SystemsPhilosophySection />
-      <TimelineSection />
-      <ProjectsAndResponsibilities />
+      {/* Dynamic Rendered Content Area */}
+      <div className="bg-white min-h-[400px]">
+        {activeTab === 'summary' && (
+          <>
+            <DetailedBioSection />
+            <SystemsPhilosophySection />
+            <TimelineSection hideSidebar={true} />
+          </>
+        )}
+        {activeTab === 'education' && <EducationSection />}
+        {activeTab === 'skills' && <SkillsSection />}
+        {activeTab === 'projects' && <ProjectsSection />}
+        {activeTab === 'responsibilities' && <ResponsibilitiesSection />}
+      </div>
     </>
   );
 }

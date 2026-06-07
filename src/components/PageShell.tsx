@@ -6,6 +6,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { logPageView, logClickEvent } from '../lib/supabase';
 import { usePortal } from '../context/PortalContext';
+import { WhatsAppButton } from './WhatsAppButton';
 
 interface PageShellProps {
   children: ReactNode;
@@ -116,7 +117,6 @@ export function PageShell({ children }: PageShellProps) {
 
       <Footer />
 
-      {/* ── Portal unlock / lock toast ── */}
       <AnimatePresence>
         {toast && (
           <motion.div
@@ -137,6 +137,9 @@ export function PageShell({ children }: PageShellProps) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Floating WhatsApp Action Button */}
+      <WhatsAppButton />
     </div>
   );
 }
