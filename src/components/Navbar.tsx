@@ -47,7 +47,6 @@ export function Navbar() {
       }
     };
     window.addEventListener('scroll', handleScroll);
-    // Initial check
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -63,33 +62,32 @@ export function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 backdrop-blur-md border-b border-border-light shadow-sm py-0'
-          : 'bg-gradient-to-r from-[#0b2341] to-[#1f5fbf] text-white py-1.5'
+      className={`sticky top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300 ${
+        isScrolled ? 'py-1 shadow-sm' : 'py-2.5'
       }`}
     >
       <div className="w-full px-6">
-        <div className="max-w-[1200px] mx-auto flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <img 
-              src="/logo.jpg" 
-              alt="Scale with Abraham" 
-              className="h-12 w-12 object-cover rounded-none border border-white/20 shadow-md transition-transform duration-300 group-hover:scale-105"
-            />
+        <div className="max-w-[1280px] mx-auto flex items-center justify-between h-16">
+          {/* Logo - Stencil Chevron A with text */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <svg viewBox="0 0 100 100" className="w-9 h-9 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Left slanted leg of A (Navy) */}
+              <polygon points="18,80 47,20 59,20 30,80" fill="#0b2341" />
+              {/* Right slanted leg of A (Green) */}
+              <polygon points="53,20 82,80 70,80 41,20" fill="#8bc34a" />
+              {/* Crossbar */}
+              <polygon points="26,58 35,58 65,58 74,58 68,64 32,64" fill="#0b2341" />
+            </svg>
             <div className="flex flex-col">
-              <span className={`text-[16px] font-extrabold leading-tight transition-colors duration-300 ${
-                isScrolled ? 'text-[#0b2341]' : 'text-white'
-              }`}>
-                Scale with Abraham
+              <span className="text-[15px] font-extrabold leading-tight text-[#0b2341] tracking-tight">
+                SCALE WITH ABRAHAM
               </span>
-              <span className="text-[9.5px] font-bold uppercase tracking-[0.12em] text-gold leading-tight mt-0.5">
-                Systems & Retail Consulting
+              <span className="text-[8.5px] font-bold uppercase tracking-[0.12em] text-[#8bc34a] leading-tight mt-0.5">
+                SYSTEMS & RETAIL CONSULTING
               </span>
             </div>
           </Link>
- 
+
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-5 lg:gap-7">
             {visibleLinks.map((link) => {
@@ -99,27 +97,23 @@ export function Navbar() {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`text-[11px] font-extrabold uppercase tracking-wider border px-4 py-2 transition-all duration-300 rounded-none shadow-sm ${
-                      isScrolled
-                        ? 'bg-[#0b2341] text-white border-[#0b2341] hover:bg-[#8bc34a] hover:border-[#8bc34a] hover:text-white'
-                        : 'bg-white text-[#0b2341] border-white hover:bg-[#8bc34a] hover:border-[#8bc34a] hover:text-white'
-                    }`}
+                    className="text-[10px] font-extrabold uppercase tracking-wider bg-[#1f5fbf] text-white px-5 py-2.5 transition-colors hover:bg-[#0b2341] rounded-none shadow-sm flex items-center gap-1.5"
                   >
-                    {link.label}
+                    Get in Touch <span className="text-xs">&rarr;</span>
                   </Link>
                 );
               }
- 
+
               const active = isActive(link.to);
               return (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`relative py-1 text-sm font-semibold tracking-wide transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${
-                    isScrolled
-                      ? `${active ? 'text-[#0b2341] after:scale-x-100' : 'text-slate-600 hover:text-[#0b2341]'} after:bg-[#0b2341]`
-                      : `${active ? 'text-white after:scale-x-100' : 'text-white/80 hover:text-white'} after:bg-[#8bc34a]`
-                  }`}
+                  className={`relative py-1 text-xs font-black uppercase tracking-wider transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100 ${
+                    active
+                      ? 'text-[#0b2341] after:scale-x-100'
+                      : 'text-slate-500 hover:text-[#0b2341]'
+                  } after:bg-[#8bc34a]`}
                 >
                   {link.label}
                 </Link>
@@ -130,11 +124,7 @@ export function Navbar() {
           {/* Mobile Menu Toggle */}
           <div className="flex items-center gap-2 md:hidden">
             <button
-              className={`md:hidden w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-                isScrolled
-                  ? 'hover:bg-gray-100 text-text-secondary'
-                  : 'hover:bg-white/10 text-white/90'
-              }`}
+              className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-100 text-[#0b2341] transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -146,52 +136,40 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className={`md:hidden border-t ${
-          isScrolled
-            ? 'bg-white/95 backdrop-blur-md border-border-light'
-            : 'bg-[#0b2341]/95 backdrop-blur-md border-white/10'
-        }`}>
+        <div className="md:hidden border-t bg-white border-gray-100">
           <div className="w-full px-6 py-4 flex flex-col gap-2">
-            <div className="max-w-[1200px] mx-auto flex flex-col gap-2">
-            {visibleLinks.map((link) => {
-              const isContact = link.label === 'Get in Touch';
-              if (isContact) {
+            <div className="max-w-[1200px] mx-auto flex flex-col gap-2 w-full">
+              {visibleLinks.map((link) => {
+                const isContact = link.label === 'Get in Touch';
+                if (isContact) {
+                  return (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setMobileOpen(false)}
+                      className="mx-4 my-2 px-4 py-3 rounded-none text-center text-xs font-extrabold uppercase tracking-wider bg-[#1f5fbf] text-white hover:bg-[#0b2341] transition-colors block"
+                    >
+                      {link.label} &rarr;
+                    </Link>
+                  );
+                }
+
+                const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
                     onClick={() => setMobileOpen(false)}
-                    className={`mx-4 my-2 px-4 py-3 rounded-none text-center text-xs font-bold uppercase tracking-wider border transition-all duration-300 ${
-                      isScrolled
-                        ? 'bg-[#0b2341] text-white border-[#0b2341] hover:bg-[#8bc34a] hover:border-[#8bc34a]'
-                        : 'bg-white text-[#0b2341] border-white hover:bg-[#8bc34a] hover:border-[#8bc34a] hover:text-white'
+                    className={`px-4 py-2.5 rounded-none text-xs font-black uppercase tracking-wider transition-colors block ${
+                      active
+                        ? 'text-[#0b2341] bg-slate-50 font-bold'
+                        : 'text-slate-500 hover:text-[#0b2341] hover:bg-slate-50'
                     }`}
                   >
                     {link.label}
                   </Link>
                 );
-              }
- 
-              const active = isActive(link.to);
-              return (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-2.5 rounded-none text-sm font-semibold transition-colors ${
-                    active
-                      ? isScrolled
-                        ? 'text-[#0b2341] bg-slate-50 font-bold'
-                        : 'text-white bg-white/5 font-bold'
-                      : isScrolled
-                        ? 'text-slate-600 hover:text-[#0b2341] hover:bg-slate-50'
-                        : 'text-white/80 hover:text-white hover:bg-white/5'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
+              })}
             </div>
           </div>
         </div>

@@ -92,7 +92,7 @@ export function HeroSection() {
     <div className="bg-white w-full">
 
       {/* ════════════════════ MAIN HERO ════════════════════ */}
-      <div className="relative bg-white border-b border-gray-100 overflow-hidden" style={{
+      <div className="relative bg-white overflow-hidden" style={{
         backgroundImage: `
           radial-gradient(#1f5fbf0a 1.2px, transparent 1.2px),
           linear-gradient(to right, #1f5fbf05 1px, transparent 1px),
@@ -135,8 +135,8 @@ export function HeroSection() {
         </div>
 
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10
-                        grid grid-cols-1 lg:grid-cols-[40%_60%]
-                        items-center gap-0 relative z-10">
+                        grid grid-cols-1 lg:grid-cols-[38%_62%]
+                        items-center gap-6 lg:gap-0 relative z-10">
 
           {/* ── LEFT COLUMN ── */}
           <div className="flex flex-col gap-5 py-10 pr-4 lg:pr-8 relative z-10">
@@ -209,6 +209,47 @@ export function HeroSection() {
                 Book a 30-min Call
               </a>
             </motion.div>
+
+            {/* Trusted by Retail Leaders */}
+            <motion.div
+              {...fadeUp(0.30)}
+              className="mt-8 pt-6 border-t border-gray-100 flex flex-col gap-3.5"
+            >
+              <span className="text-[9.5px] font-black uppercase tracking-[0.14em] text-gray-400">
+                Trusted by Retail Leaders
+              </span>
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-4 opacity-[0.45] grayscale hover:grayscale-0 transition-all duration-300">
+                {/* Tanishq */}
+                <div className="flex items-center gap-1.5">
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#0b2341] fill-current">
+                    <path d="M12 2L2 22h20L12 2zm0 3.8L18.4 18H5.6L12 5.8z" />
+                  </svg>
+                  <span className="font-serif text-[10px] font-extrabold tracking-[0.15em] text-[#0b2341]">TANISHQ</span>
+                </div>
+                {/* Kalyan */}
+                <div className="flex flex-col items-start leading-none">
+                  <span className="font-serif text-[10.5px] font-black tracking-wider text-[#0b2341]">KALYAN</span>
+                  <span className="text-[6px] font-bold tracking-[0.18em] text-[#0b2341] mt-0.5">JEWELLERS</span>
+                </div>
+                {/* GRT */}
+                <div className="flex items-center gap-1 leading-none">
+                  <span className="font-sans text-[11px] font-black tracking-tight text-[#0b2341]">GRT</span>
+                  <span className="text-[5.5px] font-black tracking-widest text-[#0b2341] border-l border-current pl-1 py-0.5">JEWELLERS</span>
+                </div>
+                {/* Jos Alukkas */}
+                <div className="flex items-center gap-1">
+                  <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 text-[#0b2341] fill-current">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-10 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                  </svg>
+                  <span className="font-serif text-[8.5px] font-bold tracking-wider text-[#0b2341] leading-none">JOS ALUKKAS</span>
+                </div>
+                {/* Senco */}
+                <div className="flex flex-col items-start leading-none">
+                  <span className="font-serif text-[10.5px] font-black tracking-wider text-[#0b2341]">SENCO</span>
+                  <span className="text-[5px] font-black tracking-[0.2em] text-[#0b2341] mt-0.5">GOLD & DIAMONDS</span>
+                </div>
+              </div>
+            </motion.div>
           </div>
 
           {/* ── RIGHT COLUMN — full illustration, no crop ── */}
@@ -231,21 +272,28 @@ export function HeroSection() {
       </div>
 
       {/* ════════════════════ BOTTOM CAPABILITIES STRIP ════════════════════ */}
-      <div className="bg-white border-t border-gray-100 py-7 px-6">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-          {CAPS.map((cap) => (
-            <div key={cap.title} className="flex flex-col gap-2">
-              {cap.icon}
-              <p
-                className="text-[8.5px] font-black uppercase tracking-wide leading-tight whitespace-pre-line"
-                style={{ color: NAVY }}
+      <div className="relative px-6 pb-16 z-20 bg-gray-50/30">
+        <div className="max-w-[1280px] mx-auto bg-white rounded-[16px] shadow-xl border border-gray-100/60 p-6 md:p-8 -mt-8 relative z-20">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-0">
+            {CAPS.map((cap, index) => (
+              <div 
+                key={cap.title} 
+                className={`flex flex-col gap-2 ${
+                  index !== 0 ? 'lg:border-l lg:border-gray-100 lg:pl-6' : ''
+                }`}
               >
-                {cap.title}
-              </p>
-              <p className="text-[8.5px] text-gray-500 leading-snug">{cap.desc}</p>
-              <div className="w-6 h-[2.5px] rounded-full mt-1" style={{ background: GREEN }} />
-            </div>
-          ))}
+                <div className="mb-1">{cap.icon}</div>
+                <p
+                  className="text-[8.5px] font-black uppercase tracking-wide leading-tight whitespace-pre-line"
+                  style={{ color: NAVY }}
+                >
+                  {cap.title}
+                </p>
+                <p className="text-[8.5px] text-gray-500 leading-snug">{cap.desc}</p>
+                <div className="w-6 h-[2.5px] rounded-full mt-1" style={{ background: GREEN }} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
