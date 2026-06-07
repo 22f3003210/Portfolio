@@ -6,11 +6,11 @@ import { usePortal } from '../context/PortalContext';
 const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/#how-i-work', label: 'How I Work' },
-  { to: '/#testimonials', label: 'Testimonials' },
-  { to: '/about', label: 'About' },
   { to: '/consulting', label: 'Consulting' },
-  { to: '/insights', label: 'Insights' },
+  { to: '/about', label: 'About' },
   { to: '/portal', label: 'Client Portal' },
+  { to: '/insights', label: 'Insights' },
+  { to: '/#testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Get in Touch' },
 ];
 
