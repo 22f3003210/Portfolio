@@ -110,7 +110,7 @@ export function HeroSection() {
       }}>
         <div 
           className="max-w-[1280px] mx-auto px-6 lg:px-10
-                     grid grid-cols-1 lg:grid-cols-[40%_60%]
+                     grid grid-cols-1 lg:grid-cols-[33%_67%]
                      items-center gap-6 lg:gap-0 relative z-10"
         >
 
@@ -191,13 +191,13 @@ export function HeroSection() {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full relative z-10 py-2 mix-blend-multiply flex items-center justify-center"
+            className="w-full relative z-10 py-2 mix-blend-multiply flex items-center justify-center lg:-ml-8"
           >
             <img
               src="/hero_background.jpg"
               alt="Retail Business Systems consulting framework"
-              className="w-full h-auto block"
-              style={{ maxHeight: '700px', objectFit: 'contain' }}
+              className="w-full h-auto block lg:scale-110 lg:origin-right"
+              style={{ objectFit: 'contain' }}
             />
           </motion.div>
 
