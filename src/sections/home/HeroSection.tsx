@@ -216,10 +216,11 @@ export function HeroSection() {
             initial={{ opacity: 0, x: 24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="w-full relative z-10 py-6"
+            className="w-full relative z-10 py-6 mix-blend-multiply"
+            style={{ mixBlendMode: 'multiply', isolation: 'auto' }}
           >
             <img
-              src="/hero_illustration.jpg"
+              src="/hero_illustration.png"
               alt="Retail Business Systems consulting framework — consultant, architecture stack, team, jewellery store"
               className="w-full h-auto block"
               style={{ maxHeight: '620px', objectFit: 'contain', mixBlendMode: 'multiply' }}
