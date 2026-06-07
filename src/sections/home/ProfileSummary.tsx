@@ -15,10 +15,27 @@ export function ProfileSummary() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-          className="bg-[#0B1E2E] rounded-none border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 w-full"
+          className="relative bg-[#0B1E2E] rounded-none border border-white/10 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-0 w-full"
         >
+          {/* Background subtle grid */}
+          <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
+            <div 
+              className="absolute inset-0" 
+              style={{ 
+                backgroundImage: 'radial-gradient(#8bc34a 1.5px, transparent 1.5px)', 
+                backgroundSize: '32px 32px',
+                maskImage: 'radial-gradient(ellipse at center, black, transparent 75%)',
+                WebkitMaskImage: 'radial-gradient(ellipse at center, black, transparent 75%)',
+              }} 
+            />
+          </div>
+
+          {/* Ambient neon radial glows */}
+          <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#8bc34a]/10 rounded-full blur-3xl pointer-events-none z-0" />
+          <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#1f5fbf]/15 rounded-full blur-3xl pointer-events-none z-0" />
+
           {/* Left - Introduction details (60% / 7 columns) */}
-          <div className="lg:col-span-7 flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-14 text-white">
+          <div className="relative z-10 lg:col-span-7 flex flex-col justify-center gap-6 p-8 md:p-12 lg:p-14 text-white">
             <div>
               <SectionLabel variant="pill" className="self-start inline-block mb-4 text-gold border-gold/30 bg-gold/5">
                 THE CONSULTANT
@@ -45,7 +62,7 @@ export function ProfileSummary() {
           </div>
 
           {/* Right - Profile Photo (40% / 5 columns) */}
-          <div className="lg:col-span-5 w-full h-full min-h-[380px] lg:min-h-full flex overflow-hidden">
+          <div className="relative z-10 lg:col-span-5 w-full h-full min-h-[380px] lg:min-h-full flex overflow-hidden">
             <img
               src="/abraham_about.png"
               alt="Abraham S"
