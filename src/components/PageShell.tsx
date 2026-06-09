@@ -98,9 +98,11 @@ export function PageShell({ children }: PageShellProps) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // intentionally empty — uses refs for current values
 
+  const isTrackerRoute = location.pathname.startsWith('/tracker');
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      {!isTrackerRoute && <Navbar />}
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -115,7 +117,7 @@ export function PageShell({ children }: PageShellProps) {
         </motion.main>
       </AnimatePresence>
 
-      <Footer />
+      {!isTrackerRoute && <Footer />}
 
       <AnimatePresence>
         {toast && (
@@ -138,8 +140,7 @@ export function PageShell({ children }: PageShellProps) {
         )}
       </AnimatePresence>
 
-      {/* Floating WhatsApp Action Button */}
-      <WhatsAppButton />
+      {!isTrackerRoute && <WhatsAppButton />}
     </div>
   );
 }

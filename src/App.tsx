@@ -9,6 +9,7 @@ import { WorkflowDetail } from './pages/WorkflowDetail';
 import { Admin } from './pages/Admin';
 import { Portal } from './pages/Portal';
 import { Consulting } from './pages/Consulting';
+import { Tracker } from './pages/Tracker';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/workflows/:slug" element={<WorkflowDetail />} />
         <Route path="/portal" element={<Portal />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/tracker" element={<Tracker />} />
       </Routes>
     </PageShell>
   );
