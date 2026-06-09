@@ -44,7 +44,7 @@ export function WorkflowDetail() {
       setError('');
       setPasscode(''); // Clear immediately to wipe from DOM/React state
     } else {
-      setError('Incorrect client passcode. Access denied.');
+      setError('Incorrect Retail Space passcode. Access denied.');
       setPasscode(''); // Clear immediately
     }
   };
@@ -68,12 +68,12 @@ export function WorkflowDetail() {
             Unlock: {workflow.name}
           </h3>
           <p className="text-xs text-slate-600 mb-6 leading-relaxed font-semibold">
-            This operational blueprint is reserved for clients and partners of Abraham's Systems & Retail Consulting. Please enter the Client Passcode to access full KPIs, audit checklists, and step-by-step implementations.
+            This operational blueprint is reserved for clients and partners of Abraham's Systems & Retail Consulting. Please enter the Retail Space Passcode to access full KPIs, audit checklists, and step-by-step implementations.
           </p>
 
           <form onSubmit={handleUnlock} className="flex flex-col gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">Client Passcode</label>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">Retail Space Passcode</label>
               <input 
                 type="password"
                 value={passcode}

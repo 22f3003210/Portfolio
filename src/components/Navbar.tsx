@@ -8,7 +8,7 @@ const navLinks = [
   { to: '/#how-i-work', label: 'How I Work' },
   { to: '/consulting', label: 'Consulting' },
   { to: '/about', label: 'About' },
-  { to: '/portal', label: 'Client Portal' },
+  { to: '/portal', label: 'Retail Space' },
   { to: '/insights', label: 'Insights' },
   { to: '/#testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Get in Touch' },

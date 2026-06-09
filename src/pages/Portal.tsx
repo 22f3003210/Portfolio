@@ -616,7 +616,7 @@ export function Portal() {
       setAuthError('');
       setPasscode(''); // Clear immediately to wipe from DOM/React state
     } else {
-      setAuthError('Incorrect client passcode. Access denied.');
+      setAuthError('Incorrect Retail Space passcode. Access denied.');
       setPasscode(''); // Clear immediately
     }
   };
@@ -670,17 +670,17 @@ export function Portal() {
             </div>
             <div>
               <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest font-mono">Restricted Access</span>
-              <h2 className="font-extrabold text-xl uppercase tracking-wider text-slate-900">Client Systems Vault</h2>
+              <h2 className="font-extrabold text-xl uppercase tracking-wider text-slate-900">Retail Space Vault</h2>
             </div>
           </div>
           
           <p className="text-xs text-slate-600 mb-6 leading-relaxed font-semibold">
-            Please enter your Client Passcode to access premium retail KPIs, interactive operational audit checklists, and automated diagnostic leakage report generation.
+            Please enter your Retail Space passcode to access premium retail KPIs, interactive operational audit checklists, and automated diagnostic leakage report generation.
           </p>
 
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">Client Passcode</label>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">Retail Space Passcode</label>
               <input 
                 type="password"
                 value={passcode}

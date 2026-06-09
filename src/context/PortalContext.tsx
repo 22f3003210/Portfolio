@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import type { ReactNode } from 'react';
 
 interface PortalContextType {
-  /** Whether the "Client Portal" link is visible in the navbar (shown via hotkey). */
+  /** Whether the "Retail Space" link is visible in the navbar (shown via hotkey). */
   isPortalVisible: boolean;
   /** Whether the user has authenticated inside the portal with the passcode. */
   isPortalAuthenticated: boolean;

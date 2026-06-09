@@ -68,7 +68,7 @@ export function PageShell({ children }: PageShellProps) {
   }, [location.pathname]);
 
   // ── Hotkey listener (registered once) ────────────────────────────────
-  // Sequence: abc123  — toggles the Client Portal nav link visibility.
+  // Sequence: abc123  — toggles the Retail Space nav link visibility.
   // State is in-memory only; page refresh always resets to hidden.
   useEffect(() => {
     let typed = '';
@@ -85,10 +85,10 @@ export function PageShell({ children }: PageShellProps) {
         typed = '';
         if (portalVisibleRef.current) {
           hidePortal();
-          fireToast('Client Portal hidden. Enter hotkey again to re-open.', 'lock');
+          fireToast('Retail Space hidden. Enter hotkey again to re-open.', 'lock');
         } else {
           showPortal();
-          fireToast('Client Portal unlocked and added to navigation.', 'unlock');
+          fireToast('Retail Space unlocked and added to navigation.', 'unlock');
         }
       }
     };
@@ -130,7 +130,7 @@ export function PageShell({ children }: PageShellProps) {
             <span className="text-xl shrink-0">{toast.type === 'unlock' ? '🔓' : '🔒'}</span>
             <div>
               <p className="text-[9px] font-black uppercase tracking-widest text-gold">
-                {toast.type === 'unlock' ? 'Portal Unlocked' : 'Portal Locked'}
+                {toast.type === 'unlock' ? 'Retail Space Unlocked' : 'Retail Space Locked'}
               </p>
               <p className="text-xs font-semibold text-white/80 leading-snug">{toast.msg}</p>
             </div>
