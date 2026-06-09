@@ -13,10 +13,25 @@ import {
   XCircle, 
   ShieldCheck, 
   ChevronRight,
-  TrendingDown
+  TrendingDown,
+  Users,
+  Gem,
+  Database,
+  MapPin,
+  UserCheck,
+  DollarSign,
+  Activity,
+  Network,
+  Brain,
+  Compass,
+  HelpCircle
 } from 'lucide-react';
 import { workflows } from '../data/workflows';
 import { usePortal } from '../context/PortalContext';
+import { 
+  processDomains, 
+  retailProcesses 
+} from '../data/governance';
 
 // KPI Definition Interface
 interface RetailKPI {
@@ -149,87 +164,384 @@ const kpisList: RetailKPI[] = [
   }
 ];
 
-// Checklist Item Interface
-interface AuditItem {
-  id: string;
-  category: string;
-  question: string;
-  leakageImpact: number; // Percentage of sales leakage if not checked (0.1 to 0.5%)
-  tip: string;
+// Intelligence Engines Questions Interface
+export interface EngineQuestions {
+  executive: string[];
+  diagnostic: string[];
+  predictive: string[];
+  strategic: string[];
 }
 
-const auditChecklist: AuditItem[] = [
+export interface EngineSubCategory {
+  title: string;
+  questions: EngineQuestions;
+}
+
+export interface IntelligenceEngine {
+  id: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  iconName: string;
+  hasSubCategories: boolean;
+  subcategories?: EngineSubCategory[];
+  questions?: EngineQuestions;
+  isExecutiveDecision?: boolean;
+  decisionQuestions?: string[];
+}
+
+export const intelligenceEngines: IntelligenceEngine[] = [
   {
-    id: 'chk-1',
-    category: 'Procure-to-Pay (P2P)',
-    question: 'Are Purchase Orders locked to live MCX gold prices (15-min refresh) during requisition?',
-    leakageImpact: 0.4,
-    tip: 'Prevents paying premium supplier rates on market fluctuations.'
+    id: 'sales',
+    name: 'Sales Intelligence Engine',
+    subtitle: 'Revenue & Volume Dynamics',
+    description: 'Deconstructs revenue growth drivers, pricing versus volume optimization, and showroom category dependencies.',
+    iconName: 'TrendingUp',
+    hasSubCategories: false,
+    questions: {
+      executive: [
+        'Why did revenue grow this month?',
+        'Why did revenue decline despite higher footfall?',
+        'Which stores are driving growth?',
+        'Which stores are becoming liabilities?',
+        'Are we growing because of volume or pricing?',
+        'Which revenue streams are becoming dependent on a few categories?'
+      ],
+      diagnostic: [
+        'Which products contributed most to revenue growth?',
+        'Which categories experienced margin erosion?',
+        'Did discounting drive growth or genuine demand?',
+        'Which sales channels are underperforming?'
+      ],
+      predictive: [
+        'Which stores are likely to miss targets next month?',
+        'Which categories will contribute most next quarter?',
+        'What revenue can be expected during upcoming festivals?'
+      ],
+      strategic: [
+        'Should we expand premium offerings?',
+        'Which category deserves higher investment?',
+        'Which categories should be phased out?'
+      ]
+    }
   },
   {
-    id: 'chk-2',
-    category: 'Procure-to-Pay (P2P)',
-    question: 'Is there automated 3-way matching (PO gold rate ↔ GRN physical weight ↔ Supplier Invoice)?',
-    leakageImpact: 0.3,
-    tip: 'Stops invoice padding and weight inflation during invoicing.'
+    id: 'customer',
+    name: 'Customer Intelligence Engine',
+    subtitle: 'Acquisition & Retention Systems',
+    description: 'Tracks campaign ROI, channel value creation, drop-off diagnostics, and 90-day churn predictions.',
+    iconName: 'Users',
+    hasSubCategories: true,
+    subcategories: [
+      {
+        title: 'Customer Acquisition',
+        questions: {
+          executive: [
+            'Which acquisition channels create the most valuable customers?',
+            'Which marketing campaigns generate customers but not profits?',
+            'Which lead sources generate repeat buyers?'
+          ],
+          diagnostic: [
+            'Why is lead conversion declining?',
+            'Which source produces the highest drop-off?',
+            'Which regions have weak acquisition efficiency?'
+          ],
+          predictive: [
+            'Which customer segments will grow fastest?',
+            'Which customer groups show high churn probability?'
+          ],
+          strategic: [
+            'Should acquisition budgets be reallocated?',
+            'Which customer segments deserve dedicated programs?'
+          ]
+        }
+      },
+      {
+        title: 'Customer Retention',
+        questions: {
+          executive: [
+            'Why are customers not returning?',
+            'Which customer segments are leaving?',
+            'Which stores retain customers best?'
+          ],
+          diagnostic: [
+            'Are complaints impacting retention?',
+            'Are service experiences reducing repeat purchases?',
+            'Are competitors attracting our customers?'
+          ],
+          predictive: [
+            'Which customers are likely to churn within 90 days?',
+            'Which customers are likely to become VIP customers?'
+          ],
+          strategic: [
+            'Which retention programs generate the highest ROI?',
+            'Which customers should receive white-glove treatment?'
+          ]
+        }
+      }
+    ]
   },
   {
-    id: 'chk-3',
-    category: 'Order-to-Cash (O2C)',
-    question: 'Are sales orders tokenized instantly upon customer walk-in to track conversion funnel?',
-    leakageImpact: 0.2,
-    tip: 'Allows monitoring salesperson strike rates and active traffic gaps.'
+    id: 'bridal',
+    name: 'Bridal Intelligence Engine',
+    subtitle: 'High-Value Conversions',
+    description: 'Monitors regional market shares, bridal quote conversion paths, and design failures (obsessed by Tanishq, Kalyan, Malabar).',
+    iconName: 'Gem',
+    hasSubCategories: false,
+    questions: {
+      executive: [
+        'Which stores dominate bridal business?',
+        'What percentage of annual revenue comes from bridal customers?',
+        'Which regions are losing bridal market share?'
+      ],
+      diagnostic: [
+        'At which stage do bridal customers drop?',
+        'Why are quotations not converting?',
+        'Which designs fail most often during selection?'
+      ],
+      predictive: [
+        'Which inquiries have the highest bridal conversion probability?',
+        'Which families have highest lifetime value potential?'
+      ],
+      strategic: [
+        'Should dedicated bridal lounges be introduced?',
+        'Which bridal categories deserve inventory expansion?'
+      ]
+    }
   },
   {
-    id: 'chk-4',
-    category: 'Order-to-Cash (O2C)',
-    question: 'Is there an automated discount approval matrix to prevent sales-level margin erosion?',
-    leakageImpact: 0.3,
-    tip: 'Ensures store managers cannot exceed authorized margin thresholds.'
+    id: 'inventory',
+    name: 'Inventory Capital Engine',
+    subtitle: 'Capital Productivity & Merchandise',
+    description: 'Tracks trapped capital, inventory aging, collection lifecycle viability, and dead-stock trends.',
+    iconName: 'Database',
+    hasSubCategories: true,
+    subcategories: [
+      {
+        title: 'Inventory Productivity',
+        questions: {
+          executive: [
+            'How much capital is trapped in inventory?',
+            'Which inventory generates poor returns?',
+            'Which categories consume capital without producing profits?'
+          ],
+          diagnostic: [
+            'Why is inventory ageing increasing?',
+            'Which stores are hoarding inventory?',
+            'Which products repeatedly fail to move?'
+          ],
+          predictive: [
+            'Which SKUs are likely to become dead stock?',
+            'Which categories will face stock-outs?'
+          ],
+          strategic: [
+            'Should inventory be redistributed?',
+            'Which collections should be liquidated?'
+          ]
+        }
+      },
+      {
+        title: 'Merchandise Intelligence',
+        questions: {
+          executive: [
+            'Which collections define brand success?',
+            'Which collections are losing relevance?'
+          ],
+          diagnostic: [
+            'Why are certain collections underperforming?',
+            'Are designs outdated or overpriced?'
+          ],
+          predictive: [
+            'Which trends will dominate next season?',
+            'Which collections will lose demand?'
+          ],
+          strategic: [
+            'Which collections deserve larger investments?',
+            'Which collections should be retired?'
+          ]
+        }
+      }
+    ]
   },
   {
-    id: 'chk-5',
-    category: 'Inventory Control',
-    question: 'Is physical inventory counted and reconciled karat-wise daily against book balances?',
-    leakageImpact: 0.4,
-    tip: 'Stops invisible weight discrepancies from accumulating over months.'
+    id: 'store',
+    name: 'Store Performance Engine',
+    subtitle: 'Showroom Value Creation',
+    description: 'Pinpoints stores creating vs. destroying enterprise value, footfall conversion disconnects, and expansion planning.',
+    iconName: 'MapPin',
+    hasSubCategories: false,
+    questions: {
+      executive: [
+        'Which stores are creating enterprise value?',
+        'Which stores are destroying profitability?',
+        'Which stores deserve expansion?'
+      ],
+      diagnostic: [
+        'Why is conversion lower in specific stores?',
+        'Why is footfall high but sales low?',
+        'Why are some managers outperforming others?'
+      ],
+      predictive: [
+        'Which stores are likely to miss targets?',
+        'Which stores are likely to exceed expectations?'
+      ],
+      strategic: [
+        'Should a store be relocated?',
+        'Should a store be expanded?',
+        'Should a store be shut down?'
+      ]
+    }
   },
   {
-    id: 'chk-6',
-    category: 'Inventory Control',
-    question: 'Are inter-store stock transfers verified (sent weight = received weight) in real-time?',
-    leakageImpact: 0.2,
-    tip: 'Eliminates transit leakage and shrinkage between showrooms.'
+    id: 'employee',
+    name: 'Employee Value Engine',
+    subtitle: 'Human Capital ROI & Attrition',
+    description: 'Identifies top profit creators, conversion slowdowns, coaching needs, and sales staff attrition risks.',
+    iconName: 'UserCheck',
+    hasSubCategories: false,
+    questions: {
+      executive: [
+        'Who creates the most value?',
+        'Who generates the highest profitability?',
+        'Who retains customers best?'
+      ],
+      diagnostic: [
+        'Why is a salesperson\'s conversion declining?',
+        'Why are follow-ups being missed?',
+        'Why are complaints increasing?'
+      ],
+      predictive: [
+        'Who is at risk of attrition?',
+        'Who has leadership potential?'
+      ],
+      strategic: [
+        'Who should be promoted?',
+        'Who requires coaching?',
+        'Where should incentives be focused?'
+      ]
+    }
   },
   {
-    id: 'chk-7',
-    category: 'Costing & Pricing',
-    question: 'Is the showroom gold price automatically synced to live MCX gold rates without manual override?',
-    leakageImpact: 0.5,
-    tip: 'Ensures immediate price adjustments when gold prices spike.'
+    id: 'financial',
+    name: 'Financial Intelligence Engine',
+    subtitle: 'Margin & EBITDA Analytics',
+    description: 'Audits business unit profit contribution, cost growth velocities, and projected working capital risks.',
+    iconName: 'DollarSign',
+    hasSubCategories: false,
+    questions: {
+      executive: [
+        'Which business units generate profit?',
+        'Which business units consume profit?',
+        'Are margins improving or deteriorating?'
+      ],
+      diagnostic: [
+        'Why did profitability decline despite revenue growth?',
+        'Which costs are growing faster than sales?'
+      ],
+      predictive: [
+        'What will EBITDA look like next quarter?',
+        'Will working capital become a risk?'
+      ],
+      strategic: [
+        'Where should capital be invested?',
+        'Which projects should be prioritized?'
+      ]
+    }
   },
   {
-    id: 'chk-8',
-    category: 'Saving Schemes',
-    question: 'Are gold saving schemes integrated into CRM and gold gram credits locked on deposit-date rates?',
-    leakageImpact: 0.2,
-    tip: 'Prevents liability mismatch due to delayed rate allocation.'
+    id: 'crm',
+    name: 'CRM & Lead Management Engine',
+    subtitle: 'Funnel Integrity & Conversions',
+    description: 'Tracks high-yield lead sources, follow-up latencies, lost opportunities, and conversion probabilities.',
+    iconName: 'Activity',
+    hasSubCategories: false,
+    questions: {
+      executive: [
+        'Which lead sources create the highest revenue?',
+        'Which lead sources create the highest profitability?',
+        'Which channels deserve larger budgets?'
+      ],
+      diagnostic: [
+        'Why are leads not converting?',
+        'Why are follow-ups delayed?',
+        'Why are opportunities being lost?'
+      ],
+      predictive: [
+        'Which leads have highest conversion probability?',
+        'Which opportunities are at risk?'
+      ],
+      strategic: [
+        'Should lead allocation rules change?',
+        'Should certain campaigns be discontinued?'
+      ]
+    }
   },
   {
-    id: 'chk-9',
-    category: 'Governance & Compliance',
-    question: 'Are all showroom jewellery items tagged with a valid BIS HUID before display?',
-    leakageImpact: 0.2,
-    tip: 'Eliminates legal lockups and compliance seizure risks.'
+    id: 'supplychain',
+    name: 'Supply Chain Intelligence Engine',
+    subtitle: 'Supplier Risk & Lead Times',
+    description: 'Evaluates supplier competitive advantages, quality issues, delay trends, and procurement shortages.',
+    iconName: 'Network',
+    hasSubCategories: false,
+    questions: {
+      executive: [
+        'Which suppliers create competitive advantage?',
+        'Which suppliers create operational risk?'
+      ],
+      diagnostic: [
+        'Why are delivery delays increasing?',
+        'Why are quality issues increasing?'
+      ],
+      predictive: [
+        'Which suppliers are likely to fail service levels?',
+        'Which procurement categories face shortages?'
+      ],
+      strategic: [
+        'Should supplier relationships be diversified?',
+        'Which suppliers deserve strategic partnerships?'
+      ]
+    }
   },
   {
-    id: 'chk-10',
-    category: 'Governance & Compliance',
-    question: 'Is purchase GSTR-2B automatically matched monthly against your purchase book?',
-    leakageImpact: 0.3,
-    tip: 'Reclaims lost GST Input Tax Credit from defaulting supplier filings.'
+    id: 'executive',
+    name: 'Executive Decision Intelligence',
+    subtitle: 'The Boardroom Layer',
+    description: 'Consolidates enterprise decision support to answer multi-dimensional, high-value boardroom questions.',
+    iconName: 'Brain',
+    hasSubCategories: false,
+    isExecutiveDecision: true,
+    decisionQuestions: [
+      'Why did South Zone bridal revenue decline despite higher footfall?',
+      'Why are premium diamond collections losing momentum?',
+      'Which ₹10 crore inventory investment will generate the highest return?',
+      'Which stores will become top performers next year?',
+      'Which customer segments will drive the next phase of growth?',
+      'Which strategic initiative will create maximum EBITDA impact?',
+      'If marketing spend increases by 20%, where should it be allocated?',
+      'If inventory investment is reduced by ₹50 crore, what is the impact?',
+      'Which single operational issue is costing the company the most money today?',
+      'What are the top 10 risks to next quarter\'s revenue target?'
+    ]
   }
 ];
+
+
+
+const renderEngineIcon = (iconName: string) => {
+  switch (iconName) {
+    case 'TrendingUp': return <TrendingUp className="w-5 h-5" />;
+    case 'Users': return <Users className="w-5 h-5" />;
+    case 'Gem': return <Gem className="w-5 h-5" />;
+    case 'Database': return <Database className="w-5 h-5" />;
+    case 'MapPin': return <MapPin className="w-5 h-5" />;
+    case 'UserCheck': return <UserCheck className="w-5 h-5" />;
+    case 'DollarSign': return <DollarSign className="w-5 h-5" />;
+    case 'Activity': return <Activity className="w-5 h-5" />;
+    case 'Network': return <Network className="w-5 h-5" />;
+    case 'Brain': return <Brain className="w-5 h-5" />;
+    default: return <HelpCircle className="w-5 h-5" />;
+  }
+};
 
 // Helper to hash string to SHA-256 hex
 async function sha256(message: string) {
@@ -266,14 +578,28 @@ export function Portal() {
     }
     // Default: all checked (clean state)
     const defaults: Record<string, boolean> = {};
-    auditChecklist.forEach(item => {
-      defaults[item.id] = true;
+    retailProcesses.forEach(p => {
+      p.stages.forEach(s => {
+        s.checklistItems.forEach(item => {
+          defaults[item.id] = true;
+        });
+      });
     });
     return defaults;
   });
 
   // Store Turnover Input (in ₹ Crores)
   const [turnover, setTurnover] = useState<number>(50);
+
+  // Gated KPI Engine States
+  const [kpisMode, setKpisMode] = useState<'decision' | 'ledger'>('decision');
+  const [activeEngineId, setActiveEngineId] = useState<string>('sales');
+  const [activeSubcatIndex, setActiveSubcatIndex] = useState<number>(0);
+
+  // Gated Process Governance Explorer States
+  const [activeDomainId, setActiveDomainId] = useState<string>('customer-sales');
+  const [activeProcessId, setActiveProcessId] = useState<number>(1);
+  const [activeLayerIndex, setActiveLayerIndex] = useState<number>(0);
 
   // Save Checklist state
   useEffect(() => {
@@ -309,14 +635,17 @@ export function Portal() {
   };
 
   // Calculations for Health Diagnostic
-  const totalAuditPoints = auditChecklist.length;
-  const compliantPointsCount = Object.values(checkedItems).filter(Boolean).length;
+  const allGovernanceChecklistItems = retailProcesses.flatMap(p => 
+    p.stages.flatMap(s => s.checklistItems)
+  );
+
+  const totalAuditPoints = allGovernanceChecklistItems.length;
+  const compliantPointsCount = allGovernanceChecklistItems.filter(item => checkedItems[item.id]).length;
   const nonCompliantPointsCount = totalAuditPoints - compliantPointsCount;
   const healthScore = totalAuditPoints > 0 ? Math.round((compliantPointsCount / totalAuditPoints) * 100) : 100;
 
   // Calculate estimated leakage based on unchecked items
-  // Annual sales * sum(leakageImpact of unchecked items) / 100
-  const uncheckedItems = auditChecklist.filter(item => !checkedItems[item.id]);
+  const uncheckedItems = allGovernanceChecklistItems.filter(item => !checkedItems[item.id]);
   const totalLeakagePercentage = uncheckedItems.reduce((acc, item) => acc + item.leakageImpact, 0);
   const estimatedLeakageAmount = (turnover * (totalLeakagePercentage / 100)); // in Crores
 
@@ -332,54 +661,54 @@ export function Portal() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-[85vh] pt-28 pb-16 bg-[#001026] text-white flex items-center justify-center p-6">
-        <div className="bg-[#0B1E2E] border border-white/10 p-8 md:p-10 w-full max-w-md shadow-2xl text-left rounded-none relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-2xl pointer-events-none" />
+      <div className="min-h-[85vh] pt-28 pb-16 bg-[#f8fafc] text-slate-900 flex items-center justify-center p-6">
+        <div className="bg-white border border-slate-200 p-8 md:p-10 w-full max-w-md shadow-2xl text-left rounded-none relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/[0.02] rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-gold/10 border border-gold/20 flex items-center justify-center text-gold">
+            <div className="w-12 h-12 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700">
               <Lock className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[9px] font-black text-gold uppercase tracking-widest font-mono">Restricted Access</span>
-              <h2 className="font-extrabold text-xl uppercase tracking-wider text-white">Client Systems Vault</h2>
+              <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest font-mono">Restricted Access</span>
+              <h2 className="font-extrabold text-xl uppercase tracking-wider text-slate-900">Client Systems Vault</h2>
             </div>
           </div>
           
-          <p className="text-xs text-white/70 mb-6 leading-relaxed font-semibold">
+          <p className="text-xs text-slate-600 mb-6 leading-relaxed font-semibold">
             Please enter your Client Passcode to access premium retail KPIs, interactive operational audit checklists, and automated diagnostic leakage report generation.
           </p>
 
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
             <div>
-              <label className="block text-xs font-bold text-white/80 uppercase mb-1.5">Client Passcode</label>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">Client Passcode</label>
               <input 
                 type="password"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full border border-white/20 bg-white/5 p-3 text-sm font-semibold rounded-none focus:outline-none focus:border-gold text-white"
+                className="w-full border border-slate-200 bg-slate-50 p-3 text-sm font-semibold rounded-none focus:outline-none focus:border-blue-700 text-slate-900"
               />
             </div>
             {authError && (
-              <div className="text-red-400 text-xs font-bold flex items-center gap-1.5 mt-1">
+              <div className="text-red-600 text-xs font-bold flex items-center gap-1.5 mt-1">
                 <AlertCircle className="w-3.5 h-3.5" />
                 <span>{authError}</span>
               </div>
             )}
             <button 
               type="submit"
-              className="w-full py-3 bg-gold text-white hover:bg-gold/90 font-extrabold text-xs uppercase tracking-widest shadow-md transition-colors rounded-none"
+              className="w-full py-3 bg-blue-700 text-white hover:bg-blue-800 font-extrabold text-xs uppercase tracking-widest shadow-md transition-colors rounded-none"
             >
               Unlock Vault
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-white/10 flex justify-between items-center text-xs">
-            <Link to="/" className="text-white/60 hover:text-white flex items-center gap-1">
+          <div className="mt-6 pt-6 border-t border-slate-100 flex justify-between items-center text-xs">
+            <Link to="/" className="text-slate-500 hover:text-slate-900 flex items-center gap-1">
               <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
             </Link>
-            <span className="text-gold/50 font-bold uppercase tracking-wider text-[9px]">Scale with Abraham</span>
+            <span className="text-blue-700 font-bold uppercase tracking-wider text-[9px]">Scale with Abraham</span>
           </div>
         </div>
       </div>
@@ -511,123 +840,600 @@ export function Portal() {
 
         {/* Tab 2: Retail KPIs Engine */}
         {activeTab === 'kpis' && (
-          <div className="animate-fadeIn space-y-6">
-            <div className="mb-4">
-              <h3 className="text-xl font-extrabold text-navy uppercase tracking-tight">Showroom KPIs & Diagnostics Ledger</h3>
-              <p className="text-xs text-text-secondary font-semibold mt-1">
-                Comprehensive reference of critical metrics required to manage a modern jewellery retail enterprise.
-              </p>
-            </div>
+          <div className="animate-fadeIn space-y-8">
+            {/* Header Compare Block: Fail vs World-class Executive System */}
+            <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-none shadow-sm space-y-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                <div>
+                  <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block mb-1">THE GATES OF INTELLIGENCE</span>
+                  <h3 className="text-xl font-extrabold text-navy uppercase tracking-tight">Executive Decision System vs. Traditional Dashboard</h3>
+                </div>
+                <div className="flex bg-slate-100 p-1 border border-slate-200 rounded-none shrink-0 self-start md:self-auto">
+                  <button
+                    onClick={() => setKpisMode('decision')}
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-none ${
+                      kpisMode === 'decision'
+                        ? 'bg-navy text-white shadow-sm font-extrabold'
+                        : 'text-text-secondary hover:text-navy'
+                    }`}
+                  >
+                    Boardroom Decisions Board
+                  </button>
+                  <button
+                    onClick={() => setKpisMode('ledger')}
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-none ${
+                      kpisMode === 'ledger'
+                        ? 'bg-navy text-white shadow-sm font-extrabold'
+                        : 'text-text-secondary hover:text-navy'
+                    }`}
+                  >
+                    Core Metrics Ledger
+                  </button>
+                </div>
+              </div>
 
-            <div className="grid grid-cols-1 gap-4">
-              {kpisList.map((kpi) => (
-                <div 
-                  key={kpi.id} 
-                  className="bg-white border border-border-light p-6 rounded-none flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-navy/20 transition-all shadow-sm"
-                >
-                  <div className="space-y-1.5 max-w-[65%]">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[8px] font-bold uppercase bg-navy/5 text-navy border border-navy/15 px-2 py-0.5 rounded-none font-mono">
-                        {kpi.department}
-                      </span>
-                    </div>
-                    <h4 className="text-base font-extrabold text-navy leading-snug">{kpi.name}</h4>
-                    <p className="text-xs text-text-secondary leading-relaxed font-semibold">
-                      <span className="text-navy font-bold uppercase tracking-wider text-[10px] block md:inline md:mr-1">Formula:</span> 
-                      <code className="font-mono text-[#0170B9] bg-[#0170B9]/5 px-2 py-0.5 border border-[#0170B9]/15 text-[10px] break-all inline-block mt-1 md:mt-0">{kpi.formula}</code>
-                    </p>
-                    <p className="text-xs text-text-secondary leading-relaxed pt-1">{kpi.impact}</p>
+              {/* McKinsey Style Contrast Box */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 border border-slate-200 p-5 md:p-6 rounded-none">
+                <div className="space-y-4 border-b md:border-b-0 md:border-r border-slate-200 pb-6 md:pb-0 md:pr-6">
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-500 font-extrabold">❌</span>
+                    <h4 className="font-extrabold text-slate-800 text-sm uppercase tracking-wider">Most Showroom Dashboards Fail</h4>
                   </div>
-                  
-                  <div className="md:border-l border-border-light md:pl-6 pt-3 md:pt-0 flex flex-col gap-2 min-w-[30%]">
-                    <div>
-                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Target Benchmark</span>
-                      <span className="text-xs font-extrabold text-gold uppercase">{kpi.benchmark}</span>
+                  <p className="text-xs text-text-secondary leading-relaxed font-semibold">
+                    Most dashboards answer only backward-looking operational questions:
+                  </p>
+                  <ul className="space-y-2 text-xs text-slate-500 pl-5 list-disc">
+                    <li>What happened to sales this month?</li>
+                    <li>Which items sold out?</li>
+                    <li>What is our current ledger inventory weight?</li>
+                  </ul>
+                </div>
+                <div className="space-y-4 md:pl-6">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[#8CC63F] font-extrabold">✅</span>
+                    <h4 className="font-extrabold text-navy text-sm uppercase tracking-wider">World-Class Executive Systems Answer:</h4>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <div className="bg-white border border-slate-200/80 p-2.5 shadow-sm">
+                      <span className="text-[#8CC63F] font-black mr-1">✅</span>
+                      <span className="font-extrabold text-navy">Why did it happen?</span>
+                      <p className="text-[10px] text-text-muted mt-1 leading-normal">Deep causation tracking.</p>
                     </div>
-                    <div>
-                      <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Actionable System Trigger</span>
-                      <span className="text-xs font-bold text-navy leading-normal block">{kpi.trigger}</span>
+                    <div className="bg-white border border-slate-200/80 p-2.5 shadow-sm">
+                      <span className="text-[#8CC63F] font-black mr-1">✅</span>
+                      <span className="font-extrabold text-navy">What caused it?</span>
+                      <p className="text-[10px] text-text-muted mt-1 leading-normal">Root trigger identification.</p>
+                    </div>
+                    <div className="bg-white border border-slate-200/80 p-2.5 shadow-sm">
+                      <span className="text-[#8CC63F] font-black mr-1">✅</span>
+                      <span className="font-extrabold text-navy">What will happen next?</span>
+                      <p className="text-[10px] text-text-muted mt-1 leading-normal">Predictive outlook modeling.</p>
+                    </div>
+                    <div className="bg-white border border-slate-200/80 p-2.5 shadow-sm">
+                      <span className="text-[#8CC63F] font-black mr-1">✅</span>
+                      <span className="font-extrabold text-navy">What action should we take?</span>
+                      <p className="text-[10px] text-text-muted mt-1 leading-normal">Strategic boardroom advice.</p>
                     </div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
+
+            {/* Sub-view switcher */}
+            {kpisMode === 'ledger' ? (
+              <div className="animate-fadeIn space-y-6">
+                <div>
+                  <h3 className="text-lg font-extrabold text-navy uppercase tracking-tight">Showroom KPIs & Diagnostics Ledger</h3>
+                  <p className="text-xs text-text-secondary font-semibold mt-1">
+                    Comprehensive reference of 13 critical metrics required to manage a modern jewellery retail enterprise.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4">
+                  {kpisList.map((kpi) => (
+                    <div 
+                      key={kpi.id} 
+                      className="bg-white border border-slate-200 p-6 rounded-none flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:border-navy/20 transition-all shadow-sm"
+                    >
+                      <div className="space-y-1.5 max-w-[65%] font-semibold">
+                        <div className="flex items-center gap-2">
+                          <span className="text-[8px] font-bold uppercase bg-navy/5 text-navy border border-navy/15 px-2 py-0.5 rounded-none font-mono">
+                            {kpi.department}
+                          </span>
+                        </div>
+                        <h4 className="text-base font-extrabold text-navy leading-snug">{kpi.name}</h4>
+                        <div className="text-xs text-text-secondary leading-relaxed font-semibold">
+                          <span className="text-navy font-bold uppercase tracking-wider text-[10px] block md:inline md:mr-1">Formula:</span> 
+                          <code className="font-mono text-navy bg-navy/5 px-2 py-0.5 border border-navy/15 text-[10px] break-all inline-block mt-1 md:mt-0">{kpi.formula}</code>
+                        </div>
+                        <p className="text-xs text-text-secondary leading-relaxed pt-1">{kpi.impact}</p>
+                      </div>
+                      
+                      <div className="md:border-l border-slate-200 md:pl-6 pt-3 md:pt-0 flex flex-col gap-2 min-w-[30%]">
+                        <div>
+                          <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Target Benchmark</span>
+                          <span className="text-xs font-extrabold text-[#8CC63F] uppercase">{kpi.benchmark}</span>
+                        </div>
+                        <div>
+                          <span className="text-[9px] font-bold text-text-muted uppercase tracking-wider block">Actionable System Trigger</span>
+                          <span className="text-xs font-bold text-navy leading-normal block">{kpi.trigger}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              // Boardroom Decisions Board view
+              <div className="animate-fadeIn space-y-6">
+                <div>
+                  <h3 className="text-lg font-extrabold text-navy uppercase tracking-tight">Showroom Intelligence Engines</h3>
+                  <p className="text-xs text-text-secondary font-semibold mt-1">
+                    Verbatim executive systems framework covering 10 key strategic domains with decision-support questions.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                  {/* Left Sidebar Pane: 10 Engines */}
+                  <div className="lg:col-span-4 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-3 lg:pb-0 scrollbar-hide">
+                    {intelligenceEngines.map((engine) => {
+                      const isSelected = activeEngineId === engine.id;
+                      return (
+                        <button
+                          key={engine.id}
+                          onClick={() => {
+                            setActiveEngineId(engine.id);
+                            setActiveSubcatIndex(0);
+                          }}
+                          className={`w-56 lg:w-full p-4 border rounded-none text-left transition-all shrink-0 flex items-start gap-3 select-none ${
+                            isSelected
+                              ? 'bg-navy border-navy text-white shadow-md'
+                              : 'bg-white border-slate-200 text-slate-900 hover:border-navy/40 hover:bg-slate-50'
+                          }`}
+                        >
+                          <div className={`p-2 rounded-none ${isSelected ? 'bg-white/10 text-white' : 'bg-blue-50 text-navy'} shrink-0`}>
+                            {renderEngineIcon(engine.iconName)}
+                          </div>
+                          <div className="min-w-0">
+                            <h4 className={`text-xs font-extrabold uppercase tracking-wide truncate ${isSelected ? 'text-white' : 'text-slate-900'}`}>
+                              {engine.name}
+                            </h4>
+                            <p className={`text-[10px] mt-0.5 truncate ${isSelected ? 'text-white/80' : 'text-slate-500'}`}>
+                              {engine.subtitle}
+                            </p>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Right Detail Pane */}
+                  <div className="lg:col-span-8 bg-white border border-slate-200 p-6 md:p-8 rounded-none shadow-sm space-y-6">
+                    {/* Selected Engine Header */}
+                    {(() => {
+                      const engine = intelligenceEngines.find(e => e.id === activeEngineId) || intelligenceEngines[0];
+                      
+                      // Check for Bridal Engine note
+                      const isBridal = engine.id === 'bridal';
+
+                      return (
+                        <div className="space-y-6">
+                          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-100 pb-4">
+                            <div className="flex items-center gap-3">
+                              <div className="p-3 bg-blue-50 text-navy border border-blue-100 rounded-none shrink-0">
+                                {renderEngineIcon(engine.iconName)}
+                              </div>
+                              <div>
+                                <h4 className="text-base font-extrabold text-navy uppercase tracking-wide">{engine.name}</h4>
+                                <p className="text-xs text-text-secondary font-semibold">{engine.subtitle}</p>
+                              </div>
+                            </div>
+                            {isBridal && (
+                              <span className="text-[9px] font-black bg-gold/15 text-gold-dark border border-gold/30 px-2 py-1 rounded-none font-mono">
+                                BRAND OBSESSION
+                              </span>
+                            )}
+                          </div>
+
+                          <p className="text-xs text-text-secondary leading-relaxed font-semibold italic">
+                            {engine.description}
+                          </p>
+
+                          {/* Bridal Engine context warning */}
+                          {isBridal && (
+                            <div className="bg-slate-50 border-l-2 border-gold p-3 text-[11px] text-text-secondary leading-relaxed">
+                              💡 <strong>Industry Benchmark:</strong> Tanishq, Malabar Gold, Kalyan, and Joyalukkas all obsess over this specific bridal workflow to capture large-ticket family purchase events.
+                            </div>
+                          )}
+
+                          {/* Render Subcategories selectors if hasSubcategories */}
+                          {engine.hasSubCategories && engine.subcategories && (
+                            <div className="flex border-b border-slate-200 pb-0 gap-1 overflow-x-auto">
+                              {engine.subcategories.map((sub, idx) => (
+                                <button
+                                  key={idx}
+                                  onClick={() => setActiveSubcatIndex(idx)}
+                                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap ${
+                                    activeSubcatIndex === idx
+                                      ? 'border-gold text-navy font-black'
+                                      : 'border-transparent text-text-secondary hover:text-navy'
+                                  }`}
+                                >
+                                  {sub.title}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Render Questions Block */}
+                          {engine.isExecutiveDecision ? (
+                            // Executive Decision Intelligence View (direct list of 10 board questions)
+                            <div className="space-y-4">
+                              <div className="bg-slate-50 border border-slate-200 p-4 rounded-none space-y-1">
+                                <span className="text-[10px] font-bold text-gold uppercase tracking-wider block font-mono">Enterprise Advisory Layer</span>
+                                <h5 className="text-xs font-extrabold uppercase text-slate-800">Boardroom Agenda Questions</h5>
+                                <p className="text-[11px] text-text-muted leading-relaxed">
+                                  This final layer is designed to answer complex cross-functional questions that dictate capital allocation and corporate survival.
+                                </p>
+                              </div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {engine.decisionQuestions?.map((q, idx) => (
+                                  <div key={idx} className="p-4 bg-white border border-slate-200 flex gap-3 shadow-xs hover:border-navy/30 transition-all">
+                                    <span className="font-mono text-xs text-navy font-extrabold shrink-0">#{idx + 1}</span>
+                                    <p className="text-xs font-bold text-slate-900 leading-snug">{q}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ) : (
+                            // 4 Pillar Grid questions View
+                            (() => {
+                              const activeQuestions = engine.hasSubCategories && engine.subcategories
+                                ? engine.subcategories[activeSubcatIndex]?.questions
+                                : engine.questions;
+
+                              if (!activeQuestions) return null;
+
+                              const pillars = [
+                                {
+                                  title: 'Executive Questions',
+                                  color: 'border-blue-200 bg-blue-50/10 text-blue-700',
+                                  badge: 'bg-blue-50 text-blue-800 border-blue-200',
+                                  icon: <Brain className="w-3.5 h-3.5" />,
+                                  list: activeQuestions.executive
+                                },
+                                {
+                                  title: 'Diagnostic Questions',
+                                  color: 'border-indigo-200 bg-indigo-50/10 text-indigo-700',
+                                  badge: 'bg-indigo-50 text-indigo-800 border-indigo-200',
+                                  icon: <HelpCircle className="w-3.5 h-3.5" />,
+                                  list: activeQuestions.diagnostic
+                                },
+                                {
+                                  title: 'Predictive Questions',
+                                  color: 'border-purple-200 bg-purple-50/10 text-purple-700',
+                                  badge: 'bg-purple-50 text-purple-800 border-purple-200',
+                                  icon: <TrendingUp className="w-3.5 h-3.5" />,
+                                  list: activeQuestions.predictive
+                                },
+                                {
+                                  title: 'Strategic Questions',
+                                  color: 'border-emerald-200 bg-emerald-50/10 text-emerald-700',
+                                  badge: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+                                  icon: <Compass className="w-3.5 h-3.5" />,
+                                  list: activeQuestions.strategic
+                                }
+                              ];
+
+                              return (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                  {pillars.map((pillar, pIdx) => (
+                                    <div key={pIdx} className={`border p-5 rounded-none flex flex-col space-y-3 shadow-xs ${pillar.color}`}>
+                                      <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                                        <div className="flex items-center gap-1.5">
+                                          {pillar.icon}
+                                          <h5 className="text-xs font-black uppercase tracking-wider text-slate-800">
+                                            {pillar.title}
+                                          </h5>
+                                        </div>
+                                        <span className="text-[9px] font-mono font-bold bg-white/60 px-1.5 py-0.5 rounded-none text-slate-600 border border-slate-200">
+                                          {pillar.list.length} Items
+                                        </span>
+                                      </div>
+                                      <ul className="flex-1 space-y-3.5">
+                                        {pillar.list.map((question, qIdx) => (
+                                          <li key={qIdx} className="flex gap-2.5 text-xs">
+                                            <span className="text-navy font-bold mt-0.5 shrink-0">▸</span>
+                                            <span className="font-bold text-slate-900 leading-snug">{question}</span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  ))}
+                                </div>
+                              );
+                            })()
+                          )}
+                        </div>
+                      );
+                    })()}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
         {/* Tab 3: Business Audit Checklist */}
-        {activeTab === 'checklist' && (
-          <div className="animate-fadeIn space-y-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-navy text-white p-6 rounded-none shadow-md">
-              <div className="space-y-1">
-                <span className="text-[9px] font-black text-gold uppercase tracking-widest font-mono">Operations Audit Protocol</span>
-                <h3 className="text-lg font-extrabold uppercase">Showroom Systems Health Check</h3>
-                <p className="text-xs text-white/70 font-semibold leading-relaxed max-w-xl">
-                  Check off the elements that are **currently fully automated and active** in your business. Gaps will automatically calculate leakages in the report tab.
-                </p>
-              </div>
-              <div className="flex items-center gap-4 bg-white/5 border border-white/10 px-5 py-3 rounded-none">
-                <div className="text-center">
-                  <span className="text-[9px] font-bold text-white/55 block uppercase">HEALTH SCORE</span>
-                  <span className={`text-2xl font-black ${healthScore > 80 ? 'text-green-400' : healthScore > 50 ? 'text-orange-400' : 'text-red-400'}`}>
-                    {healthScore}%
-                  </span>
-                </div>
-                <div className="w-px h-8 bg-white/15" />
-                <div className="text-center">
-                  <span className="text-[9px] font-bold text-white/55 block uppercase">ACTIVE GAPS</span>
-                  <span className="text-2xl font-black text-gold">{nonCompliantPointsCount}</span>
-                </div>
-              </div>
-            </div>
+        {activeTab === 'checklist' && (() => {
+          const activeDomainProcesses = retailProcesses.filter(p => p.domain === activeDomainId);
+          const activeProcess = activeDomainProcesses.find(p => p.id === activeProcessId) || activeDomainProcesses[0] || retailProcesses[0];
 
-            <div className="bg-white border border-border-light rounded-none shadow-sm divide-y divide-border-light">
-              {auditChecklist.map((item) => (
-                <div 
-                  key={item.id} 
-                  onClick={() => toggleCheck(item.id)}
-                  className={`p-5 flex items-start gap-4 cursor-pointer select-none transition-colors ${
-                    checkedItems[item.id] ? 'hover:bg-green-50/10' : 'hover:bg-red-50/10 bg-red-500/[0.01]'
-                  }`}
-                >
-                  <div className="mt-1 flex-shrink-0">
-                    {checkedItems[item.id] ? (
-                      <CheckCircle2 className="w-5 h-5 text-green-600" />
-                    ) : (
-                      <XCircle className="w-5 h-5 text-red-500" />
-                    )}
-                  </div>
-                  <div className="flex-1 space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-[9px] font-bold uppercase tracking-wider text-text-muted font-mono">
-                        {item.category}
-                      </span>
-                      <span className={`text-[8px] font-extrabold uppercase px-1.5 py-0.5 rounded-none font-mono ${
-                        checkedItems[item.id] 
-                          ? 'bg-green-100 text-green-700 border border-green-200' 
-                          : 'bg-red-50 text-red-700 border border-red-200 animate-pulse'
-                      }`}>
-                        {checkedItems[item.id] ? 'Active / Automated' : 'Manual / Leakage Risk'}
-                      </span>
-                    </div>
-                    <p className="text-sm font-bold text-navy leading-snug">
-                      {item.question}
-                    </p>
-                    <p className="text-xs text-text-secondary font-semibold">
-                      💡 {item.tip}
-                    </p>
-                  </div>
-                  <div className="text-right flex-shrink-0 hidden md:block">
-                    <span className="text-[9px] font-bold text-text-muted uppercase block">Potential Leak</span>
-                    <span className={`text-xs font-mono font-bold ${checkedItems[item.id] ? 'text-green-600' : 'text-red-500'}`}>
-                      {checkedItems[item.id] ? 'None' : `~ ${item.leakageImpact}% of turnover`}
+          return (
+            <div className="animate-fadeIn space-y-8">
+              {/* Header Scorecard Banner */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-navy text-white p-6 rounded-none shadow-md">
+                <div className="space-y-1">
+                  <span className="text-[9px] font-black text-gold uppercase tracking-widest font-mono">Process Governance Protocol</span>
+                  <h3 className="text-lg font-extrabold uppercase">Retail Process Governance & Audit Explorer</h3>
+                  <p className="text-xs text-white/70 font-semibold leading-relaxed max-w-xl">
+                    Standardized retail operating model spanning 36 core processes. Check off the elements that are **currently active** to compute your compliance score.
+                  </p>
+                </div>
+                <div className="flex items-center gap-4 bg-white/5 border border-white/10 px-5 py-3 rounded-none">
+                  <div className="text-center">
+                    <span className="text-[9px] font-bold text-white/55 block uppercase">HEALTH SCORE</span>
+                    <span className={`text-2xl font-black ${healthScore > 80 ? 'text-green-400' : healthScore > 50 ? 'text-orange-400' : 'text-red-400'}`}>
+                      {healthScore}%
                     </span>
                   </div>
+                  <div className="w-px h-8 bg-white/15" />
+                  <div className="text-center">
+                    <span className="text-[9px] font-bold text-white/55 block uppercase">ACTIVE GAPS</span>
+                    <span className="text-2xl font-black text-gold">{nonCompliantPointsCount}</span>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Domain Switcher */}
+              <div className="flex border-b border-slate-200 pb-0 gap-1 overflow-x-auto scrollbar-hide">
+                {processDomains.map((domain) => (
+                  <button
+                    key={domain.id}
+                    onClick={() => {
+                      setActiveDomainId(domain.id);
+                      // Default active process in this domain
+                      const domainProcs = retailProcesses.filter(p => p.domain === domain.id);
+                      if (domainProcs.length > 0) {
+                        setActiveProcessId(domainProcs[0].id);
+                      }
+                      setActiveLayerIndex(0);
+                    }}
+                    className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider border-b-2 transition-all whitespace-nowrap ${
+                      activeDomainId === domain.id
+                        ? 'border-gold text-navy font-black'
+                        : 'border-transparent text-text-secondary hover:text-navy'
+                    }`}
+                  >
+                    {domain.name}
+                  </button>
+                ))}
+              </div>
+
+              {/* Split Explorer Pane */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                {/* Left Side: Process Selector */}
+                <div className="lg:col-span-4 flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-3 lg:pb-0 scrollbar-hide">
+                  {activeDomainProcesses.map((p) => {
+                    const isSelected = activeProcessId === p.id;
+                    // Count compliant items in this process
+                    const procChecklist = p.stages.flatMap(s => s.checklistItems);
+                    const procTotal = procChecklist.length;
+                    const procCompliant = procChecklist.filter(item => checkedItems[item.id]).length;
+                    const procPercentage = procTotal > 0 ? Math.round((procCompliant / procTotal) * 100) : 100;
+
+                    return (
+                      <button
+                        key={p.id}
+                        onClick={() => {
+                          setActiveProcessId(p.id);
+                          setActiveLayerIndex(0);
+                        }}
+                        className={`w-64 lg:w-full p-4 border rounded-none text-left transition-all shrink-0 flex flex-col gap-2 select-none ${
+                          isSelected
+                            ? 'bg-navy border-navy text-white shadow-md'
+                            : 'bg-white border-slate-200 text-slate-900 hover:border-navy/40 hover:bg-slate-50'
+                        }`}
+                      >
+                        <div className="flex justify-between items-start w-full">
+                          <span className="font-mono text-[10px] font-black text-gold">PROCESS 0{p.id}</span>
+                          <span className={`text-[8.5px] font-mono font-bold px-1.5 py-0.5 rounded-none border ${
+                            isSelected 
+                              ? 'bg-white/10 text-white border-white/20' 
+                              : 'bg-slate-100 text-slate-600 border-slate-200'
+                          }`}>
+                            {procPercentage}% OK
+                          </span>
+                        </div>
+                        <h4 className={`text-xs font-black uppercase tracking-wide truncate ${isSelected ? 'text-white' : 'text-slate-900'}`}>
+                          {p.name}
+                        </h4>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Right Side: Process Viewer & Checklist */}
+                <div className="lg:col-span-8 space-y-6">
+                  
+                  {/* The 5 Layers Card */}
+                  <div className="bg-white border border-slate-200 p-6 rounded-none shadow-sm space-y-4">
+                    <div className="border-b border-slate-100 pb-3 flex justify-between items-center">
+                      <h4 className="text-sm font-black text-navy uppercase tracking-wider">
+                        0{activeProcess.id}. {activeProcess.name} — Core Architecture
+                      </h4>
+                      <span className="text-[9px] font-mono font-bold bg-[#8bc34a]/15 text-[#8bc34a]-dark border border-[#8bc34a]/20 px-2 py-0.5 rounded-none">
+                        5-LAYER MATRIX
+                      </span>
+                    </div>
+
+                    {/* Layers Tab Selector */}
+                    <div className="flex border-b border-slate-100 gap-1 overflow-x-auto pb-0">
+                      {['Process Flow', 'Controls', 'Risks', 'KPIs', 'Executive Insights'].map((layerName, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setActiveLayerIndex(idx)}
+                          className={`px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap ${
+                            activeLayerIndex === idx
+                              ? 'border-navy text-navy font-black'
+                              : 'border-transparent text-text-secondary hover:text-navy'
+                          }`}
+                        >
+                          Layer {idx + 1}: {layerName}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Layer Content */}
+                    <div className="p-4 bg-slate-50 border border-slate-200 rounded-none text-xs min-h-[120px] flex flex-col justify-center">
+                      {activeLayerIndex === 0 && (
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono font-black text-navy uppercase tracking-wider block">Visual Process Flow (What Happens)</span>
+                          <div className="flex flex-wrap items-center gap-2 text-slate-800 font-extrabold py-2">
+                            {activeProcess.layers.flow.split('→').map((step, sIdx, arr) => (
+                              <div key={sIdx} className="flex items-center gap-2">
+                                <span className="bg-white border border-slate-200 px-2.5 py-1.5 shadow-xs rounded-none">
+                                  {step.trim()}
+                                </span>
+                                {sIdx < arr.length - 1 && <span className="text-[#8bc34a] font-bold">➔</span>}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {activeLayerIndex === 1 && (
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono font-black text-navy uppercase tracking-wider block">Standardized Controls (What Should Happen)</span>
+                          <p className="text-slate-700 leading-relaxed font-semibold">
+                            {activeProcess.layers.controls}
+                          </p>
+                        </div>
+                      )}
+
+                      {activeLayerIndex === 2 && (
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono font-black text-red-500 uppercase tracking-wider block">Operation Risks (What Can Go Wrong)</span>
+                          <ul className="space-y-1.5 pl-4 list-disc text-slate-700 font-medium">
+                            {activeProcess.layers.risks.map((risk, rIdx) => (
+                              <li key={rIdx} className="leading-relaxed">
+                                <strong className="text-red-600">Risk #{rIdx + 1}:</strong> {risk}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {activeLayerIndex === 3 && (
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono font-black text-blue-600 uppercase tracking-wider block">Process KPIs (How Do We Measure It)</span>
+                          <ul className="space-y-1.5 pl-4 list-disc text-slate-700 font-semibold">
+                            {activeProcess.layers.kpis.map((kpi, kIdx) => (
+                              <li key={kIdx} className="leading-relaxed">
+                                {kpi}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {activeLayerIndex === 4 && (
+                        <div className="space-y-2">
+                          <span className="text-[9px] font-mono font-black text-gold-dark uppercase tracking-wider block">Executive Insights (Advisory Decisions)</span>
+                          <ul className="space-y-1.5 pl-4 list-disc text-slate-700 font-semibold">
+                            {activeProcess.layers.insights.map((insight, iIdx) => (
+                              <li key={iIdx} className="leading-relaxed text-navy">
+                                {insight}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Stage-by-Stage Control Checklist */}
+                  <div className="bg-white border border-slate-200 p-6 rounded-none shadow-sm space-y-6">
+                    <div>
+                      <h4 className="text-sm font-black text-navy uppercase tracking-wider">
+                        Operational Audit Protocol — Stage-by-Stage Governance
+                      </h4>
+                      <p className="text-[10px] text-text-muted mt-1 font-medium">
+                        Validate standard controls across each operational stage. Unchecked items indicate active leakage gaps.
+                      </p>
+                    </div>
+
+                    <div className="space-y-6">
+                      {activeProcess.stages.map((stage) => (
+                        <div key={stage.number} className="border border-slate-100 p-4 rounded-none bg-slate-50/50 space-y-3 text-left">
+                          {/* Stage Header */}
+                          <div className="border-b border-slate-100 pb-2 flex justify-between items-center">
+                            <div>
+                              <span className="text-[9px] font-mono font-black text-gold uppercase tracking-wider block">Stage 0{stage.number}</span>
+                              <h5 className="text-xs font-black text-slate-800 uppercase">{stage.title}</h5>
+                            </div>
+                            <span className="text-[8px] font-mono font-bold bg-navy/5 text-navy border border-navy/10 px-2 py-0.5 rounded-none">
+                              {stage.controlArea}
+                            </span>
+                          </div>
+
+                          {/* Checklist items */}
+                          <div className="divide-y divide-slate-100">
+                            {stage.checklistItems.map((item) => {
+                              const isChecked = checkedItems[item.id];
+                              return (
+                                <div
+                                  key={item.id}
+                                  onClick={() => toggleCheck(item.id)}
+                                  className="py-3 flex items-start gap-3.5 cursor-pointer select-none transition-colors hover:bg-slate-100/50"
+                                >
+                                  <div className="mt-0.5 shrink-0">
+                                    {isChecked ? (
+                                      <CheckCircle2 className="w-4.5 h-4.5 text-green-600" />
+                                    ) : (
+                                      <XCircle className="w-4.5 h-4.5 text-red-500" />
+                                    )}
+                                  </div>
+                                  <div className="flex-1 space-y-0.5">
+                                    <p className="text-xs font-bold text-slate-800 leading-snug">
+                                      {item.text}
+                                    </p>
+                                    <p className="text-[10px] text-text-secondary font-medium">
+                                      💡 {item.tip}
+                                    </p>
+                                  </div>
+                                  <div className="text-right shrink-0 hidden sm:block">
+                                    <span className={`text-[9.5px] font-mono font-bold ${isChecked ? 'text-green-600' : 'text-red-500 animate-pulse'}`}>
+                                      {isChecked ? 'None' : `~${item.leakageImpact}% Leak`}
+                                    </span>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
-          </div>
-        )}
+          );
+        })()}
 
         {/* Tab 4: Health Check Report Generator */}
         {activeTab === 'report' && (
@@ -787,7 +1593,7 @@ export function Portal() {
                         <div key={item.id} className="flex gap-3 text-sm border-l-2 border-red-500 pl-4 py-1">
                           <span className="font-mono text-xs text-red-500 font-bold shrink-0 mt-0.5">GAP #{idx + 1}</span>
                           <div className="space-y-1 text-left">
-                            <p className="font-bold text-navy leading-snug">{item.question}</p>
+                            <p className="font-bold text-navy leading-snug">{item.text}</p>
                             <p className="text-xs text-text-secondary leading-relaxed">
                               <span className="text-red-500 font-extrabold">Leakage Risk:</span> ~{item.leakageImpact}% of turnover. 
                               <span className="text-navy font-extrabold ml-2">Remediation:</span> {item.tip}

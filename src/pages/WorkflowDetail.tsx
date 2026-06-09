@@ -7,6 +7,7 @@ import { StepCardsGrid } from '../sections/workflow/StepCardsGrid';
 import { DashboardImpact } from '../sections/workflow/DashboardImpact';
 import { getWorkflowBySlug } from '../data/workflows';
 import { usePortal } from '../context/PortalContext';
+import { CRMDetailSection } from '../sections/workflow/CRMDetailSection';
 
 // Helper to hash string to SHA-256 hex
 async function sha256(message: string) {
@@ -50,57 +51,57 @@ export function WorkflowDetail() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen pt-28 pb-16 bg-[#001026] text-white flex items-center justify-center p-6">
-        <div className="bg-[#0B1E2E] border border-white/10 p-8 md:p-10 w-full max-w-md shadow-2xl text-left rounded-none relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 rounded-full blur-2xl pointer-events-none" />
+      <div className="min-h-screen pt-28 pb-16 bg-[#f8fafc] text-slate-900 flex items-center justify-center p-6">
+        <div className="bg-white border border-slate-200 p-8 md:p-10 w-full max-w-md shadow-2xl text-left rounded-none relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/[0.02] rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-gold/10 border border-gold/20 flex items-center justify-center text-gold">
+            <div className="w-12 h-12 bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-700">
               <Lock className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[9px] font-black text-gold uppercase tracking-widest font-mono">Restricted Access</span>
-              <h2 className="font-extrabold text-xl uppercase tracking-wider text-white">Systems Vault Gate</h2>
+              <span className="text-[9px] font-black text-blue-600 uppercase tracking-widest font-mono">Restricted Access</span>
+              <h2 className="font-extrabold text-xl uppercase tracking-wider text-slate-900">Systems Vault Gate</h2>
             </div>
           </div>
           
-          <h3 className="text-base font-extrabold text-white mb-2">
+          <h3 className="text-base font-extrabold text-slate-900 mb-2">
             Unlock: {workflow.name}
           </h3>
-          <p className="text-xs text-white/70 mb-6 leading-relaxed font-semibold">
+          <p className="text-xs text-slate-600 mb-6 leading-relaxed font-semibold">
             This operational blueprint is reserved for clients and partners of Abraham's Systems & Retail Consulting. Please enter the Client Passcode to access full KPIs, audit checklists, and step-by-step implementations.
           </p>
 
           <form onSubmit={handleUnlock} className="flex flex-col gap-4">
             <div>
-              <label className="block text-xs font-bold text-white/80 uppercase mb-1.5">Client Passcode</label>
+              <label className="block text-xs font-bold text-slate-700 uppercase mb-1.5">Client Passcode</label>
               <input 
                 type="password"
                 value={passcode}
                 onChange={(e) => setPasscode(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full border border-white/20 bg-white/5 p-3 text-sm font-semibold rounded-none focus:outline-none focus:border-gold text-white"
+                className="w-full border border-slate-200 bg-slate-50 p-3 text-sm font-semibold rounded-none focus:outline-none focus:border-blue-700 text-slate-900"
               />
             </div>
             {error && (
-              <div className="text-red-400 text-xs font-bold flex items-center gap-1.5 mt-1">
+              <div className="text-red-600 text-xs font-bold flex items-center gap-1.5 mt-1">
                 <AlertCircle className="w-3.5 h-3.5" />
                 <span>{error}</span>
               </div>
             )}
             <button 
               type="submit"
-              className="w-full py-3 bg-gold text-white hover:bg-gold/90 font-extrabold text-xs uppercase tracking-widest shadow-md transition-colors rounded-none"
+              className="w-full py-3 bg-blue-700 text-white hover:bg-blue-800 font-extrabold text-xs uppercase tracking-widest shadow-md transition-colors rounded-none"
             >
               Unlock Blueprint
             </button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-white/10 flex justify-between items-center text-xs">
-            <Link to="/" className="text-white/60 hover:text-white flex items-center gap-1">
+          <div className="mt-6 pt-6 border-t border-slate-100 flex justify-between items-center text-xs">
+            <Link to="/" className="text-slate-500 hover:text-slate-900 flex items-center gap-1">
               <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
             </Link>
-            <span className="text-gold/50 font-bold uppercase tracking-wider text-[9px]">Scale with Abraham</span>
+            <span className="text-blue-700 font-bold uppercase tracking-wider text-[9px]">Scale with Abraham</span>
           </div>
         </div>
       </div>
@@ -152,36 +153,40 @@ export function WorkflowDetail() {
     <>
       <WorkflowHero />
       
+      {workflow.slug === 'crm-growth-engine' && (
+        <CRMDetailSection />
+      )}
+      
       {workflow.slug === 'p2p-jewellery-supply-chain' && (
-        <section className="bg-[#001026] text-white py-12 px-6 border-b border-white/10 select-none">
+        <section className="bg-[#f8fafc] text-slate-900 py-16 px-6 border-b border-slate-200 select-none">
           <div className="max-w-[1200px] mx-auto">
             
             {/* Major & Recurring Procurement Classifications */}
             <div className="space-y-6 text-left mb-12">
               <div>
-                <span className="text-[10px] font-mono font-bold tracking-widest text-gold uppercase block mb-1">
+                <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-blue-600 border border-blue-200 bg-blue-50 px-3 py-1 uppercase rounded-sm inline-block mb-1">
                   Scope of Inventory
                 </span>
-                <h3 className="text-lg font-black text-white uppercase tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight">
                   Major & Recurring Procurement Classifications
                 </h3>
-                <p className="text-xs text-white/60 max-w-xl font-medium mt-1">
+                <p className="text-xs text-slate-500 max-w-xl font-medium mt-1">
                   Standard classifications utilized across showroom inventory mapping, vendor purchase orders, and karating vault controls.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* 1. Raw Materials (Indigo/Violet Gradient - "Bills" Schema) */}
-                <div className="group bg-gradient-to-b from-[#1F295D] to-[#121A3E] border border-white/10 p-5 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                {/* 1. Raw Materials (White card - Indigo border) */}
+                <div className="group bg-white border border-slate-200 p-5 rounded-none relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all duration-300">
                   {/* Default View (fades out on hover) */}
                   <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
                     <div>
                       {/* Header Row */}
                       <div className="flex items-center justify-between">
-                        <span className="text-base font-bold text-white tracking-wide font-sans">
+                        <span className="text-sm font-black text-slate-900 tracking-wide font-sans">
                           1. RAW MATERIALS
                         </span>
-                        <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                        <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer select-none">
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
                           </svg>
@@ -189,17 +194,17 @@ export function WorkflowDetail() {
                       </div>
 
                       {/* Classifications Text */}
-                      <div className="space-y-3 mt-4 text-[11px] text-white/90 font-medium relative z-10">
+                      <div className="space-y-3 mt-4 text-[11px] text-slate-600 font-medium relative z-10">
                         <div>
-                          <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Precious Metals</strong>
+                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Precious Metals</strong>
                           Gold, Silver, Platinum
                         </div>
                         <div>
-                          <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Loose Stones</strong>
+                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Loose Stones</strong>
                           Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, and Moissanite
                         </div>
                         <div>
-                          <strong className="text-violet-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Findings & Components</strong>
+                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Findings & Components</strong>
                           Locks, Clasps, Hooks, Ear Nuts, Chains, and Connectors
                         </div>
                       </div>
@@ -207,25 +212,25 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Hover Overlay View (fades in on hover) */}
-                  <div className="absolute inset-0 p-5 bg-gradient-to-b from-[#1F295D] to-[#121A3E] opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                  <div className="absolute inset-0 p-5 bg-white border border-slate-200 opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
                     <div className="space-y-3 h-full flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2">
-                          <span className="text-xs font-black text-white uppercase tracking-wider">
+                        <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2">
+                          <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
                             Raw Materials Tracking
                           </span>
                         </div>
-                        <ul className="space-y-2 text-[10px] leading-snug text-white/90 font-medium">
+                        <ul className="space-y-2 text-[10px] leading-snug text-slate-600 font-medium">
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Traceable Vaults:</strong> Secure storage linked to unique Packet, Batch & Voucher numbers.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Full Genealogy:</strong> Tracks all receipts, transfers, issues, consumption, and returns.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Custody Control:</strong> Identifies current possession, department, and work order links.</span>
                           </li>
                         </ul>
@@ -234,10 +239,10 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Bottom Vector Illustration (Receipt & Cash) */}
-                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-5 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-[0.08] group-hover:opacity-[0.02] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-20 h-20" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                       {/* White bill sheet */}
-                      <rect x="25" y="15" width="55" height="85" rx="5" fill="#FFFFFF" />
+                      <rect x="25" y="15" width="55" height="85" rx="5" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1" />
                       {/* BILL title */}
                       <text x="33" y="32" fill="#2E3A8A" fontFamily="system-ui, -apple-system, sans-serif" fontSize="10" fontWeight="900" letterSpacing="0.5">BILL</text>
                       {/* Lines on the bill */}
@@ -277,17 +282,17 @@ export function WorkflowDetail() {
                   </div>
                 </div>
 
-                {/* 2. Finished Goods (Deep Blue/Navy Gradient - "Sales" Schema) */}
-                <div className="group bg-gradient-to-b from-[#0E3570] to-[#071C40] border border-white/10 p-5 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                {/* 2. Finished Goods (White card - Blue border) */}
+                <div className="group bg-white border border-slate-200 p-5 rounded-none relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all duration-300">
                   {/* Default View (fades out on hover) */}
                   <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
                     <div>
                       {/* Header Row */}
                       <div className="flex items-center justify-between">
-                        <span className="text-base font-bold text-white tracking-wide font-sans">
+                        <span className="text-sm font-black text-slate-900 tracking-wide font-sans">
                           2. FINISHED GOODS
                         </span>
-                        <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                        <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer select-none">
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
                           </svg>
@@ -295,9 +300,9 @@ export function WorkflowDetail() {
                       </div>
 
                       {/* Classifications Text */}
-                      <div className="space-y-3 mt-4 text-[11px] text-white/90 font-medium relative z-10">
+                      <div className="space-y-3 mt-4 text-[11px] text-slate-600 font-medium relative z-10">
                         <div>
-                          <strong className="text-sky-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Ready-to-Sell Products</strong>
+                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Ready-to-Sell Products</strong>
                           Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, and Mangalsutras
                         </div>
                       </div>
@@ -305,25 +310,25 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Hover Overlay View (fades in on hover) */}
-                  <div className="absolute inset-0 p-5 bg-gradient-to-b from-[#0E3570] to-[#071C40] opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                  <div className="absolute inset-0 p-5 bg-white border border-slate-200 opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
                     <div className="space-y-3 h-full flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2">
-                          <span className="text-xs font-black text-white uppercase tracking-wider">
+                        <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2">
+                          <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
                             Finished Goods Control
                           </span>
                         </div>
-                        <ul className="space-y-2 text-[10px] leading-snug text-white/90 font-medium">
+                        <ul className="space-y-2 text-[10px] leading-snug text-slate-600 font-medium">
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>HUID & Barcoding:</strong> Unique identification and tracking from receipt/production to sale.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Omni-Channel Status:</strong> Real-time location and status across showrooms, warehouses, and exhibitions.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Lifecycle Audit:</strong> Monitors transfers, customer reservations, sales, exchanges, and repairs.</span>
                           </li>
                         </ul>
@@ -332,7 +337,7 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Bottom Vector Illustration (Store Front) */}
-                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-5 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-[0.08] group-hover:opacity-[0.02] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-20 h-20" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                       {/* Shop background / walls */}
                       <rect x="25" y="55" width="70" height="45" fill="#1D4ED8" rx="2" />
@@ -370,17 +375,17 @@ export function WorkflowDetail() {
                   </div>
                 </div>
 
-                {/* 3. Packaging Materials (Bronze/Orange Gradient - "Memo" Schema) */}
-                <div className="group bg-gradient-to-b from-[#9A5D24] to-[#5C3410] border border-white/10 p-5 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                {/* 3. Packaging Materials (White card - Bronze border) */}
+                <div className="group bg-white border border-slate-200 p-5 rounded-none relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all duration-300">
                   {/* Default View (fades out on hover) */}
                   <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
                     <div>
                       {/* Header Row */}
                       <div className="flex items-center justify-between">
-                        <span className="text-base font-bold text-white tracking-wide font-sans">
+                        <span className="text-sm font-black text-slate-900 tracking-wide font-sans">
                           3. PACKAGING & BRANDING
                         </span>
-                        <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer select-none">
+                        <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer select-none">
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
                           </svg>
@@ -388,17 +393,17 @@ export function WorkflowDetail() {
                       </div>
 
                       {/* Classifications Text */}
-                      <div className="space-y-3 mt-4 text-[11px] text-white/90 font-medium relative z-10">
+                      <div className="space-y-3 mt-4 text-[11px] text-slate-600 font-medium relative z-10">
                         <div>
-                          <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Primary Packaging</strong>
+                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Primary Packaging</strong>
                           Jewellery Boxes, Pouches, and Zip Covers
                         </div>
                         <div>
-                          <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Secondary Packaging</strong>
+                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Secondary Packaging</strong>
                           Carry Bags, Shipping Boxes, and Bubble Wrap
                         </div>
                         <div>
-                          <strong className="text-amber-200 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Branding Materials</strong>
+                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Branding Materials</strong>
                           Tags, Labels, Certificates, and Warranty Cards
                         </div>
                       </div>
@@ -406,25 +411,25 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Hover Overlay View (fades in on hover) */}
-                  <div className="absolute inset-0 p-5 bg-gradient-to-b from-[#9A5D24] to-[#5C3410] opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                  <div className="absolute inset-0 p-5 bg-white border border-slate-200 opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
                     <div className="space-y-3 h-full flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2">
-                          <span className="text-xs font-black text-white uppercase tracking-wider">
+                        <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2">
+                          <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
                             Packaging & Brand Control
                           </span>
                         </div>
-                        <ul className="space-y-2 text-[10px] leading-snug text-white/90 font-medium">
+                        <ul className="space-y-2 text-[10px] leading-snug text-slate-600 font-medium">
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Collateral Tracking:</strong> Monitors jewellery boxes, pouches, certificates, and warranty cards.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Reorder Automation:</strong> Tracks consumption patterns and triggers replenishment cycles.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
                             <span><strong>Allocation Control:</strong> Manages usage and distribution across showrooms and shipping lines.</span>
                           </li>
                         </ul>
@@ -433,7 +438,7 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Bottom Vector Illustration (Notepad) */}
-                  <div className="absolute bottom-2 right-2 opacity-20 group-hover:opacity-5 group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-[0.08] group-hover:opacity-[0.02] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-20 h-20" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                       {/* Main notepad sheet */}
                       <path d="M30 20h50l20 20v60a6 6 0 01-6 6H30a6 6 0 01-6-6V26a6 6 0 016-6z" fill="#F59E0B" />
@@ -458,11 +463,11 @@ export function WorkflowDetail() {
             </div>
 
             {/* Divider */}
-            <div className="border-t border-white/10 my-8" />
+            <div className="border-t border-slate-200 my-8" />
 
             <div className="flex items-center gap-2 mb-6">
-              <SlidersHorizontal className="w-5 h-5 text-gold" />
-              <span className="text-xs font-mono font-bold tracking-widest text-gold uppercase">
+              <SlidersHorizontal className="w-5 h-5 text-blue-700" />
+              <span className="text-xs font-mono font-bold tracking-widest text-blue-700 uppercase bg-blue-50 border border-blue-200 px-3 py-1 rounded-sm">
                 Operating Model Explorer
               </span>
             </div>
@@ -471,20 +476,20 @@ export function WorkflowDetail() {
               
               {/* Slicers Section (Left - 7 cols) */}
               <div className="lg:col-span-8 space-y-4">
-                <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tight">
                   Procurement Framework Slicers
                 </h2>
-                <p className="text-xs text-white/60 max-w-xl font-medium">
+                <p className="text-xs text-slate-500 max-w-xl font-medium">
                   Toggle the operating parameters below. The rules engine will automatically determine and display the corresponding step-by-step workflow variant.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
                   {/* Slicer 1: PO Used */}
-                  <div className="bg-[#0B1E2E] border border-white/15 p-5 space-y-3">
-                    <span className="text-[10px] font-black text-white/55 tracking-wider uppercase block">
+                  <div className="bg-slate-100 border border-slate-200 p-5 space-y-3">
+                    <span className="text-[10px] font-black text-slate-500 tracking-wider uppercase block">
                       1. Purchase Order (PO_USED)
                     </span>
-                    <p className="text-[11px] text-white/80 leading-relaxed font-semibold h-8">
+                    <p className="text-[11px] text-slate-700 leading-relaxed font-semibold h-8">
                       Does the showroom establish formal POs?
                     </p>
                     <div className="flex gap-2 pt-1">
@@ -493,8 +498,8 @@ export function WorkflowDetail() {
                         onClick={() => setPoUsed(true)}
                         className={`flex-1 py-2 px-3 text-xs font-mono font-bold uppercase tracking-wider text-center border transition-all rounded-none ${
                           poUsed
-                            ? 'bg-gold border-gold text-white font-black'
-                            : 'border-white/10 text-white/60 hover:border-white/30 hover:text-white'
+                            ? 'bg-slate-900 border-slate-900 text-white font-black'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                         }`}
                       >
                         Yes (P2P)
@@ -504,8 +509,8 @@ export function WorkflowDetail() {
                         onClick={() => setPoUsed(false)}
                         className={`flex-1 py-2 px-3 text-xs font-mono font-bold uppercase tracking-wider text-center border transition-all rounded-none ${
                           !poUsed
-                            ? 'bg-gold border-gold text-white font-black'
-                            : 'border-white/10 text-white/60 hover:border-white/30 hover:text-white'
+                            ? 'bg-slate-900 border-slate-900 text-white font-black'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                         }`}
                       >
                         No (Ad-hoc)
@@ -514,11 +519,11 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Slicer 2: Vendor Portal */}
-                  <div className="bg-[#0B1E2E] border border-white/15 p-5 space-y-3">
-                    <span className="text-[10px] font-black text-white/55 tracking-wider uppercase block">
+                  <div className="bg-slate-100 border border-slate-200 p-5 space-y-3">
+                    <span className="text-[10px] font-black text-slate-500 tracking-wider uppercase block">
                       2. Vendor Portal (VENDOR_PORTAL)
                     </span>
-                    <p className="text-[11px] text-white/80 leading-relaxed font-semibold h-8">
+                    <p className="text-[11px] text-slate-700 leading-relaxed font-semibold h-8">
                       Do suppliers enter data into an online portal?
                     </p>
                     <div className="flex gap-2 pt-1">
@@ -527,8 +532,8 @@ export function WorkflowDetail() {
                         onClick={() => setVendorPortal(true)}
                         className={`flex-1 py-2 px-3 text-xs font-mono font-bold uppercase tracking-wider text-center border transition-all rounded-none ${
                           vendorPortal
-                            ? 'bg-gold border-gold text-white font-black'
-                            : 'border-white/10 text-white/60 hover:border-white/30 hover:text-white'
+                            ? 'bg-slate-900 border-slate-900 text-white font-black'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                         }`}
                       >
                         Yes (Portal)
@@ -538,8 +543,8 @@ export function WorkflowDetail() {
                         onClick={() => setVendorPortal(false)}
                         className={`flex-1 py-2 px-3 text-xs font-mono font-bold uppercase tracking-wider text-center border transition-all rounded-none ${
                           !vendorPortal
-                            ? 'bg-gold border-gold text-white font-black'
-                            : 'border-white/10 text-white/60 hover:border-white/30 hover:text-white'
+                            ? 'bg-slate-900 border-slate-900 text-white font-black'
+                            : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                         }`}
                       >
                         No (Manual)
@@ -550,20 +555,20 @@ export function WorkflowDetail() {
               </div>
 
               {/* Rules Engine Output Summary Card (Right - 4 cols) */}
-              <div className="lg:col-span-4 bg-white/[0.02] border border-white/10 p-6 rounded-none text-left h-full flex flex-col justify-between">
+              <div className="lg:col-span-4 bg-white border border-slate-200 p-6 rounded-none text-left h-full flex flex-col justify-between shadow-sm">
                 <div>
-                  <span className="text-[9px] font-mono font-bold text-[#8CC63F] border border-[#8CC63F]/20 bg-[#8CC63F]/5 px-2 py-0.5 uppercase tracking-wider inline-block mb-3">
+                  <span className="text-[9px] font-mono font-bold text-[#558b2f] border border-emerald-200 bg-emerald-50 px-2 py-0.5 uppercase tracking-wider inline-block mb-3">
                     Rules Engine Output
                   </span>
-                  <h3 className="text-sm md:text-base font-black text-white uppercase tracking-tight">
+                  <h3 className="text-sm md:text-base font-black text-slate-900 uppercase tracking-tight">
                     {variantExp?.title}
                   </h3>
-                  <p className="text-xs text-white/70 leading-relaxed mt-2 font-medium">
+                  <p className="text-xs text-slate-600 leading-relaxed mt-2 font-medium">
                     {variantExp?.desc}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/5 text-[9px] font-mono text-white/40 space-y-1.5 mt-4">
+                <div className="pt-4 border-t border-slate-100 text-[9px] font-mono text-slate-500 space-y-1.5 mt-4">
                   <div>&gt; CONFIG: PO={poUsed ? 'YES' : 'NO'} | PORTAL={vendorPortal ? 'YES' : 'NO'}</div>
                   <div>&gt; RESOLUTION: {activeVariantKey} DEPLOYED</div>
                 </div>
