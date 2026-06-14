@@ -6,7 +6,8 @@ export function EducationSection() {
     {
       institution: 'Indian Institute of Technology, Madras (IIT Madras)',
       degree: 'Bachelor of Science (BS) in Data Science and Applications',
-      duration: '2021 – 2025 (Ongoing)',
+      duration: '2022 – Ongoing',
+      logo: '/iitm_logo.png',
       details: [
         'Specializing in Data Analytics, Machine Learning algorithms, database systems (SQL/SQLite), and python pipelines.',
         'Actively involved in student life: Head of Operations for Pixels & Panels IIT Madras society, coordinating Paradox Got Talent at Paradox\'25.'
@@ -14,19 +15,21 @@ export function EducationSection() {
       icon: <GraduationCap className="w-4 h-4 text-gold" />
     },
     {
-      institution: 'Higher Secondary & Intermediate Education',
-      degree: 'MPC (Mathematics, Physics, Chemistry)',
-      duration: '2016 – 2018',
+      institution: 'Jawahar Navodaya Vidyalaya (JNV), Guntur',
+      degree: 'Higher Secondary & Intermediate Education',
+      duration: '2018 – 2020',
+      logo: '/jnv_logo.png',
       details: [
-        'Board of Intermediate Education, Andhra Pradesh.',
+        'Affiliated with CBSE, focusing on MPC (Mathematics, Physics, Chemistry) group.',
         'Academic Excellence with MPC group focus.'
       ],
       icon: <BookOpen className="w-4 h-4 text-gold" />
     },
     {
-      institution: 'Secondary School Certificate (SSC)',
-      degree: 'High School Matriculation',
-      duration: 'Class of 2016',
+      institution: 'AMG India International (Residential High School)',
+      degree: 'Secondary School Certificate (SSC)',
+      duration: '2017 – 2018',
+      logo: '/amg_logo.png',
       details: [
         'Board of Secondary Education, Andhra Pradesh (GPA: 9.8 / 10).',
         'Awarded the CM Pratibha Award by the Chief Minister of Andhra Pradesh for academic and athletic excellence.',
@@ -53,13 +56,21 @@ export function EducationSection() {
                   {edu.icon}
                 </div>
                 <div className="bg-[#F8FAFC] border border-border-light p-5 rounded-none shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                    <h3 className="text-base md:text-lg font-bold text-navy">{edu.institution}</h3>
-                    <span className="text-xs font-mono font-bold text-gold bg-gold/5 px-2.5 py-0.5 border border-gold/20 inline-block self-start">
-                      {edu.duration}
-                    </span>
+                  <div className="flex items-start gap-4 mb-4">
+                    {/* Logo */}
+                    {edu.logo && (
+                      <img src={edu.logo} alt={`${edu.institution} Logo`} className="w-16 h-16 object-contain shrink-0" />
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+                        <h3 className="text-base md:text-lg font-bold text-navy leading-snug">{edu.institution}</h3>
+                        <span className="text-xs font-mono font-bold text-gold bg-gold/5 px-2.5 py-0.5 border border-gold/20 inline-block self-start whitespace-nowrap">
+                          {edu.duration}
+                        </span>
+                      </div>
+                      <h4 className="text-sm font-semibold text-[#0170B9]">{edu.degree}</h4>
+                    </div>
                   </div>
-                  <h4 className="text-sm font-semibold text-[#0170B9] mb-4">{edu.degree}</h4>
                   <ul className="space-y-2">
                     {edu.details.map((detail, dIdx) => (
                       <li key={dIdx} className="flex items-start gap-2 text-xs md:text-sm text-text-secondary leading-relaxed font-semibold">
@@ -77,3 +88,4 @@ export function EducationSection() {
     </section>
   );
 }
+

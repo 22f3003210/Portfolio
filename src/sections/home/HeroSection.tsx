@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, Clock3, BarChart3, TrendingUp, Workflow, PieChart, Gem, Laptop } from 'lucide-react';
+import { Calendar, BarChart3, TrendingUp, Workflow, PieChart, Gem, Laptop } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // ─── Brand colours ────────────────────────────────────────────────────────────
@@ -141,14 +141,6 @@ export function HeroSection() {
               >
                 <Calendar className="w-4 h-4" />
                 Connect Me Now
-              </Link>
-              <Link
-                to="/#contact"
-                className="inline-flex items-center gap-2 text-[12px] font-black uppercase tracking-wider px-6 py-[13px] border-2 transition-all duration-300 hover:bg-[#1f5fbf] hover:text-white hover:border-[#1f5fbf] backdrop-blur-sm rounded-sm"
-                style={{ color: BLUE, borderColor: BLUE }}
-              >
-                <Clock3 className="w-4 h-4" />
-                Book a 30-min Call
               </Link>
             </motion.div>
           </div>

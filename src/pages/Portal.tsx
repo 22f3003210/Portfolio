@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { 
   Lock, 
@@ -24,7 +24,14 @@ import {
   Network,
   Brain,
   Compass,
-  HelpCircle
+  HelpCircle,
+  RefreshCw,
+  Globe,
+  Clock,
+  Monitor,
+  Search,
+  ChevronLeft,
+  Eye
 } from 'lucide-react';
 import { workflows } from '../data/workflows';
 import { usePortal } from '../context/PortalContext';
@@ -32,6 +39,7 @@ import {
   processDomains, 
   retailProcesses 
 } from '../data/governance';
+import { getAnalyticsSummary, isLiveSupabase, getVisitorLocation } from '../lib/supabase';
 
 // KPI Definition Interface
 interface RetailKPI {
@@ -557,7 +565,76 @@ export function Portal() {
   const navigate = useNavigate();
   const [passcode, setPasscode] = useState('');
   const [authError, setAuthError] = useState('');
-  const [activeTab, setActiveTab] = useState<'workflows' | 'kpis' | 'checklist' | 'report'>('workflows');
+  const [activeTab, setActiveTab] = useState<'workflows' | 'kpis' | 'checklist' | 'report' | 'visitors'>('workflows');
+
+  // Visitor analytics states
+  const [views, setViews] = useState<any[]>([]);
+  const [loadingStats, setLoadingStats] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const [mineIps, setMineIps] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('swa_mine_ips');
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+  const [visitorSubTab, setVisitorSubTab] = useState<'ledger' | 'profiles'>('ledger');
+  const [filterType, setFilterType] = useState<'all' | 'mine' | 'new' | 'returning'>('all');
+  const [expandedIp, setExpandedIp] = useState<string | null>(null);
+  const [userIp, setUserIp] = useState<string>('');
+
+  const fetchStats = async () => {
+    setLoadingStats(true);
+    try {
+      const summary = await getAnalyticsSummary();
+      setViews(summary.views || []);
+    } catch (err) {
+      console.error('Failed to load portal stats:', err);
+    } finally {
+      setLoadingStats(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchStats();
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    const fetchUserIp = async () => {
+      try {
+        const loc = await getVisitorLocation();
+        if (loc && loc.ip) {
+          setUserIp(loc.ip);
+        }
+      } catch (e) {
+        console.warn('Failed to fetch user IP:', e);
+      }
+    };
+    if (isAuthenticated) {
+      fetchUserIp();
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    localStorage.setItem('swa_mine_ips', JSON.stringify(mineIps));
+  }, [mineIps]);
+
+  const addMineIp = (ip: string) => {
+    const trimmed = ip.trim();
+    if (trimmed && !mineIps.includes(trimmed)) {
+      setMineIps(prev => [...prev, trimmed]);
+    }
+  };
+
+  const removeMineIp = (ip: string) => {
+    setMineIps(prev => prev.filter(item => item !== ip));
+  };
 
   // Redirect to home if portal visibility is off and not authenticated (e.g. on page refresh)
   useEffect(() => {
@@ -657,6 +734,149 @@ export function Portal() {
       return `₹${amountInCr.toFixed(2)} Cr`;
     }
     return `₹${amountInLakhs.toFixed(0)} Lakhs`;
+  };
+
+  // Website visitor telemetry helpers
+  // Group views by IP address to calculate statistics
+  const ipStats = views.reduce((acc: Record<string, { count: number, firstSeen: string, lastSeen: string, location: string, country: string, userAgent: string, referrer: string, pathHistory: any[] }>, view) => {
+    const ip = view.ip || 'Unknown';
+    if (!acc[ip]) {
+      acc[ip] = {
+        count: 0,
+        firstSeen: view.created_at,
+        lastSeen: view.created_at,
+        location: view.city || 'Unknown',
+        country: view.country || 'Unknown',
+        userAgent: view.user_agent || '',
+        referrer: view.referrer || '',
+        pathHistory: []
+      };
+    }
+    
+    acc[ip].count += 1;
+    acc[ip].pathHistory.push({
+      path: view.path,
+      timestamp: view.created_at,
+      referrer: view.referrer
+    });
+    
+    if (new Date(view.created_at) < new Date(acc[ip].firstSeen)) {
+      acc[ip].firstSeen = view.created_at;
+    }
+    if (new Date(view.created_at) > new Date(acc[ip].lastSeen)) {
+      acc[ip].lastSeen = view.created_at;
+      acc[ip].location = view.city || acc[ip].location;
+      acc[ip].country = view.country || acc[ip].country;
+      acc[ip].userAgent = view.user_agent || acc[ip].userAgent;
+      acc[ip].referrer = view.referrer || acc[ip].referrer;
+    }
+    
+    return acc;
+  }, {});
+
+  // Sort path histories for each IP chronologically
+  Object.values(ipStats).forEach((stats: any) => {
+    stats.pathHistory.sort((a: any, b: any) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  });
+
+  const getVisitorLabel = (ip: string) => {
+    if (mineIps.includes(ip)) return 'Mine';
+    const stats = ipStats[ip];
+    if (stats && stats.count > 1) return 'Returning';
+    return 'New';
+  };
+
+  const filteredViews = views.filter(view => {
+    // 1. Search term filter
+    const term = searchTerm.toLowerCase();
+    const ipMatch = (view.ip || '').toLowerCase().includes(term);
+    const pathMatch = (view.path || '').toLowerCase().includes(term);
+    const cityMatch = (view.city || '').toLowerCase().includes(term);
+    const countryMatch = (view.country || '').toLowerCase().includes(term);
+    const referrerMatch = (view.referrer || '').toLowerCase().includes(term);
+    const searchMatch = ipMatch || pathMatch || cityMatch || countryMatch || referrerMatch;
+    
+    if (!searchMatch) return false;
+    
+    // 2. Tab/Filter type filter
+    const label = getVisitorLabel(view.ip || 'Unknown');
+    if (filterType === 'mine') return label === 'Mine';
+    if (filterType === 'new') return label === 'New';
+    if (filterType === 'returning') return label === 'Returning';
+    
+    return true;
+  });
+
+  const uniqueVisitorProfiles = Object.entries(ipStats).map(([ip, stats]) => {
+    return {
+      ip,
+      label: getVisitorLabel(ip),
+      ...stats
+    };
+  }).filter(profile => {
+    // 1. Search term filter
+    const term = searchTerm.toLowerCase();
+    const ipMatch = profile.ip.toLowerCase().includes(term);
+    const locMatch = profile.location.toLowerCase().includes(term);
+    const countryMatch = profile.country.toLowerCase().includes(term);
+    const refMatch = (profile.referrer || '').toLowerCase().includes(term);
+    const searchMatch = ipMatch || locMatch || countryMatch || refMatch;
+    
+    if (!searchMatch) return false;
+    
+    // 2. Filter type filter
+    if (filterType === 'mine') return profile.label === 'Mine';
+    if (filterType === 'new') return profile.label === 'New';
+    if (filterType === 'returning') return profile.label === 'Returning';
+    
+    return true;
+  }).sort((a, b) => new Date(b.lastSeen).getTime() - new Date(a.lastSeen).getTime());
+
+  const isProfilesTab = visitorSubTab === 'profiles';
+  const totalItems = isProfilesTab ? uniqueVisitorProfiles.length : filteredViews.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  
+  const currentViews = filteredViews.slice(indexOfFirstItem, indexOfLastItem);
+  const currentProfiles = uniqueVisitorProfiles.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const totalViewsCount = views.length;
+  const uniqueIpsCount = new Set(views.map(v => v.ip)).size;
+
+  // Compute top location
+  const locCounts = views.reduce((acc: Record<string, number>, view) => {
+    const key = `${view.city || 'Unknown'}, ${view.country || 'Unknown'}`;
+    if (key !== 'Unknown, Unknown') {
+      acc[key] = (acc[key] || 0) + 1;
+    }
+    return acc;
+  }, {});
+  const topLocationEntry = Object.entries(locCounts).sort((a, b) => b[1] - a[1])[0];
+  const topLocation = topLocationEntry ? topLocationEntry[0] : 'None';
+
+  const formatDateTime = (dateStr: string) => {
+    try {
+      const d = new Date(dateStr);
+      return d.toLocaleString();
+    } catch (e) {
+      return dateStr;
+    }
+  };
+
+  const cleanUserAgent = (ua: string) => {
+    if (!ua) return 'Unknown';
+    if (ua.includes('iPhone')) return 'iPhone (Safari)';
+    if (ua.includes('iPad')) return 'iPad (Safari)';
+    if (ua.includes('Android')) return 'Android';
+    if (ua.includes('Macintosh')) return 'Mac OS';
+    if (ua.includes('Windows')) return 'Windows';
+    if (ua.includes('Linux')) return 'Linux';
+    return ua.slice(0, 20) + '...';
   };
 
   if (!isAuthenticated) {
@@ -792,6 +1012,21 @@ export function Portal() {
             {nonCompliantPointsCount > 0 && (
               <span className="w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse inline-block ml-0.5" />
             )}
+          </button>
+
+          <button 
+            onClick={() => {
+              setActiveTab('visitors');
+              setCurrentPage(1);
+            }}
+            className={`px-5 py-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap flex items-center gap-2 ${
+              activeTab === 'visitors' 
+                ? 'border-gold text-navy font-black' 
+                : 'border-transparent text-text-secondary hover:text-navy'
+            }`}
+          >
+            <Users className="w-4 h-4" />
+            Website Visitors
           </button>
         </div>
 
@@ -1625,6 +1860,500 @@ export function Portal() {
               </div>
 
             </div>
+          </div>
+        )}
+
+        {activeTab === 'visitors' && (
+          <div className="animate-fadeIn space-y-6">
+            
+            {/* Header / Telemetry Controls */}
+            <div className="bg-white border border-border-light p-6 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h3 className="text-xl font-extrabold text-navy uppercase tracking-tight">Website Visitor Telemetry</h3>
+                <p className="text-xs text-text-secondary font-semibold mt-1">
+                  Live traffic metrics and geolocation auditing for scale-with-abraham.vercel.app
+                </p>
+              </div>
+              
+              <button 
+                onClick={fetchStats}
+                disabled={loadingStats}
+                className="px-5 py-2.5 bg-navy text-white hover:bg-navy/95 text-xs font-bold uppercase tracking-wider shadow-sm flex items-center gap-2 transition-colors disabled:bg-navy/70 shrink-0 rounded-none border border-navy/10"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${loadingStats ? 'animate-spin' : ''}`} />
+                <span>Refresh Telemetry</span>
+              </button>
+            </div>
+
+            {/* My IP Address Manager Section */}
+            <div className="bg-white border border-slate-200 p-6 shadow-sm">
+              <div className="flex flex-col md:flex-row justify-between gap-6 items-start md:items-center">
+                <div className="space-y-1">
+                  <h4 className="text-sm font-black text-navy uppercase tracking-wider">My IP Address Manager</h4>
+                  <p className="text-xs text-text-secondary font-semibold">
+                    Tag your own devices' IP addresses as <span className="text-green-600 font-bold">"Mine"</span> to separate your own testing traffic from actual site visitors.
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2 mt-2">
+                    <span className="text-[11px] font-semibold text-slate-500">Your detected IP:</span>
+                    <code className="text-xs font-mono font-bold text-slate-800 bg-slate-50 border border-slate-200 px-2 py-0.5">
+                      {userIp || 'Detecting...'}
+                    </code>
+                    {userIp && (
+                      <button
+                        onClick={() => mineIps.includes(userIp) ? removeMineIp(userIp) : addMineIp(userIp)}
+                        className={`px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider border rounded-none transition-colors ${
+                          mineIps.includes(userIp) 
+                            ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100' 
+                            : 'bg-green-50 text-green-700 border-green-200 hover:bg-green-100'
+                        }`}
+                      >
+                        {mineIps.includes(userIp) ? 'Remove my IP' : 'Set as Mine'}
+                      </button>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Manual IP input */}
+                <div className="w-full md:w-auto flex flex-col gap-1.5 shrink-0">
+                  <label className="text-[10px] font-black text-slate-500 uppercase tracking-wider block">Add Custom Owner IP</label>
+                  <div className="flex">
+                    <input
+                      type="text"
+                      placeholder="e.g. 192.168.1.1"
+                      id="custom-ip-input"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          addMineIp(e.currentTarget.value);
+                          e.currentTarget.value = '';
+                        }
+                      }}
+                      className="border border-slate-200 p-2 text-xs font-mono font-bold w-48 focus:outline-none focus:border-navy bg-slate-50 rounded-none"
+                    />
+                    <button
+                      onClick={() => {
+                        const input = document.getElementById('custom-ip-input') as HTMLInputElement | null;
+                        if (input && input.value) {
+                          addMineIp(input.value);
+                          input.value = '';
+                        }
+                      }}
+                      className="bg-navy hover:bg-navy/95 text-white px-3.5 text-xs font-bold uppercase transition-colors rounded-none"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Registered list */}
+              {mineIps.length > 0 && (
+                <div className="flex flex-wrap gap-2 items-center border-t border-slate-100 pt-4 mt-4 text-xs font-semibold text-slate-600">
+                  <span className="text-[10px] font-black uppercase text-slate-400 mr-2">Registered Owner IPs:</span>
+                  {mineIps.map(ip => (
+                    <span key={ip} className="bg-slate-100 border border-slate-200 font-mono text-[11px] px-2.5 py-0.5 flex items-center gap-1.5 rounded-none">
+                      <span>{ip}</span>
+                      <button 
+                        onClick={() => removeMineIp(ip)}
+                        className="text-red-500 hover:text-red-700 font-bold ml-1 transition-transform hover:scale-125"
+                        title="Remove"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Summary Telemetry Metrics Card Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div className="bg-white border border-slate-200 p-5 shadow-sm">
+                <div className="flex items-center justify-between text-navy mb-2">
+                  <Eye className="w-4 h-4 text-gold" />
+                  <span className="text-[9px] font-bold text-text-secondary uppercase">Page Views</span>
+                </div>
+                <p className="text-2xl font-black text-navy leading-none">{totalViewsCount}</p>
+                <p className="text-[9px] text-text-secondary font-semibold mt-1">Total visits tracked</p>
+              </div>
+
+              <div className="bg-white border border-slate-200 p-5 shadow-sm">
+                <div className="flex items-center justify-between text-navy mb-2">
+                  <Users className="w-4 h-4 text-gold" />
+                  <span className="text-[9px] font-bold text-text-secondary uppercase">Unique Visitors</span>
+                </div>
+                <p className="text-2xl font-black text-navy leading-none">{uniqueIpsCount}</p>
+                <p className="text-[9px] text-text-secondary font-semibold mt-1">Unique IP addresses</p>
+              </div>
+
+              <div className="bg-white border border-slate-200 p-5 shadow-sm">
+                <div className="flex items-center justify-between text-navy mb-2">
+                  <MapPin className="w-4 h-4 text-gold" />
+                  <span className="text-[9px] font-bold text-text-secondary uppercase">Top Location</span>
+                </div>
+                <p className="text-lg font-black text-navy leading-none truncate" title={topLocation}>{topLocation}</p>
+                <p className="text-[9px] text-text-secondary font-semibold mt-1">Most frequent source</p>
+              </div>
+
+              <div className="bg-white border border-slate-200 p-5 shadow-sm">
+                <div className="flex items-center justify-between text-navy mb-2">
+                  <Activity className="w-4 h-4 text-gold" />
+                  <span className="text-[9px] font-bold text-text-secondary uppercase">Database Link</span>
+                </div>
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span className={`w-2.5 h-2.5 rounded-full inline-block ${isLiveSupabase ? 'bg-green-500' : 'bg-orange-400 animate-pulse'}`} />
+                  <span className="text-xs font-extrabold text-navy uppercase">
+                    {isLiveSupabase ? 'Live Supabase' : 'Sandbox (Mock)'}
+                  </span>
+                </div>
+                <p className="text-[9px] text-text-secondary font-semibold mt-1">Analytics sink state</p>
+              </div>
+            </div>
+
+            {/* Sub-tabs & Filter Selectors */}
+            <div className="bg-white border border-border-light p-4 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              {/* Sub tabs */}
+              <div className="flex bg-slate-100 p-1 border border-slate-200 rounded-none w-full md:w-auto shrink-0">
+                <button
+                  onClick={() => {
+                    setVisitorSubTab('ledger');
+                    setCurrentPage(1);
+                  }}
+                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-none w-full md:w-auto text-center ${
+                    visitorSubTab === 'ledger'
+                      ? 'bg-navy text-white shadow-sm font-extrabold'
+                      : 'text-text-secondary hover:text-navy'
+                  }`}
+                >
+                  Traffic Ledger
+                </button>
+                <button
+                  onClick={() => {
+                    setVisitorSubTab('profiles');
+                    setCurrentPage(1);
+                  }}
+                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all rounded-none w-full md:w-auto text-center ${
+                    visitorSubTab === 'profiles'
+                      ? 'bg-navy text-white shadow-sm font-extrabold'
+                      : 'text-text-secondary hover:text-navy'
+                  }`}
+                >
+                  Visitor Profiles ({Object.keys(ipStats).length})
+                </button>
+              </div>
+
+              {/* Filter Dropdown & Search Combo */}
+              <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
+                <div>
+                  <select
+                    value={filterType}
+                    onChange={(e) => {
+                      setFilterType(e.target.value as any);
+                      setCurrentPage(1);
+                    }}
+                    className="bg-slate-50 border border-slate-200 p-2 text-xs font-bold text-navy focus:outline-none focus:border-navy h-9 w-full sm:w-44 rounded-none"
+                  >
+                    <option value="all">All Visitors</option>
+                    <option value="mine">Owner Visits (Mine)</option>
+                    <option value="new">New Visitors</option>
+                    <option value="returning">Returning Visitors</option>
+                  </select>
+                </div>
+
+                <div className="relative flex items-center border border-slate-200 bg-slate-50 p-2 h-9 w-full sm:w-64">
+                  <Search className="w-3.5 h-3.5 text-text-muted shrink-0 mr-1.5" />
+                  <input
+                    type="text"
+                    placeholder="Search by IP, location..."
+                    value={searchTerm}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    className="w-full bg-transparent border-none text-xs font-semibold text-text-primary focus:outline-none placeholder:text-text-muted"
+                  />
+                  {searchTerm && (
+                    <button
+                      onClick={() => {
+                        setSearchTerm('');
+                        setCurrentPage(1);
+                      }}
+                      className="text-[10px] font-black text-navy hover:underline shrink-0"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* 1. TRAFFIC LEDGER SUB-TAB */}
+            {!isProfilesTab && (
+              <div className="bg-white border border-border-light shadow-sm overflow-hidden">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr className="border-b border-slate-200 bg-slate-50 text-navy font-bold uppercase text-[10px] tracking-wider">
+                        <th className="p-3.5 pr-4 flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-gold" /> Timestamp</th>
+                        <th className="p-3.5 pr-4">IP Address</th>
+                        <th className="p-3.5 pr-4">Visitor Type</th>
+                        <th className="p-3.5 pr-4"><MapPin className="w-3.5 h-3.5 text-gold" /> Location</th>
+                        <th className="p-3.5 pr-4">Page Visited</th>
+                        <th className="p-3.5 pr-4"><Globe className="w-3.5 h-3.5 text-gold" /> Referrer</th>
+                        <th className="p-3.5"><Monitor className="w-3.5 h-3.5 text-gold" /> Device & OS</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {currentViews.map((view: any, idx: number) => {
+                        const label = getVisitorLabel(view.ip || 'Unknown');
+                        return (
+                          <tr key={view.id || idx} className="hover:bg-slate-50/50 text-text-secondary transition-colors align-middle">
+                            <td className="p-3.5 pr-4 font-mono whitespace-nowrap text-slate-500">
+                              {formatDateTime(view.created_at)}
+                            </td>
+                            <td className="p-3.5 pr-4 font-mono font-bold text-slate-800">
+                              {view.ip || 'Unknown'}
+                            </td>
+                            <td className="p-3.5 pr-4 font-bold">
+                              <span className={`inline-block px-2 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-none ${
+                                label === 'Mine'
+                                  ? 'bg-green-50 text-green-700 border border-green-200'
+                                  : label === 'Returning'
+                                  ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                                  : 'bg-blue-50 text-blue-700 border border-blue-200'
+                              }`}>
+                                {label === 'Mine' ? 'Mine' : label === 'Returning' ? 'Returning' : 'New Visitor'}
+                              </span>
+                            </td>
+                            <td className="p-3.5 pr-4 font-bold text-slate-700 max-w-[200px] truncate" title={view.city}>
+                              {view.city || 'Unknown Location'}
+                            </td>
+                            <td className="p-3.5 pr-4 font-bold text-[#0170B9] whitespace-nowrap">
+                              <span className="bg-[#0170B9]/5 px-2 py-0.5 border border-[#0170B9]/15 text-[11px]">
+                                {view.path}
+                              </span>
+                            </td>
+                            <td className="p-3.5 pr-4 truncate max-w-[120px] font-semibold text-slate-500" title={view.referrer || 'Direct'}>
+                              {view.referrer ? view.referrer.replace(/^https?:\/\/(www\.)?/, '') : <span className="italic text-slate-400">Direct</span>}
+                            </td>
+                            <td className="p-3.5 truncate max-w-[120px] font-semibold text-slate-600" title={view.user_agent}>
+                              {cleanUserAgent(view.user_agent)}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      {currentViews.length === 0 && (
+                        <tr>
+                          <td colSpan={7} className="p-8 text-center italic text-text-secondary bg-slate-50/20 font-semibold text-sm">
+                            {loadingStats ? 'Loading visitor records...' : 'No visitor records found.'}
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            {/* 2. VISITOR PROFILES SUB-TAB */}
+            {isProfilesTab && (
+              <div className="space-y-4">
+                <div className="bg-white border border-border-light shadow-sm overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs border-collapse">
+                      <thead>
+                        <tr className="border-b border-slate-200 bg-slate-50 text-navy font-bold uppercase text-[10px] tracking-wider">
+                          <th className="p-3.5 pr-4">IP Address</th>
+                          <th className="p-3.5 pr-4">Type</th>
+                          <th className="p-3.5 pr-4"><MapPin className="w-3.5 h-3.5 text-gold" /> Precise Geolocation & Network</th>
+                          <th className="p-3.5 pr-4">Total Hits</th>
+                          <th className="p-3.5 pr-4"><Clock className="w-3.5 h-3.5 text-gold" /> Last Active</th>
+                          <th className="p-3.5 text-right">Individual Audit</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {currentProfiles.map((profile: any, idx: number) => {
+                          const isExpanded = expandedIp === profile.ip;
+                          return (
+                            <React.Fragment key={profile.ip || idx}>
+                              <tr className="hover:bg-slate-50/50 text-text-secondary transition-colors align-middle">
+                                <td className="p-3.5 pr-4 font-mono font-bold text-slate-800 text-sm">
+                                  {profile.ip}
+                                </td>
+                                <td className="p-3.5 pr-4 font-bold">
+                                  <span className={`inline-block px-2 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-none ${
+                                    profile.label === 'Mine'
+                                      ? 'bg-green-50 text-green-700 border border-green-200'
+                                      : profile.label === 'Returning'
+                                      ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                                      : 'bg-blue-50 text-blue-700 border border-blue-200'
+                                  }`}>
+                                    {profile.label === 'Mine' ? 'Mine' : profile.label === 'Returning' ? 'Returning' : 'New Visitor'}
+                                  </span>
+                                </td>
+                                <td className="p-3.5 pr-4 font-bold text-slate-700 max-w-[280px] truncate" title={profile.location}>
+                                  {profile.location}
+                                </td>
+                                <td className="p-3.5 pr-4 font-mono font-bold text-navy">
+                                  {profile.count} views
+                                </td>
+                                <td className="p-3.5 pr-4 font-mono text-slate-500">
+                                  {formatDateTime(profile.lastSeen)}
+                                </td>
+                                <td className="p-3.5 text-right">
+                                  <button
+                                    onClick={() => setExpandedIp(isExpanded ? null : profile.ip)}
+                                    className={`px-3 py-1.5 text-[10px] font-black uppercase tracking-widest border transition-all rounded-none ${
+                                      isExpanded 
+                                        ? 'bg-navy text-white border-navy' 
+                                        : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                                    }`}
+                                  >
+                                    {isExpanded ? 'Hide History' : 'View History'}
+                                  </button>
+                                </td>
+                              </tr>
+                              
+                              {/* Expandable Session History Drawer */}
+                              {isExpanded && (
+                                <tr className="bg-slate-50/40">
+                                  <td colSpan={6} className="p-6 border-t border-b border-slate-200">
+                                    <div className="space-y-4 text-left pl-4 border-l-2 border-navy/30">
+                                      <div>
+                                        <h5 className="text-xs font-black text-navy uppercase tracking-wider">
+                                          Visitor Audit Log for {profile.ip}
+                                        </h5>
+                                        <p className="text-[10px] text-slate-500 font-semibold mt-0.5">
+                                          Device Agent: <span className="font-mono text-slate-700">{profile.userAgent || 'Unknown'}</span>
+                                        </p>
+                                      </div>
+                                      
+                                      {/* Chronological Timeline */}
+                                      <div className="space-y-3 relative before:absolute before:top-2 before:bottom-2 before:left-[7px] before:w-[1px] before:bg-slate-200">
+                                        {profile.pathHistory.map((history: any, hIdx: number) => (
+                                          <div key={hIdx} className="flex items-start gap-4 relative">
+                                            {/* Node dot */}
+                                            <span className="w-3.5 h-3.5 rounded-full bg-white border border-navy flex items-center justify-center shrink-0 mt-0.5 z-10">
+                                              <span className="w-1.5 h-1.5 rounded-full bg-[#0170B9]" />
+                                            </span>
+                                            
+                                            <div className="flex-1 text-xs">
+                                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                                                <div className="font-bold text-slate-800 flex items-center gap-1.5">
+                                                  <span>Visited</span>
+                                                  <span className="bg-[#0170B9]/5 px-2 py-0.5 border border-[#0170B9]/15 text-[10px] text-[#0170B9]">
+                                                    {history.path}
+                                                  </span>
+                                                </div>
+                                                <span className="font-mono text-[10px] text-slate-400 font-semibold">
+                                                  {formatDateTime(history.timestamp)}
+                                                </span>
+                                              </div>
+                                              <p className="text-[10px] text-slate-500 font-semibold mt-0.5">
+                                                Referrer: <span className="italic">{history.referrer || 'Direct Entry'}</span>
+                                              </p>
+                                            </div>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </React.Fragment>
+                          );
+                        })}
+                        {currentProfiles.length === 0 && (
+                          <tr>
+                            <td colSpan={6} className="p-8 text-center italic text-text-secondary bg-slate-50/20 font-semibold text-sm">
+                              {loadingStats ? 'Loading visitor profiles...' : 'No visitor profiles found.'}
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Pagination controls */}
+            {totalPages > 1 && (
+              <div className="bg-slate-50/50 border border-slate-200 p-4 flex items-center justify-between shadow-sm">
+                <div className="text-xs text-text-secondary font-semibold">
+                  Showing <span className="font-bold text-navy">{indexOfFirstItem + 1}</span> to{' '}
+                  <span className="font-bold text-navy">
+                    {Math.min(indexOfLastItem, totalItems)}
+                  </span>{' '}
+                  of <span className="font-bold text-navy">{totalItems}</span> records
+                </div>
+                
+                <div className="flex items-center gap-1.5 select-none">
+                  <button
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="p-1.5 border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:hover:bg-white text-navy transition-colors rounded-none"
+                    title="Previous Page"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  
+                  {Array.from({ length: totalPages }).map((_, i) => {
+                    const pageNum = i + 1;
+                    if (totalPages <= 6) {
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => handlePageChange(pageNum)}
+                          className={`px-3 py-1 text-xs font-bold transition-all border ${
+                            currentPage === pageNum
+                              ? 'bg-navy text-white border-navy font-black'
+                              : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    }
+                    
+                    if (pageNum === 1 || pageNum === totalPages || Math.abs(pageNum - currentPage) <= 1) {
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => handlePageChange(pageNum)}
+                          className={`px-3 py-1 text-xs font-bold transition-all border ${
+                            currentPage === pageNum
+                              ? 'bg-navy text-white border-navy font-black'
+                              : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600'
+                          }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    }
+                    
+                    if (pageNum === 2 && currentPage > 3) {
+                      return <span key="prev-dots" className="text-slate-400 text-xs px-1 select-none font-bold">...</span>;
+                    }
+                    
+                    if (pageNum === totalPages - 1 && currentPage < totalPages - 2) {
+                      return <span key="next-dots" className="text-slate-400 text-xs px-1 select-none font-bold">...</span>;
+                    }
+                    
+                    return null;
+                  })}
+
+                  <button
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="p-1.5 border border-slate-200 bg-white hover:bg-slate-50 disabled:opacity-50 disabled:hover:bg-white text-navy transition-colors rounded-none"
+                    title="Next Page"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+            
           </div>
         )}
 

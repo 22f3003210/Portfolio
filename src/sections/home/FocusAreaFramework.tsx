@@ -1,4 +1,4 @@
-import { Target, AlertTriangle, Cpu, BarChart3, Sliders, Award } from 'lucide-react';
+import { Target, AlertTriangle, Cpu, BarChart3, Sliders, Award, ArrowDown } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
 export function FocusAreaFramework() {
@@ -67,7 +67,7 @@ export function FocusAreaFramework() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           
           {/* Left Column: Focus Area Framework steps in vertical list style of 3rd pic */}
-          <div className="lg:col-span-6 space-y-3 w-full">
+          <div className="lg:col-span-6 flex flex-col justify-between lg:h-full w-full space-y-3 lg:space-y-0">
             {steps.map((step, idx) => {
               const StepIcon = step.icon;
               return (
@@ -114,40 +114,36 @@ export function FocusAreaFramework() {
             })}
           </div>
 
-          {/* Right Column: Narrative objectives shifted up with flex height to align bottoms */}
-          <div className="lg:col-span-6 flex flex-col justify-between gap-4">
-            {/* Narrative secondary text */}
-            <div className="text-[#4B4F58] text-xs md:text-sm leading-relaxed font-semibold text-left">
-              <p>
-                I DON'T focus on simply fixing problems. I do root-cause analysis: why it happened, what it is costing.
-              </p>
+          {/* Right Column: Value Ladder */}
+          <div className="lg:col-span-6 flex flex-col lg:grid lg:grid-rows-[auto_1fr] lg:h-full w-full max-w-[500px]">
+            <div className="text-left mb-4 lg:mb-0">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#8CC63F] bg-[#8CC63F]/5 px-3 py-1 border border-[#8CC63F]/15 rounded-none inline-block font-mono">
+                THE VALUE LADDER
+              </span>
+              <h3 className="text-xl md:text-2xl font-black mt-2 text-[#0B1E2E] leading-tight uppercase tracking-tight">
+                Data → Intelligence → Action
+              </h3>
             </div>
             
-            {/* Quote Box */}
-            <div className="bg-[#0170B9]/5 border-l-4 border-[#0170B9] p-5 shadow-sm italic text-[#8CC63F] font-black text-base md:text-lg leading-relaxed text-left">
-              "I design systems that prevent them."
-            </div>
-
-            {/* Transformation Focus Card (Fills the remaining height and centers contents) */}
-            <div className="bg-white border border-slate-100 p-6 shadow-sm space-y-4 rounded-none flex-grow flex flex-col justify-center text-left">
-              <h4 className="text-xs font-bold text-[#0170B9] uppercase tracking-wider font-mono">
-                System Goals & Objectives
-              </h4>
-              <div className="grid grid-cols-1 gap-4">
-                {[
-                  { title: 'Unify Silos', desc: 'Connecting inventory, sales, finance, and customer data into a single source of truth.' },
-                  { title: 'Automate Controls', desc: 'Replacing manual checks with automated workflows to eliminate leakage and errors.' },
-                  { title: 'Drive Decisions', desc: 'Converting raw ERP data into actionable dashboards for procurement and growth.' }
-                ].map((item, i) => (
-                  <div key={i} className="flex gap-2.5 items-start text-xs md:text-sm">
-                    <div className="w-1.5 h-1.5 rounded-none bg-[#8CC63F] shrink-0 mt-2" />
-                    <div>
-                      <span className="font-bold text-[#0B1E2E]">{item.title}: </span>
-                      <span className="text-[#4B4F58] font-medium leading-relaxed">{item.desc}</span>
+            <div className="flex flex-col justify-between lg:h-full lg:mt-6 space-y-2 lg:space-y-0">
+              {[
+                { label: 'Data Collection', sub: 'Capture what matters', color: 'bg-slate-200', text: 'text-slate-700' },
+                { label: 'Data Engineering', sub: 'Structure and clean', color: 'bg-slate-300', text: 'text-slate-800' },
+                { label: 'Business Intelligence', sub: 'Visualize and report', color: 'bg-[#1f5fbf]', text: 'text-white' },
+                { label: 'Decision Intelligence', sub: 'Analyze and prescribe', color: 'bg-[#0b2341]', text: 'text-white' },
+                { label: 'Continuous Improvement', sub: 'Learn and iterate', color: 'bg-[#8bc34a]', text: 'text-white' },
+              ].map((tier, idx, arr) => (
+                <div key={tier.label} className="flex flex-col items-center w-full">
+                  <div className={`w-full rounded-xl px-6 py-4 flex items-center justify-between shadow-sm hover:shadow-md transition-all duration-300 ${tier.color}`}>
+                    <div className="text-left">
+                      <p className={`text-sm font-extrabold ${tier.text}`}>{tier.label}</p>
+                      <p className={`text-[10.5px] font-medium ${tier.text} opacity-70`}>{tier.sub}</p>
                     </div>
+                    <span className={`text-xl font-black ${tier.text} opacity-30`}>{String(idx + 1).padStart(2, '0')}</span>
                   </div>
-                ))}
-              </div>
+                  {idx < arr.length - 1 && <ArrowDown className="w-4 h-4 text-[#8bc34a] my-1" />}
+                </div>
+              ))}
             </div>
           </div>
 

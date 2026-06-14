@@ -45,15 +45,6 @@ export function ProfileSummary() {
               </h2>
             </div>
             
-            <div className="space-y-4 text-white/85 text-sm md:text-base leading-relaxed">
-              <p className="font-semibold text-white">
-                A systems-first designer focused on converting retail chaos and raw, unstructured data into clean operating intelligence. I bypass legacy habits to solve major industry hurdles by designing custom data collection flows and automated architectures from first principles.
-              </p>
-              <p className="text-xs md:text-sm text-white/70 leading-relaxed border-t border-white/10 pt-4">
-                Learning from 200+ jewellery businesses. Designing systems that improve decisions, strengthen operations, and drive measurable business outcomes.
-              </p>
-            </div>
-
             <div className="pt-2">
               <GoldButton to="/about">
                 Learn More

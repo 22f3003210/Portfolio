@@ -5,7 +5,20 @@ import {
   Clock, 
   Calendar, 
   ArrowRight,
-  X
+  X,
+  Users,
+  Package,
+  ShoppingCart,
+  Heart,
+  BarChart2,
+  Settings,
+  TrendingUp,
+  Building2,
+  Rocket,
+  DollarSign,
+  Cpu,
+  Target,
+  Layers
 } from 'lucide-react';
 import { ScrollReveal } from '../../components/ScrollReveal';
 import { articles } from '../../data/articles';
@@ -297,6 +310,24 @@ function getArticleContent(article: Article): ArticleModalContent {
   }
 }
 
+const iconClass = 'w-10 h-10 text-white/60 group-hover:scale-110 transition-transform duration-300';
+
+const categoryIconMap: Record<string, React.ReactNode> = {
+  'People & Leadership': <Users className={iconClass} />,
+  'Inventory':           <Package className={iconClass} />,
+  'Procurement':         <ShoppingCart className={iconClass} />,
+  'CRM & Customer Experience': <Heart className={iconClass} />,
+  'Data & Analytics':    <BarChart2 className={iconClass} />,
+  'Operations':          <Settings className={iconClass} />,
+  'Sales':               <TrendingUp className={iconClass} />,
+  'Multi-Store Operations': <Building2 className={iconClass} />,
+  'Growth & Expansion':  <Rocket className={iconClass} />,
+  'Profitability':       <DollarSign className={iconClass} />,
+  'Technology':          <Cpu className={iconClass} />,
+  'Strategy':            <Target className={iconClass} />,
+  'Personal Notes':      <Layers className={iconClass} />,
+};
+
 export function ArticleGrid() {
   const [activeTab, setActiveTab] = useState<string>('all');
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
@@ -452,17 +483,28 @@ export function ArticleGrid() {
                       onClick={() => setSelectedArticle(article)}
                       className="cursor-pointer flex flex-col h-full bg-white rounded-none border border-[#E2E1DC] overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-[#8bc34a]/30 group"
                     >
-                      {/* Header Banner - Category specific color strip */}
+                      {/* Header Banner - Rich editorial card header */}
                       <div
-                        className="h-[100px] flex items-center justify-center relative overflow-hidden"
-                        style={{ backgroundColor: article.categoryColor }}
+                        className="h-[120px] flex items-center justify-center relative overflow-hidden"
+                        style={{ background: `linear-gradient(135deg, ${article.categoryColor} 0%, ${article.categoryColor}dd 60%, ${article.categoryColor}99 100%)` }}
                       >
-                        {/* Subtle geometry decoration */}
-                        <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(white_1px,transparent_1px)] [background-size:16px_16px]" />
-                        <span className="absolute top-3 left-3 px-3 py-1 text-[9px] font-black uppercase tracking-widest text-white bg-white/10 border border-white/10 rounded-sm backdrop-blur-sm">
+                        {/* Dot grid pattern */}
+                        <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(white_1px,transparent_1px)] [background-size:14px_14px]" />
+                        {/* Large watermark category text */}
+                        <span className="absolute -bottom-2 -right-3 text-[52px] font-black text-white/[0.08] uppercase leading-none select-none pointer-events-none tracking-tight whitespace-nowrap">
                           {article.category}
                         </span>
-                        <BookOpen className="w-8 h-8 text-white/55 group-hover:scale-110 transition-transform duration-300" />
+                        {/* Top-left category pill */}
+                        <span className="absolute top-3 left-3 px-2.5 py-1 text-[8.5px] font-black uppercase tracking-widest text-white bg-white/20 border border-white/25 backdrop-blur-sm">
+                          {article.category}
+                        </span>
+                        {/* Corner accents */}
+                        <div className="absolute top-0 right-0 w-14 h-14 border-t-2 border-r-2 border-white/20 pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-white/20 pointer-events-none" />
+                        {/* Category-specific icon */}
+                        <div className="relative z-10">
+                          {categoryIconMap[article.category] ?? <BookOpen className="w-10 h-10 text-white/60 group-hover:scale-110 transition-transform duration-300" />}
+                        </div>
                       </div>
 
                       {/* Content */}

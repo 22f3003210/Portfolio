@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Scale With Abraham — Tri-fold Brochure</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ════════════════════════════════
+       RESET
+    ════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ════════════════════════════════
+       PRINT: each .page = one A4 landscape
+    ════════════════════════════════ */
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      html, body { width: 297mm; background: white; }
+      .page { page-break-after: always; }
+      .page:last-child { page-break-after: avoid; }
+      .screen-only { display: none; }
+    }
+
+    /* ════════════════════════════════
+       SCREEN: preview wrapper
+    ════════════════════════════════ */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #94A3B8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 0;
+    }
+
+    .screen-only {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; font-weight: 700;
+      color: #475569; text-transform: uppercase;
+      letter-spacing: .18em; text-align: center;
+      padding: 12px 0 6px;
+    }
+
+    /* ════════════════════════════════
+       PAGE = A4 landscape (297 × 210 mm)
+    ════════════════════════════════ */
+    .page {
+      width: 297mm;
+      height: 210mm;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,.35);
+      position: relative;
+    }
+
+    /* ════════════════════════════════
+       PANEL = 99 × 210 mm
+    ════════════════════════════════ */
+    .panel {
+      width: 99mm;
+      height: 210mm;
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    /* fold guides */
+    .panel + .panel::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: rgba(255,255,255,.08);
+      z-index: 10;
+      pointer-events: none;
+    }
+    .outside-sheet .panel + .panel::before {
+      background: rgba(0,0,0,.07);
+    }
+
+    /* ════════════════════════════════
+       COLOURS
+    ════════════════════════════════ */
+    :root {
+      --navy: #0B1E2E;
+      --dark: #071624;
+      --blue: #0170B9;
+      --grn:  #8BC63F;
+      --lt:   #F8FAFC;
+      --sl:   #64748B;
+    }
+    .bg-navy { background: var(--navy); }
+    .bg-dark { background: var(--dark); }
+    .bg-lt   { background: var(--lt);  }
+
+    /* ════════════════════════════════
+       PANEL INNER PADDING
+    ════════════════════════════════ */
+    .inner {
+      padding: 8.5mm 7.5mm 8mm;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ════════════════════════════════
+       DECORATIVE BLOB
+    ════════════════════════════════ */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    /* ════════════════════════════════
+       TAG / BADGE
+    ════════════════════════════════ */
+    .tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      padding: 2pt 6pt; border-radius: 2pt;
+    }
+    .tag-g { color: var(--grn);  border: .5pt solid rgba(139,198,63,.35); }
+    .tag-b { color: var(--blue); border: .5pt solid rgba(1,112,185,.35); }
+    .tag-w { color: rgba(255,255,255,.5); border: .5pt solid rgba(255,255,255,.18); }
+    .tag-n { color: var(--navy); border: .5pt solid rgba(11,30,46,.25); }
+
+    /* ════════════════════════════════
+       TYPOGRAPHY (pt units for print)
+    ════════════════════════════════ */
+    .title-xl {
+      font-size: 17pt; font-weight: 900;
+      line-height: 1.1; letter-spacing: -.03em;
+      color: #fff;
+    }
+    .title-lg {
+      font-size: 11.5pt; font-weight: 800;
+      line-height: 1.2; letter-spacing: -.025em;
+    }
+    .title-md {
+      font-size: 8.5pt; font-weight: 800;
+      line-height: 1.25;
+    }
+    .body {
+      font-size: 6.8pt; line-height: 1.65; font-weight: 400;
+    }
+    .body-sm {
+      font-size: 6.2pt; line-height: 1.6; font-weight: 400;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ════════════════════════════════
+       RULE
+    ════════════════════════════════ */
+    .hr-w { height: .5pt; background: rgba(255,255,255,.09); margin: 5pt 0; }
+    .hr-d { height: .5pt; background: rgba(11,30,46,.1);     margin: 5pt 0; }
+
+    /* ════════════════════════════════
+       DATA GAP TABLE
+    ════════════════════════════════ */
+    .gap-table {
+      border: .5pt solid rgba(255,255,255,.1);
+      border-radius: 4pt; overflow: hidden;
+    }
+    .gap-row {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 5pt 7pt;
+      border-bottom: .5pt solid rgba(255,255,255,.07);
+    }
+    .gap-row:last-child { border-bottom: none; }
+    .gap-label { font-size: 7pt; font-weight: 800; color: #fff; }
+    .gap-sub   { font-size: 5.5pt; color: rgba(255,255,255,.4); margin-top: 1pt; }
+    .pill-yes {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt; font-weight: 900;
+      padding: 2pt 7pt; border-radius: 2pt; white-space: nowrap;
+      background: rgba(139,198,63,.14); color: var(--grn);
+      border: .5pt solid rgba(139,198,63,.3);
+    }
+    .pill-no {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt; font-weight: 900;
+      padding: 2pt 7pt; border-radius: 2pt; white-space: nowrap;
+      background: rgba(255,255,255,.04); color: rgba(255,255,255,.28);
+      border: .5pt solid rgba(255,255,255,.1);
+    }
+
+    /* ════════════════════════════════
+       SIGNAL CHIPS
+    ════════════════════════════════ */
+    .chips { display: flex; flex-wrap: wrap; gap: 4pt; }
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      padding: 3pt 6pt; border-radius: 2.5pt;
+      background: rgba(255,255,255,.04);
+      border: .5pt solid rgba(255,255,255,.09);
+      color: rgba(255,255,255,.6);
+    }
+
+    /* ════════════════════════════════
+       CHAIN  (formula)
+    ════════════════════════════════ */
+    .chain { display: flex; align-items: center; flex-wrap: wrap; gap: 3pt; }
+    .cn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      padding: 4pt 6pt; border-radius: 2.5pt;
+    }
+    .cn-g { background: rgba(139,198,63,.14); color: var(--grn);  border: .5pt solid rgba(139,198,63,.28); }
+    .cn-b { background: rgba(1,112,185,.12);  color: #6DBDE8; border: .5pt solid rgba(1,112,185,.28); }
+    .ca   { font-size: 8pt; color: var(--grn); line-height: 1; }
+
+    /* ════════════════════════════════
+       PHASE STEP
+    ════════════════════════════════ */
+    .phase { display: flex; gap: 7pt; align-items: flex-start; margin-bottom: 6pt; }
+    .pnum {
+      width: 19pt; height: 19pt; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.5pt; font-weight: 700; margin-top: 1pt;
+    }
+    .pg { background: var(--grn); color: var(--navy); }
+    .pb { background: rgba(1,112,185,.15); color: var(--blue); border: .5pt solid rgba(1,112,185,.3); }
+    .ph-lbl { font-size: 8pt; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.5pt; }
+    .ph-desc { font-size: 6pt; color: rgba(255,255,255,.5); line-height: 1.55; }
+
+    /* ════════════════════════════════
+       APPROACH STEP
+    ════════════════════════════════ */
+    .ap {
+      display: flex; gap: 7pt; align-items: flex-start;
+      background: rgba(255,255,255,.03);
+      border: .5pt solid rgba(255,255,255,.08);
+      border-radius: 4pt; padding: 5.5pt 7pt; margin-bottom: 4pt;
+    }
+    .ap-ico { font-size: 9pt; flex-shrink: 0; margin-top: .5pt; }
+
+    /* ════════════════════════════════
+       OUTCOME / BULLET
+    ════════════════════════════════ */
+    .out { display: flex; gap: 5pt; align-items: flex-start; margin-bottom: 4.5pt; }
+    .dot-g { width: 4.5pt; height: 4.5pt; background: var(--grn); border-radius: 50%; flex-shrink: 0; margin-top: 4pt; }
+    .dot-b { width: 4.5pt; height: 4.5pt; background: var(--blue); border-radius: 50%; flex-shrink: 0; margin-top: 4pt; }
+
+    /* ════════════════════════════════
+       CONTACT ROW
+    ════════════════════════════════ */
+    .crow { display: flex; align-items: center; gap: 7pt; margin-bottom: 6pt; }
+    .cico {
+      width: 18pt; height: 18pt;
+      background: rgba(139,198,63,.1); border: .5pt solid rgba(139,198,63,.25);
+      border-radius: 3pt; display: flex; align-items: center; justify-content: center;
+      font-size: 8.5pt; flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════
+       STAT BOX
+    ════════════════════════════════ */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4pt; }
+    .stat {
+      background: var(--navy); border-radius: 3.5pt;
+      padding: 5.5pt 4pt; text-align: center;
+    }
+    .stat-n { font-size: 15pt; font-weight: 900; color: var(--grn); letter-spacing: -.03em; line-height: 1; }
+    .stat-l { font-family: 'JetBrains Mono', monospace; font-size: 4.5pt; color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: .1em; margin-top: 2pt; }
+
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE 1 — INSIDE
+     [Inside Left: The Problem] | [Inside Centre: Patterns] | [Front Cover]
+═══════════════════════════════════════════════════════ -->
+<p class="screen-only">▶ PAGE 1 — INSIDE &nbsp;(print on side A)</p>
+
+<div class="page">
+
+  <!-- ───── INSIDE LEFT: The Problem + Data Collection Gap ───── -->
+  <div class="panel bg-navy">
+    <div class="blob" style="width:70pt;height:70pt;background:rgba(139,198,63,.06);top:-15pt;left:-15pt;"></div>
+    <div class="blob" style="width:55pt;height:55pt;background:rgba(1,112,185,.07);bottom:15pt;right:-10pt;"></div>
+    <div class="inner">
+
+      <span class="tag tag-g" style="margin-bottom:6pt;display:inline-block;">The Real Problem</span>
+      <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">Most Businesses<br/>Start at the Wrong End.</h2>
+      <p class="body-sm" style="color:rgba(255,255,255,.5);margin-bottom:6pt;">They implement ERPs, CRMs, and dashboards — yet still can't answer the questions that matter most:</p>
+
+      <div style="background:rgba(1,112,185,.07);border:.5pt solid rgba(1,112,185,.18);border-radius:4pt;padding:6pt 8pt;margin-bottom:6pt;">
+        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Why are sales increasing or declining?</span></div>
+        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Which activities actually drive profitability?</span></div>
+        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Where are the operational bottlenecks?</span></div>
+        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Which products truly perform?</span></div>
+        <div class="out" style="margin-bottom:0;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">What should we do next?</span></div>
+      </div>
+
+      <div style="background:rgba(139,198,63,.06);border-left:2pt solid var(--grn);padding:5.5pt 8pt;border-radius:0 4pt 4pt 0;margin-bottom:7pt;">
+        <p class="body-sm" style="color:rgba(255,255,255,.7);font-style:italic;">The problem is rarely the software. The problem is that the right data was <strong style="color:#fff;">never captured</strong> in the first place.</p>
+      </div>
+
+      <span class="tag tag-b" style="display:inline-block;margin-bottom:5pt;">The Data Collection Gap</span>
+      <div class="gap-table" style="background:rgba(255,255,255,.025);">
+        <div class="gap-row">
+          <div><p class="gap-label">Transaction Data</p><p class="gap-sub">What happened</p></div>
+          <span class="pill-yes">✓ Collected</span>
+        </div>
+        <div class="gap-row">
+          <div><p class="gap-label">Decision Data</p><p class="gap-sub">Why it was decided</p></div>
+          <span class="pill-no">✗ Missing</span>
+        </div>
+        <div class="gap-row">
+          <div><p class="gap-label">Process Data</p><p class="gap-sub">How long it took</p></div>
+          <span class="pill-no">✗ Missing</span>
+        </div>
+        <div class="gap-row">
+          <div><p class="gap-label">Behavioral Data</p><p class="gap-sub">What actions were taken</p></div>
+          <span class="pill-no">✗ Missing</span>
+        </div>
+      </div>
+
+      <div style="margin-top:auto;padding-top:6pt;">
+        <div class="hr-w" style="margin-bottom:6pt;"></div>
+        <p class="body-sm" style="color:rgba(255,255,255,.45);font-style:italic;">Businesses collect transactions, but fail to capture the decisions, processes, and behaviors that drive them. They understand outcomes — but struggle to understand causes. <strong style="color:var(--grn);">And intelligence lives in the "why."</strong></p>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ───── INSIDE CENTRE: Pattern Recognition + Intelligence ───── -->
+  <div class="panel bg-dark">
+    <div class="blob" style="width:65pt;height:65pt;background:rgba(1,112,185,.08);top:-10pt;right:-10pt;"></div>
+    <div class="blob" style="width:55pt;height:55pt;background:rgba(139,198,63,.06);bottom:15pt;left:-10pt;"></div>
+    <div class="inner">
+
+      <span class="tag tag-g" style="display:inline-block;margin-bottom:6pt;">Intelligence Starts Here</span>
+      <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">Pattern Recognition Is the Highest Form of Intelligence.</h2>
+      <div class="hr-w" style="margin-bottom:6pt;"></div>
+
+      <p class="body-sm" style="color:rgba(255,255,255,.55);margin-bottom:6pt;">Every business generates signals every day. Individually, they are just data points. Over time, they reveal patterns — and patterns expose bottlenecks, uncover opportunities, and guide better decisions.</p>
+
+      <span class="tag tag-w" style="display:inline-block;margin-bottom:5pt;">Daily Business Signals</span>
+      <div class="chips" style="margin-bottom:7pt;">
+        <span class="chip">Sales Transactions</span>
+        <span class="chip">Customer Interactions</span>
+        <span class="chip">Inventory Movements</span>
+        <span class="chip">Employee Activities</span>
+        <span class="chip">Operational Decisions</span>
+        <span class="chip">Financial Records</span>
+      </div>
+
+      <div style="background:rgba(1,112,185,.07);border:.5pt solid rgba(1,112,185,.2);border-radius:4pt;padding:7pt 8pt;margin-bottom:7pt;">
+        <p class="title-md" style="color:#fff;margin-bottom:3pt;">Historical Data Is the Foundation of Future Decisions.</p>
+        <p class="body-sm" style="color:rgba(255,255,255,.5);">Every sale, customer interaction, and operational activity leaves behind a signal. Over time, those signals form patterns that reveal opportunities, expose inefficiencies, and help predict future outcomes.</p>
+        <p class="body-sm" style="color:var(--grn);font-weight:700;margin-top:4pt;">The deeper the understanding of historical patterns, the better the quality of future decisions.</p>
+      </div>
+
+      <span class="tag tag-b" style="display:inline-block;margin-bottom:5pt;">The Intelligence Chain</span>
+      <div style="background:rgba(255,255,255,.03);border:.5pt solid rgba(255,255,255,.08);border-radius:4pt;padding:7pt 8pt;margin-bottom:7pt;">
+        <div class="chain">
+          <div class="cn cn-g">Data</div>
+          <span class="ca">›</span>
+          <div class="cn cn-b">Patterns</div>
+          <span class="ca">›</span>
+          <div class="cn cn-b">Intelligence</div>
+          <span class="ca">›</span>
+          <div class="cn cn-g" style="font-weight:900;">Decisions</div>
+        </div>
+        <p class="body-sm" style="color:rgba(255,255,255,.38);margin-top:5pt;">Without observation, there is no measurement. Without measurement, there is no intelligence.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5pt;margin-top:auto;">
+        <div style="background:rgba(255,255,255,.03);border:.5pt solid rgba(255,255,255,.08);border-radius:3.5pt;padding:6pt 7pt;">
+          <p style="font-size:5.5pt;font-weight:900;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:3pt;">Without Data</p>
+          <p class="body-sm" style="color:rgba(255,255,255,.42);">Reactive. Guessing. Solving problems after they happen.</p>
+        </div>
+        <div style="background:rgba(139,198,63,.05);border:.5pt solid rgba(139,198,63,.2);border-radius:3.5pt;padding:6pt 7pt;">
+          <p style="font-size:5.5pt;font-weight:900;color:var(--grn);text-transform:uppercase;letter-spacing:.12em;margin-bottom:3pt;">With Data</p>
+          <p class="body-sm" style="color:rgba(255,255,255,.55);">Proactive. Precise. Preventing problems before they occur.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ───── FRONT COVER (rightmost — visible when brochure is folded) ───── -->
+  <div class="panel bg-navy">
+    <div class="blob" style="width:120pt;height:120pt;background:rgba(1,112,185,.1);top:-40pt;right:-40pt;"></div>
+    <div class="blob" style="width:90pt;height:90pt;background:rgba(139,198,63,.07);bottom:-25pt;left:-25pt;"></div>
+    <div class="inner" style="justify-content:space-between;">
+
+      <!-- Brand -->
+      <div>
+        <span class="tag tag-g" style="display:inline-block;margin-bottom:9pt;">Systems &amp; Retail Consulting</span>
+        <div style="display:flex;align-items:center;gap:8pt;margin-bottom:10pt;">
+          <div style="width:32pt;height:32pt;background:var(--grn);border-radius:5pt;display:flex;align-items:center;justify-content:center;font-size:16pt;font-weight:900;color:var(--navy);flex-shrink:0;">A</div>
+          <div>
+            <p style="font-size:12.5pt;font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.01em;">SCALE WITH</p>
+            <p style="font-size:12.5pt;font-weight:900;color:var(--grn);line-height:1.05;letter-spacing:-.01em;">ABRAHAM</p>
+          </div>
+        </div>
+        <div class="hr-w"></div>
+      </div>
+
+      <!-- Headline -->
+      <div>
+        <h1 class="title-xl" style="font-size:16.5pt;margin-bottom:7pt;">
+          Intelligence Is<br/>Becoming a Utility.<br/>
+          <span style="color:var(--grn);">But Intelligence<br/>Starts With Data.</span>
+        </h1>
+        <p class="body" style="color:rgba(255,255,255,.52);margin-bottom:9pt;">As AI becomes accessible to every business, the real competitive advantage will not be access to intelligence — it will be the quality of data your business captures, measures, and understands.</p>
+
+        <div style="background:rgba(1,112,185,.08);border-left:2pt solid var(--blue);padding:6pt 9pt;border-radius:0 4pt 4pt 0;margin-bottom:9pt;">
+          <p class="body-sm" style="color:rgba(255,255,255,.4);font-style:italic;margin-bottom:2.5pt;">The question will no longer be:</p>
+          <p class="body-sm" style="font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5pt;">"Do you have access to intelligence?"</p>
+          <p class="body-sm" style="color:rgba(255,255,255,.4);font-style:italic;margin-bottom:2.5pt;">The question will be:</p>
+          <p style="font-size:7.5pt;font-weight:900;color:#fff;">"What intelligence can your<br/>business generate?"</p>
+        </div>
+
+        <div style="display:inline-flex;align-items:center;gap:5pt;background:rgba(139,198,63,.07);border:.5pt solid rgba(139,198,63,.22);border-radius:3pt;padding:4pt 8pt;">
+          <span style="font-size:9pt;">💎</span>
+          <span class="mono" style="font-size:5.8pt;font-weight:700;color:var(--grn);text-transform:uppercase;letter-spacing:.14em;">Retail &amp; Jewellery Specialists</span>
+        </div>
+      </div>
+
+      <!-- Bottom URL -->
+      <div>
+        <div class="hr-w" style="margin-bottom:6pt;"></div>
+        <p class="mono" style="font-size:5.5pt;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.18em;margin-bottom:2.5pt;">Discover More</p>
+        <p class="mono" style="font-size:8pt;font-weight:700;color:var(--grn);">scale-with-abraham.vercel.app</p>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /PAGE 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE 2 — OUTSIDE
+     [Back Left: Our Approach] | [Back Centre: Process + Contact] | [Back Right: Future + About]
+═══════════════════════════════════════════════════════ -->
+<p class="screen-only" style="margin-top:8px;">◀ PAGE 2 — OUTSIDE &nbsp;(print on side B, flip on short edge)</p>
+
+<div class="page outside-sheet">
+
+  <!-- ───── BACK LEFT FLAP: Our Approach ───── -->
+  <div class="panel bg-dark">
+    <div class="blob" style="width:70pt;height:70pt;background:rgba(139,198,63,.06);top:-15pt;left:-15pt;"></div>
+    <div class="inner">
+
+      <span class="tag tag-g" style="display:inline-block;margin-bottom:6pt;">Our Approach</span>
+      <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">Measure. Visualize.<br/>Analyze. Decide. Improve.</h2>
+      <p class="body-sm" style="color:rgba(255,255,255,.5);margin-bottom:6pt;">We believe intelligence is not something you purchase. It is something you build — systematically, around your business.</p>
+
+      <div style="background:rgba(255,255,255,.03);border:.5pt solid rgba(255,255,255,.08);border-radius:4pt;padding:6pt 8pt;margin-bottom:7pt;">
+        <div class="chain">
+          <div class="cn" style="background:rgba(139,198,63,.13);color:var(--grn);border:.5pt solid rgba(139,198,63,.25);font-size:5.5pt;padding:3pt 5pt;">Measure</div>
+          <span class="ca" style="font-size:7pt;">›</span>
+          <div class="cn" style="background:rgba(1,112,185,.1);color:#6DBDE8;border:.5pt solid rgba(1,112,185,.25);font-size:5.5pt;padding:3pt 5pt;">Visualize</div>
+          <span class="ca" style="font-size:7pt;">›</span>
+          <div class="cn" style="background:rgba(1,112,185,.1);color:#6DBDE8;border:.5pt solid rgba(1,112,185,.25);font-size:5.5pt;padding:3pt 5pt;">Analyze</div>
+          <span class="ca" style="font-size:7pt;">›</span>
+          <div class="cn" style="background:rgba(1,112,185,.1);color:#6DBDE8;border:.5pt solid rgba(1,112,185,.25);font-size:5.5pt;padding:3pt 5pt;">Decide</div>
+          <span class="ca" style="font-size:7pt;">›</span>
+          <div class="cn" style="background:rgba(139,198,63,.15);color:var(--grn);border:.5pt solid rgba(139,198,63,.28);font-size:5.5pt;padding:3pt 5pt;font-weight:900;">Improve</div>
+        </div>
+      </div>
+
+      <div class="hr-w" style="margin-bottom:6pt;"></div>
+      <span class="tag tag-b" style="display:inline-block;margin-bottom:6pt;">What We Focus On</span>
+
+      <div class="ap">
+        <span class="ap-ico">🎯</span>
+        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Identify Critical Business Processes</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Map the workflows and activities that drive real performance.</p></div>
+      </div>
+      <div class="ap">
+        <span class="ap-ico">📐</span>
+        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Define Meaningful Data Points</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Pinpoint exactly what should be captured and why it matters.</p></div>
+      </div>
+      <div class="ap">
+        <span class="ap-ico">🏗</span>
+        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Build Measurement Frameworks</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Design KPI systems that turn activity into accountability.</p></div>
+      </div>
+      <div class="ap">
+        <span class="ap-ico">👁</span>
+        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Create Operational Visibility</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Live dashboards that show what's happening, everywhere.</p></div>
+      </div>
+      <div class="ap" style="margin-bottom:0;">
+        <span class="ap-ico">♻️</span>
+        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Drive Continuous Improvement</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Systems that evolve as your business grows.</p></div>
+      </div>
+
+      <div style="margin-top:auto;padding-top:6pt;">
+        <div class="hr-w" style="margin-bottom:6pt;"></div>
+        <div style="background:rgba(139,198,63,.05);border:.5pt solid rgba(139,198,63,.2);border-radius:4pt;padding:7pt 8pt;">
+          <p class="title-md" style="color:var(--grn);margin-bottom:3pt;">We build Decision Intelligence Systems.</p>
+          <p class="body-sm" style="color:rgba(255,255,255,.52);">Not just reports. Not just dashboards. Not just software. But systems that help organisations understand performance, make better decisions, and scale with confidence.</p>
+          <p class="body-sm" style="color:rgba(255,255,255,.38);margin-top:4pt;font-style:italic;">Because what gets measured gets understood. And what gets understood can be improved.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ───── BACK CENTRE: Engagement Process + Contact ───── -->
+  <div class="panel bg-navy">
+    <div class="blob" style="width:70pt;height:70pt;background:rgba(139,198,63,.07);top:-15pt;right:-15pt;"></div>
+    <div class="blob" style="width:55pt;height:55pt;background:rgba(1,112,185,.07);bottom:15pt;left:-10pt;"></div>
+    <div class="inner" style="justify-content:space-between;">
+
+      <div>
+        <span class="tag tag-g" style="display:inline-block;margin-bottom:6pt;">Engagement Process</span>
+        <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">How We Work Together</h2>
+        <p class="body-sm" style="color:rgba(255,255,255,.45);margin-bottom:7pt;">A five-phase process built to transform how your retail business sees, decides, and grows.</p>
+        <div class="hr-w" style="margin-bottom:7pt;"></div>
+
+        <div class="phase">
+          <div class="pnum pg">01</div>
+          <div><p class="ph-lbl">AUDIT</p><p class="ph-desc">We map your operations, systems, data gaps, and team workflows — documenting what exists and what is missing.</p></div>
+        </div>
+        <div class="phase">
+          <div class="pnum pb">02</div>
+          <div><p class="ph-lbl">DIAGNOSE</p><p class="ph-desc">Root causes of underperformance are surfaced — inventory leakage, process delays, missing KPIs, and decision blind-spots.</p></div>
+        </div>
+        <div class="phase">
+          <div class="pnum pb">03</div>
+          <div><p class="ph-lbl">BUILD</p><p class="ph-desc">Custom data architecture, KPI frameworks, dashboards, and reporting systems — built around how your business actually operates.</p></div>
+        </div>
+        <div class="phase">
+          <div class="pnum pb">04</div>
+          <div><p class="ph-lbl">TRAIN</p><p class="ph-desc">Your team is trained to own and operate the system independently from day one.</p></div>
+        </div>
+        <div class="phase" style="margin-bottom:0;">
+          <div class="pnum pg">05</div>
+          <div><p class="ph-lbl">DELIVER</p><p class="ph-desc">Full handover of dashboards, SOPs, KPI framework, audit report, and training pack. Ongoing support available.</p></div>
+        </div>
+      </div>
+
+      <!-- Contact + CTA -->
+      <div>
+        <div class="hr-w" style="margin-bottom:7pt;"></div>
+        <span class="tag tag-g" style="display:inline-block;margin-bottom:7pt;">Get In Touch</span>
+        <div class="crow">
+          <div class="cico">🌐</div>
+          <div>
+            <p style="font-size:5.5pt;color:rgba(255,255,255,.3);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1pt;">Website</p>
+            <p class="mono" style="font-size:7pt;font-weight:700;color:var(--grn);">scale-with-abraham.vercel.app</p>
+          </div>
+        </div>
+        <div class="crow" style="margin-bottom:8pt;">
+          <div class="cico">📧</div>
+          <div>
+            <p style="font-size:5.5pt;color:rgba(255,255,255,.3);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1pt;">Email</p>
+            <p style="font-size:7pt;font-weight:700;color:#fff;">abraham@scalewithabraham.com</p>
+          </div>
+        </div>
+        <div style="background:var(--grn);border-radius:5pt;padding:9pt 10pt;text-align:center;">
+          <p class="mono" style="font-size:6pt;font-weight:900;color:var(--navy);text-transform:uppercase;letter-spacing:.15em;">Book a Free Discovery Session</p>
+          <p style="font-size:5.8pt;color:rgba(11,30,46,.6);margin-top:2pt;">No commitment. Just clarity about your data.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ───── BACK RIGHT: The Future + About + Outcomes ───── -->
+  <div class="panel bg-lt">
+    <div class="inner">
+
+      <!-- Future block -->
+      <div style="background:var(--navy);border-radius:6pt;padding:9pt 10pt;margin-bottom:7pt;">
+        <p class="body-sm" style="color:rgba(255,255,255,.4);font-style:italic;margin-bottom:4pt;">The organizations that thrive will not be those with the most tools —</p>
+        <p style="font-size:9pt;font-weight:900;color:#fff;line-height:1.25;margin-bottom:6pt;">The Future Belongs to Businesses That <span style="color:var(--grn);">Understand Their Data.</span></p>
+        <div class="chain">
+          <div class="cn cn-g" style="font-size:5.5pt;padding:3pt 5.5pt;">Data</div>
+          <span class="ca" style="color:var(--grn);font-size:7pt;">›</span>
+          <div class="cn" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);border:.5pt solid rgba(255,255,255,.12);font-size:5.5pt;padding:3pt 5.5pt;">Patterns</div>
+          <span class="ca" style="color:var(--grn);font-size:7pt;">›</span>
+          <div class="cn" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);border:.5pt solid rgba(255,255,255,.12);font-size:5.5pt;padding:3pt 5.5pt;">Intelligence</div>
+          <span class="ca" style="color:var(--grn);font-size:7pt;">›</span>
+          <div class="cn cn-g" style="font-weight:900;font-size:5.5pt;padding:3pt 5.5pt;">Decisions</div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <span class="tag tag-n" style="display:inline-block;margin-bottom:6pt;">About Abraham</span>
+      <p class="body" style="color:#475569;margin-bottom:5pt;">A systems and retail intelligence consultant helping jewellery and retail businesses transition from reactive, gut-driven operations to structured, data-led organisations that grow sustainably.</p>
+      <p class="body-sm" style="color:#64748B;margin-bottom:7pt;">With deep, hands-on experience in retail operations, ERP systems, inventory management, and business intelligence — every engagement is built around your specific business, not a generic framework.</p>
+
+      <div class="hr-d" style="margin-bottom:7pt;"></div>
+
+      <!-- Outcomes -->
+      <span class="tag tag-b" style="display:inline-block;margin-bottom:6pt;">What You Will Achieve</span>
+      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Replace gut decisions with live, accurate business data</span></div>
+      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Improve inventory productivity and eliminate dead stock</span></div>
+      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Understand why customers return — and why they don't</span></div>
+      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Build systems that don't depend on one person</span></div>
+      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">See staff productivity and delays in real time</span></div>
+      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Scale to multiple branches without losing control</span></div>
+
+      <div class="hr-d" style="margin-top:6pt;margin-bottom:6pt;"></div>
+
+      <div class="stats">
+        <div class="stat">
+          <p class="stat-n">5</p>
+          <p class="stat-l">Phases</p>
+        </div>
+        <div class="stat">
+          <p class="stat-n">9</p>
+          <p class="stat-l">Lifecycle Steps</p>
+        </div>
+        <div class="stat">
+          <p class="stat-n">6</p>
+          <p class="stat-l">Deliverables</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /PAGE 2 -->
+
+<p class="screen-only" style="padding-bottom:16px;color:#9CA3AF;">
+  Ctrl+P → Paper: A4 Landscape · Margins: None · Scale: 100% · Print both pages
+</p>
+
+</body>
+</html>

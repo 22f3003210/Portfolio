@@ -37,11 +37,6 @@ export function ArchitectureStack3D() {
             <span className="text-white text-[10px] font-black uppercase tracking-wide">
               {layer.title}
             </span>
-            <div className="ml-auto flex gap-1">
-              {[0, 1, 2].map((d) => (
-                <div key={d} className="w-1 h-1 rounded-full bg-white/25" />
-              ))}
-            </div>
           </div>
         </motion.div>
       ))}

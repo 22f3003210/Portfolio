@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BusinessOSSection } from '../sections/home/BusinessOSSection';
+import { FoundersOfficeSection } from '../sections/home/FoundersOfficeSection';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -19,12 +20,9 @@ import {
   Sparkles,
   ArrowRight,
   Calendar,
-  Clock3,
-  Search,
-  Map,
-  Link2,
-  RefreshCw
+  Clock3
 } from 'lucide-react';
+import { HowIThinkSection } from '../sections/home/HowIThinkSection';
 import { Link } from 'react-router-dom';
 
 const GREEN = '#8bc34a';
@@ -186,37 +184,6 @@ export function Consulting() {
     }
   ];
 
-  const roadmapSteps = [
-    {
-      phase: '01',
-      title: 'System Audit & Mapping',
-      icon: Search,
-      description: 'We map out your current state — auditing existing ERPs, inventory flows, and manual data silos to pinpoint bottlenecks.',
-      details: ['ERP & POS Analysis', 'Inventory Velocity Check', 'Process Mapping Sessions']
-    },
-    {
-      phase: '02',
-      title: 'Architecture Blueprinting',
-      icon: Map,
-      description: 'We design the target operating model, mapping out unified workflows, data touchpoints, and clear KPI scorecards.',
-      details: ['Target Operating Model', 'Data Integration Map', 'Roles & KPI Definitions']
-    },
-    {
-      phase: '03',
-      title: 'Custom Integration',
-      icon: Link2,
-      description: 'We build the bridge — deploying automated databases, connecting telemetry feeds, and launching clean dashboards.',
-      details: ['Telemetry API Config', 'Custom Recharts Dashboards', 'Alert & Monitor Systems']
-    },
-    {
-      phase: '04',
-      title: 'Continuous Optimization',
-      icon: RefreshCw,
-      description: 'We anchor the systems — training teams, building operational discipline, and refining models to sustain growth.',
-      details: ['Operational Coaching', 'Efficiency Reviews', 'Feature Scale-up Support']
-    }
-  ];
-
   const currentCategory = objectiveCategories.find(cat => cat.id === activeCategory) || objectiveCategories[0];
 
   return (
@@ -375,6 +342,9 @@ export function Consulting() {
           </div>
         </div>
       </section>
+
+      {/* Founder's Office Positioning Statement */}
+      <FoundersOfficeSection />
 
       {/* Mission & Vision Section (White / Soft Gray Backgrounds) */}
       <section className="py-20 md:py-28 px-6 bg-white border-b border-slate-100">
@@ -565,11 +535,6 @@ export function Consulting() {
 
               {/* Points display column (Sleek light panels) */}
               <div className="lg:col-span-8 bg-white border border-slate-200/60 rounded-xl p-6 md:p-8 min-h-[340px] shadow-sm relative">
-                <div className="absolute top-3 right-4 flex gap-1.5 opacity-30">
-                  <div className="w-2 h-2 rounded-full bg-slate-300" />
-                  <div className="w-2 h-2 rounded-full bg-slate-300" />
-                  <div className="w-2 h-2 rounded-full bg-slate-300" />
-                </div>
                 
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -603,62 +568,7 @@ export function Consulting() {
       </section>
 
       {/* Step-by-Step Consulting Roadmap Timeline (Light Theme) */}
-      <section className="py-20 md:py-28 px-6 bg-[#F8FAFC] border-b border-slate-100 relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto relative z-10">
-          <div className="text-center max-w-[800px] mx-auto mb-20">
-            <span className="text-[10px] font-black uppercase tracking-[0.15em] text-[#8bc34a] block mb-3">Engagement Process</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0b2341] tracking-tight mb-4">
-              The Consulting Engagement Roadmap
-            </h2>
-            <p className="text-sm md:text-base text-slate-500 font-medium">
-              A structured, 4-phase lifecycle to transform your retail jewellery operations from reactive firefighting to data-driven scale.
-            </p>
-          </div>
-
-          <div className="relative">
-            {/* Connector Line (Dotted Track) */}
-            <div className="hidden lg:block absolute top-[55px] left-[5%] right-[5%] h-[2px] bg-slate-200 border-t-2 border-dashed border-slate-300 z-0" />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-              {roadmapSteps.map((step, idx) => {
-                const Icon = step.icon;
-                return (
-                  <motion.div
-                    key={idx}
-                    {...fadeUp(idx * 0.1)}
-                    whileHover={{ y: -6, borderColor: '#8bc34a', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)' }}
-                    className="flex flex-col items-center lg:items-start text-center lg:text-left bg-white border border-slate-200/70 p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300"
-                  >
-                    {/* Circle Node with Icon */}
-                    <div className="w-16 h-16 rounded-full bg-[#0b2341] text-white flex items-center justify-center mb-6 shadow-lg relative border-4 border-white">
-                      <Icon className="w-6 h-6 text-[#8bc34a]" />
-                      <span className="absolute -top-1 -right-1 bg-[#8bc34a] text-white text-[8px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow">
-                        {step.phase}
-                      </span>
-                    </div>
-
-                    <h3 className="text-base md:text-lg font-black text-[#0b2341] mb-3">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-slate-500 leading-relaxed font-medium mb-5">
-                      {step.description}
-                    </p>
-
-                    <div className="mt-auto w-full pt-4 border-t border-slate-100 flex flex-col gap-2">
-                      {step.details.map((detail, dIdx) => (
-                        <div key={dIdx} className="flex items-center gap-2 text-[10.5px] font-bold text-slate-600">
-                          <div className="w-1 h-1 rounded-full bg-[#8bc34a] shrink-0" />
-                          <span>{detail}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowIThinkSection />
 
       {/* What We Help Businesses Achieve (Light Theme Outcomes Grid) */}
       <section className="py-20 md:py-28 px-6 bg-white border-b border-slate-100">
