@@ -62,7 +62,7 @@ export function CRMDetailSection() {
         return [
           `[${time}] [CRE_DESK] Customer walked into Showroom. Entry logged`,
           `[${time}] [CRM_ENGINE] Generated unique Lead Token LT-8092`,
-          `[${time}] [CRM_QUEUE] Token Lead Token LT-8092 assigned to Retail Rep Abraham Sayed`,
+          `[${time}] [CRM_QUEUE] Token Lead Token Lead Token LT-8092 assigned to Retail Rep Abraham Sayed`,
           `[${time}] [POS_SYSTEM] Sales Rep logged active consultation: Trial Activities`,
           `[${time}] [POS_SYSTEM] Product selected. Gold scheme discount check completed`,
           `[${time}] [BILLING] Invoice #INV-2901 generated. Marked as Opportunity Won`,
@@ -76,19 +76,19 @@ export function CRMDetailSection() {
           `[${time}] [POS_SYSTEM] Sales Rep logged active consultation: Products viewed & shortlisted`,
           `[${time}] [POS_SYSTEM] Customer left store without purchase. initiating recovery workflow`,
           `[${time}] [CRM_STATUS] Marking opportunity as LOST. Capturing reason: 'Design Dissatisfaction'`,
-          `[${time}] [RETARGETING] Lead Lead Token LT-8093 pushed to CRM Analytics and personalized follow-up campaign`
+          `[${time}] [RETARGETING] Lead Lead Token Lead Token LT-8093 pushed to CRM Analytics and personalized follow-up campaign`
         ];
       }
     }
   };
 
   return (
-    <section className="bg-slate-100/70 py-16 px-4 sm:px-6 relative overflow-hidden select-none text-left">
+    <section className="bg-slate-100/70 py-16 px-4 sm:px-6 md:px-8 relative overflow-hidden select-none text-left">
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{backgroundImage:'radial-gradient(circle, #0170B9 1.5px, transparent 1.5px)', backgroundSize:'32px 32px'}} />
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-[#558b2f] to-blue-400" />
 
       {/* ════════════ PAGE 1: EXECUTIVE BRIEF ════════════ */}
-      <div className="w-full max-w-[900px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[850px] flex flex-col justify-between">
+      <div className="w-full max-w-[1280px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[800px] flex flex-col justify-between">
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-[#558b2f] to-blue-400" />
         <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{backgroundImage:'radial-gradient(circle, #0170B9 1.5px, transparent 1.5px)', backgroundSize:'32px 32px'}} />
         
@@ -96,16 +96,16 @@ export function CRMDetailSection() {
           <span className="text-xs sm:text-sm font-mono font-bold tracking-[0.2em] text-blue-700 border border-blue-200 bg-blue-50 px-4 py-2 uppercase rounded-sm inline-block">
             Enterprise CRM Architecture
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 uppercase tracking-tight leading-none">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 uppercase tracking-tight leading-none">
             OMNI-CHANNEL CUSTOMER<br/>LIFECYCLE MANAGEMENT
           </h2>
-          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700 leading-snug">
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-700 leading-snug">
             Transforming Customer Interactions into Measurable Business Intelligence
           </p>
-          <p className="text-base sm:text-lg md:text-xl font-bold text-[#558b2f] uppercase tracking-wider leading-relaxed border-l-4 border-[#8bc34a] pl-5">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-[#558b2f] uppercase tracking-wider leading-relaxed border-l-4 border-[#8bc34a] pl-5">
             Establishing a Single Source of Truth for Every Customer Interaction From First Customer Touchpoint to Complete Lifecycle Ownership
           </p>
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-semibold max-w-3xl">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-600 leading-relaxed font-semibold max-w-5xl">
             Every customer interaction—whether originating from Instagram, WhatsApp, walk-ins, referrals, Google search, advertising campaigns, exhibitions, or direct inquiries—is systematically captured within a centralized CRM ecosystem. Each prospect is assigned a unique Lead Token, enabling end-to-end tracking, accountability, and visibility across the entire customer journey. This framework ensures seamless lead management, structured follow-ups, performance measurement, and conversion optimization, providing complete control over the customer lifecycle from initial engagement to final transaction and long-term relationship management.
           </p>
         </div>
@@ -117,7 +117,7 @@ export function CRMDetailSection() {
       </div>
 
       {/* ════════════ PAGE 2: INTERACTIVE BLUEPRINT SIMULATOR ════════════ */}
-      <div className="w-full max-w-[900px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[1000px] flex flex-col justify-between">
+      <div className="w-full max-w-[1280px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[900px] flex flex-col justify-between">
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-[#558b2f] to-blue-400" />
         <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{backgroundImage:'radial-gradient(circle, #0170B9 1.5px, transparent 1.5px)', backgroundSize:'32px 32px'}} />
         
@@ -129,7 +129,7 @@ export function CRMDetailSection() {
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tight">
               CUSTOMER FIRST INTERACTION
             </h3>
-            <p className="text-sm sm:text-base text-slate-500 max-w-2xl font-semibold mt-3">
+            <p className="text-sm sm:text-base text-slate-500 max-w-4xl font-semibold mt-3">
               Select process parameters and outcome branches to simulate the data flow, automatic triggers, and CRM token assignment pathways.
             </p>
           </div>
@@ -196,8 +196,8 @@ export function CRMDetailSection() {
                           <div className={`absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full flex items-center justify-center shadow-sm transition-all group-hover:scale-110 ${s.accent === 'green' ? 'bg-green-100 border border-green-300 text-green-700 group-hover:bg-white group-hover:text-emerald-600 group-hover:border-white' : 'bg-blue-100 border border-blue-300 text-blue-700 group-hover:bg-white group-hover:text-blue-600 group-hover:border-white'}`}>{s.icon}</div>
                           <div className={`bg-white border border-slate-200 p-6 space-y-3 transition-all duration-300 group-hover:shadow-lg ${s.accent === 'green' ? 'group-hover:bg-emerald-600 group-hover:border-emerald-700 group-hover:text-white' : 'group-hover:bg-blue-600 group-hover:border-blue-700 group-hover:text-white'}`}>
                             <span className={`text-xs font-mono font-bold uppercase tracking-widest block transition-colors ${s.accent === 'green' ? 'text-green-700 group-hover:text-emerald-100' : 'text-blue-700 group-hover:text-blue-100'}`}>Step {s.step} — {s.label}</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">{s.title}</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">{s.desc}</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">{s.title}</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">{s.desc}</p>
                           </div>
                         </div>
                       ))}
@@ -205,8 +205,8 @@ export function CRMDetailSection() {
                         <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-emerald-600 group-hover:border-white"><Truck className="w-5 h-5" /></div>
                         <div className="bg-white border border-slate-200 border-l-4 border-l-emerald-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-emerald-600 group-hover:border-emerald-700 group-hover:text-white group-hover:shadow-lg">
                           <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-widest block transition-colors group-hover:text-emerald-100">Step 05 — Fulfillment</span>
-                          <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Tracking & Delivery Pipeline</h4>
-                          <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Complete visibility and tracking from Order Placement → Fulfillment → Delivery under a unified marketplace order workflow.</p>
+                          <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Tracking & Delivery Pipeline</h4>
+                          <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Complete visibility and tracking from Order Placement → Fulfillment → Delivery under a unified marketplace order workflow.</p>
                         </div>
                       </div>
                     </>
@@ -221,8 +221,8 @@ export function CRMDetailSection() {
                           <div className={`absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full flex items-center justify-center shadow-sm transition-all group-hover:scale-110 ${s.accent === 'green' ? 'bg-green-100 border border-green-300 text-green-700 group-hover:bg-white group-hover:text-emerald-600 group-hover:border-white' : 'bg-blue-100 border border-blue-300 text-blue-700 group-hover:bg-white group-hover:text-blue-600 group-hover:border-white'}`}>{s.icon}</div>
                           <div className={`bg-white border border-slate-200 p-6 space-y-3 transition-all duration-300 group-hover:shadow-lg ${s.accent === 'green' ? 'group-hover:bg-emerald-600 group-hover:border-emerald-700 group-hover:text-white' : 'group-hover:bg-blue-600 group-hover:border-blue-700 group-hover:text-white'}`}>
                             <span className={`text-xs font-mono font-bold uppercase tracking-widest block transition-colors ${s.accent === 'green' ? 'text-green-700 group-hover:text-emerald-100' : 'text-blue-700 group-hover:text-blue-100'}`}>Step {s.step} — {s.label}</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">{s.title}</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">{s.desc}</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">{s.title}</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">{s.desc}</p>
                           </div>
                         </div>
                       ))}
@@ -232,7 +232,7 @@ export function CRMDetailSection() {
                         <div className="bg-white border border-slate-200 p-6 space-y-5 hover:bg-slate-50 hover:shadow-md transition-all duration-200">
                           <div>
                             <span className="text-xs font-mono font-bold text-blue-700 uppercase tracking-widest block">Step 04 — Decision Junction</span>
-                            <h4 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-wide mt-1">Outcome Branch Evaluation</h4>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black text-slate-900 uppercase tracking-wide mt-1">Outcome Branch Evaluation</h4>
                             <p className="text-sm text-slate-500 font-medium leading-relaxed mt-1">Select a branch below to view the verbatim path details and subsequent steps:</p>
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -256,8 +256,8 @@ export function CRMDetailSection() {
                           <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700 transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-emerald-600 group-hover:border-white"><CheckCircle className="w-5 h-5" /></div>
                           <div className="bg-white border border-slate-200 border-l-4 border-l-emerald-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-emerald-600 group-hover:border-emerald-700 group-hover:text-white group-hover:shadow-lg">
                             <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-widest block transition-colors group-hover:text-emerald-100">Step 05 — Path A Completion</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">A. Online Purchase Conversion</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer decides to purchase through Website, Mobile App, or Marketplace. Order is placed and payment is completed online. Workflow automatically transitions to Direct Online Purchase.</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">A. Online Purchase Conversion</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer decides to purchase through Website, Mobile App, or Marketplace. Order is placed and payment is completed online. Workflow automatically transitions to Direct Online Purchase.</p>
                           </div>
                         </div>
                       )}
@@ -266,17 +266,17 @@ export function CRMDetailSection() {
                           <div className="relative group">
                             <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-700 transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-amber-600 group-hover:border-white"><Calendar className="w-5 h-5" /></div>
                             <div className="bg-white border border-slate-200 border-l-4 border-l-amber-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-amber-500 group-hover:border-amber-600 group-hover:text-white group-hover:shadow-lg">
-                              <span className="text-xs font-mono font-bold text-amber-700 uppercase tracking-widest block transition-colors group-hover:text-amber-100">Step 05 — Showroom Appointment Booking</span>
-                              <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">B. Offline Store Visit Appointment</h4>
-                              <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer prefers a physical store visit before making a purchase decision. Appointment is booked at the nearest store based on customer location. Store team receives instant notification.</p>
+                              <span className="text-xs font-mono font-bold text-amber-700 uppercase tracking-widest block transition-colors group-hover:text-emerald-100">Step 05 — Showroom Appointment Booking</span>
+                              <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">B. Offline Store Visit Appointment</h4>
+                              <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer prefers a physical store visit before making a purchase decision. Appointment is booked at the nearest store based on customer location. Store team receives instant notification.</p>
                             </div>
                           </div>
                           <div className="relative group">
                             <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-700 transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-amber-600 group-hover:border-white"><Users className="w-5 h-5" /></div>
                             <div className="bg-white border border-slate-200 border-l-4 border-l-amber-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-amber-500 group-hover:border-amber-600 group-hover:text-white group-hover:shadow-lg">
-                              <span className="text-xs font-mono font-bold text-amber-700 uppercase tracking-widest block transition-colors group-hover:text-amber-100">Step 06 — Showroom Handoff</span>
-                              <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Customer Profile & Enquiry Transfer</h4>
-                              <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer details, enquiry history, product interests, and appointment schedule are shared with the assigned employee. Store visit status is tracked until conversion, follow-up, or closure.</p>
+                              <span className="text-xs font-mono font-bold text-amber-700 uppercase tracking-widest block transition-colors group-hover:text-emerald-100">Step 06 — Showroom Handoff</span>
+                              <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Customer Profile & Enquiry Transfer</h4>
+                              <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer details, enquiry history, product interests, and appointment schedule are shared with the assigned employee. Store visit status is tracked until conversion, follow-up, or closure.</p>
                             </div>
                           </div>
                         </>
@@ -287,16 +287,16 @@ export function CRMDetailSection() {
                             <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-red-100 border border-red-300 flex items-center justify-center text-red-700 transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-red-600 group-hover:border-white"><XCircle className="w-5 h-5" /></div>
                             <div className="bg-white border border-slate-200 border-l-4 border-l-red-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-700 group-hover:text-white group-hover:shadow-lg">
                               <span className="text-xs font-mono font-bold text-red-700 uppercase tracking-widest block transition-colors group-hover:text-red-100">Step 05 — Path C Completion</span>
-                              <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">C. Opportunity Loss Ingestion</h4>
-                              <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer does not proceed with either an online purchase or offline visit. Mandatory loss reason must be captured.</p>
+                              <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">C. Opportunity Loss Ingestion</h4>
+                              <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer does not proceed with either an online purchase or offline visit. Mandatory loss reason must be captured.</p>
                             </div>
                           </div>
                           <div className="relative group">
                             <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-red-100 border border-red-300 flex items-center justify-center text-red-700 transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-red-600 group-hover:border-white"><TrendingUp className="w-5 h-5" /></div>
                             <div className="bg-white border border-slate-200 border-l-4 border-l-red-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-700 group-hover:text-white group-hover:shadow-lg">
                               <span className="text-xs font-mono font-bold text-red-700 uppercase tracking-widest block transition-colors group-hover:text-red-100">Step 06 — Retargeting Loop</span>
-                              <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Conversion Analytics & Re-engagement</h4>
-                              <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Opportunity loss data is used for conversion analysis, sales improvement, and operational intelligence to trigger future automated marketing campaigns.</p>
+                              <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Conversion Analytics & Re-engagement</h4>
+                              <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Opportunity loss data is used for conversion analysis, sales improvement, and operational intelligence to trigger future automated marketing campaigns.</p>
                             </div>
                           </div>
                         </>
@@ -313,8 +313,8 @@ export function CRMDetailSection() {
                         <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-blue-100 border border-blue-300 flex items-center justify-center text-blue-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-blue-600 group-hover:border-white">{s.icon}</div>
                         <div className="bg-white border border-slate-200 p-6 space-y-3 transition-all duration-300 group-hover:bg-blue-600 group-hover:border-blue-700 group-hover:text-white group-hover:shadow-lg">
                           <span className="text-xs font-mono font-bold text-blue-700 uppercase tracking-widest block transition-colors group-hover:text-blue-100">Step {s.step} — {s.label}</span>
-                          <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">{s.title}</h4>
-                          <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">{s.desc}</p>
+                          <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">{s.title}</h4>
+                          <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">{s.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -322,8 +322,8 @@ export function CRMDetailSection() {
                       <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-blue-100 border border-blue-300 flex items-center justify-center text-blue-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-blue-600 group-hover:border-white"><Database className="w-5 h-5" /></div>
                       <div className="bg-white border border-slate-200 p-6 space-y-4 transition-all duration-300 group-hover:bg-blue-600 group-hover:border-blue-700 group-hover:text-white group-hover:shadow-lg">
                         <span className="text-xs font-mono font-bold text-blue-700 uppercase tracking-widest block transition-colors group-hover:text-blue-100">Step 03 — Consultation Auditing</span>
-                        <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Activity tracking against Lead Token</h4>
-                        <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">All customer interactions and sales activities are logged against the generated token to ensure complete visibility of customer engagement.</p>
+                        <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Activity tracking against Lead Token</h4>
+                        <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">All customer interactions and sales activities are logged against the generated token to ensure complete visibility of customer engagement.</p>
                         <div className="bg-slate-50 border border-slate-200 p-4 space-y-3 transition-all duration-300 group-hover:bg-blue-700 group-hover:border-blue-800">
                           <span className="text-xs font-mono text-[#558b2f] font-bold uppercase block transition-colors group-hover:text-emerald-100">Tracked Showroom Activities:</span>
                           <ul className="grid grid-cols-2 gap-2 text-xs sm:text-sm text-slate-700 font-bold transition-colors group-hover:text-white">
@@ -343,7 +343,7 @@ export function CRMDetailSection() {
                       <div className="bg-white border border-slate-200 p-6 space-y-5 hover:bg-slate-50 hover:shadow-md transition-all duration-200">
                         <div>
                           <span className="text-xs font-mono font-bold text-blue-700 uppercase tracking-widest block">Step 04 — Showroom Resolution</span>
-                          <h4 className="text-base sm:text-lg font-black text-slate-900 uppercase tracking-wide mt-1">Opportunity Branch Evaluation</h4>
+                          <h4 className="text-base sm:text-lg md:text-xl font-black text-slate-900 uppercase tracking-wide mt-1">Opportunity Branch Evaluation</h4>
                           <p className="text-sm text-slate-500 font-medium leading-relaxed mt-1">Select the final showroom outcome to visualize the verification and recovery pathways:</p>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -364,16 +364,16 @@ export function CRMDetailSection() {
                           <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-emerald-600 group-hover:border-white"><CheckSquare className="w-5 h-5" /></div>
                           <div className="bg-white border border-slate-200 border-l-4 border-l-emerald-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-emerald-600 group-hover:border-emerald-700 group-hover:text-white group-hover:shadow-lg">
                             <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-widest block transition-colors group-hover:text-emerald-100">Step 05 — Conversion Resolution</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">A. Opportunity Won</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer completes a purchase, places an order, enrolls in a scheme, or submits a repair/service request. Opportunity status is marked as Won in the CRM interface.</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">A. Opportunity Won</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer completes a purchase, places an order, enrolls in a scheme, or submits a repair/service request. Opportunity status is marked as Won in the CRM interface.</p>
                           </div>
                         </div>
                         <div className="relative group">
                           <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-emerald-600 group-hover:border-white"><Truck className="w-5 h-5" /></div>
                           <div className="bg-white border border-slate-200 border-l-4 border-l-emerald-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-emerald-600 group-hover:border-emerald-700 group-hover:text-white group-hover:shadow-lg">
                             <span className="text-xs font-mono font-bold text-emerald-700 uppercase tracking-widest block transition-colors group-hover:text-emerald-100">Step 06 — Post-Conversion Flow</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Fulfillment, Logistics & Handoff</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">The workflow is tracked until successful delivery and closure, recording final metal weights, karating values, and invoice codes for financial reconciliation.</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Fulfillment, Logistics & Handoff</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">The workflow is tracked until successful delivery and closure, recording final metal weights, karating values, and invoice codes for financial reconciliation.</p>
                           </div>
                         </div>
                       </>
@@ -383,16 +383,16 @@ export function CRMDetailSection() {
                           <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-red-100 border border-red-300 flex items-center justify-center text-red-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-red-600 group-hover:border-white"><RotateCcw className="w-5 h-5" /></div>
                           <div className="bg-white border border-slate-200 border-l-4 border-l-red-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-700 group-hover:text-white group-hover:shadow-lg">
                             <span className="text-xs font-mono font-bold text-red-700 uppercase tracking-widest block transition-colors group-hover:text-red-100">Step 05 — Follow-Up Triggers</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Post-Engagement Recovery Workflows</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer does not proceed with a purchase. Automated follow-up workflows are initiated immediately to re-engage before the active lead slot is closed.</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">Post-Engagement Recovery Workflows</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Customer does not proceed with a purchase. Automated follow-up workflows are initiated immediately to re-engage before the active lead slot is closed.</p>
                           </div>
                         </div>
                         <div className="relative group">
                           <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-red-100 border border-red-300 flex items-center justify-center text-red-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-red-600 group-hover:border-white"><XCircle className="w-5 h-5" /></div>
                           <div className="bg-white border border-slate-200 border-l-4 border-l-red-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-700 group-hover:text-white group-hover:shadow-lg">
                             <span className="text-xs font-mono font-bold text-red-700 uppercase tracking-widest block transition-colors group-hover:text-red-100">Step 06 — Loss Auditing</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">B. Opportunity Lost</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Opportunity status is marked as Lost. The system prompts the salesperson to select a mandatory loss reason to build competitive intelligence:</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">B. Opportunity Lost</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Opportunity status is marked as Lost. The system prompts the salesperson to select a mandatory loss reason to build competitive intelligence:</p>
                             <div className="bg-slate-50 border border-slate-200 p-4 text-xs font-mono italic leading-relaxed transition-all duration-300 group-hover:bg-red-700 group-hover:border-red-800 group-hover:text-white">Budget mismatch, Competitor purchase, Design dissatisfaction, Family decision pending, Trust concerns, Service dissatisfaction.</div>
                           </div>
                         </div>
@@ -400,8 +400,8 @@ export function CRMDetailSection() {
                           <div className="absolute -left-[47px] md:-left-[55px] w-10 h-10 rounded-full bg-red-100 border border-red-300 flex items-center justify-center text-red-700 shadow-sm transition-all group-hover:scale-110 group-hover:bg-white group-hover:text-red-600 group-hover:border-white"><TrendingUp className="w-5 h-5" /></div>
                           <div className="bg-white border border-slate-200 border-l-4 border-l-red-500 p-6 space-y-3 transition-all duration-300 group-hover:bg-red-600 group-hover:border-red-700 group-hover:text-white group-hover:shadow-lg">
                             <span className="text-xs font-mono font-bold text-red-700 uppercase tracking-widest block transition-colors group-hover:text-red-100">Step 07 — Intelligence Ingestion</span>
-                            <h4 className="text-base sm:text-lg font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">CRM Analytics & Personalized Campaigns</h4>
-                            <p className="text-sm font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Loss metrics are pushed directly into the CRM Analytics platform to fuel retargeting lists and customized, automated re-engagement email/WhatsApp campaigns.</p>
+                            <h4 className="text-base sm:text-lg md:text-xl font-black uppercase tracking-wide transition-colors text-slate-900 group-hover:text-white">CRM Analytics & Personalized Campaigns</h4>
+                            <p className="text-sm sm:text-base font-medium leading-relaxed transition-colors text-slate-600 group-hover:text-slate-100">Loss metrics are pushed directly into the CRM Analytics platform to fuel retargeting lists and customized, automated re-engagement email/WhatsApp campaigns.</p>
                           </div>
                         </div>
                       </>
@@ -469,7 +469,7 @@ export function CRMDetailSection() {
       </div>
 
       {/* ════════════ PAGE 3: ARCHITECTURE & SEGMENTATION FRAMEWORK ════════════ */}
-      <div className="w-full max-w-[900px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[1000px] flex flex-col justify-between">
+      <div className="w-full max-w-[1280px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[1000px] flex flex-col justify-between">
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-[#558b2f] to-blue-400" />
         <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{backgroundImage:'radial-gradient(circle, #0170B9 1.5px, transparent 1.5px)', backgroundSize:'32px 32px'}} />
         
@@ -601,7 +601,7 @@ export function CRMDetailSection() {
       </div>
 
       {/* ════════════ PAGE 4: ADVANCED CRM SEGMENTATION HIERARCHY ════════════ */}
-      <div className="w-full max-w-[900px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[1000px] flex flex-col justify-between">
+      <div className="w-full max-w-[1280px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left mb-16 min-h-[1000px] flex flex-col justify-between">
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-[#558b2f] to-blue-400" />
         <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{backgroundImage:'radial-gradient(circle, #0170B9 1.5px, transparent 1.5px)', backgroundSize:'32px 32px'}} />
         
@@ -650,7 +650,7 @@ export function CRMDetailSection() {
               <Bot className="w-5 h-5 text-blue-700 group-hover:text-white" />
               LEVEL 8 — AI / PREDICTIVE SEGMENTATION
             </h4>
-            <p className="text-xs sm:text-sm text-slate-600 group-hover:text-slate-100 leading-relaxed max-w-2xl mb-6 font-bold">Modern CRM systems should predict conversion rates and behavior parameters using machine learning scoring algorithms:</p>
+            <p className="text-xs sm:text-sm text-slate-600 group-hover:text-slate-100 leading-relaxed max-w-4xl mb-6 font-bold">Modern CRM systems should predict conversion rates and behavior parameters using machine learning scoring algorithms:</p>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
               {["Likely Bridal Buyers","Likely Churn Customers","High Upsell Potential","High Cross-Sell Potential","Likely Dormant Customers","High Referral Potential","Scheme Maturity Conversion Likelihood"].map((aiMetric, idx) => (
                 <div key={idx} className="group bg-white border border-slate-200 p-4 text-left flex flex-col justify-between shadow-sm hover:bg-blue-600 hover:border-blue-700 hover:text-white hover:shadow-lg transition-all duration-300 cursor-default">
@@ -669,12 +669,12 @@ export function CRMDetailSection() {
       </div>
 
       {/* ════════════ PAGE 5: WHY THIS ARCHITECTURE MUST BE STUDIED ════════════ */}
-      <div className="w-full max-w-[900px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left min-h-[1000px] flex flex-col justify-between">
+      <div className="w-full max-w-[1280px] mx-auto bg-white shadow-[0_15px_50px_rgba(0,0,0,0.05)] border border-slate-200/80 p-8 sm:p-12 md:p-16 relative overflow-hidden text-left min-h-[1000px] flex flex-col justify-between">
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-[#558b2f] to-blue-400" />
         <div className="absolute inset-0 opacity-[0.015] pointer-events-none" style={{backgroundImage:'radial-gradient(circle, #0170B9 1.5px, transparent 1.5px)', backgroundSize:'32px 32px'}} />
         
         <div className="space-y-10 relative z-10">
-          <div className="text-center space-y-3 max-w-3xl mx-auto">
+          <div className="text-center space-y-3 max-w-5xl mx-auto">
             <span className="text-xs sm:text-sm font-mono font-bold tracking-[0.2em] text-[#558b2f] uppercase">Business Case Study</span>
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tight">WHY THIS ARCHITECTURE MUST BE STUDIED</h3>
             <p className="text-sm sm:text-base text-slate-500 font-semibold">Analyzing the core failure modes of untracked sales pipelines and operational lead leakage.</p>
