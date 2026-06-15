@@ -14,8 +14,7 @@ import {
   Settings, 
   TrendingUp, 
   Scale, 
-  Users, 
-  Sparkles
+  Users
 } from 'lucide-react';
 import { usePortal } from '../context/PortalContext';
 
@@ -335,27 +334,6 @@ export function Roadmap() {
               >
                 Full 8-Phase Table
               </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Compelling Value Proposition Section */}
-        <div className="bg-white border border-slate-200 p-6 md:p-8 shadow-sm mb-12 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-1 h-full bg-blue-700" />
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-700 shrink-0 hidden sm:flex">
-              <Sparkles className="w-5 h-5 animate-spin-slow" />
-            </div>
-            <div>
-              <h2 className="font-extrabold text-sm uppercase tracking-wider text-slate-900 mb-2">
-                Why this is compelling
-              </h2>
-              <p className="text-slate-700 text-sm leading-relaxed font-semibold">
-                Traditional retail consulting often yields heavy reports that sit on shelves, gathering dust. 
-                This framework is entirely different. It bridges the gap between high-level leadership ambition and on-the-ground day-to-day operations. 
-                By following this rigorous, chronological sequence, we establish a feedback loop that uncovers hidden leakages, models dynamic data flows, builds high-performance team culture, and transfers operational governance directly to your team. 
-                It is a complete, self-sustaining system for long-term growth and founder freedom.
-              </p>
             </div>
           </div>
         </div>
