@@ -140,58 +140,60 @@ export function Navbar() {
             })}
 
             {/* Login Button with Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                id="navbar-login-btn"
-                onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
-                className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-wider px-4 py-2.5 rounded-sm border transition-all duration-300 ${
-                  isPortalActive
-                    ? 'bg-[#8bc34a] text-white border-[#8bc34a]'
-                    : 'bg-transparent text-white border-white/30 hover:border-[#8bc34a] hover:text-[#8bc34a]'
-                }`}
-              >
-                <LogIn className="w-3.5 h-3.5" />
-                Login
-                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${loginDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
+            {isPortalVisible && (
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  id="navbar-login-btn"
+                  onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
+                  className={`flex items-center gap-2 text-[10px] font-black uppercase tracking-wider px-4 py-2.5 rounded-sm border transition-all duration-300 ${
+                    isPortalActive
+                      ? 'bg-[#8bc34a] text-white border-[#8bc34a]'
+                      : 'bg-transparent text-white border-white/30 hover:border-[#8bc34a] hover:text-[#8bc34a]'
+                  }`}
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  Login
+                  <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${loginDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
 
-              {/* Dropdown */}
-              {loginDropdownOpen && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-[#0b2341] border border-white/15 shadow-2xl rounded-sm overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-2 border-b border-white/10">
-                    <span className="text-[9px] font-black text-[#8bc34a] uppercase tracking-widest">Select Portal</span>
+                {/* Dropdown */}
+                {loginDropdownOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-56 bg-[#0b2341] border border-white/15 shadow-2xl rounded-sm overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                    <div className="px-3 py-2 border-b border-white/10">
+                      <span className="text-[9px] font-black text-[#8bc34a] uppercase tracking-widest">Select Portal</span>
+                    </div>
+
+                    <Link
+                      to="/admin"
+                      id="navbar-admin-login"
+                      className="flex items-center gap-3 px-4 py-3.5 hover:bg-white/5 transition-colors group"
+                    >
+                      <span className="w-8 h-8 bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center rounded-sm flex-shrink-0 group-hover:bg-[#d4af37]/20 transition-colors">
+                        <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
+                      </span>
+                      <div className="flex flex-col">
+                        <span className="text-[11px] font-black text-white uppercase tracking-wider">Admin Login</span>
+                        <span className="text-[9px] text-slate-400 font-semibold">Abraham's console</span>
+                      </div>
+                    </Link>
+
+                    <Link
+                      to="/tracker"
+                      id="navbar-client-login"
+                      className="flex items-center gap-3 px-4 py-3.5 hover:bg-white/5 transition-colors group border-t border-white/5"
+                    >
+                      <span className="w-8 h-8 bg-[#8bc34a]/10 border border-[#8bc34a]/20 flex items-center justify-center rounded-sm flex-shrink-0 group-hover:bg-[#8bc34a]/20 transition-colors">
+                        <Users className="w-4 h-4 text-[#8bc34a]" />
+                      </span>
+                      <div className="flex flex-col">
+                        <span className="text-[11px] font-black text-white uppercase tracking-wider">Client Portal</span>
+                        <span className="text-[9px] text-slate-400 font-semibold">Project dashboard</span>
+                      </div>
+                    </Link>
                   </div>
-
-                  <Link
-                    to="/admin"
-                    id="navbar-admin-login"
-                    className="flex items-center gap-3 px-4 py-3.5 hover:bg-white/5 transition-colors group"
-                  >
-                    <span className="w-8 h-8 bg-[#d4af37]/10 border border-[#d4af37]/20 flex items-center justify-center rounded-sm flex-shrink-0 group-hover:bg-[#d4af37]/20 transition-colors">
-                      <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
-                    </span>
-                    <div className="flex flex-col">
-                      <span className="text-[11px] font-black text-white uppercase tracking-wider">Admin Login</span>
-                      <span className="text-[9px] text-slate-400 font-semibold">Abraham's console</span>
-                    </div>
-                  </Link>
-
-                  <Link
-                    to="/tracker"
-                    id="navbar-client-login"
-                    className="flex items-center gap-3 px-4 py-3.5 hover:bg-white/5 transition-colors group border-t border-white/5"
-                  >
-                    <span className="w-8 h-8 bg-[#8bc34a]/10 border border-[#8bc34a]/20 flex items-center justify-center rounded-sm flex-shrink-0 group-hover:bg-[#8bc34a]/20 transition-colors">
-                      <Users className="w-4 h-4 text-[#8bc34a]" />
-                    </span>
-                    <div className="flex flex-col">
-                      <span className="text-[11px] font-black text-white uppercase tracking-wider">Client Portal</span>
-                      <span className="text-[9px] text-slate-400 font-semibold">Project dashboard</span>
-                    </div>
-                  </Link>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -209,33 +211,18 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t bg-[#0b2341] border-white/10">
-          <div className="w-full px-6 py-4 flex flex-col gap-2">
-            <div className="max-w-[1200px] mx-auto flex flex-col gap-2 w-full">
+        <div className="md:hidden fixed inset-0 top-[70px] bg-[#0b2341] z-40 border-t border-white/10 animate-in fade-in slide-in-from-top-4 duration-250">
+          <div className="px-6 py-8">
+            <div className="flex flex-col gap-2">
               {visibleLinks.map((link) => {
-                const isContact = link.label === 'Get in Touch';
-                if (isContact) {
-                  return (
-                    <Link
-                      key={link.to}
-                      to={link.to}
-                      onClick={() => setMobileOpen(false)}
-                      className="mx-4 my-2 px-4 py-3 rounded-sm text-center text-xs font-extrabold uppercase tracking-wider bg-white text-[#0b2341] hover:bg-[#8bc34a] hover:text-white transition-all duration-300 block"
-                    >
-                      GET IN TOUCH &rarr;
-                    </Link>
-                  );
-                }
-
                 const active = isActive(link.to);
                 return (
                   <Link
                     key={link.to}
                     to={link.to}
-                    onClick={(e) => {
+                    onClick={() => {
                       setMobileOpen(false);
                       if (link.to === '/' && location.pathname === '/' && !location.hash) {
-                        e.preventDefault();
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }
                     }}
@@ -251,29 +238,31 @@ export function Navbar() {
               })}
 
               {/* Mobile Login section */}
-              <div className="border-t border-white/10 mt-2 pt-3">
-                <span className="px-4 text-[9px] font-black text-[#8bc34a] uppercase tracking-widest block mb-2">Login</span>
-                <Link
-                  to="/admin"
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-colors ${
-                    location.pathname === '/admin' ? 'text-[#d4af37] bg-white/10' : 'text-slate-300 hover:text-[#d4af37] hover:bg-white/5'
-                  }`}
-                >
-                  <ShieldCheck className="w-4 h-4" />
-                  Admin Login
-                </Link>
-                <Link
-                  to="/tracker"
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-colors ${
-                    location.pathname === '/tracker' ? 'text-[#8bc34a] bg-white/10' : 'text-slate-300 hover:text-[#8bc34a] hover:bg-white/5'
-                  }`}
-                >
-                  <Users className="w-4 h-4" />
-                  Client Portal
-                </Link>
-              </div>
+              {isPortalVisible && (
+                <div className="border-t border-white/10 mt-2 pt-3">
+                  <span className="px-4 text-[9px] font-black text-[#8bc34a] uppercase tracking-widest block mb-2">Login</span>
+                  <Link
+                    to="/admin"
+                    onClick={() => setMobileOpen(false)}
+                    className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-colors ${
+                      location.pathname === '/admin' ? 'text-[#d4af37] bg-white/10' : 'text-slate-300 hover:text-[#d4af37] hover:bg-white/5'
+                    }`}
+                  >
+                    <ShieldCheck className="w-4 h-4" />
+                    Admin Login
+                  </Link>
+                  <Link
+                    to="/tracker"
+                    onClick={() => setMobileOpen(false)}
+                    className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-colors ${
+                      location.pathname === '/tracker' ? 'text-[#8bc34a] bg-white/10' : 'text-slate-300 hover:text-[#8bc34a] hover:bg-white/5'
+                    }`}
+                  >
+                    <Users className="w-4 h-4" />
+                    Client Portal
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
