@@ -21,11 +21,17 @@ export function PortalProvider({ children }: { children: ReactNode }) {
   const [isPortalVisible, setIsPortalVisible] = useState(false);
   const [isPortalAuthenticated, setIsPortalAuthenticated] = useState(false);
 
-  const showPortal = () => setIsPortalVisible(true);
+  const showPortal = () => {
+    setIsPortalVisible(true);
+    localStorage.setItem('portal_link_visible', 'true');
+    window.dispatchEvent(new Event('portal_unlocked'));
+  };
 
   const hidePortal = () => {
     setIsPortalVisible(false);
     setIsPortalAuthenticated(false);
+    localStorage.setItem('portal_link_visible', 'false');
+    window.dispatchEvent(new Event('portal_locked'));
   };
 
   return (

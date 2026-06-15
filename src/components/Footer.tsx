@@ -8,6 +8,7 @@ const navLinks = [
   { to: '/about', label: 'About' },
   { to: '/insights', label: 'Insights' },
   { to: '/portal', label: 'Retail Space' },
+  { to: '/roadmap', label: 'Roadmap' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -28,7 +29,7 @@ export function Footer() {
   }, []);
 
   const visibleLinks = navLinks.filter(
-    (link) => link.to !== '/portal' || showPortalLink
+    (link) => (link.to !== '/portal' && link.to !== '/roadmap') || showPortalLink
   );
 
   return (
