@@ -11,6 +11,7 @@ import { Portal } from './pages/Portal';
 import { Consulting } from './pages/Consulting';
 import { HowIWork } from './pages/HowIWork';
 import { Tracker } from './pages/Tracker';
+import { Roadmap } from './pages/Roadmap';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/how-i-work" element={<HowIWork />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/tracker" element={<Tracker />} />
+        <Route path="/roadmap" element={<Roadmap />} />
       </Routes>
     </PageShell>
   );
