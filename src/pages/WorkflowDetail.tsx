@@ -158,79 +158,82 @@ export function WorkflowDetail() {
       )}
       
       {workflow.slug === 'p2p-jewellery-supply-chain' && (
-        <section className="bg-[#f8fafc] text-slate-900 py-16 px-6 border-b border-slate-200 select-none">
+        <section className="bg-[#06152d] text-white py-16 px-6 border-b border-slate-900 select-none">
           <div className="max-w-[1200px] mx-auto">
             
             {/* Major & Recurring Procurement Classifications */}
             <div className="space-y-6 text-left mb-12">
               <div>
-                <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-blue-600 border border-blue-200 bg-blue-50 px-3 py-1 uppercase rounded-sm inline-block mb-1">
+                <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-[#8bc34a] uppercase inline-block mb-1">
                   Scope of Inventory
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 uppercase tracking-tight">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white uppercase tracking-tight">
                   Major & Recurring Procurement Classifications
                 </h3>
-                <p className="text-xs text-slate-500 max-w-xl font-medium mt-1">
+                <p className="text-xs text-slate-400 max-w-xl font-medium mt-1">
                   Standard classifications utilized across showroom inventory mapping, vendor purchase orders, and karating vault controls.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* 1. Raw Materials (White card - Indigo border) */}
-                <div className="group bg-white border border-slate-200 p-5 rounded-none relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all duration-300">
-                  {/* Default View (fades out on hover) */}
-                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
+                {/* 1. Raw Materials */}
+                <div className="group bg-[#0d213b] border border-blue-900/30 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[350px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Default View */}
+                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px] z-10">
                     <div>
                       {/* Header Row */}
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-black text-slate-900 tracking-wide font-sans">
+                        <span className="text-base font-black text-white tracking-wide font-sans">
                           1. RAW MATERIALS
                         </span>
-                        <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer select-none">
+                        <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all cursor-pointer select-none">
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
                           </svg>
                         </div>
                       </div>
 
+                      {/* Large Category Count */}
+                      <div className="text-6xl sm:text-7xl font-black text-white mt-4 mb-2">3</div>
+
                       {/* Classifications Text */}
-                      <div className="space-y-3 mt-4 text-[11px] text-slate-600 font-medium relative z-10">
+                      <div className="space-y-4 mt-5 text-xs text-white/90 font-medium leading-relaxed">
                         <div>
-                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Precious Metals</strong>
+                          <strong className="text-[#8bc34a] block font-mono text-[10px] uppercase tracking-widest mb-1">Precious Metals</strong>
                           Gold, Silver, Platinum
                         </div>
                         <div>
-                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Loose Stones</strong>
+                          <strong className="text-[#8bc34a] block font-mono text-[10px] uppercase tracking-widest mb-1">Loose Stones</strong>
                           Natural Diamonds, Lab-Grown Diamonds, Precious Stones, Semi-Precious Stones, CZ, and Moissanite
                         </div>
                         <div>
-                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Findings & Components</strong>
+                          <strong className="text-[#8bc34a] block font-mono text-[10px] uppercase tracking-widest mb-1">Findings & Components</strong>
                           Locks, Clasps, Hooks, Ear Nuts, Chains, and Connectors
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Hover Overlay View (fades in on hover) */}
-                  <div className="absolute inset-0 p-5 bg-white border border-slate-200 opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                  {/* Hover Overlay View */}
+                  <div className="absolute inset-0 p-6 bg-[#0d213b] border border-blue-805/50 rounded-2xl opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
                     <div className="space-y-3 h-full flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2">
-                          <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
+                        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2">
+                          <span className="text-xs font-black text-white uppercase tracking-wider">
                             Raw Materials Tracking
                           </span>
                         </div>
-                        <ul className="space-y-2 text-[10px] leading-snug text-slate-600 font-medium">
+                        <ul className="space-y-2 text-[10px] leading-snug text-slate-300 font-medium">
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] mt-1.5 flex-shrink-0" />
                             <span><strong>Traceable Vaults:</strong> Secure storage linked to unique Packet, Batch & Voucher numbers.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] mt-1.5 flex-shrink-0" />
                             <span><strong>Full Genealogy:</strong> Tracks all receipts, transfers, issues, consumption, and returns.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] mt-1.5 flex-shrink-0" />
                             <span><strong>Custody Control:</strong> Identifies current possession, department, and work order links.</span>
                           </li>
                         </ul>
@@ -239,28 +242,24 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Bottom Vector Illustration (Receipt & Cash) */}
-                  <div className="absolute bottom-2 right-2 opacity-[0.08] group-hover:opacity-[0.02] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-[0.2] group-hover:opacity-[0.05] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-20 h-20" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                       {/* White bill sheet */}
-                      <rect x="25" y="15" width="55" height="85" rx="5" fill="#FFFFFF" stroke="#CBD5E1" strokeWidth="1" />
+                      <rect x="25" y="15" width="55" height="85" rx="5" fill="#1e293b" stroke="#475569" strokeWidth="1" />
                       {/* BILL title */}
-                      <text x="33" y="32" fill="#2E3A8A" fontFamily="system-ui, -apple-system, sans-serif" fontSize="10" fontWeight="900" letterSpacing="0.5">BILL</text>
+                      <text x="33" y="32" fill="#38bdf8" fontFamily="system-ui, -apple-system, sans-serif" fontSize="10" fontWeight="900" letterSpacing="0.5">BILL</text>
                       {/* Lines on the bill */}
-                      <rect x="33" y="42" width="38" height="4" rx="2" fill="#E2E8F0" />
-                      <rect x="33" y="52" width="38" height="4" rx="2" fill="#CBD5E1" />
-                      <rect x="33" y="62" width="25" height="4" rx="2" fill="#E2E8F0" />
-                      <rect x="33" y="72" width="38" height="4" rx="2" fill="#E2E8F0" />
-                      <rect x="33" y="82" width="30" height="4" rx="2" fill="#2E3A8A" />
+                      <rect x="33" y="42" width="38" height="4" rx="2" fill="#334155" />
+                      <rect x="33" y="52" width="38" height="4" rx="2" fill="#475569" />
+                      <rect x="33" y="62" width="25" height="4" rx="2" fill="#334155" />
+                      <rect x="33" y="72" width="38" height="4" rx="2" fill="#334155" />
+                      <rect x="33" y="82" width="30" height="4" rx="2" fill="#38bdf8" />
                       
                       {/* Stack of cash green banknotes */}
                       <g transform="translate(15, 65)">
-                        {/* Back note */}
-                        <rect x="0" y="5" width="45" height="26" rx="3" fill="#059669" stroke="#047857" strokeWidth="1" />
-                        {/* Front note */}
-                        <rect x="4" y="0" width="45" height="26" rx="3" fill="#10B981" stroke="#059669" strokeWidth="1" />
-                        {/* Oval in middle */}
-                        <ellipse cx="26.5" cy="13" rx="8" ry="5" fill="#A7F3D0" />
-                        {/* Corner decorations */}
+                        <rect x="0" y="5" width="45" height="26" rx="3" fill="#047857" stroke="#065f46" strokeWidth="1" />
+                        <rect x="4" y="0" width="45" height="26" rx="3" fill="#10B981" stroke="#047857" strokeWidth="1" />
+                        <ellipse cx="26.5" cy="13" rx="8" ry="5" fill="#a7f3d0" />
                         <circle cx="8" cy="4" r="1.5" fill="#34D399" />
                         <circle cx="45" cy="4" r="1.5" fill="#34D399" />
                         <circle cx="8" cy="22" r="1.5" fill="#34D399" />
@@ -269,66 +268,66 @@ export function WorkflowDetail() {
 
                       {/* Blue credit card */}
                       <g transform="translate(55, 75)">
-                        <rect x="0" y="0" width="45" height="28" rx="4" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="1" />
-                        {/* Chip */}
-                        <rect x="6" y="8" width="8" height="6" rx="1" fill="#F59E0B" />
-                        {/* Visa/logo lines */}
-                        <circle cx="34" cy="20" r="4" fill="#EF4444" opacity="0.8" />
-                        <circle cx="38" cy="20" r="4" fill="#F59E0B" opacity="0.8" />
-                        {/* Card number line */}
-                        <rect x="6" y="18" width="18" height="2" rx="0.5" fill="#93C5FD" />
+                        <rect x="0" y="0" width="45" height="28" rx="4" fill="#2563eb" stroke="#1d4ed8" strokeWidth="1" />
+                        <rect x="6" y="8" width="8" height="6" rx="1" fill="#fbbf24" />
+                        <circle cx="34" cy="20" r="4" fill="#ef4444" opacity="0.8" />
+                        <circle cx="38" cy="20" r="4" fill="#fbbf24" opacity="0.8" />
+                        <rect x="6" y="18" width="18" height="2" rx="0.5" fill="#93c5fd" />
                       </g>
                     </svg>
                   </div>
                 </div>
 
-                {/* 2. Finished Goods (White card - Blue border) */}
-                <div className="group bg-white border border-slate-200 p-5 rounded-none relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all duration-300">
-                  {/* Default View (fades out on hover) */}
-                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
+                {/* 2. Finished Goods */}
+                <div className="group bg-[#0d213b] border border-blue-900/30 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[350px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Default View */}
+                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px] z-10">
                     <div>
                       {/* Header Row */}
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-black text-slate-900 tracking-wide font-sans">
+                        <span className="text-base font-black text-white tracking-wide font-sans">
                           2. FINISHED GOODS
                         </span>
-                        <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer select-none">
+                        <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all cursor-pointer select-none">
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
                           </svg>
                         </div>
                       </div>
 
+                      {/* Large Category Count */}
+                      <div className="text-6xl sm:text-7xl font-black text-white mt-4 mb-2">1</div>
+
                       {/* Classifications Text */}
-                      <div className="space-y-3 mt-4 text-[11px] text-slate-600 font-medium relative z-10">
+                      <div className="space-y-4 mt-5 text-xs text-white/90 font-medium leading-relaxed">
                         <div>
-                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Ready-to-Sell Products</strong>
+                          <strong className="text-[#8bc34a] block font-mono text-[10px] uppercase tracking-widest mb-1">Ready-to-Sell Products</strong>
                           Rings, Earrings, Pendants, Bangles, Bracelets, Necklaces, Chains, and Mangalsutras
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Hover Overlay View (fades in on hover) */}
-                  <div className="absolute inset-0 p-5 bg-white border border-slate-200 opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                  {/* Hover Overlay View */}
+                  <div className="absolute inset-0 p-6 bg-[#0d213b] border border-blue-805/50 rounded-2xl opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
                     <div className="space-y-3 h-full flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2">
-                          <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
+                        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2">
+                          <span className="text-xs font-black text-white uppercase tracking-wider">
                             Finished Goods Control
                           </span>
                         </div>
-                        <ul className="space-y-2 text-[10px] leading-snug text-slate-600 font-medium">
+                        <ul className="space-y-2 text-[10px] leading-snug text-slate-300 font-medium">
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] mt-1.5 flex-shrink-0" />
                             <span><strong>HUID & Barcoding:</strong> Unique identification and tracking from receipt/production to sale.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] mt-1.5 flex-shrink-0" />
                             <span><strong>Omni-Channel Status:</strong> Real-time location and status across showrooms, warehouses, and exhibitions.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#8bc34a] mt-1.5 flex-shrink-0" />
                             <span><strong>Lifecycle Audit:</strong> Monitors transfers, customer reservations, sales, exchanges, and repairs.</span>
                           </li>
                         </ul>
@@ -337,99 +336,90 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Bottom Vector Illustration (Store Front) */}
-                  <div className="absolute bottom-2 right-2 opacity-[0.08] group-hover:opacity-[0.02] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-[0.2] group-hover:opacity-[0.05] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-20 h-20" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Shop background / walls */}
-                      <rect x="25" y="55" width="70" height="45" fill="#1D4ED8" rx="2" />
-                      
-                      {/* Door */}
-                      <rect x="50" y="70" width="20" height="30" fill="#FBBF24" />
-                      {/* Door handle */}
-                      <circle cx="54" cy="85" r="2" fill="#D97706" />
-
-                      {/* Windows */}
-                      <rect x="32" y="68" width="12" height="15" fill="#93C5FD" rx="1" />
-                      <rect x="76" y="68" width="12" height="15" fill="#93C5FD" rx="1" />
-                      
-                      {/* Awning (red & white stripes) */}
+                      <rect x="25" y="55" width="70" height="45" fill="#1e3a8a" rx="2" />
+                      <rect x="50" y="70" width="20" height="30" fill="#f59e0b" />
+                      <circle cx="54" cy="85" r="2" fill="#d97706" />
+                      <rect x="32" y="68" width="12" height="15" fill="#93c5fd" rx="1" />
+                      <rect x="76" y="68" width="12" height="15" fill="#93c5fd" rx="1" />
                       <g>
-                        {/* Awning backing */}
-                        <rect x="20" y="40" width="80" height="18" fill="#EF4444" rx="2" />
-                        {/* Stripes */}
-                        <path d="M20 40h8v18h-8z" fill="#EF4444" />
+                        <rect x="20" y="40" width="80" height="18" fill="#ef4444" rx="2" />
+                        <path d="M20 40h8v18h-8z" fill="#ef4444" />
                         <path d="M28 40h8v18h-8z" fill="#FFFFFF" />
-                        <path d="M36 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M36 40h8v18h-8z" fill="#ef4444" />
                         <path d="M44 40h8v18h-8z" fill="#FFFFFF" />
-                        <path d="M52 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M52 40h8v18h-8z" fill="#ef4444" />
                         <path d="M60 40h8v18h-8z" fill="#FFFFFF" />
-                        <path d="M68 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M68 40h8v18h-8z" fill="#ef4444" />
                         <path d="M76 40h8v18h-8z" fill="#FFFFFF" />
-                        <path d="M84 40h8v18h-8z" fill="#EF4444" />
+                        <path d="M84 40h8v18h-8z" fill="#ef4444" />
                         <path d="M92 40h8v18h-8z" fill="#FFFFFF" />
                       </g>
-                      
-                      {/* SHOP sign */}
-                      <rect x="35" y="16" width="50" height="20" rx="4" fill="#10B981" stroke="#FFFFFF" strokeWidth="2" />
+                      <rect x="35" y="16" width="50" height="20" rx="4" fill="#059669" stroke="#FFFFFF" strokeWidth="2" />
                       <text x="60" y="30" fill="#FFFFFF" fontFamily="system-ui, -apple-system, sans-serif" fontSize="10" fontWeight="900" textAnchor="middle" letterSpacing="1">SHOP</text>
                     </svg>
                   </div>
                 </div>
 
-                {/* 3. Packaging Materials (White card - Bronze border) */}
-                <div className="group bg-white border border-slate-200 p-5 rounded-none relative overflow-hidden flex flex-col justify-between min-h-[300px] text-left shadow-sm hover:shadow-md hover:border-blue-500/50 transition-all duration-300">
-                  {/* Default View (fades out on hover) */}
-                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px]">
+                {/* 3. Packaging & Branding */}
+                <div className="group bg-[#5f391a] border border-amber-900/30 p-6 rounded-2xl relative overflow-hidden flex flex-col justify-between min-h-[350px] text-left shadow-lg hover:shadow-2xl transition-all duration-300">
+                  {/* Default View */}
+                  <div className="flex flex-col justify-between h-full transition-all duration-500 ease-in-out group-hover:opacity-0 group-hover:translate-y-[-10px] z-10">
                     <div>
                       {/* Header Row */}
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-black text-slate-900 tracking-wide font-sans">
+                        <span className="text-base font-black text-white tracking-wide font-sans">
                           3. PACKAGING & BRANDING
                         </span>
-                        <div className="w-7 h-7 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 transition-colors cursor-pointer select-none">
+                        <div className="w-7 h-7 rounded-full bg-white/10 border border-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-all cursor-pointer select-none">
                           <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <polyline points="9 18 15 12 9 6"></polyline>
                           </svg>
                         </div>
                       </div>
 
+                      {/* Large Category Count */}
+                      <div className="text-6xl sm:text-7xl font-black text-white mt-4 mb-2">3</div>
+
                       {/* Classifications Text */}
-                      <div className="space-y-3 mt-4 text-[11px] text-slate-600 font-medium relative z-10">
+                      <div className="space-y-4 mt-5 text-xs text-amber-100 font-medium leading-relaxed">
                         <div>
-                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Primary Packaging</strong>
+                          <strong className="text-amber-400 block font-mono text-[10px] uppercase tracking-widest mb-1">Primary Packaging</strong>
                           Jewellery Boxes, Pouches, and Zip Covers
                         </div>
                         <div>
-                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Secondary Packaging</strong>
+                          <strong className="text-amber-400 block font-mono text-[10px] uppercase tracking-widest mb-1">Secondary Packaging</strong>
                           Carry Bags, Shipping Boxes, and Bubble Wrap
                         </div>
                         <div>
-                          <strong className="text-blue-700 block font-mono text-[9px] uppercase tracking-wider mb-0.5">Branding Materials</strong>
+                          <strong className="text-amber-400 block font-mono text-[10px] uppercase tracking-widest mb-1">Branding Materials</strong>
                           Tags, Labels, Certificates, and Warranty Cards
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Hover Overlay View (fades in on hover) */}
-                  <div className="absolute inset-0 p-5 bg-white border border-slate-200 opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
+                  {/* Hover Overlay View */}
+                  <div className="absolute inset-0 p-6 bg-[#5f391a] border border-amber-805/50 rounded-2xl opacity-0 group-hover:opacity-100 translate-y-[10px] group-hover:translate-y-0 transition-all duration-500 ease-in-out flex flex-col justify-between pointer-events-none group-hover:pointer-events-auto z-20">
                     <div className="space-y-3 h-full flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center justify-between border-b border-slate-200 pb-1.5 mb-2">
-                          <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
+                        <div className="flex items-center justify-between border-b border-white/10 pb-1.5 mb-2">
+                          <span className="text-xs font-black text-white uppercase tracking-wider">
                             Packaging & Brand Control
                           </span>
                         </div>
-                        <ul className="space-y-2 text-[10px] leading-snug text-slate-600 font-medium">
+                        <ul className="space-y-2 text-[10px] leading-snug text-amber-100 font-medium">
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0" />
                             <span><strong>Collateral Tracking:</strong> Monitors jewellery boxes, pouches, certificates, and warranty cards.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0" />
                             <span><strong>Reorder Automation:</strong> Tracks consumption patterns and triggers replenishment cycles.</span>
                           </li>
                           <li className="flex gap-1.5 items-start">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-700 mt-1.5 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0" />
                             <span><strong>Allocation Control:</strong> Manages usage and distribution across showrooms and shipping lines.</span>
                           </li>
                         </ul>
@@ -438,23 +428,17 @@ export function WorkflowDetail() {
                   </div>
 
                   {/* Bottom Vector Illustration (Notepad) */}
-                  <div className="absolute bottom-2 right-2 opacity-[0.08] group-hover:opacity-[0.02] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
+                  <div className="absolute bottom-2 right-2 opacity-[0.2] group-hover:opacity-[0.05] group-hover:scale-105 transition-all duration-300 pointer-events-none z-0">
                     <svg className="w-20 h-20" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      {/* Main notepad sheet */}
-                      <path d="M30 20h50l20 20v60a6 6 0 01-6 6H30a6 6 0 01-6-6V26a6 6 0 016-6z" fill="#F59E0B" />
-                      {/* Folded corner */}
-                      <path d="M80 20v20h20L80 20z" fill="#D97706" />
-                      
-                      {/* Lines on notepad */}
+                      <path d="M30 20h50l20 20v60a6 6 0 01-6 6H30a6 6 0 01-6-6V26a6 6 0 016-6z" fill="#d97706" />
+                      <path d="M80 20v20h20L80 20z" fill="#b45309" />
                       <rect x="34" y="50" width="52" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
                       <rect x="34" y="60" width="52" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
                       <rect x="34" y="70" width="52" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
                       <rect x="34" y="80" width="38" height="3" rx="1.5" fill="#FFFFFF" opacity="0.9" />
-                      
-                      {/* Paperclip */}
                       <g transform="translate(36, 12)">
-                        <path d="M4 16v-8a6 6 0 0112 0v10a4 4 0 01-8 0v-8a2 2 0 014 0v6" stroke="#94A3B8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        <path d="M4 16v-8a6 6 0 0112 0v10a4 4 0 01-8 0v-8a2 2 0 014 0v6" stroke="#E2E8F0" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        <path d="M4 16v-8a6 6 0 0112 0v10a4 4 0 01-8 0v-8a2 2 0 014 0v6" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        <path d="M4 16v-8a6 6 0 0112 0v10a4 4 0 01-8 0v-8a2 2 0 014 0v6" stroke="#94a3b8" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                       </g>
                     </svg>
                   </div>
