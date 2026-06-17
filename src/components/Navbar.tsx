@@ -9,7 +9,7 @@ const navLinks = [
   { to: '/consulting', label: 'Consulting' },
   { to: '/about', label: 'About' },
   { to: '/portal', label: 'Retail Space' },
-  { to: '/insights', label: 'Insights' },
+  { to: '/case-studies', label: 'Case Studies' },
   { to: '/contact', label: 'Get in Touch' },
 ];
 

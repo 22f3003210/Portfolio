@@ -4,7 +4,7 @@ import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Projects } from './pages/Projects';
 import { Contact } from './pages/Contact';
-import { Insights } from './pages/Insights';
+import { CaseStudies } from './pages/CaseStudies';
 import { WorkflowDetail } from './pages/WorkflowDetail';
 import { Admin } from './pages/Admin';
 import { Portal } from './pages/Portal';
@@ -22,7 +22,7 @@ export default function App() {
         <Route path="/consulting" element={<Consulting />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/insights" element={<Insights />} />
+        <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/workflows/:slug" element={<WorkflowDetail />} />
         <Route path="/portal" element={<Portal />} />
         <Route path="/how-i-work" element={<HowIWork />} />

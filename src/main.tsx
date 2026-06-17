@@ -9,7 +9,7 @@ import { PortalProvider } from './context/PortalContext.tsx'
 const path = window.location.pathname;
 if (path && path !== '/') {
   const cleanPath = path.replace(/^\/+|\/+$/g, '');
-  const knownRoutes = ['roadmap', 'portal', 'admin', 'tracker', 'about', 'consulting', 'projects', 'contact', 'insights', 'how-i-work'];
+  const knownRoutes = ['roadmap', 'portal', 'admin', 'tracker', 'about', 'consulting', 'projects', 'contact', 'case-studies', 'how-i-work'];
   if (knownRoutes.includes(cleanPath) || cleanPath.startsWith('workflows/')) {
     window.location.replace(`/#/${cleanPath}`);
   }

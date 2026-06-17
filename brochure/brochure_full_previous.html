@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Founder's Office Partner — Executive Consulting Framework</title>
+  <!-- Google Fonts: Inter for professional sans-serif, JetBrains Mono for metrics -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ════════════════════════════════
+       1. COLOR PALETTE (Blue Corporate Theme)
+       ════════════════════════════════ */
+    :root {
+      --bg-document: #F1F5F9;    /* Outer scroll background */
+      --bg-page: #FFFFFF;        /* Pure white A4 page background */
+      --bg-tint: #F8FAFC;        /* Soft slate/ice blue tint */
+      
+      /* Typography Colors */
+      --txt-header: #0F1E36;     /* Deep Midnight Navy for primary headers */
+      --txt-primary: #1E293B;    /* Charcoal for body copy and titles */
+      --txt-secondary: #475569;  /* Slate for descriptions */
+      --txt-muted: #64748B;      /* Slate grey for subtext */
+      
+      /* Accents & Borders */
+      --blue-navy: #0F1E36;      /* Deep Midnight Navy */
+      --blue-royal: #005691;     /* Classic Corporate Royal Blue */
+      --blue-cyan: #00A3E0;      /* Cyan/Sky Blue for active details */
+      --accent-gold: #B89047;    /* Muted Gold for accents */
+      --border-light: #E2E8F0;   /* Light grey divider line */
+      
+      /* Layout Dimensions */
+      --a4-width: 210mm;
+      --a4-height: 297mm;
+    }
+
+    /* ════════════════════════════════
+       2. RESET & BASE DOCUMENT STYLING
+       ════════════════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--bg-document);
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--txt-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10mm 0;
+    }
+
+    /* ════════════════════════════════
+       3. VERTICAL PORTRAIT PAGES (A4)
+       ════════════════════════════════ */
+    .page {
+      width: var(--a4-width);
+      height: var(--a4-height);
+      background: var(--bg-page);
+      padding: 15mm 18mm 13mm 18mm;
+      margin-bottom: 12mm;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+      border: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .page:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ════════════════════════════════
+       4. EXECUTIVE HEADER & FOOTER
+       ════════════════════════════════ */
+    .running-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--txt-muted);
+      border-bottom: 1.5px solid var(--blue-navy);
+      padding-bottom: 2.5mm;
+      margin-bottom: 4mm;
+      text-transform: uppercase;
+    }
+
+    .running-header .confidential {
+      color: #94A3B8;
+      font-weight: 700;
+    }
+
+    .running-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 7pt;
+      font-weight: 500;
+      color: var(--txt-muted);
+      border-top: 1px solid var(--border-light);
+      padding-top: 2.5mm;
+      margin-top: auto;
+    }
+
+    .running-footer .page-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+      font-weight: 700;
+      color: var(--txt-primary);
+    }
+
+    /* ════════════════════════════════
+       5. TYPOGRAPHY CONTROLS (USING pt UNITS)
+       ════════════════════════════════ */
+    .title-doc {
+      font-size: 24pt;
+      font-weight: 850;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+    }
+
+    .subtitle-doc {
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--blue-royal);
+      text-transform: uppercase;
+      margin-top: 2mm;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .title-section {
+      font-size: 11pt;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--blue-navy);
+      margin-bottom: 3mm;
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      text-transform: uppercase;
+    }
+
+    .title-section::after {
+      content: '';
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-light);
+    }
+
+    .body {
+      font-size: 8pt;
+      line-height: 1.5;
+      color: var(--txt-secondary);
+    }
+
+    .body-strong {
+      color: var(--txt-primary);
+      font-weight: 600;
+    }
+
+    /* ════════════════════════════════
+       6. COMPONENT STYLING
+       ════════════════════════════════ */
+    /* Stance Box Quote */
+    .stance-box {
+      background: var(--bg-tint);
+      border-left: 3.5px solid var(--accent-gold);
+      padding: 4mm 5.5mm;
+      margin-bottom: 5mm;
+      border-top: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .stance-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+    }
+
+    .stance-text {
+      font-size: 8.2pt;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--blue-navy);
+    }
+
+    /* Comparison Grid */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-top: 3.5mm;
+    }
+
+    .compare-card {
+      border: 1px solid var(--border-light);
+      padding: 3.5mm 4.5mm;
+      background: var(--bg-page);
+    }
+
+    .compare-card.blue-focus {
+      background: var(--bg-tint);
+      border-top: 2.5px solid var(--blue-royal);
+    }
+
+    .compare-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--txt-muted);
+      text-transform: uppercase;
+      margin-bottom: 2.5mm;
+    }
+
+    .compare-bullet {
+      display: flex;
+      gap: 2mm;
+      margin-bottom: 2mm;
+      align-items: start;
+    }
+
+    .compare-bullet:last-child {
+      margin-bottom: 0;
+    }
+
+    .bullet-icon {
+      font-size: 7pt;
+      margin-top: 0.5pt;
+      color: var(--blue-royal);
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════
+       7. ROADMAP process blocks row (Page 2)
+       ════════════════════════════════ */
+    .roadmap-blocks-row {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 1.8mm;
+      margin-top: 1mm;
+      margin-bottom: 4.5mm;
+      position: relative;
+      width: 100%;
+    }
+
+    .roadmap-blocks-row::before {
+      content: '';
+      position: absolute;
+      top: 5.5mm;
+      left: 6mm;
+      right: 6mm;
+      height: 1px;
+      border-top: 1px dashed rgba(15, 30, 54, 0.12);
+      z-index: 1;
+    }
+
+    .roadmap-block {
+      height: 32mm;
+      padding: 2.5mm 2.2mm;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border-radius: 1px;
+      z-index: 2;
+    }
+
+    .roadmap-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5mm;
+    }
+
+    .roadmap-block-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5mm;
+      height: 5mm;
+      color: #FFFFFF;
+      opacity: 0.95;
+    }
+
+    .roadmap-block-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13pt;
+      font-weight: 800;
+      color: #FFFFFF;
+      opacity: 0.16;
+      line-height: 1;
+    }
+
+    .roadmap-block-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .roadmap-block-title {
+      font-size: 6.2pt;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0.8mm;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+
+    .roadmap-block-desc {
+      font-size: 5pt;
+      line-height: 1.3;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    /* ════════════════════════════════
+       8. PHASES UI TIMELINE CARDS
+       ════════════════════════════════ */
+    .roadmap-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5mm;
+      position: relative;
+    }
+
+    .phase-card {
+      background: var(--bg-page);
+      border: 1px solid var(--border-light);
+      border-radius: 2px;
+      position: relative;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.01);
+      overflow: hidden;
+    }
+
+    /* Slanted Trapezoid Header Bar */
+    .phase-card-header {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--bg-page);
+      height: 9.5mm;
+      padding: 0;
+    }
+
+    .phase-badge-slanted {
+      background: var(--blue-navy);
+      color: #FFFFFF;
+      width: 13mm;
+      height: 9.5mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11pt;
+      font-weight: 800;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 4mm) 100%, 0 100%);
+      flex-shrink: 0;
+      padding-right: 2.2mm; /* visually balance the slant */
+    }
+
+    .phase-badge-slanted.active-block {
+      background: var(--blue-royal);
+    }
+
+    .phase-badge-slanted.advisor-block {
+      background: var(--accent-gold);
+    }
+
+    .phase-icon-circle {
+      width: 6.2mm;
+      height: 6.2mm;
+      border: 1px solid var(--blue-royal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue-royal);
+      margin-left: 3.2mm;
+      flex-shrink: 0;
+    }
+
+    .phase-icon-circle.active-block {
+      border-color: var(--blue-cyan);
+      color: var(--blue-cyan);
+    }
+
+    .phase-icon-circle.advisor-block {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .phase-header-text {
+      display: flex;
+      flex-direction: column;
+      margin-left: 3.2mm;
+      flex-grow: 1;
+    }
+
+    .phase-title {
+      font-size: 8.5pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      line-height: 1.25;
+    }
+
+    .phase-timeline-text {
+      font-size: 6.2pt;
+      color: var(--txt-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-top: 0.1mm;
+    }
+
+    .phase-card-body {
+      padding: 3.2mm 4.5mm;
+    }
+
+    .phase-text {
+      font-size: 7.2pt;
+      line-height: 1.5;
+      color: var(--txt-secondary);
+      margin-bottom: 1.8mm;
+    }
+
+    .phase-text:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Roadmap Page Sub-headings */
+    .roadmap-section-intro {
+      font-size: 7.8pt;
+      line-height: 1.5;
+      color: var(--txt-primary);
+      margin-bottom: 3.5mm;
+      border-left: 2px solid var(--blue-cyan);
+      padding-left: 3mm;
+    }
+
+    /* ════════════════════════════════
+       9. KPI BOXES & CTA BANNER (Page 4)
+       ════════════════════════════════ */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3mm;
+      margin-top: 4mm;
+      margin-bottom: 5.5mm;
+    }
+
+    .kpi-card {
+      border: 1px solid var(--border-light);
+      padding: 2.5mm 3mm;
+      background: var(--bg-tint);
+      text-align: center;
+    }
+
+    .kpi-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 6pt;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--txt-muted);
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+    }
+
+    .kpi-val {
+      font-size: 7.8pt;
+      font-weight: 900;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+    }
+
+    .kpi-desc {
+      font-size: 6pt;
+      color: var(--txt-secondary);
+      line-height: 1.3;
+      margin-top: 0.8mm;
+    }
+
+    .cta-banner {
+      background: var(--blue-navy);
+      color: #FFFFFF;
+      padding: 5mm 6mm;
+      border-left: 3.5px solid var(--accent-gold);
+      margin-top: auto;
+    }
+
+    .cta-title {
+      font-size: 8.5pt;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+    }
+
+    .cta-body {
+      font-size: 7.2pt;
+      color: #94A3B8;
+      line-height: 1.45;
+    }
+
+    /* ════════════════════════════════
+       10. PRINT LAYOUT SPECIFICS (A4 Portrait)
+       ════════════════════════════════ */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF;
+        padding: 0;
+        margin: 0;
+      }
+
+      .page {
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        width: var(--a4-width) !important;
+        height: var(--a4-height) !important;
+        padding: 15mm 18mm 13mm 18mm !important;
+      }
+
+      .page:last-child {
+        page-break-after: avoid !important;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════
+       PAGE 1: TITLE & ENGAGEMENT PARADIGM
+       ════════════════════════════════ -->
+  <div class="page" id="page-1">
+    <div class="running-header">
+      <span class="confidential">CONFIDENTIAL</span>
+      <span>The Founder's Office Partner</span>
+    </div>
+
+    <!-- Title Block -->
+    <div style="margin-top: 2mm; margin-bottom: 5mm;">
+      <h1 class="title-doc">THE FOUNDER’S<br/>OFFICE PARTNER</h1>
+      <p class="subtitle-doc">An Embedded Operating Model for System-Driven Scale</p>
+      <div style="height: 1px; background: var(--border-light); margin-top: 3.5mm;"></div>
+    </div>
+
+    <!-- My Stance Quote -->
+    <div class="stance-box">
+      <div class="stance-title">My Stance</div>
+      <p class="stance-text">
+        "I don’t pull files from a template, hand you a slide deck of recommendations, and walk away. I embed myself directly inside your business alongside you and your executive team as a true execution partner. We are going to take your business vision and turn it into a structured, highly predictable operational reality."
+      </p>
+    </div>
+
+    <!-- How We Will Work Together -->
+    <div style="margin-bottom: auto;">
+      <h2 class="title-section">How We Will Work Together</h2>
+      
+      <p class="body" style="margin-bottom: 3.5mm;">
+        Most consultants operate from a safe distance. They point out your flaws, tell you what needs fixing, and exit before the actual friction of training teams and deploying software begins.
+      </p>
+      
+      <p class="body" style="margin-bottom: 3.5mm;">
+        I work on a completely different paradigm. I get in the trenches with you to figure out what really moves the needle. I don't look at finance, technology, workflows, or people as isolated pieces; I tie them all together into a single, cohesive engine. My ultimate goal is to build an organization that can scale smoothly, measure its own performance, and run predictably without burning you out or requiring your constant personal intervention.
+      </p>
+
+      <p class="body" style="margin-bottom: 4mm; font-weight: 500;">
+        To make that happen, I will guide your business through a deliberate, eight-phase evolutionary journey.
+      </p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="compare-title">Traditional Consulting</div>
+          <div class="compare-bullet">
+            <span class="bullet-icon">▪</span>
+            <p class="body-sm">Operate from a safe distance, advising without operational friction.</p>
+          </div>
+          <div class="compare-bullet">
+            <span class="bullet-icon">▪</span>
+            <p class="body-sm">Address pieces in isolation (finance, tech, workflows, or people).</p>
+          </div>
+          <div class="compare-bullet">
+            <span class="bullet-icon">▪</span>
+            <p class="body-sm">Exit the business before onboarding vendors or training teams begins.</p>
+          </div>
+        </div>
+
+        <div class="compare-card blue-focus">
+          <div class="compare-title" style="color: var(--blue-royal);">Embedded Partner</div>
+          <div class="compare-bullet">
+            <span class="bullet-icon">▪</span>
+            <p class="body-sm">Embed directly inside the organization alongside the executive team.</p>
+          </div>
+          <div class="compare-bullet">
+            <span class="bullet-icon">▪</span>
+            <p class="body-sm">Tie all operational systems together into a single cohesive engine.</p>
+          </div>
+          <div class="compare-bullet">
+            <span class="bullet-icon">▪</span>
+            <p class="body-sm">Coordinate onboarding, coach managers, and manage training friction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>operating philosophy &amp; paradigm</span>
+      <span class="page-number">01</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+       PAGE 2: ROADMAP SQUARES & PHASES 1–3
+       ════════════════════════════════ -->
+  <div class="page" id="page-2">
+    <div class="running-header">
+      <span class="confidential">CONFIDENTIAL</span>
+      <span>Executive Roadmap &amp; Timeline</span>
+    </div>
+
+    <div>
+      <h2 class="title-section" style="margin-bottom: 2mm;">Our Execution Roadmap &amp; Timeline</h2>
+      <p class="roadmap-section-intro" style="margin-bottom: 2.5mm;">
+        Every successful transformation begins with executive clarity. Before we look at a single piece of your data, you and I need to be perfectly aligned on the destination. I start by completely absorbing your long-term goals, immediate bottlenecks, and where you want this company to be in three to five years.
+      </p>
+    </div>
+
+    <!-- Colored Roadmap Blocks Row -->
+    <div class="roadmap-blocks-row">
+      <!-- 01 ADVOCATE -->
+      <div class="roadmap-block" style="background: #2A4B54;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </span>
+          <span class="roadmap-block-num">01</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">ADVOCATE</div>
+          <div class="roadmap-block-desc">Build trust through industry insights.</div>
+        </div>
+      </div>
+
+      <!-- 02 UNDERSTAND -->
+      <div class="roadmap-block" style="background: #254689;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </span>
+          <span class="roadmap-block-num">02</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">UNDERSTAND</div>
+          <div class="roadmap-block-desc">Align with the owner's vision.</div>
+        </div>
+      </div>
+
+      <!-- 03 ASSESS -->
+      <div class="roadmap-block" style="background: #522F80;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </span>
+          <span class="roadmap-block-num">03</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">ASSESS</div>
+          <div class="roadmap-block-desc">Audit and diagnose the business.</div>
+        </div>
+      </div>
+
+      <!-- 04 RECOMMEND -->
+      <div class="roadmap-block" style="background: #2C5E35;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          </span>
+          <span class="roadmap-block-num">04</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">RECOMMEND</div>
+          <div class="roadmap-block-desc">Present a transformation blueprint.</div>
+        </div>
+      </div>
+
+      <!-- 05 EXECUTE -->
+      <div class="roadmap-block" style="background: #915F2F;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </span>
+          <span class="roadmap-block-num">05</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">EXECUTE</div>
+          <div class="roadmap-block-desc">Implement changes &amp; train team.</div>
+        </div>
+      </div>
+
+      <!-- 06 MEASURE -->
+      <div class="roadmap-block" style="background: #8F263A;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </span>
+          <span class="roadmap-block-num">06</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">MEASURE</div>
+          <div class="roadmap-block-desc">Track results &amp; optimize daily.</div>
+        </div>
+      </div>
+
+      <!-- 07 SUSTAIN -->
+      <div class="roadmap-block" style="background: #346979;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </span>
+          <span class="roadmap-block-num">07</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">SUSTAIN</div>
+          <div class="roadmap-block-desc">Establish governance &amp; hand over.</div>
+        </div>
+      </div>
+
+      <!-- 08 PARTNER -->
+      <div class="roadmap-block" style="background: #425265;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </span>
+          <span class="roadmap-block-num">08</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">PARTNER</div>
+          <div class="roadmap-block-desc">Provide long-term growth advisory.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phases Stack -->
+    <div class="roadmap-timeline">
+      
+      <!-- Phase 1 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted">1</div>
+          <div class="phase-icon-circle">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Executive Business Insight &amp; Vision Alignment</h3>
+            <p class="phase-timeline-text">Timeline: Week 1 &nbsp;|&nbsp; Strategic Alignment Sprints</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            Every successful transformation begins with executive clarity. Before we look at a single piece of your data, you and I need to be perfectly aligned on the destination. I start by completely absorbing your long-term goals, immediate bottlenecks, and where you want this company to be in three to five years.
+          </p>
+          <p class="phase-text">
+            To kick things off, I run an <span class="body-strong">Executive Business Intelligence Session</span> for you and your leadership team. Instead of burying you in IT or ERP jargon, I pull back the curtain on how world-class, multi-million dollar brands operate from a pure data perspective. I’ll show you how top-tier organizations actually leverage live metrics, tight corporate governance, and decision scorecards to move fast and minimize mistakes. This aligns our mindsets on best-in-class operations before we ever touch your actual workflows.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted">2</div>
+          <div class="phase-icon-circle">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Priority Planning, Business Audit &amp; Diagnostic Assessment</h3>
+            <p class="phase-timeline-text">Timeline: Weeks 2–3 &nbsp;|&nbsp; Diagnostic Sprints</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            Once we are aligned on what great looks like, I dig deep into your current architecture. I conduct a structured business diagnostic across your entire ecosystem, evaluating your inventory lifecycle, cash flow metrics, sales pipelines, customer retention pathways, and employee output.
+          </p>
+          <p class="phase-text" style="color: var(--blue-royal); font-weight: 600; padding: 1.5mm 0; border-top: 1px solid var(--bg-tint); border-bottom: 1px solid var(--bg-tint); margin: 2mm 0;">
+            In this audit phase, I will examine: <strong>What's working? What's broken? What's costing? What's risky? What's possible? What's next?</strong>
+          </p>
+          <p class="phase-text">
+            I refuse to waste your time or mine by auditing every single department with equal weight. Instead, I focus my lens surgically on the highest-impact, highest-risk functions—the specific areas that are currently bleeding cash, bottlenecking your growth, or leaving revenue on the table.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted">3</div>
+          <div class="phase-icon-circle">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"></path><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"></path></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Gap Analysis &amp; Executive Audit Review</h3>
+            <p class="phase-timeline-text">Timeline: Weeks 4–6 &nbsp;|&nbsp; Strategy Review Sprints</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            Data is entirely useless without context. Once the diagnostic is complete, I translate our raw findings, operational leakages, and risks into boardroom-ready intelligence.
+          </p>
+          <p class="phase-text">
+            We will sit down for an intensive <span class="body-strong">Executive Audit Review Meeting</span>. I will present exactly where the business stands, reveal the true root causes of your operational friction, and benchmark your company against leading industry metrics. Together, we will translate these insights into a pragmatic transformation roadmap tailored specifically to your team’s actual bandwidth.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="running-footer">
+      <span>ALIGNMENT &amp; DIAGNOSTIC ROADMAP</span>
+      <span class="page-number">02</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+       PAGE 3: ROADMAP PHASES 4–6
+       ════════════════════════════════ -->
+  <div class="page" id="page-3">
+    <div class="running-header">
+      <span class="confidential">CONFIDENTIAL</span>
+      <span>Executive Roadmap &amp; Timeline</span>
+    </div>
+
+    <div>
+      <h2 class="title-section" style="margin-bottom: 3.5mm;">Roadmap Architecture &amp; Execution</h2>
+      <p class="roadmap-section-intro">
+        Predictable systems are the foundation of scalable enterprises. We transition from assessment to technological planning and shoulder-to-shoulder implementation.
+      </p>
+    </div>
+
+    <div class="roadmap-timeline">
+      
+      <!-- Phase 4 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted">4</div>
+          <div class="phase-icon-circle">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Process Re-Design, Technology &amp; Automation Planning</h3>
+            <p class="phase-timeline-text">Timeline: Weeks 4–6 &nbsp;|&nbsp; Operating Model Architecture</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            I firmly believe that highly valuable, scalable businesses do not rely on superstar individuals or tribal knowledge—they rely on predictable systems. This phase is where we architect your future operating model.
+          </p>
+          <p class="phase-text">
+            I will map out your optimized workflows, write clear Standard Operating Procedures (SOPs), and build your master KPI framework. Simultaneously, I look at your tech gaps and map out your ERP, CRM, and automation strategies. I recommend the exact digital architecture required to turn your company into a transparent, data-driven enterprise.
+          </p>
+        </div>
+      </div>
+
+      <!-- Execution Sprints Intro Banner -->
+      <div style="background: var(--bg-tint); border-left: 2px solid var(--blue-cyan); padding: 3.2mm 4.5mm; margin-top: 1mm; border-top: 1px solid var(--border-light); border-right: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+        <p class="body-strong" style="font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.03em; color: var(--blue-royal); margin-bottom: 1mm;">
+          The Execution &amp; Advisory Blocks
+        </p>
+        <p class="body-sm" style="line-height: 1.45;">
+          The remaining phases are highly customized, execution-focused sprints. Their timelines are scoped dynamically based on the exact technology platforms, automation paths, and scale of initiatives we greenlight at the end of Week 6.
+        </p>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted active-block">5</div>
+          <div class="phase-icon-circle active-block">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Implementation, Team Training &amp; Change Management</h3>
+            <p class="phase-timeline-text" style="color: var(--blue-cyan);">Timeline: Dynamic Sprints &nbsp;|&nbsp; Embedded Execution</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            Strategy creates zero enterprise value without relentless, disciplined execution. Once you approve our blueprint, I stand shoulder-to-shoulder with your leadership team to drive the actual implementation.
+          </p>
+          <p class="phase-text">
+            I act as your owner’s representative to coordinate the onboarding of software and technology vendors, ensuring they deliver on time, on budget, and in complete alignment with your goals. I don't leave your staff to struggle through a transition alone; I handle the process deployment, coach your managers, train your frontline teams, and actively manage the psychological friction of change across your organization to guarantee long-term adoption.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase 6 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted active-block">6</div>
+          <div class="phase-icon-circle active-block">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Performance Management &amp; Continuous Improvement</h3>
+            <p class="phase-timeline-text" style="color: var(--blue-cyan);">Timeline: Dynamic Sprints &nbsp;|&nbsp; Visibility Setup</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            To make this transformation stick, we have to replace guesswork and "gut feelings" with real-time operational visibility. I want you managing your business through live data-streams, not lagged accounting reports.
+          </p>
+          <p class="phase-text">
+            I help you design and deploy live executive dashboards and performance tracking tools. Then, I institutionalize your review cadences—setting up structured weekly and monthly business reviews (MBRs). By teaching your leadership team how to continuously analyze business data, I help you spot operational anomalies early and make data-backed strategic moves.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="running-footer">
+      <span>SYSTEMS ARCHITECTURE &amp; DEPLOYMENT</span>
+      <span class="page-number">03</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+       PAGE 4: ROADMAP PHASES 7–8 & PHILOSOPHY
+       ════════════════════════════════ -->
+  <div class="page" id="page-4">
+    <div class="running-header">
+      <span class="confidential">CONFIDENTIAL</span>
+      <span>Strategic Alignment &amp; Outcomes</span>
+    </div>
+
+    <div class="roadmap-timeline">
+      
+      <!-- Phase 7 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted active-block">7</div>
+          <div class="phase-icon-circle active-block">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Governance &amp; Knowledge Transfer</h3>
+            <p class="phase-timeline-text" style="color: var(--blue-cyan);">Timeline: Dynamic Sprints &nbsp;|&nbsp; Transition Protocols</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            The ultimate test of a great operating model is simple: Does the business run flawlessly when you or I step away? My goal is to deliberately engineer you out of the day-to-day operational bottleneck.
+          </p>
+          <p class="phase-text">
+            I build formal corporate governance frameworks, crystal-clear reporting paths, and explicit accountability hierarchies. We will centralize your company's institutional knowledge and execute a thorough knowledge transfer process that empowers your management layer to own their functions completely, permanently reducing founder dependency.
+          </p>
+        </div>
+      </div>
+
+      <!-- Phase 8 -->
+      <div class="phase-card">
+        <div class="phase-card-header">
+          <div class="phase-badge-slanted advisor-block">8</div>
+          <div class="phase-icon-circle advisor-block">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <div class="phase-header-text">
+            <h3 class="phase-title">Strategic Advisory &amp; Founder's Office Partnership</h3>
+            <p class="phase-timeline-text" style="color: var(--accent-gold);">Timeline: Ongoing Retainer &nbsp;|&nbsp; Advisory Alliance</p>
+          </div>
+        </div>
+        <div class="phase-card-body">
+          <p class="phase-text">
+            True transformation doesn’t end when the software goes live or the processes are documented. Once your new operating model is stabilized, your challenges shift from internal firefighting to macro expansion.
+          </p>
+          <p class="phase-text">
+            Our relationship naturally evolves into an ongoing, long-term strategic alliance. I stay by your side as an embedded advisor. I sit in on your recurring executive reviews, help you evaluate new market opportunities, monitor your structural health, and serve as a reliable sounding board for capital allocation and strategic growth planning.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Why I Work This Way -->
+    <div style="margin-top: 3.5mm; margin-bottom: auto;">
+      <h2 class="title-section">Why I Work This Way</h2>
+      
+      <p class="body" style="margin-bottom: 3mm; font-weight: 500; color: var(--blue-navy);">
+        When you partner with me, you are making a conscious decision to shift your timeline. You are choosing to step out of the daily chaos of running a job, and stepping into your true role as a visionary founder.
+      </p>
+      
+      <p class="body" style="margin-bottom: 2mm;">
+        By taking your company through this data-driven journey, we turn your business into a system-driven, asset-backed enterprise. Your calendar is successfully reclaimed, giving you the clarity and freedom to focus entirely on what you should be doing: <strong style="color: var(--blue-royal);">macro ecosystem development, corporate growth planning, strategic capital allocation, and scaling with confidence.</strong>
+      </p>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Founder Role</div>
+          <div class="kpi-val" style="color: var(--accent-gold);">Strategic</div>
+          <div class="kpi-desc">No longer the operational daily bottleneck.</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Visibility</div>
+          <div class="kpi-val" style="color: var(--blue-royal);">Live</div>
+          <div class="kpi-desc">Real-time indicators over lagged reports.</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Operations</div>
+          <div class="kpi-val" style="color: var(--blue-royal);">Systemized</div>
+          <div class="kpi-desc">SOPs replace tribal knowledge.</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Assets</div>
+          <div class="kpi-val" style="color: var(--accent-gold);">Scalable</div>
+          <div class="kpi-desc">Structured for predictable multi-branch scale.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Boardroom Advisory CTA (Without right contact panel) -->
+    <div class="cta-banner">
+      <h4 class="cta-title">Complimentary Executive Discovery Briefing</h4>
+      <p class="cta-body">
+        To evaluate structural alignment, we conduct a private, complimentary Discovery briefing. We identify critical data gaps and outline highest-risk operational cash flow leaks.
+      </p>
+    </div>
+
+    <div class="running-footer">
+      <span>abraham@scalewithabraham.com &nbsp;|&nbsp; scale-with-abraham.vercel.app</span>
+      <span class="page-number">04</span>
+    </div>
+  </div>
+
+</body>
+</html>

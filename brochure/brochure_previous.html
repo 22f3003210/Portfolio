@@ -1,0 +1,808 @@
+Created At: 2026-06-16T14:35:38Z
+Completed At: 2026-06-16T14:35:38Z
+File Path: `file:///c:/Users/sayed/Downloads/Kimi_Agent_Clone%20HBJ%20Digital%20Lab/app/brochure/brochure.html`
+Total Lines: 1266
+Total Bytes: 53889
+Showing lines 1 to 800
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: <!DOCTYPE html>
+2: <html lang="en">
+3: <head>
+4:   <meta charset="UTF-8"/>
+5:   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+6:   <title>The Founder's Office Partner — Executive Consulting Framework</title>
+7:   <!-- Google Fonts: Inter for professional sans-serif, JetBrains Mono for metrics -->
+8:   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+9:   <style>
+10:     /* ════════════════════════════════
+11:        1. COLOR PALETTE (Blue Corporate Theme)
+12:        ════════════════════════════════ */
+13:     :root {
+14:       --bg-document: #F1F5F9;    /* Outer scroll background */
+15:       --bg-page: #FFFFFF;        /* Pure white A4 page background */
+16:       --bg-tint: #F8FAFC;        /* Soft slate/ice blue tint */
+17:       
+18:       /* Typography Colors */
+19:       --txt-header: #0F1E36;     /* Deep Midnight Navy for primary headers */
+20:       --txt-primary: #1E293B;    /* Charcoal for body copy and titles */
+21:       --txt-secondary: #475569;  /* Slate for descriptions */
+22:       --txt-muted: #64748B;      /* Slate grey for subtext */
+23:       
+24:       /* Accents & Borders */
+25:       --blue-navy: #0F1E36;      /* Deep Midnight Navy */
+26:       --blue-royal: #005691;     /* Classic Corporate Royal Blue */
+27:       --blue-cyan: #00A3E0;      /* Cyan/Sky Blue for active details */
+28:       --accent-gold: #B89047;    /* Muted Gold for accents */
+29:       --border-light: #E2E8F0;   /* Light grey divider line */
+30:       
+31:       /* Roadmap & Phase Colors */
+32:       --color-advocate: #2A4B54;
+33:       --color-understand: #254689;
+34:       --color-assess: #522F80;
+35:       --color-recommend: #2C5E35;
+36:       --color-execute: #915F2F;
+37:       --color-measure: #8F263A;
+38:       --color-sustain: #346979;
+39:       --color-partner: #425265;
+40:       
+41:       /* Layout Dimensions */
+42:       --a4-width: 210mm;
+43:       --a4-height: 297mm;
+44:     }
+45: 
+46:     /* ════════════════════════════════
+47:        2. RESET & BASE DOCUMENT STYLING
+48:        ════════════════════════════════ */
+49:     *, *::before, *::after {
+50:       margin: 0;
+51:       padding: 0;
+52:       box-sizing: border-box;
+53:     }
+54: 
+55:     html, body {
+56:       width: 100%;
+57:       background: var(--bg-document);
+58:       font-family: 'Inter', -apple-system, sans-serif;
+59:       color: var(--txt-primary);
+60:       line-height: 1.5;
+61:       -webkit-font-smoothing: antialiased;
+62:       display: flex;
+63:       flex-direction: column;
+64:       align-items: center;
+65:       padding: 10mm 0;
+66:     }
+67: 
+68:     /* ════════════════════════════════
+69:        3. VERTICAL PORTRAIT PAGES (A4)
+70:        ════════════════════════════════ */
+71:     .page {
+72:       width: var(--a4-width);
+73:       height: var(--a4-height);
+74:       background: var(--bg-page);
+75:       padding: 15mm 18mm 13mm 18mm;
+76:       margin-bottom: 12mm;
+77:       box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+78:       border: 1px solid var(--border-light);
+79:       display: flex;
+80:       flex-direction: column;
+81:       justify-content: flex-start;
+82:       position: relative;
+83:       overflow: hidden;
+84:       box-sizing: border-box;
+85:     }
+86: 
+87:     .page:last-child {
+88:       margin-bottom: 0;
+89:     }
+90: 
+91:     /* ════════════════════════════════
+92:        4. EXECUTIVE HEADER & FOOTER
+93:        ════════════════════════════════ */
+94:     .running-header {
+95:       display: flex;
+96:       justify-content: space-between;
+97:       align-items: center;
+98:       font-family: 'Inter', sans-serif;
+99:       font-size: 7.5pt;
+100:       font-weight: 600;
+101:       letter-spacing: 0.12em;
+102:       color: var(--txt-muted);
+103:       border-bottom: 1.5px solid var(--blue-navy);
+104:       padding-bottom: 2.5mm;
+105:       margin-bottom: 4mm;
+106:       text-transform: uppercase;
+107:     }
+108: 
+109:     .running-header .confidential {
+110:       color: #94A3B8;
+111:       font-weight: 700;
+112:     }
+113: 
+114:     .running-footer {
+115:       display: flex;
+116:       justify-content: space-between;
+117:       align-items: center;
+118:       font-family: 'Inter', sans-serif;
+119:       font-size: 7pt;
+120:       font-weight: 500;
+121:       color: var(--txt-muted);
+122:       border-top: 1px solid var(--border-light);
+123:       padding-top: 2.5mm;
+124:       margin-top: auto;
+125:     }
+126: 
+127:     .running-footer .page-number {
+128:       font-family: 'JetBrains Mono', monospace;
+129:       font-size: 7.5pt;
+130:       font-weight: 700;
+131:       color: var(--txt-primary);
+132:     }
+133: 
+134:     /* ════════════════════════════════
+135:        5. TYPOGRAPHY CONTROLS (USING pt UNITS)
+136:        ════════════════════════════════ */
+137:     .title-doc {
+138:       font-size: 24pt;
+139:       font-weight: 850;
+140:       line-height: 1.15;
+141:       letter-spacing: -0.02em;
+142:       color: var(--blue-navy);
+143:       text-transform: uppercase;
+144:     }
+145: 
+146:     .subtitle-doc {
+147:       font-size: 9.5pt;
+148:       font-weight: 700;
+149:       letter-spacing: 0.08em;
+150:       color: var(--blue-royal);
+151:       text-transform: uppercase;
+152:       margin-top: 2mm;
+153:       font-family: 'Inter', sans-serif;
+154:     }
+155: 
+156:     .title-section {
+157:       font-size: 11pt;
+158:       font-weight: 700;
+159:       letter-spacing: 0.02em;
+160:       color: var(--blue-navy);
+161:       margin-bottom: 3mm;
+162:       display: flex;
+163:       align-items: center;
+164:       gap: 3mm;
+165:       text-transform: uppercase;
+166:     }
+167: 
+168:     .title-section::after {
+169:       content: '';
+170:       flex-grow: 1;
+171:       height: 1px;
+172:       background: var(--border-light);
+173:     }
+174: 
+175:     .body {
+176:       font-size: 8pt;
+177:       line-height: 1.5;
+178:       color: var(--txt-secondary);
+179:     }
+180: 
+181:     .body-strong {
+182:       color: var(--txt-primary);
+183:       font-weight: 600;
+184:     }
+185: 
+186:     .lead-paragraph {
+187:       font-size: 8.8pt;
+188:       line-height: 1.55;
+189:       font-weight: 500;
+190:       color: var(--blue-navy);
+191:       margin-bottom: 3.5mm;
+192:     }
+193: 
+194:     /* ════════════════════════════════
+195:        6. COMPONENT STYLING
+196:        ════════════════════════════════ */
+197:     /* Stance Box Quote */
+198:     .stance-box {
+199:       background: #FFFFFF;
+200:       border: 1px solid var(--border-light);
+201:       border-left: 3.5px solid var(--accent-gold);
+202:       padding: 5mm 6mm;
+203:       margin-bottom: 6mm;
+204:       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+205:     }
+206:     
+207:     .stance-title {
+208:       font-family: 'Inter', sans-serif;
+209:       font-size: 7.2pt;
+210:       font-weight: 800;
+211:       letter-spacing: 0.15em;
+212:       color: var(--accent-gold);
+213:       text-transform: uppercase;
+214:       margin-bottom: 2mm;
+215:     }
+216: 
+217:     .stance-text {
+218:       font-family: Georgia, 'Times New Roman', serif;
+219:       font-size: 9.5pt;
+220:       line-height: 1.6;
+221:       font-style: italic;
+222:       color: var(--txt-primary);
+223:     }
+224: 
+225:     .stance-signature {
+226:       font-family: 'Inter', sans-serif;
+227:       font-size: 6.5pt;
+228:       font-weight: 700;
+229:       letter-spacing: 0.1em;
+230:       color: var(--txt-muted);
+231:       text-transform: uppercase;
+232:       margin-top: 3mm;
+233:       text-align: right;
+234:     }
+235: 
+236:     /* Comparison Grid */
+237:     .compare-grid {
+238:       display: grid;
+239:       grid-template-columns: 1fr 1fr;
+240:       gap: 5mm;
+241:       margin-top: 4.5mm;
+242:     }
+243: 
+244:     .compare-card {
+245:       border: 1px solid var(--border-light);
+246:       border-top: 2.5px solid var(--txt-muted);
+247:       padding: 4.5mm 5.5mm;
+248:       background: var(--bg-page);
+249:       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.01);
+250:     }
+251: 
+252:     .compare-card.blue-focus {
+253:       background: var(--bg-tint);
+254:       border-top: 3px solid var(--blue-royal);
+255:       border-left: 1px solid var(--border-light);
+256:       border-right: 1px solid var(--border-light);
+257:       border-bottom: 1px solid var(--border-light);
+258:       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+259:     }
+260: 
+261:     .compare-title {
+262:       font-family: 'Inter', sans-serif;
+263:       font-size: 7.5pt;
+264:       font-weight: 800;
+265:       letter-spacing: 0.05em;
+266:       color: var(--txt-muted);
+267:       text-transform: uppercase;
+268:       margin-bottom: 3.5mm;
+269:     }
+270: 
+271:     .compare-bullet {
+272:       display: flex;
+273:       gap: 2.5mm;
+274:       margin-bottom: 2.5mm;
+275:       align-items: start;
+276:     }
+277: 
+278:     .compare-bullet:last-child {
+279:       margin-bottom: 0;
+280:     }
+281: 
+282:     .bullet-icon-grey, .bullet-icon-gold {
+283:       display: inline-flex;
+284:       align-items: center;
+285:       justify-content: center;
+286:       margin-top: 1.2mm;
+287:       flex-shrink: 0;
+288:     }
+289: 
+290:     .body-sm {
+291:       font-size: 7.2pt;
+292:       line-height: 1.45;
+293:       color: var(--txt-secondary);
+294:     }
+295: 
+296:     /* Page 1 Grid & Asymmetric Layout */
+297:     .page-1-grid {
+298:       display: grid;
+299:       grid-template-columns: 1.15fr 0.85fr;
+300:       gap: 7mm;
+301:       align-items: start;
+302:       margin-top: 2.5mm;
+303:     }
+304: 
+305:     .mandates-box {
+306:       background: #FFFFFF;
+307:       border: 1px solid var(--border-light);
+308:       border-top: 2.5px solid var(--blue-royal);
+309:       padding: 5mm 5.5mm;
+310:       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.02);
+311:     }
+312: 
+313:     .mandates-title {
+314:       font-family: 'Inter', sans-serif;
+315:       font-size: 7.2pt;
+316:       font-weight: 800;
+317:       letter-spacing: 0.15em;
+318:       color: var(--blue-royal);
+319:       text-transform: uppercase;
+320:       margin-bottom: 3.5mm;
+321:     }
+322: 
+323:     .mandate-item {
+324:       display: flex;
+325:       gap: 3mm;
+326:       margin-bottom: 3.5mm;
+327:       align-items: start;
+328:     }
+329: 
+330:     .mandate-item:last-child {
+331:       margin-bottom: 0;
+332:     }
+333: 
+334:     .mandate-num {
+335:       font-family: 'JetBrains Mono', monospace;
+336:       font-size: 8pt;
+337:       font-weight: 700;
+338:       color: var(--accent-gold);
+339:       margin-top: 0.5pt;
+340:     }
+341: 
+342:     .mandate-text-container {
+343:       display: flex;
+344:       flex-direction: column;
+345:     }
+346: 
+347:     .mandate-heading {
+348:       font-size: 7.8pt;
+349:       font-weight: 700;
+350:       color: var(--blue-navy);
+351:       line-height: 1.2;
+352:     }
+353: 
+354:     .mandate-desc {
+355:       font-size: 6.8pt;
+356:       color: var(--txt-secondary);
+357:       line-height: 1.4;
+358:       margin-top: 0.5mm;
+359:     }
+360: 
+361:     /* ════════════════════════════════
+362:        7. ROADMAP process blocks row (Page 2)
+363:        ════════════════════════════════ */
+364:     .roadmap-blocks-row {
+365:       display: grid;
+366:       grid-template-columns: repeat(8, 1fr);
+367:       gap: 1.8mm;
+368:       margin-top: 1mm;
+369:       margin-bottom: 4.5mm;
+370:       position: relative;
+371:       width: 100%;
+372:     }
+373: 
+374:     .roadmap-blocks-row::before {
+375:       content: '';
+376:       position: absolute;
+377:       top: 5.5mm;
+378:       left: 6mm;
+379:       right: 6mm;
+380:       height: 1px;
+381:       border-top: 1px dashed rgba(15, 30, 54, 0.12);
+382:       z-index: 1;
+383:     }
+384: 
+385:     .roadmap-block {
+386:       height: 32mm;
+387:       padding: 2.5mm 2.2mm;
+388:       color: #FFFFFF;
+389:       display: flex;
+390:       flex-direction: column;
+391:       justify-content: space-between;
+392:       position: relative;
+393:       border-radius: 1px;
+394:       z-index: 2;
+395:     }
+396: 
+397:     .roadmap-block-header {
+398:       display: flex;
+399:       justify-content: space-between;
+400:       align-items: center;
+401:       margin-bottom: 1.5mm;
+402:     }
+403: 
+404:     .roadmap-block-icon {
+405:       display: flex;
+406:       align-items: center;
+407:       justify-content: center;
+408:       width: 5mm;
+409:       height: 5mm;
+410:       color: #FFFFFF;
+411:       opacity: 0.95;
+412:     }
+413: 
+414:     .roadmap-block-num {
+415:       font-family: 'JetBrains Mono', monospace;
+416:       font-size: 13pt;
+417:       font-weight: 800;
+418:       color: #FFFFFF;
+419:       opacity: 0.16;
+420:       line-height: 1;
+421:     }
+422: 
+423:     .roadmap-block-body {
+424:       display: flex;
+425:       flex-direction: column;
+426:       justify-content: flex-end;
+427:     }
+428: 
+429:     .roadmap-block-title {
+430:       font-size: 6.2pt;
+431:       font-weight: 800;
+432:       letter-spacing: 0.03em;
+433:       text-transform: uppercase;
+434:       margin-bottom: 0.8mm;
+435:       color: #FFFFFF;
+436:       line-height: 1.1;
+437:     }
+438: 
+439:     .roadmap-block-desc {
+440:       font-size: 5pt;
+441:       line-height: 1.3;
+442:       color: rgba(255, 255, 255, 0.88);
+443:     }
+444: 
+445:     /* ════════════════════════════════
+446:        8. PHASES UI TIMELINE CARDS
+447:        ════════════════════════════════ */
+448:     .roadmap-timeline {
+449:       display: flex;
+450:       flex-direction: column;
+451:       gap: 3mm;
+452:       position: relative;
+453:     }
+454: 
+455:     .phase-card {
+456:       background: var(--bg-page);
+457:       border: 1px solid var(--border-light);
+458:       border-radius: 2px;
+459:       position: relative;
+460:       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.01);
+461:       overflow: hidden;
+462:     }
+463: 
+464:     /* Slanted Trapezoid Header Bar */
+465:     .phase-card-header {
+466:       display: flex;
+467:       align-items: center;
+468:       border-bottom: 1px solid var(--border-light);
+469:       background: var(--bg-page);
+470:       height: 9.5mm;
+471:       padding: 0;
+472:     }
+473: 
+474:     .phase-badge-slanted {
+475:       background: var(--blue-navy);
+476:       color: #FFFFFF;
+477:       width: 13mm;
+478:       height: 9.5mm;
+479:       display: flex;
+480:       align-items: center;
+481:       justify-content: center;
+482:       font-family: 'JetBrains Mono', monospace;
+483:       font-size: 11pt;
+484:       font-weight: 800;
+485:       clip-path: polygon(0 0, 100% 0, calc(100% - 4mm) 100%, 0 100%);
+486:       flex-shrink: 0;
+487:       padding-right: 2.2mm; /* visually balance the slant */
+488:     }
+489: 
+490:     .phase-badge-slanted.active-block {
+491:       background: var(--blue-royal);
+492:     }
+493: 
+494:     .phase-badge-slanted.advisor-block {
+495:       background: var(--accent-gold);
+496:     }
+497: 
+498:     .phase-icon-circle {
+499:       width: 6.2mm;
+500:       height: 6.2mm;
+501:       border: 1px solid var(--blue-royal);
+502:       border-radius: 50%;
+503:       display: flex;
+504:       align-items: center;
+505:       justify-content: center;
+506:       color: var(--blue-royal);
+507:       margin-left: 3.2mm;
+508:       flex-shrink: 0;
+509:     }
+510: 
+511:     .phase-icon-circle.active-block {
+512:       border-color: var(--blue-cyan);
+513:       color: var(--blue-cyan);
+514:     }
+515: 
+516:     .phase-icon-circle.advisor-block {
+517:       border-color: var(--accent-gold);
+518:       color: var(--accent-gold);
+519:     }
+520: 
+521:     .phase-header-text {
+522:       display: flex;
+523:       flex-direction: column;
+524:       margin-left: 3.2mm;
+525:       flex-grow: 1;
+526:     }
+527: 
+528:     .phase-title {
+529:       font-size: 8.5pt;
+530:       font-weight: 800;
+531:       color: var(--blue-navy);
+532:       line-height: 1.25;
+533:     }
+534: 
+535:     .phase-timeline-text {
+536:       font-size: 6.2pt;
+537:       color: var(--txt-muted);
+538:       font-weight: 600;
+539:       text-transform: uppercase;
+540:       letter-spacing: 0.03em;
+541:       margin-top: 0.1mm;
+542:     }
+543: 
+544:     .phase-card-body {
+545:       padding: 2.8mm 4.5mm;
+546:     }
+547: 
+548:     .phase-text {
+549:       font-size: 7.2pt;
+550:       line-height: 1.5;
+551:       color: var(--txt-secondary);
+552:       margin-bottom: 1.2mm;
+553:     }
+554: 
+555:     .phase-text:last-child {
+556:       margin-bottom: 0;
+557:     }
+558: 
+559:     /* Roadmap Page Sub-headings */
+560:     .roadmap-section-intro {
+561:       font-size: 7.8pt;
+562:       line-height: 1.5;
+563:       color: var(--txt-primary);
+564:       margin-bottom: 3.5mm;
+565:       border-left: 2px solid var(--blue-cyan);
+566:       padding-left: 3mm;
+567:     }
+568: 
+569:     /* Phase Card Theme Colors */
+570:     .badge-advocate { background: var(--color-advocate) !important; }
+571:     .badge-understand { background: var(--color-understand) !important; }
+572:     .badge-assess { background: var(--color-assess) !important; }
+573:     .badge-recommend { background: var(--color-recommend) !important; }
+574:     .badge-execute { background: var(--color-execute) !important; }
+575:     .badge-measure { background: var(--color-measure) !important; }
+576:     .badge-sustain { background: var(--color-sustain) !important; }
+577:     .badge-partner { background: var(--color-partner) !important; }
+578: 
+579:     .icon-advocate { border-color: var(--color-advocate) !important; color: var(--color-advocate) !important; }
+580:     .icon-understand { border-color: var(--color-understand) !important; color: var(--color-understand) !important; }
+581:     .icon-assess { border-color: var(--color-assess) !important; color: var(--color-assess) !important; }
+582:     .icon-recommend { border-color: var(--color-recommend) !important; color: var(--color-recommend) !important; }
+583:     .icon-execute { border-color: var(--color-execute) !important; color: var(--color-execute) !important; }
+584:     .icon-measure { border-color: var(--color-measure) !important; color: var(--color-measure) !important; }
+585:     .icon-sustain { border-color: var(--color-sustain) !important; color: var(--color-sustain) !important; }
+586:     .icon-partner { border-color: var(--color-partner) !important; color: var(--color-partner) !important; }
+587: 
+588:     .timeline-advocate { color: var(--color-advocate) !important; }
+589:     .timeline-understand { color: var(--color-understand) !important; }
+590:     .timeline-assess { color: var(--color-assess) !important; }
+591:     .timeline-recommend { color: var(--color-recommend) !important; }
+592:     .timeline-execute { color: var(--color-execute) !important; }
+593:     .timeline-measure { color: var(--color-measure) !important; }
+594:     .timeline-sustain { color: var(--color-sustain) !important; }
+595:     .timeline-partner { color: var(--color-partner) !important; }
+596: 
+597:     /* ════════════════════════════════
+598:        9. KPI BOXES & CTA BANNER (Page 4)
+599:        ════════════════════════════════ */
+600:     .kpi-grid {
+601:       display: grid;
+602:       grid-template-columns: repeat(4, 1fr);
+603:       gap: 3mm;
+604:       margin-top: 4mm;
+605:       margin-bottom: 5.5mm;
+606:     }
+607: 
+608:     .kpi-card {
+609:       border: 1px solid var(--border-light);
+610:       padding: 2.5mm 3mm;
+611:       background: var(--bg-tint);
+612:       text-align: center;
+613:     }
+614: 
+615:     .kpi-label {
+616:       font-family: 'Inter', sans-serif;
+617:       font-size: 6pt;
+618:       font-weight: 800;
+619:       letter-spacing: 0.05em;
+620:       color: var(--txt-muted);
+621:       text-transform: uppercase;
+622:       margin-bottom: 1mm;
+623:     }
+624: 
+625:     .kpi-val {
+626:       font-size: 7.8pt;
+627:       font-weight: 900;
+628:       color: var(--blue-navy);
+629:       text-transform: uppercase;
+630:     }
+631: 
+632:     .kpi-desc {
+633:       font-size: 6pt;
+634:       color: var(--txt-secondary);
+635:       line-height: 1.3;
+636:       margin-top: 0.8mm;
+637:     }
+638: 
+639:     .cta-banner {
+640:       background: var(--blue-navy);
+641:       color: #FFFFFF;
+642:       padding: 5mm 6mm;
+643:       border-left: 3.5px solid var(--accent-gold);
+644:       margin-top: auto;
+645:     }
+646: 
+647:     .cta-title {
+648:       font-size: 8.5pt;
+649:       font-weight: 800;
+650:       letter-spacing: 0.05em;
+651:       color: #FFFFFF;
+652:       text-transform: uppercase;
+653:       margin-bottom: 1.5mm;
+654:     }
+655: 
+656:     .cta-body {
+657:       font-size: 7.2pt;
+658:       color: #94A3B8;
+659:       line-height: 1.45;
+660:     }
+661: 
+662:     /* ════════════════════════════════
+663:        10. PRINT LAYOUT SPECIFICS (A4 Portrait)
+664:        ════════════════════════════════ */
+665:     @page {
+666:       size: A4 portrait;
+667:       margin: 0;
+668:     }
+669: 
+670:     @media print {
+671:       body {
+672:         background: #FFFFFF;
+673:         padding: 0;
+674:         margin: 0;
+675:       }
+676: 
+677:       .page {
+678:         margin: 0 !important;
+679:         border: none !important;
+680:         box-shadow: none !important;
+681:         page-break-after: always !important;
+682:         width: var(--a4-width) !important;
+683:         height: var(--a4-height) !important;
+684:         padding: 15mm 18mm 13mm 18mm !important;
+685:       }
+686: 
+687:       .page:last-child {
+688:         page-break-after: avoid !important;
+689:       }
+690: 
+691:       * {
+692:         -webkit-print-color-adjust: exact !important;
+693:         print-color-adjust: exact !important;
+694:       }
+695:     }
+696:   </style>
+697: </head>
+698: <body>
+699: 
+700:   <!-- ════════════════════════════════
+701:        PAGE 1: TITLE & ENGAGEMENT PARADIGM
+702:        ════════════════════════════════ -->
+703:   <div class="page" id="page-1">
+704:     <div class="running-header">
+705:       <span class="confidential">CONFIDENTIAL</span>
+706:       <span>The Founder's Office Partner</span>
+707:     </div>
+708: 
+709:     <!-- Title Block -->
+710:     <div style="margin-top: 2.5mm; margin-bottom: 5.5mm; border-bottom: 1.5px solid var(--border-light); padding-bottom: 4.5mm;">
+711:       <p style="font-size: 7.5pt; font-weight: 800; letter-spacing: 0.15em; color: var(--accent-gold); text-transform: uppercase; margin-bottom: 2mm;">Embedded Partnership</p>
+712:       <h1 class="title-doc" style="line-height: 1.1; margin-bottom: 1.5mm; letter-spacing: -0.01em;">
+713:         THE FOUNDER’S <span style="color: var(--blue-royal);">OFFICE PARTNER</span>
+714:       </h1>
+715:       <p class="subtitle-doc" style="margin-top: 0; color: var(--txt-secondary); text-transform: none; font-weight: 500; letter-spacing: 0.02em;">An Embedded Operating Model for System-Driven Scale</p>
+716:     </div>
+717: 
+718:     <!-- Asymmetric Split Grid -->
+719:     <div class="page-1-grid" style="margin-bottom: auto;">
+720:       
+721:       <!-- Left Column: How We Will Work Together & Stacked Comparison -->
+722:       <div>
+723:         <h2 class="title-section" style="margin-bottom: 3.5mm;">How We Will Work Together</h2>
+724:         
+725:         <p class="lead-paragraph">
+726:           Most consultants operate from a safe distance. They point out your flaws, tell you what needs fixing, and exit before the actual friction of training teams and deploying software begins.
+727:         </p>
+728:         
+729:         <p class="body" style="margin-bottom: 4mm;">
+730:           I work on a completely different paradigm. I get in the trenches with you to figure out what really moves the needle. I don't look at finance, technology, workflows, or people as isolated pieces; I tie them all together into a single, cohesive engine. My ultimate goal is to build an organization that can scale smoothly, measure its own performance, and run predictably without burning you out or requiring your constant personal intervention.
+731:         </p>
+732: 
+733:         <p class="body" style="margin-bottom: 4.5mm; font-weight: 600; color: var(--blue-navy);">
+734:           To make that happen, I will guide your business through a deliberate, eight-phase evolutionary journey.
+735:         </p>
+736: 
+737:         <!-- Vertical Comparison Stack -->
+738:         <div style="display: flex; flex-direction: column; gap: 3.5mm;">
+739:           <!-- Traditional Card -->
+740:           <div class="compare-card">
+741:             <div class="compare-title">Traditional Consulting</div>
+742:             <div class="compare-bullet">
+743:               <span class="bullet-icon-grey">
+744:                 <svg viewBox="0 0 24 24" width="7" height="7" fill="none" stroke="#64748B" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+745:               </span>
+746:               <p class="body-sm">Operate from a safe distance, advising without operational friction.</p>
+747:             </div>
+748:             <div class="compare-bullet">
+749:               <span class="bullet-icon-grey">
+750:                 <svg viewBox="0 0 24 24" width="7" height="7" fill="none" stroke="#64748B" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+751:               </span>
+752:               <p class="body-sm">Address pieces in isolation (finance, tech, workflows, or people).</p>
+753:             </div>
+754:             <div class="compare-bullet">
+755:               <span class="bullet-icon-grey">
+756:                 <svg viewBox="0 0 24 24" width="7" height="7" fill="none" stroke="#64748B" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+757:               </span>
+758:               <p class="body-sm">Exit the business before onboarding vendors or training teams begins.</p>
+759:             </div>
+760:           </div>
+761: 
+762:           <!-- Embedded Card -->
+763:           <div class="compare-card blue-focus">
+764:             <div class="compare-title" style="color: var(--blue-royal); display: flex; align-items: center; gap: 1.5mm;">
+765:               Embedded Partner
+766:               <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="var(--accent-gold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+767:             </div>
+768:             <div class="compare-bullet">
+769:               <span class="bullet-icon-gold">
+770:                 <svg viewBox="0 0 24 24" width="8" height="8" fill="none" stroke="var(--accent-gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+771:               </span>
+772:               <p class="body-sm" style="color: var(--txt-primary); font-weight: 500;">Embed directly inside the organization alongside the executive team.</p>
+773:             </div>
+774:             <div class="compare-bullet">
+775:               <span class="bullet-icon-gold">
+776:                 <svg viewBox="0 0 24 24" width="8" height="8" fill="none" stroke="var(--accent-gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+777:               </span>
+778:               <p class="body-sm" style="color: var(--txt-primary); font-weight: 500;">Tie all operational systems together into a single cohesive engine.</p>
+779:             </div>
+780:             <div class="compare-bullet">
+781:               <span class="bullet-icon-gold">
+782:                 <svg viewBox="0 0 24 24" width="8" height="8" fill="none" stroke="var(--accent-gold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+783:               </span>
+784:               <p class="body-sm" style="color: var(--txt-primary); font-weight: 500;">Coordinate onboarding, coach managers, and manage training friction.</p>
+785:             </div>
+786:           </div>
+787:         </div>
+788:       </div>
+789: 
+790:       <!-- Right Column: Stance Quote & The Core Mandates -->
+791:       <div style="display: flex; flex-direction: column; gap: 4.5mm;">
+792:         <!-- My Stance Quote -->
+793:         <div class="stance-box" style="position: relative; margin-bottom: 0;">
+794:           <!-- Giant Editorial Quote Mark Watermark -->
+795:           <span style="font-family: Georgia, serif; font-size: 44pt; line-height: 1; color: var(--accent-gold); opacity: 0.14; position: absolute; top: 1mm; left: 3mm; user-select: none;">“</span>
+796:           <div class="stance-title">My Stance</div>
+797:           <p class="stance-text" style="position: relative; z-index: 10;">
+798:             "I don’t pull files from a template, hand you a slide deck of recommendations, and walk away. I embed myself directly inside your business alongside you and your executive team as a true execution partner. We are going to take your business vision and turn it into a structured, highly predictable operational reality."
+799:           </p>
+800:           <div class="stance-signature">— Embedded Execution Alliance</div>
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.

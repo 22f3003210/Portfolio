@@ -1,12 +1,12 @@
 import { SectionLabel } from '../../components/SectionLabel';
 import { ScrollReveal } from '../../components/ScrollReveal';
 
-export function InsightsHero() {
+export function CaseStudiesHero() {
   return (
     <section className="hero-gradient pt-32 pb-16">
       <div className="content-max">
         <ScrollReveal>
-          <SectionLabel variant="pill">INSIGHTS</SectionLabel>
+          <SectionLabel variant="pill">CASE STUDIES</SectionLabel>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight mt-4">

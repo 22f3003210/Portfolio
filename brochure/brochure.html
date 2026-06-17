@@ -2,644 +2,2667 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Scale With Abraham — Tri-fold Brochure</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Founder's Office Partner — Executive Consulting Framework</title>
+  <!-- Google Fonts: Manrope for title contrast, Inter for readable body, JetBrains Mono for modern monospace metrics/labels -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     /* ════════════════════════════════
-       RESET
-    ════════════════════════════════ */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+       1. COLOR SYSTEM (Arctic Executive Theme)
+       ════════════════════════════════ */
+    :root {
+      --bg-document: #E2E8F0;      /* Outer scroll background */
+      
+      /* Page & Card Surface Backgrounds */
+      --bg-page: #F4F7FB;          /* Soft Cloud background */
+      --bg-card: #FFFFFF;          /* Pure White card backgrounds */
+      --bg-tint-blue: #E8F0FE;     /* Ice Blue tint */
+      
+      /* Typography Colors */
+      --txt-primary: #1E293B;      /* Charcoal Primary text */
+      --txt-secondary: #64748B;    /* Slate Secondary text */
+      --txt-muted: #94A3B8;        /* Muted caption text */
+      
+      /* Brand Accent Colors */
+      --blue-navy: #0F1E36;        /* Deep Slate (Primary Navy) */
+      --blue-slate: #1E4D8C;       /* Corporate Azure (Primary Blue) */
+      --accent-azure: #3B82F6;     /* Bright Azure Accent */
+      --accent-teal: #0D9488;      /* Success/Positive Teal */
+      --accent-coral: #E85D4E;     /* Alert Coral for risks */
+      
+      /* Borders */
+      --border-color: #D1D9E6;     /* Frost border */
+      
+      /* Layout Dimensions */
+      --a4-width: 210mm;
+      --a4-height: 297mm;
+    }
 
     /* ════════════════════════════════
-       PRINT: each .page = one A4 landscape
-    ════════════════════════════════ */
+       2. RESET & BASE DOCUMENT STYLING
+       ════════════════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--bg-document);
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--txt-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10mm 0;
+    }
+
+    /* ════════════════════════════════
+       3. VERTICAL PORTRAIT PAGES (A4)
+       ════════════════════════════════ */
+    .page {
+      width: var(--a4-width);
+      height: var(--a4-height);
+      background: var(--bg-page);
+      padding: 10mm 16mm 8mm 16mm;
+      margin-bottom: 12mm;
+      box-shadow: 0 10px 30px rgba(15, 30, 54, 0.05);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .page:last-child {
+      margin-bottom: 0;
+    }
+
+    .page > * {
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════
+       4. EXECUTIVE HEADER BANNER (Full Bleed Top)
+       ════════════════════════════════ */
+    .header-banner {
+      background: linear-gradient(135deg, var(--blue-navy) 0%, var(--blue-slate) 100%);
+      margin: -10mm -16mm 4mm -16mm;
+      padding: 8mm 16mm 6mm 16mm;
+      color: #FFFFFF;
+      border-bottom: 3px solid var(--accent-azure);
+      position: relative;
+    }
+    
+    .header-banner-nav {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--accent-azure);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 2mm;
+      margin-bottom: 3.5mm;
+      text-transform: uppercase;
+    }
+    
+    .header-banner-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 24pt;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+    
+    .header-banner-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5pt;
+      font-weight: 500;
+      color: #E2E8F0;
+      margin-top: 1.8mm;
+    }
+
+    .header-banner-subtitle span.blue-text {
+      color: var(--accent-azure);
+      font-weight: 700;
+    }
+
+    .running-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7pt;
+      font-weight: 500;
+      color: var(--txt-secondary);
+      border-top: 1px solid var(--border-color);
+      padding-top: 2.5mm;
+      margin-top: auto;
+      letter-spacing: 0.05em;
+    }
+
+    .running-footer .page-number {
+      font-weight: 700;
+      color: var(--blue-slate);
+    }
+
+    /* ════════════════════════════════
+       5. TYPOGRAPHY & TEXT CONTROLS
+       ════════════════════════════════ */
+    .title-section {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10pt;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: var(--blue-navy);
+      margin-bottom: 3.5mm;
+      display: flex;
+      align-items: center;
+      gap: 3mm;
+      text-transform: uppercase;
+    }
+
+    .title-section::after {
+      content: '';
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .body {
+      font-family: 'Inter', sans-serif;
+      font-size: 8.2pt;
+      line-height: 1.55;
+      color: var(--txt-primary);
+    }
+
+    .body-sm {
+      font-family: 'Inter', sans-serif;
+      font-size: 7.8pt;
+      line-height: 1.45;
+      color: var(--txt-primary);
+    }
+
+    /* ════════════════════════════════
+       6. COMPONENT STYLING
+       ════════════════════════════════ */
+    /* Pull Quote Box (Philosophy) */
+    .philosophy-box {
+      background: var(--bg-tint-blue);
+      border-left: 4px solid var(--accent-azure);
+      padding: 6mm 7mm;
+      margin-bottom: 5.5mm;
+      position: relative;
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(15, 30, 54, 0.04);
+    }
+    .philosophy-box::before {
+      content: '“';
+      position: absolute;
+      top: -2mm;
+      right: 4mm;
+      font-size: 34pt;
+      font-family: 'Manrope', sans-serif;
+      color: rgba(59, 130, 246, 0.1);
+      font-weight: 800;
+      line-height: 1;
+    }
+    .philosophy-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.5pt;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent-azure);
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+    }
+    .philosophy-text {
+      font-size: 9.2pt;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--blue-navy);
+      font-style: italic;
+    }
+
+
+
+    /* The Nine Constraints Container */
+    .constraints-container {
+      background: var(--bg-tint-blue);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 4mm 4.5mm;
+      box-shadow: 0 4px 8px rgba(15, 23, 42, 0.02);
+    }
+    .constraints-title-new {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9.5pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+      margin-bottom: 2.5mm;
+      letter-spacing: 0.02em;
+    }
+    .constraints-item-new {
+      display: flex;
+      gap: 2.5mm;
+      align-items: start;
+      border-bottom: 1px dashed var(--border-color);
+      padding: 2.2mm 0;
+    }
+    .constraints-item-new:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .constraints-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      font-weight: 700;
+      color: var(--accent-azure);
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+    .constraints-text-new {
+      font-size: 7.2pt;
+      line-height: 1.4;
+      color: var(--txt-primary);
+    }
+
+    /* Scale Threshold Banner */
+    .scale-card-navy {
+      background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 60%, #F5FBF0 100%);
+      border-left: 5px solid #0170B9;
+      border-top: 1px solid rgba(1,112,185,0.18);
+      border-right: 1px solid rgba(1,112,185,0.12);
+      border-bottom: 1px solid rgba(1,112,185,0.12);
+      border-radius: 5px;
+      padding: 5mm 6mm 5mm 7mm;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(1,112,185,0.08), 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .scale-card-navy::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 28mm;
+      height: 100%;
+      background: linear-gradient(to left, rgba(140,198,63,0.06), transparent);
+      pointer-events: none;
+    }
+    .scale-card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6pt;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: #0170B9;
+      text-transform: uppercase;
+      margin-bottom: 2mm;
+      display: flex;
+      align-items: center;
+      gap: 1.5mm;
+    }
+    .scale-card-label::before {
+      content: '';
+      display: inline-block;
+      width: 3.5mm;
+      height: 0.6mm;
+      background: #0170B9;
+      border-radius: 1px;
+    }
+    .scale-card-main {
+      font-family: 'Manrope', sans-serif;
+      font-size: 10pt;
+      font-weight: 800;
+      line-height: 1.45;
+      color: #0B1E2E;
+      margin-bottom: 2.5mm;
+    }
+    .scale-card-sub {
+      font-size: 7.2pt;
+      line-height: 1.5;
+      color: #3D5066;
+      font-style: italic;
+      border-top: 1px solid rgba(1,112,185,0.15);
+      padding-top: 2.5mm;
+    }
+
+    /* Split Details grid */
+    .split-details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: 5.5mm;
+    }
+    /* --- OLD STATE card --- */
+    .split-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+      padding: 5mm 6mm;
+      background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF5 70%, #FFF 100%);
+      border: 1px solid rgba(200,100,30,0.18);
+      border-left: 4px solid #E07B39;
+      box-shadow: 0 2px 10px rgba(200,100,30,0.08);
+    }
+    .split-card .wm-icon {
+      position: absolute;
+      bottom: -4mm;
+      right: -3mm;
+      opacity: 0.055;
+      width: 36mm;
+      height: 36mm;
+      pointer-events: none;
+    }
+    .split-card .state-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.5mm;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #B85C20;
+      background: rgba(224,123,57,0.10);
+      padding: 0.8mm 2mm;
+      border-radius: 2px;
+      margin-bottom: 2.5mm;
+    }
+    .split-card .state-badge .badge-dot {
+      width: 1.8mm; height: 1.8mm;
+      border-radius: 50%;
+      background: #E07B39;
+      flex-shrink: 0;
+    }
+    /* --- NEW STATE card --- */
+    .split-card.highlight {
+      background: linear-gradient(135deg, #EBF5FF 0%, #F5FBFF 55%, #F0FAEC 100%);
+      border: 1px solid rgba(1,112,185,0.20);
+      border-left: 4px solid #0170B9;
+      box-shadow: 0 2px 10px rgba(1,112,185,0.10);
+    }
+    .split-card.highlight .state-badge {
+      color: #0A5C8F;
+      background: rgba(1,112,185,0.10);
+    }
+    .split-card.highlight .state-badge .badge-dot {
+      background: #0170B9;
+    }
+    .split-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 8.8pt;
+      font-weight: 900;
+      color: #0B1E2E;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 3mm;
+      line-height: 1.3;
+    }
+    .split-card .card-divider {
+      height: 0.5px;
+      background: linear-gradient(to right, rgba(200,100,30,0.30), transparent);
+      margin-bottom: 3mm;
+    }
+    .split-card.highlight .card-divider {
+      background: linear-gradient(to right, rgba(1,112,185,0.30), transparent);
+    }
+    .split-body {
+      font-size: 7.8pt;
+      line-height: 1.55;
+      color: #3D4F60;
+    }
+    .split-body .bullet-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 2mm;
+      margin-bottom: 1.8mm;
+    }
+    .split-body .bullet-row:last-child { margin-bottom: 0; }
+    .split-body .b-icon {
+      width: 3mm; height: 3mm;
+      flex-shrink: 0;
+      margin-top: 0.3mm;
+    }
+    .split-body p {
+      margin-bottom: 2.5mm;
+    }
+    .split-body p:last-child {
+      margin-bottom: 0;
+    }
+
+
+    /* Leak Audit Section Style (Page 2) */
+    /* Systemic Fallacy Section (Page 2) */
+    .fallacy-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5mm;
+      margin-bottom: 4mm;
+      align-items: stretch;
+    }
+    .fallacy-left {
+      padding: 4mm 5mm;
+    }
+    .fallacy-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #8CC63F;
+      margin-bottom: 1.5mm;
+    }
+    .fallacy-heading {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11pt;
+      font-weight: 900;
+      color: #0B1E2E;
+      line-height: 1.25;
+      margin-bottom: 2mm;
+    }
+    .fallacy-body {
+      font-size: 6.8pt;
+      color: #4A5568;
+      line-height: 1.5;
+      margin-bottom: 3mm;
+    }
+    .fallacy-q-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5mm;
+    }
+    .fallacy-q {
+      display: flex;
+      align-items: flex-start;
+      gap: 2mm;
+      background: #FFFFFF;
+      border: 1px solid rgba(1,112,185,0.15);
+      border-radius: 4px;
+      padding: 2.8mm 3.5mm;
+      font-size: 6.8pt;
+      font-weight: 700;
+      color: #1E3A4A;
+      line-height: 1.4;
+      box-shadow: 0 1px 4px rgba(1,112,185,0.06);
+    }
+    .fallacy-q:hover { background: #F0F7FF; }
+    .fallacy-q-dot {
+      width: 2mm; height: 2mm;
+      background: #8CC63F;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 1mm;
+    }
+
+    /* ── Diagnosis Card — teal color scheme ── */
+    .diagnosis-card {
+      background: linear-gradient(180deg, #0C4555 0%, #0D5162 50%, #0C4D5E 100%);
+      border-radius: 7px;
+      border: 1px solid rgba(43,188,204,0.12);
+      padding: 4.5mm 5.5mm;
+      color: #FFFFFF;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(8,45,58,0.35);
+    }
+    .diagnosis-card::before {
+      content: '';
+      position: absolute;
+      top: -12mm; right: -8mm;
+      width: 35mm; height: 35mm;
+      background: radial-gradient(circle, rgba(43,188,204,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .diagnosis-card::after {
+      content: '';
+      position: absolute;
+      bottom: -8mm; left: -6mm;
+      width: 25mm; height: 25mm;
+      background: radial-gradient(circle, rgba(245,168,35,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .diag-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #5EC8D8;
+      margin-bottom: 1.5mm;
+    }
+    .diag-heading {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9.5pt;
+      font-weight: 900;
+      color: #FFFFFF;
+      margin-bottom: 2mm;
+      line-height: 1.3;
+    }
+    .diag-body {
+      font-size: 6.8pt;
+      color: rgba(210,235,240,0.80);
+      line-height: 1.5;
+      margin-bottom: 3mm;
+    }
+    .diag-gap-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5pt;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(94,200,216,0.60);
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding-top: 2.5mm;
+      margin-bottom: 2mm;
+    }
+    .diag-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 5px;
+      padding: 2mm 3mm;
+      margin-bottom: 1.5mm;
+    }
+    .diag-row:last-of-type { margin-bottom: 0; }
+    .diag-row-label { font-size: 6.5pt; font-weight: 700; color: rgba(255,255,255,0.95); }
+    .diag-row-sub   { font-size: 5.5pt; color: rgba(160,215,225,0.60); margin-top: 0.3mm; }
+    .diag-badge-collected {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5pt;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #E8A020;
+      background: rgba(232,160,32,0.16);
+      padding: 0.7mm 2mm;
+      border-radius: 3px;
+      border: 1px solid rgba(232,160,32,0.32);
+    }
+    .diag-badge-missing {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(180,210,215,0.40);
+      background: rgba(255,255,255,0.05);
+      padding: 0.7mm 2mm;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .diag-footer {
+      border-top: 1px solid rgba(255,255,255,0.10);
+      padding-top: 2.5mm;
+      margin-top: 2.5mm;
+    }
+    .diag-footer p {
+      font-size: 6.5pt;
+      color: rgba(210,235,240,0.75);
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.5mm;
+    }
+    .diag-footer .why-line {
+      font-size: 7.5pt;
+      font-weight: 900;
+      color: #4EC8D8;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .leak-audit-section {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 5mm;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 4mm 5mm;
+      margin-bottom: 4mm;
+      box-shadow: 0 1px 3px rgba(15, 30, 54, 0.04);
+      align-items: center;
+    }
+    .leak-audit-title-block {
+      grid-column: 1 / -1;
+      border-bottom: 1.5px solid var(--blue-slate);
+      padding-bottom: 1.5mm;
+      margin-bottom: 1mm;
+    }
+    .leak-audit-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16.5pt;
+      font-weight: 800;
+      color: #0170B9;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+    .leak-audit-subtitle {
+      font-size: 7.2pt;
+      line-height: 1.4;
+      color: var(--txt-secondary);
+      margin-top: 1mm;
+    }
+    .dial-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2mm;
+      justify-content: center;
+      padding-left: 3mm;
+    }
+    .audit-card {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      background: linear-gradient(135deg, #0A4A8F 0%, #0170B9 55%, #0A3D7A 100%);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(1,112,185,0.25);
+    }
+    .audit-card-icon {
+      width: 9mm;
+      min-width: 9mm;
+      background: rgba(11, 30, 46, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5mm 2mm;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .audit-card-icon svg {
+      width: 4.5mm;
+      height: 4.5mm;
+      flex-shrink: 0;
+    }
+    .audit-card-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 7.5pt;
+      font-weight: 900;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 2.8mm 3.5mm;
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    /* ════════════════════════════════
+       7. ROADMAP TIMELINE COMPONENTS (Page 3)
+       ════════════════════════════════ */
+    .roadmap-blocks-row {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 1.8mm;
+      margin-top: 2mm;
+      margin-bottom: 5.5mm;
+      position: relative;
+      width: 100%;
+    }
+
+    .roadmap-block {
+      height: 24mm;
+      padding: 2mm 2mm;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      border-radius: 0;
+      z-index: 2;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    }
+    .roadmap-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5mm;
+      position: relative;
+      z-index: 4;
+    }
+    .roadmap-block-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5mm;
+      height: 5mm;
+      color: #FFFFFF;
+      opacity: 0.95;
+    }
+    .roadmap-block-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18pt;
+      font-weight: 800;
+      color: #FFFFFF;
+      opacity: 0.15;
+      line-height: 1;
+    }
+    .roadmap-block-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .roadmap-block-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 7pt;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0.8mm;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+    .roadmap-block-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 5.8pt;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    /* Phase Card stack */
+    .phase-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      margin-bottom: 4mm;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.02);
+      overflow: hidden;
+      padding-left: 3.5px; /* Alignment spacing for left absolute border glow */
+    }
+    .phase-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3.5px;
+      background: var(--blue-slate);
+      z-index: 2;
+    }
+    .phase-card:nth-child(even)::before {
+      background: var(--accent-teal);
+    }
+    .phase-card:last-child {
+      margin-bottom: 0;
+    }
+    .phase-card-header {
+      display: flex;
+      align-items: center;
+      background: var(--bg-tint-blue);
+      border-bottom: 1px solid var(--border-color);
+      padding: 2.5mm 4mm;
+    }
+    .phase-badge {
+      background: var(--blue-navy);
+      color: #FFFFFF;
+      width: 7mm;
+      height: 7mm;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10pt;
+      font-weight: 700;
+      margin-right: 3mm;
+      flex-shrink: 0;
+    }
+    .phase-icon {
+      color: var(--blue-slate);
+      margin-right: 3mm;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .phase-card:nth-child(even) .phase-icon {
+      color: var(--accent-teal);
+    }
+    .phase-header-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .phase-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 8.5pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .phase-timeline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6pt;
+      font-weight: 600;
+      color: var(--accent-azure);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.5mm;
+    }
+    .phase-card-body {
+      padding: 3.5mm 4.5mm;
+    }
+    .phase-card-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 7.8pt;
+      line-height: 1.5;
+      color: var(--txt-primary);
+      margin-bottom: 2mm;
+    }
+    .phase-card-text:last-child {
+      margin-bottom: 0;
+    }
+    .phase-callout {
+      background: var(--bg-tint-blue);
+      border-left: 3px solid var(--accent-teal);
+      padding: 2.5mm 3.5mm;
+      margin: 3mm 0;
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: 7.8pt;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--blue-navy);
+    }
+
+    /* Sprints Banner (Page 4) */
+    .sprints-banner-new {
+      background: var(--bg-tint-blue);
+      border-left: 3.5px solid var(--blue-slate);
+      border-radius: 4px;
+      padding: 3.5mm 4.5mm;
+      margin-bottom: 4mm;
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.01);
+    }
+    .sprints-banner-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.5pt;
+      font-weight: 700;
+      color: var(--blue-slate);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.2mm;
+    }
+    
+    /* ════════════════════════════════
+       8. KPI BOXES & CTA BANNER (Page 5)
+       ════════════════════════════════ */
+    .kpi-dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4.5mm;
+      margin-top: 4.5mm;
+      margin-bottom: 4.5mm;
+    }
+    .kpi-cell {
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 4mm 3.5mm;
+      background: var(--bg-tint-blue);
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.01);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-cell::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-azure), var(--accent-teal));
+      opacity: 0.3;
+    }
+    .kpi-cell-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6pt;
+      font-weight: 700;
+      color: var(--txt-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5mm;
+    }
+    .kpi-cell-val {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+    }
+    .kpi-cell-desc {
+      font-size: 6.5pt;
+      line-height: 1.35;
+      color: var(--txt-secondary);
+      margin-top: 1.2mm;
+    }
+
+    .boardroom-cta {
+      background: linear-gradient(135deg, var(--bg-tint-blue) 0%, var(--bg-page) 100%);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--accent-azure);
+      border-radius: 6px;
+      padding: 5mm 6mm;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.01);
+    }
+    .boardroom-cta::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      height: 3.5px;
+      background: linear-gradient(90deg, var(--blue-slate), var(--accent-azure));
+      border-radius: 6px 6px 0 0;
+    }
+    .boardroom-cta-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+      letter-spacing: 0.05em;
+    }
+    .boardroom-cta-body {
+      font-size: 7.5pt;
+      line-height: 1.5;
+      color: var(--txt-primary);
+      max-width: 140mm;
+      margin: 0 auto;
+    }
+
+    /* Compact Phase Grid for Page 3 */
+    .phase-grid-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4.5mm;
+      margin-bottom: auto;
+    }
+    .phase-grid-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(15, 30, 54, 0.12);
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(11,30,46,0.03);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      transform: skewX(-6.5deg);
+      margin-left: 2.5mm;
+      margin-right: 2.5mm;
+    }
+    .phase-grid-header {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, #F9FBF8 0%, #FFFFFF 100%);
+      border-bottom: 1px solid rgba(11,30,46,0.05);
+      padding: 0 4.5mm 0 0;
+      gap: 4mm;
+      height: 13.5mm;
+      overflow: hidden;
+    }
+    .phase-grid-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28mm;
+      height: 100%;
+      background: #0F1E36;
+      color: #FFFFFF;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11pt;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .phase-grid-badge span {
+      transform: skewX(6.5deg);
+      display: inline-block;
+      padding-left: 3.5mm;
+      letter-spacing: -0.02em;
+    }
+    .phase-grid-icon-circle {
+      border: 1.5px solid var(--accent-azure);
+      background: #FFFFFF;
+      border-radius: 50%;
+      width: 8.5mm;
+      height: 8.5mm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 2mm;
+      transform: skewX(6.5deg);
+    }
+    .phase-grid-icon-circle svg {
+      width: 4.8mm;
+      height: 4.8mm;
+      stroke: var(--accent-azure);
+      fill: none;
+    }
+    .phase-grid-header-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transform: skewX(6.5deg);
+    }
+    .phase-grid-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 9pt;
+      font-weight: 850;
+      color: #0F1E36;
+      line-height: 1.25;
+    }
+    .phase-grid-timeline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.8pt;
+      font-weight: 600;
+      color: #64748B;
+      letter-spacing: 0.02em;
+      margin-top: 0.8mm;
+    }
+    .phase-grid-body {
+      padding: 4.2mm 6.5mm 4.2mm 8.5mm;
+    }
+    .phase-grid-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 7.2pt;
+      line-height: 1.45;
+      color: var(--txt-primary);
+      transform: skewX(6.5deg);
+    }
+    .phase-grid-text p {
+      margin-bottom: 2mm;
+    }
+    .phase-grid-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 8 Phases Colored Themes */
+    .phase-grid-card.phase-1 { background: #2F5C69; }
+    .phase-grid-card.phase-2 { background: #2A478F; }
+    .phase-grid-card.phase-3 { background: #583088; }
+    .phase-grid-card.phase-4 { background: #396E3C; }
+    .phase-grid-card.phase-5 { background: #9A612E; }
+    .phase-grid-card.phase-6 { background: #962E43; }
+    .phase-grid-card.phase-7 { background: #477D88; }
+    .phase-grid-card.phase-8 { background: #3E4955; }
+
+    /* Theme override rules for filled cards */
+    .phase-grid-card.phase-1, .phase-grid-card.phase-2, .phase-grid-card.phase-3, .phase-grid-card.phase-4,
+    .phase-grid-card.phase-5, .phase-grid-card.phase-6, .phase-grid-card.phase-7, .phase-grid-card.phase-8 {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(11,30,46,0.08);
+    }
+    .phase-grid-card.phase-1 .phase-grid-header, .phase-grid-card.phase-2 .phase-grid-header, .phase-grid-card.phase-3 .phase-grid-header, .phase-grid-card.phase-4 .phase-grid-header,
+    .phase-grid-card.phase-5 .phase-grid-header, .phase-grid-card.phase-6 .phase-grid-header, .phase-grid-card.phase-7 .phase-grid-header, .phase-grid-card.phase-8 .phase-grid-header {
+      background: transparent;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .phase-grid-card.phase-1 .phase-grid-badge, .phase-grid-card.phase-2 .phase-grid-badge, .phase-grid-card.phase-3 .phase-grid-badge, .phase-grid-card.phase-4 .phase-grid-badge,
+    .phase-grid-card.phase-5 .phase-grid-badge, .phase-grid-card.phase-6 .phase-grid-badge, .phase-grid-card.phase-7 .phase-grid-badge, .phase-grid-card.phase-8 .phase-grid-badge {
+      background: rgba(0, 0, 0, 0.22);
+      color: #FFFFFF;
+    }
+    .phase-grid-card.phase-1 .phase-grid-icon-circle, .phase-grid-card.phase-2 .phase-grid-icon-circle, .phase-grid-card.phase-3 .phase-grid-icon-circle, .phase-grid-card.phase-4 .phase-grid-icon-circle,
+    .phase-grid-card.phase-5 .phase-grid-icon-circle, .phase-grid-card.phase-6 .phase-grid-icon-circle, .phase-grid-card.phase-7 .phase-grid-icon-circle, .phase-grid-card.phase-8 .phase-grid-icon-circle {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.65) !important;
+    }
+    .phase-grid-card.phase-1 .phase-grid-icon-circle svg, .phase-grid-card.phase-2 .phase-grid-icon-circle svg, .phase-grid-card.phase-3 .phase-grid-icon-circle svg, .phase-grid-card.phase-4 .phase-grid-icon-circle svg,
+    .phase-grid-card.phase-5 .phase-grid-icon-circle svg, .phase-grid-card.phase-6 .phase-grid-icon-circle svg, .phase-grid-card.phase-7 .phase-grid-icon-circle svg, .phase-grid-card.phase-8 .phase-grid-icon-circle svg {
+      stroke: #FFFFFF !important;
+    }
+    .phase-grid-card.phase-1 .phase-grid-title, .phase-grid-card.phase-2 .phase-grid-title, .phase-grid-card.phase-3 .phase-grid-title, .phase-grid-card.phase-4 .phase-grid-title,
+    .phase-grid-card.phase-5 .phase-grid-title, .phase-grid-card.phase-6 .phase-grid-title, .phase-grid-card.phase-7 .phase-grid-title, .phase-grid-card.phase-8 .phase-grid-title {
+      color: #FFFFFF;
+    }
+    .phase-grid-card.phase-1 .phase-grid-timeline, .phase-grid-card.phase-2 .phase-grid-timeline, .phase-grid-card.phase-3 .phase-grid-timeline, .phase-grid-card.phase-4 .phase-grid-timeline,
+    .phase-grid-card.phase-5 .phase-grid-timeline, .phase-grid-card.phase-6 .phase-grid-timeline, .phase-grid-card.phase-7 .phase-grid-timeline, .phase-grid-card.phase-8 .phase-grid-timeline {
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .phase-grid-card.phase-1 .phase-grid-text, .phase-grid-card.phase-2 .phase-grid-text, .phase-grid-card.phase-3 .phase-grid-text, .phase-grid-card.phase-4 .phase-grid-text,
+    .phase-grid-card.phase-5 .phase-grid-text, .phase-grid-card.phase-6 .phase-grid-text, .phase-grid-card.phase-7 .phase-grid-text, .phase-grid-card.phase-8 .phase-grid-text {
+      color: #F8FAFC;
+    }
+    .phase-grid-card.phase-1 .phase-grid-text strong, .phase-grid-card.phase-2 .phase-grid-text strong, .phase-grid-card.phase-3 .phase-grid-text strong, .phase-grid-card.phase-4 .phase-grid-text strong,
+    .phase-grid-card.phase-5 .phase-grid-text strong, .phase-grid-card.phase-6 .phase-grid-text strong, .phase-grid-card.phase-7 .phase-grid-text strong, .phase-grid-card.phase-8 .phase-grid-text strong {
+      color: #FFFFFF;
+    }
+
+    /* Outcomes Bridge Grid Dashboard (Chemical Reaction Styling) */
+    .outcome-bridge-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4mm;
+      width: 100%;
+      position: relative;
+    }
+    .outcome-bridge-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.8mm;
+    }
+    .bridge-input-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(1,112,185,0.15);
+      border-radius: 6px;
+      padding: 2.5mm 3.5mm;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 2mm;
+      box-shadow: 0 2px 6px rgba(11,30,46,0.04);
+      position: relative;
+      z-index: 2;
+    }
+    .bridge-input-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 7.6pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    .bridge-outcome-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(140,198,63,0.3);
+      border-radius: 6px;
+      padding: 2.5mm 3.5mm;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 2mm;
+      box-shadow: 0 2px 6px rgba(11,30,46,0.04);
+      position: relative;
+      z-index: 2;
+    }
+    .bridge-outcome-label {
+      font-family: 'Manrope', sans-serif;
+      font-size: 7.6pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+    .bridge-center-card {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(59, 130, 246, 0.4);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(11,30,46,0.04);
+      padding: 4.5mm 3.5mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--blue-navy);
+    }
+    .bridge-center-decor {
+      border-top: 3px double rgba(255, 255, 255, 0.35);
+      border-bottom: 3px double rgba(255, 255, 255, 0.35);
+      height: 5px;
+      width: 85%;
+      margin: 2mm 0;
+    }
+
+    /* Evolution Path Chain for Page 3 Bottom */
+    .evolution-chain {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-tint-blue);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2.5mm 4mm;
+      margin-top: auto;
+    }
+    .chain-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.2pt;
+      font-weight: 700;
+      color: var(--blue-slate);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .chain-badges-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5mm;
+    }
+    .chain-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6pt;
+      font-weight: 700;
+      padding: 0.8mm 2mm;
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      border-radius: 2px;
+      color: var(--txt-secondary);
+      text-transform: uppercase;
+    }
+    .chain-badge.active {
+      background: var(--blue-navy);
+      color: #FFFFFF;
+      border-color: var(--blue-navy);
+    }
+    .chain-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.5pt;
+      color: var(--txt-muted);
+      font-weight: 700;
+    }
+
+    /* ════════════════════════════════
+       9. PRINT LAYOUT SPECIFICS (A4 Portrait)
+       ════════════════════════════════ */
     @page {
-      size: A4 landscape;
+      size: A4 portrait;
       margin: 0;
     }
 
     @media print {
-      html, body { width: 297mm; background: white; }
-      .page { page-break-after: always; }
-      .page:last-child { page-break-after: avoid; }
-      .screen-only { display: none; }
-    }
+      html, body {
+        width: 210mm !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #FFFFFF !important;
+        display: block !important;
+        align-items: unset !important;
+      }
 
-    /* ════════════════════════════════
-       SCREEN: preview wrapper
-    ════════════════════════════════ */
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #94A3B8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      padding: 0;
-    }
+      .page {
+        width: 210mm !important;
+        height: 297mm !important;
+        margin: 0 !important;
+        padding: 10mm 16mm 8mm 16mm !important;
+        border: none !important;
+        box-shadow: none !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        position: relative !important;
+      }
 
-    .screen-only {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 9px; font-weight: 700;
-      color: #475569; text-transform: uppercase;
-      letter-spacing: .18em; text-align: center;
-      padding: 12px 0 6px;
-    }
+      .page:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
 
-    /* ════════════════════════════════
-       PAGE = A4 landscape (297 × 210 mm)
-    ════════════════════════════════ */
-    .page {
-      width: 297mm;
-      height: 210mm;
-      display: flex;
-      flex-direction: row;
-      overflow: hidden;
-      box-shadow: 0 8px 40px rgba(0,0,0,.35);
-      position: relative;
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
     }
-
-    /* ════════════════════════════════
-       PANEL = 99 × 210 mm
-    ════════════════════════════════ */
-    .panel {
-      width: 99mm;
-      height: 210mm;
-      flex-shrink: 0;
-      overflow: hidden;
-      position: relative;
-    }
-    /* fold guides */
-    .panel + .panel::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 1px;
-      background: rgba(255,255,255,.08);
-      z-index: 10;
-      pointer-events: none;
-    }
-    .outside-sheet .panel + .panel::before {
-      background: rgba(0,0,0,.07);
-    }
-
-    /* ════════════════════════════════
-       COLOURS
-    ════════════════════════════════ */
-    :root {
-      --navy: #0B1E2E;
-      --dark: #071624;
-      --blue: #0170B9;
-      --grn:  #8BC63F;
-      --lt:   #F8FAFC;
-      --sl:   #64748B;
-    }
-    .bg-navy { background: var(--navy); }
-    .bg-dark { background: var(--dark); }
-    .bg-lt   { background: var(--lt);  }
-
-    /* ════════════════════════════════
-       PANEL INNER PADDING
-    ════════════════════════════════ */
-    .inner {
-      padding: 8.5mm 7.5mm 8mm;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ════════════════════════════════
-       DECORATIVE BLOB
-    ════════════════════════════════ */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(50px);
-      pointer-events: none;
-    }
-
-    /* ════════════════════════════════
-       TAG / BADGE
-    ════════════════════════════════ */
-    .tag {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 5.5pt; font-weight: 700;
-      letter-spacing: .18em; text-transform: uppercase;
-      padding: 2pt 6pt; border-radius: 2pt;
-    }
-    .tag-g { color: var(--grn);  border: .5pt solid rgba(139,198,63,.35); }
-    .tag-b { color: var(--blue); border: .5pt solid rgba(1,112,185,.35); }
-    .tag-w { color: rgba(255,255,255,.5); border: .5pt solid rgba(255,255,255,.18); }
-    .tag-n { color: var(--navy); border: .5pt solid rgba(11,30,46,.25); }
-
-    /* ════════════════════════════════
-       TYPOGRAPHY (pt units for print)
-    ════════════════════════════════ */
-    .title-xl {
-      font-size: 17pt; font-weight: 900;
-      line-height: 1.1; letter-spacing: -.03em;
-      color: #fff;
-    }
-    .title-lg {
-      font-size: 11.5pt; font-weight: 800;
-      line-height: 1.2; letter-spacing: -.025em;
-    }
-    .title-md {
-      font-size: 8.5pt; font-weight: 800;
-      line-height: 1.25;
-    }
-    .body {
-      font-size: 6.8pt; line-height: 1.65; font-weight: 400;
-    }
-    .body-sm {
-      font-size: 6.2pt; line-height: 1.6; font-weight: 400;
-    }
-    .mono { font-family: 'JetBrains Mono', monospace; }
-
-    /* ════════════════════════════════
-       RULE
-    ════════════════════════════════ */
-    .hr-w { height: .5pt; background: rgba(255,255,255,.09); margin: 5pt 0; }
-    .hr-d { height: .5pt; background: rgba(11,30,46,.1);     margin: 5pt 0; }
-
-    /* ════════════════════════════════
-       DATA GAP TABLE
-    ════════════════════════════════ */
-    .gap-table {
-      border: .5pt solid rgba(255,255,255,.1);
-      border-radius: 4pt; overflow: hidden;
-    }
-    .gap-row {
-      display: flex; align-items: center;
-      justify-content: space-between;
-      padding: 5pt 7pt;
-      border-bottom: .5pt solid rgba(255,255,255,.07);
-    }
-    .gap-row:last-child { border-bottom: none; }
-    .gap-label { font-size: 7pt; font-weight: 800; color: #fff; }
-    .gap-sub   { font-size: 5.5pt; color: rgba(255,255,255,.4); margin-top: 1pt; }
-    .pill-yes {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 5.5pt; font-weight: 900;
-      padding: 2pt 7pt; border-radius: 2pt; white-space: nowrap;
-      background: rgba(139,198,63,.14); color: var(--grn);
-      border: .5pt solid rgba(139,198,63,.3);
-    }
-    .pill-no {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 5.5pt; font-weight: 900;
-      padding: 2pt 7pt; border-radius: 2pt; white-space: nowrap;
-      background: rgba(255,255,255,.04); color: rgba(255,255,255,.28);
-      border: .5pt solid rgba(255,255,255,.1);
-    }
-
-    /* ════════════════════════════════
-       SIGNAL CHIPS
-    ════════════════════════════════ */
-    .chips { display: flex; flex-wrap: wrap; gap: 4pt; }
-    .chip {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 5.5pt; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .07em;
-      padding: 3pt 6pt; border-radius: 2.5pt;
-      background: rgba(255,255,255,.04);
-      border: .5pt solid rgba(255,255,255,.09);
-      color: rgba(255,255,255,.6);
-    }
-
-    /* ════════════════════════════════
-       CHAIN  (formula)
-    ════════════════════════════════ */
-    .chain { display: flex; align-items: center; flex-wrap: wrap; gap: 3pt; }
-    .cn {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 6pt; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .08em;
-      padding: 4pt 6pt; border-radius: 2.5pt;
-    }
-    .cn-g { background: rgba(139,198,63,.14); color: var(--grn);  border: .5pt solid rgba(139,198,63,.28); }
-    .cn-b { background: rgba(1,112,185,.12);  color: #6DBDE8; border: .5pt solid rgba(1,112,185,.28); }
-    .ca   { font-size: 8pt; color: var(--grn); line-height: 1; }
-
-    /* ════════════════════════════════
-       PHASE STEP
-    ════════════════════════════════ */
-    .phase { display: flex; gap: 7pt; align-items: flex-start; margin-bottom: 6pt; }
-    .pnum {
-      width: 19pt; height: 19pt; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 6.5pt; font-weight: 700; margin-top: 1pt;
-    }
-    .pg { background: var(--grn); color: var(--navy); }
-    .pb { background: rgba(1,112,185,.15); color: var(--blue); border: .5pt solid rgba(1,112,185,.3); }
-    .ph-lbl { font-size: 8pt; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 1.5pt; }
-    .ph-desc { font-size: 6pt; color: rgba(255,255,255,.5); line-height: 1.55; }
-
-    /* ════════════════════════════════
-       APPROACH STEP
-    ════════════════════════════════ */
-    .ap {
-      display: flex; gap: 7pt; align-items: flex-start;
-      background: rgba(255,255,255,.03);
-      border: .5pt solid rgba(255,255,255,.08);
-      border-radius: 4pt; padding: 5.5pt 7pt; margin-bottom: 4pt;
-    }
-    .ap-ico { font-size: 9pt; flex-shrink: 0; margin-top: .5pt; }
-
-    /* ════════════════════════════════
-       OUTCOME / BULLET
-    ════════════════════════════════ */
-    .out { display: flex; gap: 5pt; align-items: flex-start; margin-bottom: 4.5pt; }
-    .dot-g { width: 4.5pt; height: 4.5pt; background: var(--grn); border-radius: 50%; flex-shrink: 0; margin-top: 4pt; }
-    .dot-b { width: 4.5pt; height: 4.5pt; background: var(--blue); border-radius: 50%; flex-shrink: 0; margin-top: 4pt; }
-
-    /* ════════════════════════════════
-       CONTACT ROW
-    ════════════════════════════════ */
-    .crow { display: flex; align-items: center; gap: 7pt; margin-bottom: 6pt; }
-    .cico {
-      width: 18pt; height: 18pt;
-      background: rgba(139,198,63,.1); border: .5pt solid rgba(139,198,63,.25);
-      border-radius: 3pt; display: flex; align-items: center; justify-content: center;
-      font-size: 8.5pt; flex-shrink: 0;
-    }
-
-    /* ════════════════════════════════
-       STAT BOX
-    ════════════════════════════════ */
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4pt; }
-    .stat {
-      background: var(--navy); border-radius: 3.5pt;
-      padding: 5.5pt 4pt; text-align: center;
-    }
-    .stat-n { font-size: 15pt; font-weight: 900; color: var(--grn); letter-spacing: -.03em; line-height: 1; }
-    .stat-l { font-family: 'JetBrains Mono', monospace; font-size: 4.5pt; color: rgba(255,255,255,.35); text-transform: uppercase; letter-spacing: .1em; margin-top: 2pt; }
-
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
-     PAGE 1 — INSIDE
-     [Inside Left: The Problem] | [Inside Centre: Patterns] | [Front Cover]
-═══════════════════════════════════════════════════════ -->
-<p class="screen-only">▶ PAGE 1 — INSIDE &nbsp;(print on side A)</p>
 
-<div class="page">
-
-  <!-- ───── INSIDE LEFT: The Problem + Data Collection Gap ───── -->
-  <div class="panel bg-navy">
-    <div class="blob" style="width:70pt;height:70pt;background:rgba(139,198,63,.06);top:-15pt;left:-15pt;"></div>
-    <div class="blob" style="width:55pt;height:55pt;background:rgba(1,112,185,.07);bottom:15pt;right:-10pt;"></div>
-    <div class="inner">
-
-      <span class="tag tag-g" style="margin-bottom:6pt;display:inline-block;">The Real Problem</span>
-      <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">Most Businesses<br/>Start at the Wrong End.</h2>
-      <p class="body-sm" style="color:rgba(255,255,255,.5);margin-bottom:6pt;">They implement ERPs, CRMs, and dashboards — yet still can't answer the questions that matter most:</p>
-
-      <div style="background:rgba(1,112,185,.07);border:.5pt solid rgba(1,112,185,.18);border-radius:4pt;padding:6pt 8pt;margin-bottom:6pt;">
-        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Why are sales increasing or declining?</span></div>
-        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Which activities actually drive profitability?</span></div>
-        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Where are the operational bottlenecks?</span></div>
-        <div class="out" style="margin-bottom:3pt;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">Which products truly perform?</span></div>
-        <div class="out" style="margin-bottom:0;"><span class="dot-b"></span><span class="body-sm" style="color:rgba(255,255,255,.65);">What should we do next?</span></div>
+  <!-- ════════════════════════════════
+       PAGE 1: THE EMBEDDED FOUNDER'S OFFICE PARTNER
+       ════════════════════════════════ -->
+  <div class="page" id="page-1">
+    <!-- Full Bleed Top Banner (Extended for Pathway Flowchart) -->
+    <div class="header-banner" style="height: 115mm; display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 5mm; margin-bottom: 6mm;">
+      <div class="header-banner-nav">
+        <span>CONFIDENTIAL</span>
+        <span>EXECUTIVE BRIEFING</span>
+      </div>
+      
+      <div style="margin-top: 4mm; margin-bottom: 0; text-align: center;">
+        <h1 class="header-banner-title" style="font-size: 26pt; letter-spacing: -0.01em;">THE EMBEDDED FOUNDER'S OFFICE PARTNER</h1>
+        <p style="font-family: 'JetBrains Mono', monospace; font-size: 7.2pt; font-weight: 700; color: #8CC63F; margin-top: 3.5mm; letter-spacing: 0.08em; text-transform: uppercase;">
+          JEWELLERY RETAIL GROWTH CONSULTANT &nbsp;|&nbsp; THIS IS MY CONSULTING MODEL
+        </p>
+        <p class="header-banner-subtitle" style="font-size: 9.2pt; margin-top: 1.5mm; color: #E2E8F0; font-weight: 500;">
+          Bridging Executive Strategy, Business Intelligence &amp; Execution.
+        </p>
       </div>
 
-      <div style="background:rgba(139,198,63,.06);border-left:2pt solid var(--grn);padding:5.5pt 8pt;border-radius:0 4pt 4pt 0;margin-bottom:7pt;">
-        <p class="body-sm" style="color:rgba(255,255,255,.7);font-style:italic;">The problem is rarely the software. The problem is that the right data was <strong style="color:#fff;">never captured</strong> in the first place.</p>
-      </div>
+      <!-- The Capability Stack Flowchart -->
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 4mm; margin-top: 5mm;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 7.5pt; font-weight: 700; color: #8CC63F; letter-spacing: 0.15em; text-transform: uppercase; text-align: center; margin-bottom: 5mm;">
+          The Transformation Pathway
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 4mm;">
+          
+          <!-- Item 1 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #FFFFFF; fill: none; stroke-width: 2;"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 700; color: #FFFFFF; text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              Founder's Vision
+            </div>
+          </div>
 
-      <span class="tag tag-b" style="display:inline-block;margin-bottom:5pt;">The Data Collection Gap</span>
-      <div class="gap-table" style="background:rgba(255,255,255,.025);">
-        <div class="gap-row">
-          <div><p class="gap-label">Transaction Data</p><p class="gap-sub">What happened</p></div>
-          <span class="pill-yes">✓ Collected</span>
-        </div>
-        <div class="gap-row">
-          <div><p class="gap-label">Decision Data</p><p class="gap-sub">Why it was decided</p></div>
-          <span class="pill-no">✗ Missing</span>
-        </div>
-        <div class="gap-row">
-          <div><p class="gap-label">Process Data</p><p class="gap-sub">How long it took</p></div>
-          <span class="pill-no">✗ Missing</span>
-        </div>
-        <div class="gap-row">
-          <div><p class="gap-label">Behavioral Data</p><p class="gap-sub">What actions were taken</p></div>
-          <span class="pill-no">✗ Missing</span>
-        </div>
-      </div>
+          <span style="color: rgba(255, 255, 255, 0.3); font-size: 11pt; font-weight: bold; margin-bottom: 4mm;">&rarr;</span>
 
-      <div style="margin-top:auto;padding-top:6pt;">
-        <div class="hr-w" style="margin-bottom:6pt;"></div>
-        <p class="body-sm" style="color:rgba(255,255,255,.45);font-style:italic;">Businesses collect transactions, but fail to capture the decisions, processes, and behaviors that drive them. They understand outcomes — but struggle to understand causes. <strong style="color:var(--grn);">And intelligence lives in the "why."</strong></p>
+          <!-- Item 2 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #FFFFFF; fill: none; stroke-width: 2;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 700; color: #FFFFFF; text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              Business Intelligence
+            </div>
+          </div>
+
+          <span style="color: rgba(255, 255, 255, 0.3); font-size: 11pt; font-weight: bold; margin-bottom: 4mm;">&rarr;</span>
+
+          <!-- Item 3 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #FFFFFF; fill: none; stroke-width: 2;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="15" y2="17"></line></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 700; color: #FFFFFF; text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              Processes
+            </div>
+          </div>
+
+          <span style="color: rgba(255, 255, 255, 0.3); font-size: 11pt; font-weight: bold; margin-bottom: 4mm;">&rarr;</span>
+
+          <!-- Item 4 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #FFFFFF; fill: none; stroke-width: 2;"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 700; color: #FFFFFF; text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              Technology
+            </div>
+          </div>
+
+          <span style="color: rgba(255, 255, 255, 0.3); font-size: 11pt; font-weight: bold; margin-bottom: 4mm;">&rarr;</span>
+
+          <!-- Item 5 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #FFFFFF; fill: none; stroke-width: 2;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 700; color: #FFFFFF; text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              People
+            </div>
+          </div>
+
+          <span style="color: rgba(255, 255, 255, 0.3); font-size: 11pt; font-weight: bold; margin-bottom: 4mm;">&rarr;</span>
+
+          <!-- Item 6 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #FFFFFF; fill: none; stroke-width: 2;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 700; color: #FFFFFF; text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              Governance
+            </div>
+          </div>
+
+          <span style="color: rgba(255, 255, 255, 0.3); font-size: 11pt; font-weight: bold; margin-bottom: 4mm;">&rarr;</span>
+
+          <!-- Item 7 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #FFFFFF; fill: none; stroke-width: 2;"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 700; color: #FFFFFF; text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              Performance
+            </div>
+          </div>
+
+          <span style="color: rgba(255, 255, 255, 0.3); font-size: 11pt; font-weight: bold; margin-bottom: 4mm;">&rarr;</span>
+
+          <!-- Item 8 -->
+          <div style="display: flex; flex-direction: column; align-items: center; width: 18mm;">
+            <div style="border: 1.2px solid rgba(255, 255, 255, 0.4); border-radius: 50%; width: 9mm; height: 9mm; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 4.5mm; height: 4.5mm; stroke: #3B82F6; fill: none; stroke-width: 2.5;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 6.2pt; font-weight: 800; color: var(--accent-azure); text-align: center; margin-top: 2.2mm; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.25;">
+              Predictable Growth
+            </div>
+          </div>
+
+        </div>
       </div>
 
     </div>
-  </div>
 
+    <!-- Positioning Statement -->
+    <div style="font-size: 9.8pt; font-weight: 500; color: var(--txt-primary); line-height: 1.55; border-left: 4px solid var(--accent-azure); padding-left: 5.5mm; margin-top: 0; margin-bottom: 8mm;">
+      Most consultants deliver recommendations. I remain embedded within the business — from executive education and strategic planning to implementation, capability building, and long-term execution.
+    </div>
 
-  <!-- ───── INSIDE CENTRE: Pattern Recognition + Intelligence ───── -->
-  <div class="panel bg-dark">
-    <div class="blob" style="width:65pt;height:65pt;background:rgba(1,112,185,.08);top:-10pt;right:-10pt;"></div>
-    <div class="blob" style="width:55pt;height:55pt;background:rgba(139,198,63,.06);bottom:15pt;left:-10pt;"></div>
-    <div class="inner">
-
-      <span class="tag tag-g" style="display:inline-block;margin-bottom:6pt;">Intelligence Starts Here</span>
-      <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">Pattern Recognition Is the Highest Form of Intelligence.</h2>
-      <div class="hr-w" style="margin-bottom:6pt;"></div>
-
-      <p class="body-sm" style="color:rgba(255,255,255,.55);margin-bottom:6pt;">Every business generates signals every day. Individually, they are just data points. Over time, they reveal patterns — and patterns expose bottlenecks, uncover opportunities, and guide better decisions.</p>
-
-      <span class="tag tag-w" style="display:inline-block;margin-bottom:5pt;">Daily Business Signals</span>
-      <div class="chips" style="margin-bottom:7pt;">
-        <span class="chip">Sales Transactions</span>
-        <span class="chip">Customer Interactions</span>
-        <span class="chip">Inventory Movements</span>
-        <span class="chip">Employee Activities</span>
-        <span class="chip">Operational Decisions</span>
-        <span class="chip">Financial Records</span>
+    <!-- Core Capabilities Card (6 capabilities in a single full-bleed card fitting page corners) -->
+    <div style="background: #FFFFFF; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(11,30,46,0.04); padding: 5mm 16mm 4.5mm 16mm; display: grid; grid-template-columns: repeat(6, 1fr); gap: 5mm; margin-left: -16mm; margin-right: -16mm; margin-top: 1mm; margin-bottom: 5mm;">
+      
+      <!-- Capability 1: Business Analysis -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; position: relative; padding-bottom: 4.5mm;">
+        <div style="width: 10.5mm; height: 10.5mm; border-radius: 50%; background: rgba(31,95,191,0.06); border: 1.2px solid rgba(31,95,191,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg viewBox="0 0 24 24" style="width: 5.5mm; height: 5.5mm; stroke: #1F5FBF; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        </div>
+        <div style="font-family: 'Manrope', sans-serif; font-size: 8.2pt; font-weight: 800; color: var(--blue-navy); margin-top: 3.5mm; margin-bottom: 2mm; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25;">
+          Business Analysis
+        </div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 7.2pt; color: var(--txt-secondary); line-height: 1.45; margin-bottom: auto;">
+          Uncover gaps, root causes and growth opportunities.
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #8BC34A; border-radius: 1.5px;"></div>
       </div>
 
-      <div style="background:rgba(1,112,185,.07);border:.5pt solid rgba(1,112,185,.2);border-radius:4pt;padding:7pt 8pt;margin-bottom:7pt;">
-        <p class="title-md" style="color:#fff;margin-bottom:3pt;">Historical Data Is the Foundation of Future Decisions.</p>
-        <p class="body-sm" style="color:rgba(255,255,255,.5);">Every sale, customer interaction, and operational activity leaves behind a signal. Over time, those signals form patterns that reveal opportunities, expose inefficiencies, and help predict future outcomes.</p>
-        <p class="body-sm" style="color:var(--grn);font-weight:700;margin-top:4pt;">The deeper the understanding of historical patterns, the better the quality of future decisions.</p>
+      <!-- Capability 2: Strategy & Transformation -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; position: relative; padding-bottom: 4.5mm;">
+        <div style="width: 10.5mm; height: 10.5mm; border-radius: 50%; background: rgba(139,195,74,0.06); border: 1.2px solid rgba(139,195,74,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg viewBox="0 0 24 24" style="width: 5.5mm; height: 5.5mm; stroke: #8BC34A; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <div style="font-family: 'Manrope', sans-serif; font-size: 8.2pt; font-weight: 800; color: var(--blue-navy); margin-top: 3.5mm; margin-bottom: 2mm; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25;">
+          Strategy &<br>Transformation
+        </div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 7.2pt; color: var(--txt-secondary); line-height: 1.45; margin-bottom: auto;">
+          Design strategies that drive real change.
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #8BC34A; border-radius: 1.5px;"></div>
       </div>
 
-      <span class="tag tag-b" style="display:inline-block;margin-bottom:5pt;">The Intelligence Chain</span>
-      <div style="background:rgba(255,255,255,.03);border:.5pt solid rgba(255,255,255,.08);border-radius:4pt;padding:7pt 8pt;margin-bottom:7pt;">
-        <div class="chain">
-          <div class="cn cn-g">Data</div>
-          <span class="ca">›</span>
-          <div class="cn cn-b">Patterns</div>
-          <span class="ca">›</span>
-          <div class="cn cn-b">Intelligence</div>
-          <span class="ca">›</span>
-          <div class="cn cn-g" style="font-weight:900;">Decisions</div>
+      <!-- Capability 3: Operations -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; position: relative; padding-bottom: 4.5mm;">
+        <div style="width: 10.5mm; height: 10.5mm; border-radius: 50%; background: rgba(31,95,191,0.06); border: 1.2px solid rgba(31,95,191,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg viewBox="0 0 24 24" style="width: 5.5mm; height: 5.5mm; stroke: #1F5FBF; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
         </div>
-        <p class="body-sm" style="color:rgba(255,255,255,.38);margin-top:5pt;">Without observation, there is no measurement. Without measurement, there is no intelligence.</p>
+        <div style="font-family: 'Manrope', sans-serif; font-size: 8.2pt; font-weight: 800; color: var(--blue-navy); margin-top: 3.5mm; margin-bottom: 2mm; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25;">
+          Operations
+        </div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 7.2pt; color: var(--txt-secondary); line-height: 1.45; margin-bottom: auto;">
+          Design efficient, scalable and standard processes.
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #8BC34A; border-radius: 1.5px;"></div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:5pt;margin-top:auto;">
-        <div style="background:rgba(255,255,255,.03);border:.5pt solid rgba(255,255,255,.08);border-radius:3.5pt;padding:6pt 7pt;">
-          <p style="font-size:5.5pt;font-weight:900;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:3pt;">Without Data</p>
-          <p class="body-sm" style="color:rgba(255,255,255,.42);">Reactive. Guessing. Solving problems after they happen.</p>
+      <!-- Capability 4: Performance Management -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; position: relative; padding-bottom: 4.5mm;">
+        <div style="width: 10.5mm; height: 10.5mm; border-radius: 50%; background: rgba(139,195,74,0.06); border: 1.2px solid rgba(139,195,74,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg viewBox="0 0 24 24" style="width: 5.5mm; height: 5.5mm; stroke: #8BC34A; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
         </div>
-        <div style="background:rgba(139,198,63,.05);border:.5pt solid rgba(139,198,63,.2);border-radius:3.5pt;padding:6pt 7pt;">
-          <p style="font-size:5.5pt;font-weight:900;color:var(--grn);text-transform:uppercase;letter-spacing:.12em;margin-bottom:3pt;">With Data</p>
-          <p class="body-sm" style="color:rgba(255,255,255,.55);">Proactive. Precise. Preventing problems before they occur.</p>
+        <div style="font-family: 'Manrope', sans-serif; font-size: 8.2pt; font-weight: 800; color: var(--blue-navy); margin-top: 3.5mm; margin-bottom: 2mm; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25;">
+          Performance Management
         </div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 7.2pt; color: var(--txt-secondary); line-height: 1.45; margin-bottom: auto;">
+          Build KPI systems that drive accountability.
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #8BC34A; border-radius: 1.5px;"></div>
+      </div>
+
+      <!-- Capability 5: Retail & Jewellery -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; position: relative; padding-bottom: 4.5mm;">
+        <div style="width: 10.5mm; height: 10.5mm; border-radius: 50%; background: rgba(139,195,74,0.06); border: 1.2px solid rgba(139,195,74,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg viewBox="0 0 24 24" style="width: 5.5mm; height: 5.5mm; stroke: #8BC34A; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><path d="M6 3h12l4 6-10 13L2 9z"></path><path d="M11 3 8 9l4 13 4-13-3-6"></path><path d="M2 9h20"></path></svg>
+        </div>
+        <div style="font-family: 'Manrope', sans-serif; font-size: 8.2pt; font-weight: 800; color: var(--blue-navy); margin-top: 3.5mm; margin-bottom: 2mm; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25;">
+          Retail &<br>Jewellery
+        </div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 7.2pt; color: var(--txt-secondary); line-height: 1.45; margin-bottom: auto;">
+          Optimize retail operations, inventory and customer experience.
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #8BC34A; border-radius: 1.5px;"></div>
+      </div>
+
+      <!-- Capability 6: Technology Enablement -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center; height: 100%; position: relative; padding-bottom: 4.5mm;">
+        <div style="width: 10.5mm; height: 10.5mm; border-radius: 50%; background: rgba(31,95,191,0.06); border: 1.2px solid rgba(31,95,191,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg viewBox="0 0 24 24" style="width: 5.5mm; height: 5.5mm; stroke: #1F5FBF; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </div>
+        <div style="font-family: 'Manrope', sans-serif; font-size: 8.2pt; font-weight: 800; color: var(--blue-navy); margin-top: 3.5mm; margin-bottom: 2.2mm; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.25;">
+          Technology Enablement
+        </div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 7.2pt; color: var(--txt-secondary); line-height: 1.45; margin-bottom: auto;">
+          Leverage technology to automate and scale.
+        </div>
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #8BC34A; border-radius: 1.5px;"></div>
       </div>
 
     </div>
-  </div>
 
-
-  <!-- ───── FRONT COVER (rightmost — visible when brochure is folded) ───── -->
-  <div class="panel bg-navy">
-    <div class="blob" style="width:120pt;height:120pt;background:rgba(1,112,185,.1);top:-40pt;right:-40pt;"></div>
-    <div class="blob" style="width:90pt;height:90pt;background:rgba(139,198,63,.07);bottom:-25pt;left:-25pt;"></div>
-    <div class="inner" style="justify-content:space-between;">
-
-      <!-- Brand -->
-      <div>
-        <span class="tag tag-g" style="display:inline-block;margin-bottom:9pt;">Systems &amp; Retail Consulting</span>
-        <div style="display:flex;align-items:center;gap:8pt;margin-bottom:10pt;">
-          <div style="width:32pt;height:32pt;background:var(--grn);border-radius:5pt;display:flex;align-items:center;justify-content:center;font-size:16pt;font-weight:900;color:var(--navy);flex-shrink:0;">A</div>
-          <div>
-            <p style="font-size:12.5pt;font-weight:900;color:#fff;line-height:1.05;letter-spacing:-.01em;">SCALE WITH</p>
-            <p style="font-size:12.5pt;font-weight:900;color:var(--grn);line-height:1.05;letter-spacing:-.01em;">ABRAHAM</p>
+    <!-- Executive Dashboard (Outcomes Bridge Grid wrapped in a single card) -->
+    <div style="background: linear-gradient(135deg, #0e1438 0%, #192157 50%, #0b0d24 100%); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); padding: 5.5mm 5mm; margin-top: 0; margin-bottom: 4mm; position: relative; overflow: hidden;">
+      <div class="outcome-bridge-grid" style="margin-top: 0; margin-bottom: 0; display: flex; justify-content: space-between; align-items: center; position: relative; width: 100%;">
+        
+        <!-- Left Column: Reactants (Inputs) -->
+        <div class="outcome-bridge-col" style="width: 28%; display: flex; flex-direction: column; z-index: 2;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 5.2pt; font-weight: 800; color: #38BDF8; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin-bottom: 2mm;">
+            Reactants: Your Business
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(56, 189, 248, 0.15); border-radius: 8px; padding: 3mm 3.5mm; display: flex; flex-direction: column; gap: 1.8mm;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Inventory</span>
+              <span style="color: #38BDF8; font-size: 8pt; font-weight: bold;">&rarr;</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Customers</span>
+              <span style="color: #38BDF8; font-size: 8pt; font-weight: bold;">&rarr;</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">People</span>
+              <span style="color: #38BDF8; font-size: 8pt; font-weight: bold;">&rarr;</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Processes</span>
+              <span style="color: #38BDF8; font-size: 8pt; font-weight: bold;">&rarr;</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Technology</span>
+              <span style="color: #38BDF8; font-size: 8pt; font-weight: bold;">&rarr;</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 0;">
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Finance</span>
+              <span style="color: #38BDF8; font-size: 8pt; font-weight: bold;">&rarr;</span>
+            </div>
           </div>
         </div>
-        <div class="hr-w"></div>
-      </div>
 
-      <!-- Headline -->
-      <div>
-        <h1 class="title-xl" style="font-size:16.5pt;margin-bottom:7pt;">
-          Intelligence Is<br/>Becoming a Utility.<br/>
-          <span style="color:var(--grn);">But Intelligence<br/>Starts With Data.</span>
-        </h1>
-        <p class="body" style="color:rgba(255,255,255,.52);margin-bottom:9pt;">As AI becomes accessible to every business, the real competitive advantage will not be access to intelligence — it will be the quality of data your business captures, measures, and understands.</p>
+        <!-- Center Column: The Catalyst / Reaction Flow -->
+        <div style="position: relative; width: 40%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; align-self: stretch; text-align: center; padding: 2mm 0;">
+          <!-- Horizontal Reaction Yield Arrow -->
+          <div style="position: absolute; top: 50%; left: -20px; right: -20px; height: 2px; background: linear-gradient(90deg, #38BDF8 0%, #34D399 100%); transform: translateY(-50%); z-index: 0; display: flex; align-items: center; justify-content: flex-end; opacity: 0.45;">
+            <!-- Arrowhead -->
+            <div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 9px solid #34D399; margin-right: -2px;"></div>
+          </div>
+          
+          <!-- Catalyst Floating Content -->
+          <div style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 95%; background: #131945; padding: 4mm 3.5mm; border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.05);">
+            <!-- Pill Badge: The Catalyst -->
+            <div style="display: inline-block; border: 1px solid rgba(147, 197, 253, 0.35); border-radius: 20px; padding: 0.8mm 3mm; font-family: 'JetBrains Mono', monospace; font-size: 5.2pt; font-weight: 700; color: #93C5FD; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 3.5mm; background: rgba(147, 197, 253, 0.08); box-shadow: 0 0 10px rgba(147, 197, 253, 0.15);">
+              THE CATALYST
+            </div>
 
-        <div style="background:rgba(1,112,185,.08);border-left:2pt solid var(--blue);padding:6pt 9pt;border-radius:0 4pt 4pt 0;margin-bottom:9pt;">
-          <p class="body-sm" style="color:rgba(255,255,255,.4);font-style:italic;margin-bottom:2.5pt;">The question will no longer be:</p>
-          <p class="body-sm" style="font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5pt;">"Do you have access to intelligence?"</p>
-          <p class="body-sm" style="color:rgba(255,255,255,.4);font-style:italic;margin-bottom:2.5pt;">The question will be:</p>
-          <p style="font-size:7.5pt;font-weight:900;color:#fff;">"What intelligence can your<br/>business generate?"</p>
-        </div>
+            <!-- Highlighted Callout Box above headline -->
+            <div style="background: rgba(56, 189, 248, 0.1); border: 1.2px solid rgba(56, 189, 248, 0.25); border-radius: 6px; padding: 2mm 3mm; font-family: 'Inter', sans-serif; font-size: 7.2pt; font-weight: 600; color: #38BDF8; line-height: 1.4; margin-bottom: 3.5mm; text-align: center; max-width: 95%;">
+              We shoulder the operational complexity so you can build the future.
+            </div>
 
-        <div style="display:inline-flex;align-items:center;gap:5pt;background:rgba(139,198,63,.07);border:.5pt solid rgba(139,198,63,.22);border-radius:3pt;padding:4pt 8pt;">
-          <span style="font-size:9pt;">💎</span>
-          <span class="mono" style="font-size:5.8pt;font-weight:700;color:var(--grn);text-transform:uppercase;letter-spacing:.14em;">Retail &amp; Jewellery Specialists</span>
-        </div>
-      </div>
-
-      <!-- Bottom URL -->
-      <div>
-        <div class="hr-w" style="margin-bottom:6pt;"></div>
-        <p class="mono" style="font-size:5.5pt;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.18em;margin-bottom:2.5pt;">Discover More</p>
-        <p class="mono" style="font-size:8pt;font-weight:700;color:var(--grn);">scale-with-abraham.vercel.app</p>
-      </div>
-
-    </div>
-  </div>
-
-</div><!-- /PAGE 1 -->
-
-
-<!-- ═══════════════════════════════════════════════════════
-     PAGE 2 — OUTSIDE
-     [Back Left: Our Approach] | [Back Centre: Process + Contact] | [Back Right: Future + About]
-═══════════════════════════════════════════════════════ -->
-<p class="screen-only" style="margin-top:8px;">◀ PAGE 2 — OUTSIDE &nbsp;(print on side B, flip on short edge)</p>
-
-<div class="page outside-sheet">
-
-  <!-- ───── BACK LEFT FLAP: Our Approach ───── -->
-  <div class="panel bg-dark">
-    <div class="blob" style="width:70pt;height:70pt;background:rgba(139,198,63,.06);top:-15pt;left:-15pt;"></div>
-    <div class="inner">
-
-      <span class="tag tag-g" style="display:inline-block;margin-bottom:6pt;">Our Approach</span>
-      <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">Measure. Visualize.<br/>Analyze. Decide. Improve.</h2>
-      <p class="body-sm" style="color:rgba(255,255,255,.5);margin-bottom:6pt;">We believe intelligence is not something you purchase. It is something you build — systematically, around your business.</p>
-
-      <div style="background:rgba(255,255,255,.03);border:.5pt solid rgba(255,255,255,.08);border-radius:4pt;padding:6pt 8pt;margin-bottom:7pt;">
-        <div class="chain">
-          <div class="cn" style="background:rgba(139,198,63,.13);color:var(--grn);border:.5pt solid rgba(139,198,63,.25);font-size:5.5pt;padding:3pt 5pt;">Measure</div>
-          <span class="ca" style="font-size:7pt;">›</span>
-          <div class="cn" style="background:rgba(1,112,185,.1);color:#6DBDE8;border:.5pt solid rgba(1,112,185,.25);font-size:5.5pt;padding:3pt 5pt;">Visualize</div>
-          <span class="ca" style="font-size:7pt;">›</span>
-          <div class="cn" style="background:rgba(1,112,185,.1);color:#6DBDE8;border:.5pt solid rgba(1,112,185,.25);font-size:5.5pt;padding:3pt 5pt;">Analyze</div>
-          <span class="ca" style="font-size:7pt;">›</span>
-          <div class="cn" style="background:rgba(1,112,185,.1);color:#6DBDE8;border:.5pt solid rgba(1,112,185,.25);font-size:5.5pt;padding:3pt 5pt;">Decide</div>
-          <span class="ca" style="font-size:7pt;">›</span>
-          <div class="cn" style="background:rgba(139,198,63,.15);color:var(--grn);border:.5pt solid rgba(139,198,63,.28);font-size:5.5pt;padding:3pt 5pt;font-weight:900;">Improve</div>
-        </div>
-      </div>
-
-      <div class="hr-w" style="margin-bottom:6pt;"></div>
-      <span class="tag tag-b" style="display:inline-block;margin-bottom:6pt;">What We Focus On</span>
-
-      <div class="ap">
-        <span class="ap-ico">🎯</span>
-        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Identify Critical Business Processes</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Map the workflows and activities that drive real performance.</p></div>
-      </div>
-      <div class="ap">
-        <span class="ap-ico">📐</span>
-        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Define Meaningful Data Points</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Pinpoint exactly what should be captured and why it matters.</p></div>
-      </div>
-      <div class="ap">
-        <span class="ap-ico">🏗</span>
-        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Build Measurement Frameworks</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Design KPI systems that turn activity into accountability.</p></div>
-      </div>
-      <div class="ap">
-        <span class="ap-ico">👁</span>
-        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Create Operational Visibility</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Live dashboards that show what's happening, everywhere.</p></div>
-      </div>
-      <div class="ap" style="margin-bottom:0;">
-        <span class="ap-ico">♻️</span>
-        <div><p class="title-md" style="color:#fff;margin-bottom:1.5pt;">Drive Continuous Improvement</p><p class="body-sm" style="color:rgba(255,255,255,.5);">Systems that evolve as your business grows.</p></div>
-      </div>
-
-      <div style="margin-top:auto;padding-top:6pt;">
-        <div class="hr-w" style="margin-bottom:6pt;"></div>
-        <div style="background:rgba(139,198,63,.05);border:.5pt solid rgba(139,198,63,.2);border-radius:4pt;padding:7pt 8pt;">
-          <p class="title-md" style="color:var(--grn);margin-bottom:3pt;">We build Decision Intelligence Systems.</p>
-          <p class="body-sm" style="color:rgba(255,255,255,.52);">Not just reports. Not just dashboards. Not just software. But systems that help organisations understand performance, make better decisions, and scale with confidence.</p>
-          <p class="body-sm" style="color:rgba(255,255,255,.38);margin-top:4pt;font-style:italic;">Because what gets measured gets understood. And what gets understood can be improved.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <!-- ───── BACK CENTRE: Engagement Process + Contact ───── -->
-  <div class="panel bg-navy">
-    <div class="blob" style="width:70pt;height:70pt;background:rgba(139,198,63,.07);top:-15pt;right:-15pt;"></div>
-    <div class="blob" style="width:55pt;height:55pt;background:rgba(1,112,185,.07);bottom:15pt;left:-10pt;"></div>
-    <div class="inner" style="justify-content:space-between;">
-
-      <div>
-        <span class="tag tag-g" style="display:inline-block;margin-bottom:6pt;">Engagement Process</span>
-        <h2 class="title-lg" style="color:#fff;margin-bottom:3pt;">How We Work Together</h2>
-        <p class="body-sm" style="color:rgba(255,255,255,.45);margin-bottom:7pt;">A five-phase process built to transform how your retail business sees, decides, and grows.</p>
-        <div class="hr-w" style="margin-bottom:7pt;"></div>
-
-        <div class="phase">
-          <div class="pnum pg">01</div>
-          <div><p class="ph-lbl">AUDIT</p><p class="ph-desc">We map your operations, systems, data gaps, and team workflows — documenting what exists and what is missing.</p></div>
-        </div>
-        <div class="phase">
-          <div class="pnum pb">02</div>
-          <div><p class="ph-lbl">DIAGNOSE</p><p class="ph-desc">Root causes of underperformance are surfaced — inventory leakage, process delays, missing KPIs, and decision blind-spots.</p></div>
-        </div>
-        <div class="phase">
-          <div class="pnum pb">03</div>
-          <div><p class="ph-lbl">BUILD</p><p class="ph-desc">Custom data architecture, KPI frameworks, dashboards, and reporting systems — built around how your business actually operates.</p></div>
-        </div>
-        <div class="phase">
-          <div class="pnum pb">04</div>
-          <div><p class="ph-lbl">TRAIN</p><p class="ph-desc">Your team is trained to own and operate the system independently from day one.</p></div>
-        </div>
-        <div class="phase" style="margin-bottom:0;">
-          <div class="pnum pg">05</div>
-          <div><p class="ph-lbl">DELIVER</p><p class="ph-desc">Full handover of dashboards, SOPs, KPI framework, audit report, and training pack. Ongoing support available.</p></div>
-        </div>
-      </div>
-
-      <!-- Contact + CTA -->
-      <div>
-        <div class="hr-w" style="margin-bottom:7pt;"></div>
-        <span class="tag tag-g" style="display:inline-block;margin-bottom:7pt;">Get In Touch</span>
-        <div class="crow">
-          <div class="cico">🌐</div>
-          <div>
-            <p style="font-size:5.5pt;color:rgba(255,255,255,.3);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1pt;">Website</p>
-            <p class="mono" style="font-size:7pt;font-weight:700;color:var(--grn);">scale-with-abraham.vercel.app</p>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 6.2pt; font-weight: 700; color: #94A3B8; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5mm;">
+              THE EMBEDDED
+            </div>
+            
+            <h2 style="font-family: 'Manrope', sans-serif; font-size: 14.5pt; font-weight: 800; color: #FFFFFF; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 2mm 0; max-width: 95%;">
+              Founder's Office Partner
+            </h2>
+            
+            <!-- Cyan-Teal Gradient Divider Line -->
+            <div style="height: 2px; width: 35px; background: linear-gradient(90deg, #38BDF8 0%, #34D399 100%); margin: 2mm auto 0 auto; border-radius: 2px;"></div>
           </div>
         </div>
-        <div class="crow" style="margin-bottom:8pt;">
-          <div class="cico">📧</div>
-          <div>
-            <p style="font-size:5.5pt;color:rgba(255,255,255,.3);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1pt;">Email</p>
-            <p style="font-size:7pt;font-weight:700;color:#fff;">abraham@scalewithabraham.com</p>
+
+        <!-- Right Column: Products (Outcomes) -->
+        <div class="outcome-bridge-col" style="width: 28%; display: flex; flex-direction: column; z-index: 2;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 5.2pt; font-weight: 800; color: #34D399; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin-bottom: 2mm;">
+            Products: Scaling & Growth
+          </div>
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(52, 211, 153, 0.15); border-radius: 8px; padding: 3mm 3.5mm; display: flex; flex-direction: column; gap: 1.8mm;">
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 2mm; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="color: #34D399; font-size: 8pt; font-weight: bold;">&rarr;</span>
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Growth</span>
+            </div>
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 2mm; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="color: #34D399; font-size: 8pt; font-weight: bold;">&rarr;</span>
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Scale</span>
+            </div>
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 2mm; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="color: #34D399; font-size: 8pt; font-weight: bold;">&rarr;</span>
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Governance</span>
+            </div>
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 2mm; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="color: #34D399; font-size: 8pt; font-weight: bold;">&rarr;</span>
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Visibility</span>
+            </div>
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 2mm; border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding-bottom: 1.5mm;">
+              <span style="color: #34D399; font-size: 8pt; font-weight: bold;">&rarr;</span>
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Profitability</span>
+            </div>
+            <div style="display: flex; justify-content: flex-start; align-items: center; gap: 2mm; padding-bottom: 0;">
+              <span style="color: #34D399; font-size: 8pt; font-weight: bold;">&rarr;</span>
+              <span style="font-family: 'Manrope', sans-serif; font-size: 6.8pt; font-weight: 700; color: #E2E8F0; text-transform: uppercase; letter-spacing: 0.01em;">Founder Freedom</span>
+            </div>
           </div>
         </div>
-        <div style="background:var(--grn);border-radius:5pt;padding:9pt 10pt;text-align:center;">
-          <p class="mono" style="font-size:6pt;font-weight:900;color:var(--navy);text-transform:uppercase;letter-spacing:.15em;">Book a Free Discovery Session</p>
-          <p style="font-size:5.8pt;color:rgba(11,30,46,.6);margin-top:2pt;">No commitment. Just clarity about your data.</p>
-        </div>
-      </div>
 
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE EMBEDDED FOUNDER'S OFFICE PARTNER</span>
+      <span class="page-number">01</span>
     </div>
   </div>
 
 
-  <!-- ───── BACK RIGHT: The Future + About + Outcomes ───── -->
-  <div class="panel bg-lt">
-    <div class="inner">
+  <!-- ════════════════════════════════
+       PAGE 2: WHY MOST BUSINESSES CAN'T SCALE
+       ════════════════════════════════ -->
+  <div class="page" id="page-2">
+    <!-- Full Bleed Top Banner -->
+    <div class="header-banner">
+      <div class="header-banner-nav">
+        <span>CONFIDENTIAL</span>
+        <span>EXECUTIVE BRIEFING</span>
+      </div>
+      <h1 class="header-banner-title">WHY MOST BUSINESSES CAN'T SCALE</h1>
+      <p class="header-banner-subtitle">
+        Growth rarely exposes a market problem. It exposes an operating system problem.
+      </p>
+    </div>
 
-      <!-- Future block -->
-      <div style="background:var(--navy);border-radius:6pt;padding:9pt 10pt;margin-bottom:7pt;">
-        <p class="body-sm" style="color:rgba(255,255,255,.4);font-style:italic;margin-bottom:4pt;">The organizations that thrive will not be those with the most tools —</p>
-        <p style="font-size:9pt;font-weight:900;color:#fff;line-height:1.25;margin-bottom:6pt;">The Future Belongs to Businesses That <span style="color:var(--grn);">Understand Their Data.</span></p>
-        <div class="chain">
-          <div class="cn cn-g" style="font-size:5.5pt;padding:3pt 5.5pt;">Data</div>
-          <span class="ca" style="color:var(--grn);font-size:7pt;">›</span>
-          <div class="cn" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);border:.5pt solid rgba(255,255,255,.12);font-size:5.5pt;padding:3pt 5.5pt;">Patterns</div>
-          <span class="ca" style="color:var(--grn);font-size:7pt;">›</span>
-          <div class="cn" style="background:rgba(255,255,255,.07);color:rgba(255,255,255,.55);border:.5pt solid rgba(255,255,255,.12);font-size:5.5pt;padding:3pt 5.5pt;">Intelligence</div>
-          <span class="ca" style="color:var(--grn);font-size:7pt;">›</span>
-          <div class="cn cn-g" style="font-weight:900;font-size:5.5pt;padding:3pt 5.5pt;">Decisions</div>
+        <!-- Scale Threshold Creative Visual -->
+    <div style="background: linear-gradient(135deg, #0A4A8F 0%, #0170B9 55%, #0A3D7A 100%); border-radius: 8px; padding: 5mm 6mm; margin-bottom: 4mm; position: relative; overflow: hidden; box-shadow: 0 4px 24px rgba(1,112,185,0.35);">
+      <div style="position: absolute; top: -12mm; right: -8mm; width: 40mm; height: 40mm; border-radius: 50%; background: rgba(1,112,185,0.08); pointer-events: none;"></div>
+      <div style="position: absolute; bottom: -8mm; left: 8mm; width: 28mm; height: 28mm; border-radius: 50%; background: rgba(140,198,63,0.06); pointer-events: none;"></div>
+
+      <!-- Label -->
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 5.5pt; font-weight: 700; color: #8CC63F; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 3.5mm; display: flex; align-items: center; gap: 2mm;">
+        <svg viewBox="0 0 16 16" style="width: 3mm; height: 3mm; fill: #8CC63F;"><polygon points="8,1 10,6 16,6 11,10 13,16 8,12 3,16 5,10 0,6 6,6"/></svg>
+        The Scale Threshold
+      </div>
+
+      <!-- Main 3-column: ₹50Cr | Arrow | ₹500Cr -->
+      <div style="display: grid; grid-template-columns: 1fr 16mm 1fr; gap: 3mm; align-items: center; margin-bottom: 4mm;">
+
+        <!-- Left: ₹50 Cr -->
+        <div>
+          <div style="font-family: 'Manrope', sans-serif; font-size: 14pt; font-weight: 900; color: #E07B39; line-height: 1.15; letter-spacing: -0.015em; min-height: 10mm; display: flex; align-items: flex-end;">Unstructured Operations</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 5pt; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1.5mm; margin-bottom: 2.5mm;">Operation Today</div>
+          <div style="display: flex; flex-direction: column; gap: 1.8mm;">
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.7);line-height:1.35;">Founder is the operating system — no one decides without them</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.7);line-height:1.35;">Jewellery stock managed by feel, not data — dead inventory builds</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.7);line-height:1.35;">Customers are walk-ins, not a managed asset</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.7);line-height:1.35;">Growth adds chaos — more staff, more confusion, same margin</span></div>
+          </div>
+        </div>
+
+        <!-- Center: Arrow divider -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 2mm;">
+          <div style="width: 1px; flex: 1; background: rgba(255,255,255,0.12);"></div>
+          <div style="background: #1A5FA8; border-radius: 50%; width: 8mm; height: 8mm; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 10px rgba(1,112,185,0.5);">
+            <svg viewBox="0 0 24 24" style="width:4mm;height:4mm;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <div style="width: 1px; flex: 1; background: rgba(255,255,255,0.12);"></div>
+        </div>
+
+        <!-- Right: ₹500 Cr -->
+        <div>
+          <div style="font-family: 'Manrope', sans-serif; font-size: 14pt; font-weight: 900; color: #8CC63F; line-height: 1.15; letter-spacing: -0.015em; min-height: 10mm; display: flex; align-items: flex-end;">Organized Scaling Systems</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 5pt; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1.5mm; margin-bottom: 2.5mm;">Enterprise Target</div>
+          <div style="display: flex; flex-direction: column; gap: 1.8mm;">
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#8CC63F;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.85);font-weight:600;line-height:1.35;">Founder is free to build — systems run the business day-to-day</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#8CC63F;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.85);font-weight:600;line-height:1.35;">Inventory intelligence drives buying decisions &amp; eliminates dead stock</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#8CC63F;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.85);font-weight:600;line-height:1.35;">Customer lifetime value managed through segments &amp; loyalty</span></div>
+            <div style="display: flex; align-items: flex-start; gap: 1.5mm;"><svg viewBox="0 0 8 8" style="width:2mm;height:2mm;flex-shrink:0;margin-top:0.5mm;fill:#8CC63F;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6pt;color:rgba(255,255,255,0.85);font-weight:600;line-height:1.35;">Scale adds margin — governed systems protect profitability at every stage</span></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom 3-pillar bar -->
+      <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 3mm; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm;">
+        <div style="display: flex; align-items: center; gap: 2mm;">
+          <div style="background: rgba(1,112,185,0.2); border-radius: 4px; width: 6mm; height: 6mm; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg viewBox="0 0 24 24" style="width:3.5mm;height:3.5mm;stroke:#5DD4E4;fill:none;stroke-width:2;stroke-linecap:round;"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Manrope',sans-serif;font-size:6pt;font-weight:800;color:#FFFFFF;text-transform:uppercase;letter-spacing:0.04em;">Operational Data</div>
+            <div style="font-family:'Inter',sans-serif;font-size:5pt;color:rgba(255,255,255,0.5);line-height:1.3;">Every signal captured</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 2mm;">
+          <div style="background: rgba(1,112,185,0.2); border-radius: 4px; width: 6mm; height: 6mm; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg viewBox="0 0 24 24" style="width:3.5mm;height:3.5mm;stroke:#8CC63F;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M3 3v18h18"/><path d="M18 9l-5 5-3-3-4 4"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Manrope',sans-serif;font-size:6pt;font-weight:800;color:#FFFFFF;text-transform:uppercase;letter-spacing:0.04em;">Executive Intelligence</div>
+            <div style="font-family:'Inter',sans-serif;font-size:5pt;color:rgba(255,255,255,0.5);line-height:1.3;">Real-time dashboards</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 2mm;">
+          <div style="background: rgba(1,112,185,0.2); border-radius: 4px; width: 6mm; height: 6mm; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg viewBox="0 0 24 24" style="width:3.5mm;height:3.5mm;stroke:#F5A623;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Manrope',sans-serif;font-size:6pt;font-weight:800;color:#FFFFFF;text-transform:uppercase;letter-spacing:0.04em;">Strategic Action</div>
+            <div style="font-family:'Inter',sans-serif;font-size:5pt;color:rgba(255,255,255,0.5);line-height:1.3;">Precise decisions, fast</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Outcome Engine & Process Leak Audit Section -->
+    <div class="leak-audit-section">
+      <div class="leak-audit-title-block">
+        <h2 class="leak-audit-title"><span style="color:#0170B9;">Stop fighting the market.</span> <span style="color:#8CC63F;">Engineer it.</span></h2>
+        <p class="leak-audit-subtitle">Every broken integration, manual spreadsheet, and data blind spot is a leak in your profit margin. The market is moving too fast for intuition-based retail.</p>
+      </div>
+
+      <!-- Semicircle Dial Visual -->
+      <div class="dial-container">
+        <svg viewBox="60 10 380 215" style="width: 100%; height: auto; max-height: 68mm; overflow: visible;">
+          <!-- Guide rings -->
+          <path d="M 90,40 A 160,160 0 0,0 410,40" fill="none" stroke="rgba(15, 30, 54, 0.05)" stroke-width="1" stroke-dasharray="3 3" />
+          <path d="M 160,40 A 90,90 0 0,0 340,40" fill="none" stroke="rgba(15, 30, 54, 0.05)" stroke-width="1" stroke-dasharray="2 2" />
+
+          <!-- Center Brain Graphic (exact match to React component) -->
+          <!-- Outer spinning dashed rings -->
+          <circle cx="250" cy="70" r="52" fill="none" stroke="#0170B9" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.25" />
+          <circle cx="250" cy="70" r="46" fill="none" stroke="rgba(11,30,46,0.08)" stroke-width="4" stroke-dasharray="8 6" />
+          <!-- Dark navy center circle with blue border -->
+          <circle cx="250" cy="70" r="40" fill="#0A1826" stroke="#0170B9" stroke-width="3" />
+          <circle cx="250" cy="70" r="28" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="4" stroke-dasharray="6 4" />
+          <!-- Brain (scaled 1.75 × base paths, centred at 250,40) -->
+          <g transform="translate(250,70) scale(1.65)">
+            <!-- LEFT hemisphere — cyan -->
+            <path d="M 0,-14 C -2,-16 -6,-16 -9,-14 C -12,-12 -14,-9 -14,-6 C -14,-3 -12,-1 -13,1 C -14,3 -13,6 -11,8 C -9,10 -6,10 -3,9 C -1,8 0,7 0,6 Z"
+              fill="rgba(0,229,255,0.10)" stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Left gyri / sulci -->
+            <path d="M -3,-12 C -7,-10 -9,-7 -8,-4" fill="none" stroke="#00E5FF" stroke-width="0.9" stroke-linecap="round" />
+            <path d="M -8,-4 C -11,-2 -11,1 -9,3" fill="none" stroke="#00E5FF" stroke-width="0.9" stroke-linecap="round" />
+            <path d="M -10,4 C -12,5 -11,8 -9,8" fill="none" stroke="#00E5FF" stroke-width="0.8" stroke-linecap="round" />
+            <!-- RIGHT hemisphere — green -->
+            <path d="M 0,-14 C 2,-16 6,-16 9,-14 C 12,-12 14,-9 14,-6 C 14,-3 12,-1 13,1 C 14,3 13,6 11,8 C 9,10 6,10 3,9 C 1,8 0,7 0,6 Z"
+              fill="rgba(140,198,63,0.10)" stroke="#8CC63F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Right gyri / sulci -->
+            <path d="M 3,-12 C 7,-10 9,-7 8,-4" fill="none" stroke="#8CC63F" stroke-width="0.9" stroke-linecap="round" />
+            <path d="M 8,-4 C 11,-2 11,1 9,3" fill="none" stroke="#8CC63F" stroke-width="0.9" stroke-linecap="round" />
+            <path d="M 10,4 C 12,5 11,8 9,8" fill="none" stroke="#8CC63F" stroke-width="0.8" stroke-linecap="round" />
+            <!-- Central longitudinal fissure -->
+            <line x1="0" y1="-14" x2="0" y2="6" stroke="rgba(255,255,255,0.25)" stroke-width="0.8" stroke-dasharray="2 1.5" />
+            <!-- Corpus callosum hint -->
+            <path d="M -2,0 C -1,-1 1,-1 2,0" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.9" stroke-linecap="round" />
+            <!-- Brainstem -->
+            <path d="M -3,9 C -2,13 2,13 3,9" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2" stroke-linecap="round" />
+          </g>
+
+          <!-- Petal 1 (WORKING) — green like NEXT -->
+          <path d="M 79.84 80.85 A 175 175 0 0 0 109.33 144.09 L 177.65 93.53 A 90 90 0 0 1 162.49 61.01 Z" fill="#8CC63F" fill-opacity="0.90" stroke="#8CC63F" stroke-width="1.5" />
+          <g transform="translate(129.91, 89.00) scale(0.7)" stroke="#0B1E2E" stroke-width="2" fill="none">
+            <path d="M-4,-4 h8 v3 c0,2 -2,4 -4,4 c-2,0 -4,-2 -4,-4 z M-4,-2 h-2 v-1 h2 M4,-2 h2 v-1 h-2 M0,3 v3 M-2,6 h4" />
+          </g>
+          <text x="129.91" y="112.00" font-family="'JetBrains Mono', monospace" font-size="5.5pt" font-weight="900" fill="#0B1E2E" text-anchor="middle">WORKING</text>
+
+          <!-- Petal 2 (BROKEN) — green like NEXT -->
+          <path d="M 114.97 151.31 A 175 175 0 0 0 169.19 195.23 L 208.44 119.83 A 90 90 0 0 1 180.55 97.25 Z" fill="#8CC63F" fill-opacity="0.90" stroke="#8CC63F" stroke-width="1.5" />
+          <g transform="translate(166.62, 135.97) scale(0.7)" stroke="#0B1E2E" stroke-width="2" fill="none">
+            <path d="M0,-6 L-4,0 L1,0 L-1,6 L4,0 L-1,0 Z" />
+          </g>
+          <text x="166.62" y="158.97" font-family="'JetBrains Mono', monospace" font-size="5.5pt" font-weight="900" fill="#0B1E2E" text-anchor="middle">BROKEN</text>
+
+          <!-- Petal 3 (COSTING) — green like NEXT -->
+          <path d="M 177.43 199.24 A 175 175 0 0 0 245.42 214.94 L 247.64 129.97 A 90 90 0 0 1 212.68 121.90 Z" fill="#8CC63F" fill-opacity="0.90" stroke="#8CC63F" stroke-width="1.5" />
+          <g transform="translate(220.19, 162.10) scale(0.7)" stroke="#0B1E2E" stroke-width="2" fill="none">
+            <path d="M-6,-4 L-2,2 L2,0 L6,5 M2,5 H6 V1" />
+          </g>
+          <text x="220.19" y="185.10" font-family="'JetBrains Mono', monospace" font-size="5.5pt" font-weight="900" fill="#0B1E2E" text-anchor="middle">COSTING</text>
+
+          <!-- Petal 4 (RISKY) — green like NEXT -->
+          <path d="M 254.58 214.94 A 175 175 0 0 0 322.57 199.24 L 287.32 121.90 A 90 90 0 0 1 252.36 129.97 Z" fill="#8CC63F" fill-opacity="0.90" stroke="#8CC63F" stroke-width="1.5" />
+          <g transform="translate(279.81, 162.10) scale(0.7)" stroke="#0B1E2E" stroke-width="2" fill="none">
+            <path d="M0,-6 L6,4 H-6 Z M0,-2 V1 M0,3 H0.1" />
+          </g>
+          <text x="279.81" y="185.10" font-family="'JetBrains Mono', monospace" font-size="5.5pt" font-weight="900" fill="#0B1E2E" text-anchor="middle">RISKY</text>
+
+          <!-- Petal 5 (POSSIBLE) — green like NEXT -->
+          <path d="M 330.81 195.23 A 175 175 0 0 0 385.03 151.31 L 319.45 97.25 A 90 90 0 0 1 291.56 119.83 Z" fill="#8CC63F" fill-opacity="0.90" stroke="#8CC63F" stroke-width="1.5" />
+          <g transform="translate(333.38, 135.97) scale(0.7)" stroke="#0B1E2E" stroke-width="2" fill="none">
+            <path d="M-3,-4 C-3,-6 3,-6 3,-4 C3,-1 1,1 1,3 H-1 C-1,1 -3,-1 -3,-4 Z M-2,5 H2" />
+          </g>
+          <text x="333.38" y="158.97" font-family="'JetBrains Mono', monospace" font-size="5.5pt" font-weight="900" fill="#0B1E2E" text-anchor="middle">POSSIBLE</text>
+
+          <!-- Petal 6 (NEXT) — green -->
+          <path d="M 397.93 147.47 A 175 175 0 0 0 427.42 84.23 L 344.76 64.39 A 90 90 0 0 1 329.60 96.91 Z" fill="#8CC63F" fill-opacity="0.95" stroke="#8CC63F" stroke-width="2" />
+          <g transform="translate(377.34, 92.38) scale(0.7)" stroke="#0B1E2E" stroke-width="2" fill="none">
+            <path d="M-4,-4 L2,0 L-4,4 Z M2,-4 L8,0 L2,4 Z" />
+          </g>
+          <text x="377.34" y="115.38" font-family="'JetBrains Mono', monospace" font-size="5.5pt" font-weight="900" fill="#0B1E2E" text-anchor="middle">NEXT</text>
+        </svg>
+      </div>
+
+      <!-- Right Side: Icon Cards -->
+      <div class="audit-list">
+        <!-- What's Working -->
+        <div class="audit-card">
+          <div class="audit-card-icon">
+            <svg viewBox="-10 -10 20 20" stroke="#8CC63F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M-4,-4 h8 v3 c0,2 -2,4 -4,4 c-2,0 -4,-2 -4,-4 z M-4,-2 h-2 v-1 h2 M4,-2 h2 v-1 h-2 M0,3 v3 M-2,6 h4" />
+            </svg>
+          </div>
+          <div class="audit-card-label">What's Working?</div>
+        </div>
+        <!-- What's Broken -->
+        <div class="audit-card">
+          <div class="audit-card-icon">
+            <svg viewBox="-10 -10 20 20" stroke="#E07B39" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M0,-6 L-4,0 L1,0 L-1,6 L4,0 L-1,0 Z" />
+            </svg>
+          </div>
+          <div class="audit-card-label">What's Broken?</div>
+        </div>
+        <!-- What's Costing -->
+        <div class="audit-card">
+          <div class="audit-card-icon">
+            <svg viewBox="-10 -10 20 20" stroke="#F5A623" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M-6,-4 L-2,2 L2,0 L6,5 M2,5 H6 V1" />
+            </svg>
+          </div>
+          <div class="audit-card-label">What's Costing?</div>
+        </div>
+        <!-- What's Risky -->
+        <div class="audit-card">
+          <div class="audit-card-icon">
+            <svg viewBox="-10 -10 20 20" stroke="#E05C5C" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M0,-6 L6,4 H-6 Z M0,-2 V1 M0,3 H0.1" />
+            </svg>
+          </div>
+          <div class="audit-card-label">What's Risky?</div>
+        </div>
+        <!-- What's Possible -->
+        <div class="audit-card">
+          <div class="audit-card-icon">
+            <svg viewBox="-10 -10 20 20" stroke="#5DD4E4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M-3,-4 C-3,-6 3,-6 3,-4 C3,-1 1,1 1,3 H-1 C-1,1 -3,-1 -3,-4 Z M-2,5 H2" />
+            </svg>
+          </div>
+          <div class="audit-card-label">What's Possible?</div>
+        </div>
+        <!-- What's Next -->
+        <div class="audit-card">
+          <div class="audit-card-icon">
+            <svg viewBox="-10 -10 20 20" stroke="#4EC8D8" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M-4,-4 L2,0 L-4,4 Z M2,-4 L8,0 L2,4 Z" />
+            </svg>
+          </div>
+          <div class="audit-card-label">What's Next?</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Nine Constraints (Full Width Layout - Moved to Bottom) -->
+    <div class="constraints-container" style="margin-bottom: 0;">
+      <div class="constraints-title-new">Major Jewellery Industry Constraints</div>
+      <p class="body-sm" style="color: var(--txt-secondary); margin-bottom: 3.5mm; line-height: 1.45;">
+        These are the operational forces that silently cap every business that hasn't built intelligence into its DNA:
+      </p>
+      
+      <div class="struggle-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3.5mm 5mm;">
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">01</span>
+          <p class="constraints-text-new">Inventory tracked by movement, not productivity, ageing, or capital efficiency.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">02</span>
+          <p class="constraints-text-new">Customer records without behavioural intelligence or predictive value.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">03</span>
+          <p class="constraints-text-new">Reporting that varies by department, creating conflicting versions of truth.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">04</span>
+          <p class="constraints-text-new">Governance structures that look good on paper but hold zero real accountability.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">05</span>
+          <p class="constraints-text-new">Operational processes that exist in people's heads, not in documented systems.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">06</span>
+          <p class="constraints-text-new">Technology platforms that don't talk to each other, creating data silos.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">07</span>
+          <p class="constraints-text-new">Decision-making that stops when the founder steps away from the business.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">08</span>
+          <p class="constraints-text-new">Executive visibility limited to lagging financial reports, not live operational signals.</p>
+        </div>
+        <div class="constraints-item-new" style="border-bottom: none; padding: 0;">
+          <span class="constraints-num">09</span>
+          <p class="constraints-text-new">Growth that happens by momentum, not by systematic, repeatable design.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="running-footer">
+      <span>WHY MOST BUSINESSES CAN'T SCALE</span>
+      <span class="page-number">02</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+       PAGE 3: THE BUSINESS TRANSFORMATION FRAMEWORK
+       ════════════════════════════════ -->
+  <div class="page" id="page-3">
+    <!-- Full Bleed Top Banner -->
+    <div class="header-banner">
+      <div class="header-banner-nav">
+        <span>CONFIDENTIAL</span>
+        <span>MY COnsulting MOdel - your business transformation framework.</span>
+      </div>
+      <h1 class="header-banner-title">MY COnsulting MOdel - your business transformation framework.</h1>
+      <p class="header-banner-subtitle">
+        A structured operating model for predictable business transformation.
+      </p>
+    </div>
+
+    <!-- Colored Roadmap Blocks Row -->
+    <div class="roadmap-blocks-row">
+      <!-- 01 EDUCATE -->
+      <div class="roadmap-block" style="background: #2F5C69;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          </span>
+          <span class="roadmap-block-num">01</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">EDUCATE</div>
+          <div class="roadmap-block-desc">Build trust through industry insights.</div>
         </div>
       </div>
 
-      <!-- About -->
-      <span class="tag tag-n" style="display:inline-block;margin-bottom:6pt;">About Abraham</span>
-      <p class="body" style="color:#475569;margin-bottom:5pt;">A systems and retail intelligence consultant helping jewellery and retail businesses transition from reactive, gut-driven operations to structured, data-led organisations that grow sustainably.</p>
-      <p class="body-sm" style="color:#64748B;margin-bottom:7pt;">With deep, hands-on experience in retail operations, ERP systems, inventory management, and business intelligence — every engagement is built around your specific business, not a generic framework.</p>
-
-      <div class="hr-d" style="margin-bottom:7pt;"></div>
-
-      <!-- Outcomes -->
-      <span class="tag tag-b" style="display:inline-block;margin-bottom:6pt;">What You Will Achieve</span>
-      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Replace gut decisions with live, accurate business data</span></div>
-      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Improve inventory productivity and eliminate dead stock</span></div>
-      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Understand why customers return — and why they don't</span></div>
-      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Build systems that don't depend on one person</span></div>
-      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">See staff productivity and delays in real time</span></div>
-      <div class="out"><span class="dot-g"></span><span class="body-sm" style="color:#475569;">Scale to multiple branches without losing control</span></div>
-
-      <div class="hr-d" style="margin-top:6pt;margin-bottom:6pt;"></div>
-
-      <div class="stats">
-        <div class="stat">
-          <p class="stat-n">5</p>
-          <p class="stat-l">Phases</p>
+      <!-- 02 UNDERSTAND -->
+      <div class="roadmap-block" style="background: #2A478F;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </span>
+          <span class="roadmap-block-num">02</span>
         </div>
-        <div class="stat">
-          <p class="stat-n">9</p>
-          <p class="stat-l">Lifecycle Steps</p>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">UNDERSTAND</div>
+          <div class="roadmap-block-desc">Align with the owner's vision.</div>
         </div>
-        <div class="stat">
-          <p class="stat-n">6</p>
-          <p class="stat-l">Deliverables</p>
+      </div>
+
+      <!-- 03 ASSESS -->
+      <div class="roadmap-block" style="background: #583088;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </span>
+          <span class="roadmap-block-num">03</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">ASSESS</div>
+          <div class="roadmap-block-desc">Audit and diagnose the business.</div>
+        </div>
+      </div>
+
+      <!-- 04 RECOMMEND -->
+      <div class="roadmap-block" style="background: #396E3C;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          </span>
+          <span class="roadmap-block-num">04</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">RECOMMEND</div>
+          <div class="roadmap-block-desc">Present a transformation blueprint.</div>
+        </div>
+      </div>
+
+      <!-- 05 EXECUTE -->
+      <div class="roadmap-block" style="background: #9A612E;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </span>
+          <span class="roadmap-block-num">05</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">EXECUTE</div>
+          <div class="roadmap-block-desc">Implement changes and train the team.</div>
+        </div>
+      </div>
+
+      <!-- 06 MEASURE -->
+      <div class="roadmap-block" style="background: #962E43;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </span>
+          <span class="roadmap-block-num">06</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">MEASURE</div>
+          <div class="roadmap-block-desc">Track results and optimize continuously.</div>
+        </div>
+      </div>
+
+      <!-- 07 SUSTAIN -->
+      <div class="roadmap-block" style="background: #477D88;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 16v1a5 5 0 0 1-10 0v-1"></path><path d="M12 3v18"></path><path d="M19 16v1a7 7 0 0 1-14 0v-1"></path><path d="M3 7h18"></path></svg>
+          </span>
+          <span class="roadmap-block-num">07</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">SUSTAIN</div>
+          <div class="roadmap-block-desc">Establish governance and transfer capability.</div>
+        </div>
+      </div>
+
+      <!-- 08 PARTNER -->
+      <div class="roadmap-block" style="background: #3E4955;">
+        <div class="roadmap-block-header">
+          <span class="roadmap-block-icon">
+            <svg viewBox="0 0 24 24" width="9" height="9" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </span>
+          <span class="roadmap-block-num">08</span>
+        </div>
+        <div class="roadmap-block-body">
+          <div class="roadmap-block-title">PARTNER</div>
+          <div class="roadmap-block-desc">Provide long-term growth advisory.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 Phases 2-Column Grid -->
+    <div class="phase-grid-container">
+      
+      <!-- Phase 1 -->
+      <div class="phase-grid-card phase-1">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 1</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #0170B9;">
+            <svg style="stroke: #0170B9;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Executive Business Insight &amp; Vision Alignment</h3>
+            <p class="phase-grid-timeline">TIMELINE: WEEK 1 | STRATEGIC ALIGNMENT SPRINT</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>Every successful transformation begins with executive clarity.</strong> Before we examine a single data point, you and I align on the destination. I absorb your long-term goals, immediate bottlenecks, and your three-to-five-year vision.
+            </p>
+            <p>
+              I conduct an <strong>Executive Business Intelligence Session</strong> for you and your leadership team. I reveal how world-class, organised corporate brands operate from a pure data perspective — live metrics, tight governance, decision scorecards. This aligns our mindsets on best-in-class operations before we touch your workflows.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="phase-grid-card phase-2">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 2</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #F5A623;">
+            <svg style="stroke: #F5A623;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Priority Planning, Business Audit &amp; Diagnostic Assessment</h3>
+            <p class="phase-grid-timeline">TIMELINE: WEEKS 2-3 | DIAGNOSTIC SPRINT</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>Once aligned on what excellence looks like,</strong> I examine your current architecture. A structured diagnostic across your ecosystem: inventory lifecycle, cash flow, sales pipelines, customer retention, and employee output.
+            </p>
+            <p style="font-style: italic; font-weight: 600; color: #FFFFFF; padding-left: 2mm; border-left: 2px solid rgba(255, 255, 255, 0.65); margin: 1.5mm 0;">
+              What's working? What's broken? What's costing? What's risky? What's possible? What's next?
+            </p>
+            <p>
+              I focus surgically on the highest-impact, highest-risk functions — the areas bleeding cash, bottlenecking growth, or leaving revenue unrealized.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="phase-grid-card phase-3">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 3</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #8B5CF6;">
+            <svg style="stroke: #8B5CF6;" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Gap Analysis &amp; Executive Audit Review</h3>
+            <p class="phase-grid-timeline">TIMELINE: WEEKS 4-6 | STRATEGY REVIEW SPRINT</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>Data without context is noise.</strong> Once diagnostics are complete, I translate raw findings, operational leakages, and risks into boardroom-ready intelligence.
+            </p>
+            <p>
+              We conduct an intensive <strong>Executive Audit Review</strong>. I present exactly where the business stands, reveal root causes of operational friction, and benchmark against leading industry metrics. Together, we build a pragmatic transformation roadmap calibrated to your team's actual bandwidth.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="phase-grid-card phase-4">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 4</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #10B981;">
+            <svg style="stroke: #10B981;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Process Re-Design, Technology &amp; Automation Planning</h3>
+            <p class="phase-grid-timeline">TIMELINE: WEEKS 4-6 | OPERATING MODEL ARCHITECTURE</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>Valuable, scalable businesses do not rely on superstars or tribal knowledge.</strong> They rely on predictable systems. This phase architects your future operating model.
+            </p>
+            <p>
+              I map optimized workflows, write clear Standard Operating Procedures, and build your master KPI framework. Simultaneously, I evaluate your tech gaps and design your ERP, CRM, and automation strategy. I recommend the exact digital architecture required to turn your company into a transparent, data-driven enterprise.
+            </p>
+          </div>
         </div>
       </div>
 
     </div>
+
+    <div class="running-footer">
+      <span>MY COnsulting MOdel - your business transformation framework.</span>
+      <span class="page-number">03</span>
+    </div>
   </div>
 
-</div><!-- /PAGE 2 -->
 
-<p class="screen-only" style="padding-bottom:16px;color:#9CA3AF;">
-  Ctrl+P → Paper: A4 Landscape · Margins: None · Scale: 100% · Print both pages
-</p>
+  <!-- ════════════════════════════════
+       PAGE 4: THE BUSINESS TRANSFORMATION FRAMEWORK (CONTINUED)
+       ════════════════════════════════ -->
+  <div class="page" id="page-4">
+    <!-- Full Bleed Top Banner -->
+    <div class="header-banner">
+      <div class="header-banner-nav">
+        <span>CONFIDENTIAL</span>
+        <span>MY COnsulting MOdel - your business transformation framework.</span>
+      </div>
+      <h1 class="header-banner-title">MY COnsulting MOdel - your business transformation framework.</h1>
+      <p class="header-banner-subtitle">
+        A structured operating model for predictable business transformation. (Continued)
+      </p>
+    </div>
+
+    <!-- 8 Phases 1-Column Grid (Phases 5-8) -->
+    <div class="phase-grid-container">
+
+      <!-- Phase 5 -->
+      <div class="phase-grid-card phase-5">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 5</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #F97316;">
+            <svg style="stroke: #F97316;" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Implementation, Team Training &amp; Change Management</h3>
+            <p class="phase-grid-timeline">TIMELINE: DYNAMIC SPRINTS | EMBEDDED EXECUTION</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>Strategy creates zero value without relentless execution.</strong> Once you approve the blueprint, I stand shoulder-to-shoulder with your leadership team to drive implementation.
+            </p>
+            <p>
+              I act as your owner's representative coordinating technology vendor onboarding, ensuring on-time, on-budget delivery aligned with your goals. I handle process deployment, coach managers, train frontline teams, and manage the psychological friction of organizational change to guarantee adoption.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 6 -->
+      <div class="phase-grid-card phase-6">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 6</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #EF4444;">
+            <svg style="stroke: #EF4444;" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Performance Management &amp; Continuous Improvement</h3>
+            <p class="phase-grid-timeline">TIMELINE: DYNAMIC SPRINTS | VISIBILITY SETUP</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>To make transformation permanent, we replace guesswork with real-time operational visibility.</strong> You manage through live data streams, not lagged accounting reports.
+            </p>
+            <p>
+              I help design and deploy live executive dashboards and performance tracking tools. Then I institutionalize your review cadences — structured weekly and monthly business reviews (MBRs). By teaching your leadership team to continuously analyze operational data, I help you spot anomalies early and make data-backed strategic moves.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 7 -->
+      <div class="phase-grid-card phase-7">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 7</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #06B6D4;">
+            <svg style="stroke: #06B6D4;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Governance &amp; Knowledge Transfer</h3>
+            <p class="phase-grid-timeline">TIMELINE: DYNAMIC SPRINTS | TRANSITION PROTOCOLS</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>The ultimate test of a great operating model:</strong> Does the business run flawlessly when the founder steps away? My goal is to deliberately engineer you out of the day-to-day operational bottleneck.
+            </p>
+            <p>
+              I build formal corporate governance frameworks, clear reporting paths, and explicit accountability hierarchies. We centralize institutional knowledge and execute a thorough knowledge transfer process that empowers your management layer to own their functions completely — permanently reducing founder dependency.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 8 -->
+      <div class="phase-grid-card phase-8">
+        <div class="phase-grid-header">
+          <div class="phase-grid-badge"><span>Phase 8</span></div>
+          <div class="phase-grid-icon-circle" style="border-color: #64748B;">
+            <svg style="stroke: #64748B;" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <div class="phase-grid-header-text">
+            <h3 class="phase-grid-title">Strategic Advisory &amp; Founder's Office Partnership</h3>
+            <p class="phase-grid-timeline">TIMELINE: ONGOING RETAINER | ADVISORY ALLIANCE</p>
+          </div>
+        </div>
+        <div class="phase-grid-body">
+          <div class="phase-grid-text">
+            <p>
+              <strong>True transformation does not end when software goes live or processes are documented.</strong> Once your operating model stabilizes, challenges shift from internal firefighting to macro expansion.
+            </p>
+            <p>
+              Our relationship evolves into an ongoing strategic alliance. I stay embedded as your advisor, attending executive reviews, evaluating new market opportunities, monitoring structural health, and serving as a sounding board for capital allocation and strategic growth planning.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Evolution Chain -->
+    <div class="evolution-chain" style="margin-top: 4mm;">
+      <div class="chain-label">Evolution Path</div>
+      <div class="chain-badges-row">
+        <span class="chain-badge">Outcome</span>
+        <span class="chain-arrow">&rsaquo;</span>
+        <span class="chain-badge">Business Intelligence</span>
+        <span class="chain-arrow">&rsaquo;</span>
+        <span class="chain-badge">Execution</span>
+        <span class="chain-arrow">&rsaquo;</span>
+        <span class="chain-badge">Governance</span>
+        <span class="chain-arrow">&rsaquo;</span>
+        <span class="chain-badge active">Predictable Scale</span>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>MY COnsulting MOdel - your business transformation framework.</span>
+      <span class="page-number">04</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+       PAGE 5: THE SYSTEMIC FALLACY
+       ════════════════════════════════ -->
+  <div class="page" id="page-5">
+    <!-- Full Bleed Top Banner -->
+    <div class="header-banner">
+      <div class="header-banner-nav">
+        <span>CONFIDENTIAL</span>
+        <span>INTELLIGENCE &amp; DATA ARCHITECTURE</span>
+      </div>
+      <h1 class="header-banner-title">THE SYSTEMIC FALLACY</h1>
+      <p class="header-banner-subtitle">
+        Most businesses invest in software before solving the data capture problem. Intelligence lives in the &ldquo;why&rdquo; &mdash; not just the &ldquo;what.&rdquo;
+      </p>
+    </div>
+
+    <!-- Systemic Fallacy Full-Page Section -->
+    <div class="fallacy-section" style="margin-bottom: 5mm;">
+
+      <!-- LEFT: The Fallacy -->
+      <div class="fallacy-left" style="padding: 5mm 6mm;">
+        <div class="fallacy-eyebrow">The Systemic Fallacy</div>
+        <h2 class="fallacy-heading" style="font-size:14pt; margin-bottom: 3mm;">Most Businesses Start<br>at the Wrong End</h2>
+        <p class="fallacy-body" style="font-size: 7.8pt; margin-bottom: 5mm;">When businesses face operational challenges, they often look for software. They purchase ERPs, implement CRMs, subscribe to dashboards, and automate workflows. Yet many still struggle to answer simple, critical questions:</p>
+        <div class="fallacy-q-grid" style="gap: 2.5mm;">
+          <div class="fallacy-q" style="font-size: 7.5pt; padding: 3mm 3.5mm;"><span class="fallacy-q-dot"></span>Why are sales declining?</div>
+          <div class="fallacy-q" style="font-size: 7.5pt; padding: 3mm 3.5mm;"><span class="fallacy-q-dot"></span>Why are customers not returning?</div>
+          <div class="fallacy-q" style="font-size: 7.5pt; padding: 3mm 3.5mm;"><span class="fallacy-q-dot"></span>Which employees create the most value?</div>
+          <div class="fallacy-q" style="font-size: 7.5pt; padding: 3mm 3.5mm;"><span class="fallacy-q-dot"></span>Which products generate real profit?</div>
+          <div class="fallacy-q" style="font-size: 7.5pt; padding: 3mm 3.5mm;"><span class="fallacy-q-dot"></span>Where is operational leakage occurring?</div>
+          <div class="fallacy-q" style="font-size: 7.5pt; padding: 3mm 3.5mm;"><span class="fallacy-q-dot"></span>Which process creates the most delays?</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: The Diagnosis Card -->
+      <div class="diagnosis-card" style="padding: 6mm 7mm;">
+        <div class="diag-eyebrow">The Diagnosis</div>
+        <h3 class="diag-heading" style="font-size: 12pt; margin-bottom: 3mm;">The problem is rarely<br>the software.</h3>
+        <p class="diag-body" style="font-size: 7.8pt; margin-bottom: 4mm;">The problem is that the right data was <strong style="color:#fff;">never captured</strong> in the first place. Without observation, there is no measurement; without measurement, there is no intelligence.</p>
+
+        <div class="diag-gap-label" style="font-size: 5.5pt; padding-top: 3mm; margin-bottom: 2.5mm;">Data Collection Gap</div>
+
+        <div class="diag-row" style="padding: 2.8mm 3.5mm; margin-bottom: 2mm;">
+          <div><div class="diag-row-label" style="font-size: 7.5pt;">Transaction Data</div><div class="diag-row-sub" style="font-size: 6pt;">What happened</div></div>
+          <span class="diag-badge-collected" style="font-size: 5.5pt; padding: 1mm 2.5mm;">Collected</span>
+        </div>
+        <div class="diag-row" style="padding: 2.8mm 3.5mm; margin-bottom: 2mm;">
+          <div><div class="diag-row-label" style="font-size: 7.5pt;">Decision Data</div><div class="diag-row-sub" style="font-size: 6pt;">Why it was decided</div></div>
+          <span class="diag-badge-missing" style="font-size: 5.5pt; padding: 1mm 2.5mm;">Missing</span>
+        </div>
+        <div class="diag-row" style="padding: 2.8mm 3.5mm; margin-bottom: 2mm;">
+          <div><div class="diag-row-label" style="font-size: 7.5pt;">Process Data</div><div class="diag-row-sub" style="font-size: 6pt;">How long it took</div></div>
+          <span class="diag-badge-missing" style="font-size: 5.5pt; padding: 1mm 2.5mm;">Missing</span>
+        </div>
+        <div class="diag-row" style="padding: 2.8mm 3.5mm;">
+          <div><div class="diag-row-label" style="font-size: 7.5pt;">Behavioral Data</div><div class="diag-row-sub" style="font-size: 6pt;">Actions taken by actors</div></div>
+          <span class="diag-badge-missing" style="font-size: 5.5pt; padding: 1mm 2.5mm;">Missing</span>
+        </div>
+
+        <div class="diag-footer" style="padding-top: 3.5mm; margin-top: 3.5mm;">
+          <p style="font-size: 7.5pt; margin-bottom: 2mm;">Businesses collect transactions, but miss the decisions and processes. As a result, they know what happened, but not <span style="color:#C8D840; font-weight:700;">why</span> it happened.</p>
+          <div class="why-line" style="font-size: 9pt;">And intelligence lives in the &ldquo;why.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Insight Callout Strip -->
+    <div style="background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 60%, #F5FBF0 100%); border-radius: 5px; padding: 4mm 6mm 4mm 7mm; margin-bottom: 5mm; box-shadow: 0 2px 8px rgba(1,112,185,0.07);">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 5.5pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #0170B9; margin-bottom: 1.5mm;">The Intelligence Architecture</div>
+      <p style="font-family: 'Manrope', sans-serif; font-size: 9pt; font-weight: 800; color: #0B1E2E; margin-bottom: 2mm; line-height: 1.35;">Operational data without decisional context is noise, not intelligence.</p>
+      <p style="font-size: 7pt; color: #3D5066; line-height: 1.5;">The role of an embedded Founder's Office is to build the <strong>observation layer</strong> — capturing not just transactions, but decisions, timings, actors, and outcomes — so that every business signal feeds a model that produces better decisions, faster.</p>
+    </div>
+
+    <!-- Three-Column Insight Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; margin-bottom: 5mm;">
+
+      <!-- Card 1: Without Observation -->
+      <div style="background: #233280; border-radius: 5px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <div style="background: #19A4C6; padding: 2.5mm 4.5mm;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF;">Without Observation</span>
+        </div>
+        <div style="padding: 4mm 4.5mm;">
+          <p style="font-size: 9pt; color: #F1F5F9; line-height: 1.5; font-weight: 600; margin: 0;">You cannot measure what you cannot see. Businesses operating without structured data capture are making strategic decisions on incomplete information.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Without Measurement -->
+      <div style="background: #132B4F; border-radius: 5px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <div style="background: #E07B39; padding: 2.5mm 4.5mm;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF;">Without Measurement</span>
+        </div>
+        <div style="padding: 4mm 4.5mm;">
+          <p style="font-size: 9pt; color: #F1F5F9; line-height: 1.5; font-weight: 600; margin: 0;">Pattern recognition requires consistent data. Without measurement systems, every decision is intuition-led — and intuition doesn't scale beyond the founder.</p>
+        </div>
+      </div>
+
+      <!-- Card 3: With Intelligence -->
+      <div style="background: #915F2F; border-radius: 5px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+        <div style="background: #8CBF26; padding: 2.5mm 4.5mm;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #FFFFFF;">With Intelligence</span>
+        </div>
+        <div style="padding: 4mm 4.5mm;">
+          <p style="font-size: 9pt; color: #F1F5F9; line-height: 1.5; font-weight: 600; margin: 0;">When all four data streams — transactional, decisional, process, and behavioral — converge, the business gains predictive intelligence and founder-independent governance.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMIC FALLACY &amp; DATA INTELLIGENCE</span>
+      <span class="page-number">05</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+       PAGE 6: BUSINESS OUTCOMES
+       ════════════════════════════════ -->
+  <div class="page" id="page-6">
+    <!-- Full Bleed Top Banner -->
+    <div class="header-banner">
+      <div class="header-banner-nav">
+        <span>CONFIDENTIAL</span>
+        <span>BUSINESS TRANSFORMATION OUTCOMES</span>
+      </div>
+      <h1 class="header-banner-title">BUSINESS OUTCOMES</h1>
+      <p class="header-banner-subtitle">
+        Establishing predictable systems, governed operations, and founder independence.
+      </p>
+    </div>
+
+    <!-- Executive Transformation Comparison Table -->
+    <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(11,30,46,0.18); margin-top: 2mm; margin-bottom: 4mm;">
+
+      <!-- HEADER BANNER: Arrow divider between two headers -->
+      <div style="display: grid; grid-template-columns: 1fr 14mm 1fr; align-items: stretch;">
+
+        <!-- Left header: FROM REACTIVE OPERATIONS -->
+        <div style="background: linear-gradient(135deg, #8B1A1A 0%, #A52020 100%); padding: 4mm 5mm; display: flex; align-items: center; gap: 3mm;">
+          <div style="width: 7mm; height: 7mm; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg viewBox="0 0 24 24" style="width: 3.5mm; height: 3.5mm; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round;"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 5pt; font-weight: 700; color: rgba(255,200,180,0.8); letter-spacing: 0.12em; text-transform: uppercase;">Current State</div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 9pt; font-weight: 900; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.02em;">FROM REACTIVE OPERATIONS</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 5.5pt; color: rgba(255,220,200,0.75); font-style: italic; margin-top: 0.5mm;">How many growing businesses operate today.</div>
+          </div>
+        </div>
+
+        <!-- Center arrow -->
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0B1E2E;">
+          <div style="width: 1px; flex: 1; background: rgba(255,255,255,0.12);"></div>
+          <div style="background: #1A5FA8; border-radius: 50%; width: 8mm; height: 8mm; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 10px rgba(1,112,185,0.5);">
+            <svg viewBox="0 0 24 24" style="width: 4mm; height: 4mm; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <div style="width: 1px; flex: 1; background: rgba(255,255,255,0.12);"></div>
+        </div>
+
+        <!-- Right header: TO INTELLIGENT EXECUTION -->
+        <div style="background: linear-gradient(135deg, #155A2A 0%, #1B7A38 100%); padding: 4mm 5mm; display: flex; align-items: center; gap: 3mm;">
+          <div style="width: 7mm; height: 7mm; border-radius: 50%; background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg viewBox="0 0 24 24" style="width: 3.5mm; height: 3.5mm; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;"><path d="M5 12l5 5L20 7"/></svg>
+          </div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 5pt; font-weight: 700; color: rgba(180,255,180,0.8); letter-spacing: 0.12em; text-transform: uppercase;">Target Operating Model</div>
+            <div style="font-family: 'Manrope', sans-serif; font-size: 9pt; font-weight: 900; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.02em;">TO INTELLIGENT EXECUTION</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 5.5pt; color: rgba(200,255,200,0.75); font-style: italic; margin-top: 0.5mm;">How scalable, data-driven organizations operate.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TABLE HEADER -->
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #0B1E2E;">
+        <div style="padding: 2mm 3mm 2mm 4mm; font-family: 'JetBrains Mono', monospace; font-size: 5.5pt; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em;">Function</div>
+        <div style="padding: 2mm 3mm 2mm 5mm; font-family: 'JetBrains Mono', monospace; font-size: 5.5pt; font-weight: 700; color: rgba(255,160,130,0.9); text-transform: uppercase; letter-spacing: 0.1em; border-left: 1px solid rgba(255,255,255,0.08);">Before – Current State</div>
+        <div style="padding: 2mm 3mm 2mm 4mm; font-family: 'JetBrains Mono', monospace; font-size: 5.5pt; font-weight: 700; color: rgba(140,220,140,0.9); text-transform: uppercase; letter-spacing: 0.1em; border-left: 1px solid rgba(255,255,255,0.08);">After – Future State</div>
+      </div>
+
+      <!-- TABLE ROWS: clean white/grey alternating -->
+      <div style="display: flex; flex-direction: column;">
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #FFFFFF; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #F0F1F3; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Operations</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Tool-driven and reactive operations</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">System-driven execution supported by the right technology</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #F8F9FA; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #EAEBEC; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Leadership</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Founder involved in every operational decision</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Founder focused on strategy, expansion &amp; capital allocation</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #FFFFFF; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #F0F1F3; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Technology</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Software used as a record-keeping tool</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Technology enables automation, visibility &amp; decision-making</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #F8F9FA; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #EAEBEC; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Finance</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Spending without measurable business outcomes</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">ROI-driven investments aligned with strategic objectives</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #FFFFFF; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #F0F1F3; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Revenue</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Walk-in dependent revenue generation</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Customer intelligence driving retention, repeat purchases &amp; lifetime value</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #F8F9FA; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #EAEBEC; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Inventory</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Inventory managed as stock</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Inventory managed as productive working capital with lifecycle intelligence</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #FFFFFF; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #F0F1F3; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Customers</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Basic customer records</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Advanced customer segmentation, lifecycle management &amp; personalized engagement</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #F8F9FA; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #EAEBEC; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Decisions</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Experience and intuition driven</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Business Intelligence &amp; KPI-driven decisions</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #FFFFFF; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #F0F1F3; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Reporting</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Fragmented reports across departments</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Unified executive dashboards with real-time visibility</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #F8F9FA; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #EAEBEC; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Processes</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">People-dependent workflows</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Standardized SOPs and governed business processes</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #FFFFFF; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #F0F1F3; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Performance</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Problems identified after they occur</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Continuous monitoring through KPIs and performance intelligence</span></div>
+      </div>
+      <div style="display: grid; grid-template-columns: 22mm 1fr 1fr; background: #F8F9FA; border-bottom: 1px solid rgba(11,30,46,0.05);">
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; background: #EAEBEC; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 6.5pt; font-weight: 800; color: #0B1E2E; text-transform: uppercase; letter-spacing: 0.04em;">Governance</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 5mm; border-right: 1px solid rgba(11,30,46,0.07); display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#E07B39;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#3D4F5C;line-height:1.35;">Limited accountability and ownership</span></div>
+        <div style="padding: 2.8mm 3mm 2.8mm 4mm; display: flex; align-items: center; gap: 2mm;"><svg viewBox="0 0 8 8" style="width:2.2mm;height:2.2mm;flex-shrink:0;fill:#2E8B3A;"><circle cx="4" cy="4" r="4"/></svg><span style="font-family:'Inter',sans-serif;font-size:6.5pt;color:#0B1E2E;font-weight:600;line-height:1.35;">Clear accountability through governance frameworks &amp; reporting structures</span></div>
+      </div>
+      </div>
+
+    </div>
+
+    <!-- My Promise Full-Width Blue Banner -->
+    <div class="promise-special-card" style="margin-top: auto; margin-left: -16mm; margin-right: -16mm; margin-bottom: 0; padding: 6mm 16mm 6mm 16mm; background: #3A72BC; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 3.5mm;">
+      
+      <!-- Subtle Decorative Glow overlays -->
+      <div style="position: absolute; top: -20mm; right: -20mm; width: 50mm; height: 50mm; background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 70%); pointer-events: none;"></div>
+      <div style="position: absolute; bottom: -15mm; left: -15mm; width: 50mm; height: 50mm; background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%); pointer-events: none;"></div>
+
+      <div style="display: flex; gap: 5.5mm; align-items: flex-start;">
+        
+        <!-- Left Column: Bespoke Golden Pillar Crest -->
+        <div style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.3); border-radius: 50%; padding: 1.5mm; width: 17mm; height: 17mm; box-shadow: 0 3px 10px rgba(0,0,0,0.15);">
+          <svg viewBox="0 0 100 100" style="width: 13mm; height: 13mm; display: block;">
+            <!-- Outer Ring -->
+            <circle cx="50" cy="50" r="42" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.6" />
+            <!-- Inner Ring -->
+            <circle cx="50" cy="50" r="36" fill="none" stroke="#FFFFFF" stroke-width="0.8" opacity="0.8" />
+            <!-- Decorative Laurel leaves -->
+            <path d="M25 65 C22 50 30 35 40 32 C38 42 32 55 25 65 Z" fill="#D4AF37" opacity="0.7" />
+            <path d="M75 65 C78 50 70 35 60 32 C62 42 68 55 75 65 Z" fill="#D4AF37" opacity="0.7" />
+            <!-- Center Shield -->
+            <path d="M37 34 L63 34 C63 34 63 55 50 68 C37 55 37 34 37 34 Z" fill="rgba(255,255,255,0.15)" stroke="#D4AF37" stroke-width="1.5" />
+            <!-- Classical Pillar representing Structure -->
+            <path d="M45 42 L55 42 M45 59 L55 59 M48 42 L48 59 M52 42 L52 59" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" fill="none" />
+            <!-- Small Star at the top of the pillar -->
+            <polygon points="50,37 51.5,39.5 54,39.5 52,41.2 52.8,43.7 50,42.2 47.2,43.7 48,41.2 46,39.5 48.5,39.5" fill="#D4AF37" />
+          </svg>
+        </div>
+
+        <!-- Right Column: Content -->
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2mm; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 1.5mm;">
+            <div style="display: flex; flex-direction: column;">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 8pt; font-weight: 800; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.18em; line-height: 1;">MY PROMISE</span>
+              <span style="font-family: 'Inter', sans-serif; font-size: 5.2pt; font-weight: 600; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.8mm; line-height: 1;">Strategic Executive Guarantee</span>
+            </div>
+            <!-- Right side accent: small badge -->
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 5pt; font-weight: 700; color: #D4AF37; border: 1.2px solid rgba(212,175,55,0.5); background: rgba(212,175,55,0.1); padding: 0.8mm 2mm; border-radius: 3px; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1;">Executive Trust</span>
+          </div>
+
+          <p style="font-family: 'Inter', sans-serif; font-size: 7.6pt; line-height: 1.55; color: rgba(255,255,255,0.88); margin: 0; font-weight: 400; font-style: italic;">
+            "I help you understand what your business is truly capable of. By connecting <strong style="color: #FFFFFF; font-weight: 700; font-style: normal;">inventory, customers, finance, operations, and technology into one intelligent system</strong>, I uncover <strong style="color: #D4AF37; font-weight: 700; font-style: normal;">hidden opportunities</strong>, expose <strong style="color: #D4AF37; font-weight: 700; font-style: normal;">operational inefficiencies</strong>, and identify the actions that create the <strong style="color: #FFFFFF; font-weight: 700; font-style: normal;">greatest business impact</strong>. Together, we prioritize the right investments, allocate resources where they matter most, and build the <strong style="color: #D4AF37; font-weight: 700; font-style: normal;">operational structure required for sustainable, profitable growth—before scaling.</strong>"
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Bottom Statement Banner -->
+      <div style="background: rgba(0,0,0,0.12); border: 1px solid rgba(255,255,255,0.18); border-radius: 4px; padding: 2.5mm 3.5mm; display: flex; align-items: center; gap: 3.5mm;">
+        <!-- Small Gold Quote SVG -->
+        <svg viewBox="0 0 24 24" style="width: 4.2mm; height: 4.2mm; fill: #D4AF37; flex-shrink: 0; opacity: 0.95;">
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+        <h3 style="font-family: 'Manrope', sans-serif; font-size: 9pt; font-weight: 700; color: #FFFFFF; letter-spacing: -0.01em; line-height: 1.35; margin: 0; flex: 1;">
+          Before scaling a business, <span style="color: #D4AF37; font-weight: 800;">Together we build the structure</span> that makes scaling sustainable.
+        </h3>
+      </div>
+    </div>
+
+    <!-- Running Footer (separate, outside blue banner) -->
+    <div class="running-footer">
+      <span>BUSINESS OUTCOMES</span>
+      <span class="page-number">06</span>
+    </div>
+  </div>
 
 </body>
 </html>

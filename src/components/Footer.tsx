@@ -6,7 +6,7 @@ const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/#workflows', label: '12 Workflows' },
   { to: '/about', label: 'About' },
-  { to: '/insights', label: 'Insights' },
+  { to: '/case-studies', label: 'Case Studies' },
   { to: '/portal', label: 'Retail Space' },
   { to: '/roadmap', label: 'Roadmap' },
   { to: '/contact', label: 'Contact' },
