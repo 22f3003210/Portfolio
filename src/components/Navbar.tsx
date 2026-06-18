@@ -9,6 +9,7 @@ const navLinks = [
   { to: '/consulting', label: 'Consulting' },
   { to: '/about', label: 'About' },
   { to: '/portal', label: 'Retail Space' },
+  { to: '/roadmap', label: 'Roadmap' },
   { to: '/case-studies', label: 'Case Studies' },
   { to: '/contact', label: 'Get in Touch' },
 ];
@@ -36,7 +37,7 @@ export function Navbar() {
   }, [location.hash, location.pathname]);
 
   const visibleLinks = navLinks.filter(
-    (link) => link.to !== '/portal' || isPortalVisible
+    (link) => (link.to !== '/portal' && link.to !== '/roadmap') || isPortalVisible
   );
 
   useEffect(() => {
