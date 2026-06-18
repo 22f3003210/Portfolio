@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { sha256 as jsSha256 } from './sha256';
 
 // Get Supabase credentials from environment variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
@@ -378,10 +379,7 @@ export interface PortalComment {
 
 // Helper SHA-256
 async function sha256(message: string): Promise<string> {
-  const msgBuffer = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return jsSha256(message);
 }
 
 // ---- CLIENT CRUD ----
