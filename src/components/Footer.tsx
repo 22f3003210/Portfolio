@@ -13,9 +13,7 @@ const navLinks = [
 ];
 
 export function Footer() {
-  const [showPortalLink, setShowPortalLink] = useState(() => {
-    return localStorage.getItem('portal_link_visible') === 'true';
-  });
+  const [showPortalLink, setShowPortalLink] = useState(false);
 
   useEffect(() => {
     const handleUnlock = () => setShowPortalLink(true);

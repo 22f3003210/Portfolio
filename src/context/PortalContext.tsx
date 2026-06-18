@@ -18,23 +18,19 @@ const PortalContext = createContext<PortalContextType | null>(null);
 
 export function PortalProvider({ children }: { children: ReactNode }) {
   // Read initial states from localStorage to survive page refreshes
-  const [isPortalVisible, setIsPortalVisible] = useState(() => {
-    return localStorage.getItem('portal_link_visible') === 'true';
-  });
+  const [isPortalVisible, setIsPortalVisible] = useState(false);
   const [isPortalAuthenticated, setIsPortalAuthenticated] = useState(() => {
     return localStorage.getItem('portal_authenticated') === 'true';
   });
 
   const showPortal = () => {
     setIsPortalVisible(true);
-    localStorage.setItem('portal_link_visible', 'true');
     window.dispatchEvent(new Event('portal_unlocked'));
   };
 
   const hidePortal = () => {
     setIsPortalVisible(false);
     setIsPortalAuthenticated(false);
-    localStorage.setItem('portal_link_visible', 'false');
     localStorage.setItem('portal_authenticated', 'false');
     window.dispatchEvent(new Event('portal_locked'));
   };
