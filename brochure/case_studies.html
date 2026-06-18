@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Transformation — Case Studies Booklet</title>
+  <!-- Google Fonts: Manrope for title contrast, Inter for readable body, JetBrains Mono for modern metrics/labels -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ════════════════════════════════
+       1. COLOR SYSTEM (Arctic Executive Theme)
+       ════════════════════════════════ */
+    :root {
+      --bg-document: #E2E8F0;      /* Outer scroll background */
+      
+      /* Page & Card Surface Backgrounds */
+      --bg-page: #F4F7FB;          /* Soft Cloud background */
+      --bg-card: #FFFFFF;          /* Pure White card backgrounds */
+      --bg-tint-blue: #E8F0FE;     /* Ice Blue tint */
+      --bg-dark-navy: #0B1E2E;     /* Cover / Premium Hero Navy */
+      
+      /* Typography Colors */
+      --txt-primary: #1E293B;      /* Charcoal Primary text */
+      --txt-secondary: #475569;    /* Slate Secondary text */
+      --txt-muted: #64748B;        /* Muted caption text */
+      
+      /* Brand Accent Colors */
+      --blue-navy: #0F1E36;        /* Deep Slate (Primary Navy) */
+      --blue-slate: #1E4D8C;       /* Corporate Azure (Primary Blue) */
+      --accent-azure: #3B82F6;     /* Bright Azure Accent */
+      --accent-teal: #0D9488;      /* Success/Positive Teal */
+      --accent-coral: #E85D4E;     /* Alert Coral for risks */
+      --accent-lime: #8CC63F;      /* Lime/Chartreuse brand accent */
+      
+      /* Borders */
+      --border-color: #D1D9E6;     /* Frost border */
+      
+      /* Layout Dimensions (A4 Landscape) */
+      --a4-width: 297mm;
+      --a4-height: 210mm;
+    }
+
+    /* ════════════════════════════════
+       2. RESET & BASE DOCUMENT STYLING
+       ════════════════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--bg-document);
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--txt-primary);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10mm 0;
+    }
+
+    /* ════════════════════════════════
+       3. VERTICAL PORTRAIT PAGES (A4 Landscape)
+       ════════════════════════════════ */
+    .page {
+      width: var(--a4-width);
+      height: var(--a4-height);
+      background: var(--bg-page);
+      padding: 12mm 20mm 10mm 20mm;
+      margin-bottom: 12mm;
+      box-shadow: 0 10px 30px rgba(15, 30, 54, 0.05);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .page > * {
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════
+       4. EXECUTIVE HEADER BANNERS (Full Bleed Top)
+       ════════════════════════════════ */
+    .header-banner {
+      background: linear-gradient(135deg, var(--blue-navy) 0%, var(--blue-slate) 100%);
+      margin: -12mm -20mm 3mm -20mm;
+      padding: 6mm 20mm 6mm 20mm;
+      color: #FFFFFF;
+      border-bottom: 3px solid var(--accent-azure);
+      position: relative;
+    }
+    
+    .header-banner-nav {
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--accent-azure);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 1.5mm;
+      margin-bottom: 2.5mm;
+      text-transform: uppercase;
+    }
+    
+    .header-banner-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 26pt;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+    
+    .header-banner-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 13pt;
+      font-weight: 500;
+      color: #CBD5E1;
+      margin-top: 1.5mm;
+    }
+
+    .header-banner-subtitle span.accent-text {
+      color: #93C5FD;
+      font-weight: 700;
+    }
+
+    .running-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      font-weight: 500;
+      color: var(--txt-muted);
+      border-top: 1px solid var(--border-color);
+      padding-top: 2mm;
+      margin-top: auto;
+      letter-spacing: 0.05em;
+    }
+
+    .running-footer .page-number {
+      font-weight: 700;
+      color: var(--blue-slate);
+    }
+
+    /* ════════════════════════════════
+       5. COVER / HERO PAGE STYLING (Light Theme with 40% Dark Banner)
+       ════════════════════════════════ */
+    .page.cover {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 12mm;
+    }
+
+    .cover-header-banner {
+      background-color: #0B1E2E;
+      background-image: 
+        radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.18) 0%, transparent 55%),
+        linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+        linear-gradient(135deg, #040A12 0%, #0B1E2E 100%);
+      background-size: 100% 100%, 15mm 15mm, 15mm 15mm, 100% 100%;
+      margin: -12mm -20mm 3.5mm -20mm;
+      padding: 10mm 20mm 8mm 20mm;
+      height: 70mm;
+      color: #FFFFFF;
+      border-bottom: 3px solid var(--accent-azure);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .cover-header-top {
+      border-left: 3px solid var(--accent-lime);
+      padding-left: 5mm;
+      margin-top: 1mm;
+    }
+
+    .cover-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12pt;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent-lime);
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+    }
+
+    .cover-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 40pt;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+    }
+
+    .cover-subtitle {
+      font-size: 13.5pt;
+      color: #CBD5E1;
+      font-weight: 500;
+      max-width: 95%;
+      line-height: 1.45;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .cover-intro-box {
+      background: rgba(30, 77, 140, 0.05);
+      border: none;
+      border-left: 5px solid var(--blue-slate);
+      border-radius: 6px;
+      padding: 5.5mm 9mm;
+      margin: 3mm 0;
+      font-size: 13pt;
+      line-height: 1.65;
+      color: var(--blue-navy);
+      font-weight: 500;
+      font-style: italic;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+      position: relative;
+      overflow: hidden;
+    }
+    .cover-intro-box::before {
+      content: '\201C';
+      position: absolute;
+      top: -4mm;
+      right: 5mm;
+      font-size: 52pt;
+      font-family: 'Manrope', sans-serif;
+      color: rgba(30, 77, 140, 0.08);
+      font-weight: 900;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .cover-bridge-text {
+      font-family: 'Manrope', sans-serif;
+      font-size: 12pt;
+      font-weight: 800;
+      color: var(--blue-slate);
+      text-align: center;
+      margin: 4mm 0 5mm 0;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      border-top: 1.5px dashed var(--border-color);
+      border-bottom: 1.5px dashed var(--border-color);
+      padding: 2.5mm 0;
+      line-height: 1.4;
+    }
+
+    .cover-hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6mm;
+      margin-bottom: 2mm;
+    }
+
+    .hero-card {
+      border-radius: 8px;
+      padding: 5mm 6mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 54mm;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      bottom: -8mm;
+      right: -8mm;
+      width: 28mm;
+      height: 28mm;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+
+    /* Card P1: Deep Sapphire Blue */
+    .hero-card.card-p1 {
+      background: linear-gradient(135deg, #102A54 0%, #1E4E8C 100%);
+      border: 1px solid rgba(59, 130, 246, 0.45);
+      box-shadow: 0 6px 20px rgba(16, 42, 84, 0.25);
+    }
+    /* Card P2: Deep Emerald/Teal */
+    .hero-card.card-p2 {
+      background: linear-gradient(135deg, #064E3B 0%, #0D9488 100%);
+      border: 1px solid rgba(20, 184, 166, 0.45);
+      box-shadow: 0 6px 20px rgba(6, 78, 59, 0.25);
+    }
+    /* Card P3: Deep Indigo/Purple */
+    .hero-card.card-p3 {
+      background: linear-gradient(135deg, #311062 0%, #6366F1 100%);
+      border: 1px solid rgba(99, 102, 241, 0.45);
+      box-shadow: 0 6px 20px rgba(49, 16, 98, 0.25);
+    }
+
+    .hero-card-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 20pt;
+      font-weight: 700;
+      margin-bottom: 2mm;
+      color: rgba(255,255,255,0.35);
+    }
+    .hero-card.card-p1 .hero-card-num { color: rgba(147,197,253,0.7); }
+    .hero-card.card-p2 .hero-card-num { color: rgba(94,234,212,0.7); }
+    .hero-card.card-p3 .hero-card-num { color: rgba(252,165,165,0.7); }
+
+    .hero-card-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      line-height: 1.25;
+      margin-bottom: 2mm;
+    }
+
+    .hero-card-desc {
+      font-size: 10pt;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════
+       6. CONTENT PAGES STYLING (Vertical Booklet Stack)
+       ════════════════════════════════ */
+    .page-intro-text {
+      font-size: 11.5pt;
+      line-height: 1.4;
+      color: var(--blue-slate);
+      font-weight: 500;
+      margin-bottom: 3mm;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5mm;
+    }
+
+    .page-p2 .page-intro-text {
+      font-size: 12pt;
+      line-height: 1.45;
+      color: var(--blue-navy);
+      font-weight: 600;
+      background: rgba(59, 130, 246, 0.05);
+      border-left: 4px solid var(--accent-azure);
+      border-bottom: none;
+      padding: 3.5mm 5mm;
+      margin-bottom: 4.5mm;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .page-p4 .page-intro-text {
+      font-size: 12pt;
+      line-height: 1.45;
+      color: var(--blue-navy);
+      font-weight: 600;
+      background: rgba(13, 148, 136, 0.05);
+      border-left: 4px solid var(--accent-teal);
+      border-bottom: none;
+      padding: 3.5mm 5mm;
+      margin-bottom: 4.5mm;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .page-p6 .page-intro-text {
+      font-size: 12pt;
+      line-height: 1.45;
+      color: var(--blue-navy);
+      font-weight: 600;
+      background: rgba(232, 93, 78, 0.05);
+      border-left: 4px solid var(--accent-coral);
+      border-bottom: none;
+      padding: 3.5mm 5mm;
+      margin-bottom: 4.5mm;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .vertical-stack-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      flex-grow: 1;
+      height: auto;
+    }
+
+    .list-title-header {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12pt;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--blue-slate);
+      text-transform: uppercase;
+      margin-bottom: 3.5mm;
+      display: flex;
+      align-items: center;
+      gap: 2.5mm;
+    }
+
+    .list-title-header::after {
+      content: '';
+      flex-grow: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    /* Vertical Bullet List Page */
+    .vertical-action-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5mm;
+      margin-bottom: 4mm;
+    }
+
+    .two-column-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm 16mm;
+      margin-bottom: 4mm;
+    }
+
+    .vertical-action-item {
+      display: flex;
+      gap: 3mm;
+      align-items: start;
+    }
+
+    .vertical-action-bullet {
+      width: 2.5mm;
+      height: 2.5mm;
+      background: var(--accent-azure);
+      border-radius: 50%;
+      margin-top: 1.5mm;
+      flex-shrink: 0;
+    }
+    
+    .page-p4 .vertical-action-bullet { background: var(--accent-teal); }
+    .page-p6 .vertical-action-bullet { background: var(--accent-coral); }
+
+    .vertical-action-text {
+      font-size: 12.5pt;
+      line-height: 1.45;
+      color: var(--txt-primary);
+      font-weight: 500;
+    }
+
+    /* Highlight Summary Card at bottom of List Pages */
+    .summary-metric-card {
+      background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 65%, #F4F7FB 100%);
+      border-left: 5px solid var(--accent-azure);
+      border-top: 1px solid rgba(59, 130, 246, 0.1);
+      border-right: 1px solid rgba(59, 130, 246, 0.08);
+      border-bottom: 1px solid rgba(59, 130, 246, 0.08);
+      border-radius: 6px;
+      padding: 4.5mm 8mm;
+      margin-top: auto;
+      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.03);
+    }
+    .page-p4 .summary-metric-card {
+      border-left-color: var(--accent-teal);
+      background: linear-gradient(135deg, #F0FBFB 0%, #FFFFFF 65%, #F4F7FB 100%);
+    }
+    .page-p6 .summary-metric-card {
+      border-left-color: var(--accent-coral);
+      background: linear-gradient(135deg, #FFF5F4 0%, #FFFFFF 65%, #F4F7FB 100%);
+    }
+
+    .summary-metric-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5pt;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--blue-slate);
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+    }
+    .page-p4 .summary-metric-label { color: var(--accent-teal); }
+    .page-p6 .summary-metric-label { color: var(--accent-coral); }
+
+    .summary-metric-text {
+      font-size: 13pt;
+      line-height: 1.45;
+      color: var(--blue-navy);
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    /* ════════════════════════════════
+       7. HORIZONTAL CARDS STYLING (Case Studies/Frameworks Page)
+       ════════════════════════════════ */
+    .horizontal-cards-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      flex-grow: 1;
+      height: auto;
+    }
+
+    .horizontal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: 2.5fr 7.5fr;
+      gap: 5mm;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+      transition: all 0.2s ease;
+    }
+
+    .horizontal-card:hover {
+      box-shadow: 0 5px 12px rgba(15, 23, 42, 0.04);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    /* Left side of Horizontal Card (Title/Badge) */
+    .horizontal-card-left {
+      border-right: 1px solid var(--border-color);
+      padding: 3mm 4mm 3mm 5mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .horizontal-card-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 11.5pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    /* Right side of Horizontal Card (Description) */
+    .horizontal-card-right {
+      padding: 3mm 6mm 3mm 4mm;
+    }
+
+    .horizontal-card-desc {
+      font-size: 10.5pt;
+      line-height: 1.35;
+      color: var(--txt-secondary);
+    }
+
+    /* Page-wise Cards Heights and Gaps to Fit A4 Exactly */
+    /* Page 3: 5 cards (Pillar 01) */
+    .page-p3 .horizontal-cards-container {
+      gap: 1.8mm;
+    }
+    .page-p3 .horizontal-card {
+      height: 22.5mm;
+    }
+
+    /* Page 5: 6 cards (Pillar 02) */
+    .page-p5 .horizontal-cards-container {
+      gap: 1.2mm;
+    }
+    .page-p5 .horizontal-card {
+      height: 18.5mm;
+    }
+    .page-p5 .horizontal-card-title {
+      font-size: 10.5pt;
+    }
+    .page-p5 .horizontal-card-desc {
+      font-size: 10pt;
+      line-height: 1.3;
+    }
+
+    /* Page 7: 4 cards (Pillar 03) */
+    .page-p7 .horizontal-cards-container {
+      gap: 3.5mm;
+    }
+    .page-p7 .horizontal-card {
+      height: 29.5mm;
+    }
+    .page-p7 .horizontal-card-title {
+      font-size: 12.5pt;
+    }
+    .page-p7 .horizontal-card-desc {
+      font-size: 11pt;
+      line-height: 1.35;
+    }
+
+    /* ════════════════════════════════
+       8. BACK COVER / PHILOSOPHY PAGE (Page 8)
+       ════════════════════════════════ */
+    .page.back-cover {
+      background: var(--bg-page);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 12mm;
+    }
+
+    .back-header-banner {
+      background-color: var(--blue-navy);
+      background-image: 
+        radial-gradient(circle at 15% 30%, rgba(13, 148, 136, 0.15) 0%, transparent 55%),
+        linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+        linear-gradient(135deg, var(--blue-navy) 0%, var(--blue-slate) 100%);
+      background-size: 100% 100%, 15mm 15mm, 15mm 15mm, 100% 100%;
+      margin: -12mm -20mm 3.5mm -20mm;
+      padding: 10mm 20mm 8mm 20mm;
+      height: 70mm;
+      color: #FFFFFF;
+      border-bottom: 3px solid var(--accent-lime);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .back-header-top {
+      border-left: 3px solid var(--accent-lime);
+      padding-left: 5mm;
+      margin-top: 1mm;
+    }
+
+    .back-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 38pt;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      margin-bottom: 1.5mm;
+    }
+
+    .back-subtitle {
+      font-size: 12.5pt;
+      line-height: 1.4;
+      color: #E2E8F0;
+      font-family: 'Inter', sans-serif;
+      font-style: italic;
+    }
+
+    .back-subtitle strong {
+      color: var(--accent-lime);
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    .methodology-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 6mm 10mm;
+      margin-bottom: 3.5mm;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02);
+    }
+
+    .methodology-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: var(--blue-navy);
+      text-transform: uppercase;
+      margin-bottom: 2.5mm;
+      letter-spacing: 0.02em;
+    }
+
+    .methodology-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: center;
+      text-align: center;
+    }
+
+    .methodology-step {
+      background: var(--bg-tint-blue);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      padding: 3.5mm 3mm;
+      border-radius: 4px;
+      font-family: 'Manrope', sans-serif;
+      font-size: 12.5pt;
+      font-weight: 700;
+      color: var(--blue-slate);
+      text-transform: uppercase;
+    }
+
+    .methodology-arrow {
+      color: var(--txt-muted);
+      font-weight: bold;
+      font-size: 13pt;
+      padding: 0 1.5mm;
+    }
+
+    .back-cta-card {
+      background: linear-gradient(135deg, var(--blue-navy) 0%, var(--blue-slate) 100%);
+      color: #FFFFFF;
+      border-radius: 6px;
+      padding: 4.5mm 8mm;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.1);
+      margin-bottom: 3mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-cta-left {
+      max-width: 75%;
+    }
+
+    .back-cta-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 1mm;
+      color: #FFFFFF;
+    }
+
+    .back-cta-desc {
+      font-size: 11.5pt;
+      color: #CBD5E1;
+      line-height: 1.35;
+    }
+
+    .back-cta-button {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--blue-navy);
+      background: #FFFFFF;
+      border: 1px solid #FFFFFF;
+      padding: 3mm 6mm;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    /* ════════════════════════════════
+       9. PRINT LAYOUT SPECIFICS (A4 Landscape)
+       ════════════════════════════════ */
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        width: 297mm !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #FFFFFF !important;
+        display: block !important;
+        align-items: unset !important;
+      }
+
+      .page {
+        width: 297mm !important;
+        height: 210mm !important;
+        margin: 0 !important;
+        padding: 12mm 20mm 10mm 20mm !important;
+        border: none !important;
+        box-shadow: none !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        position: relative !important;
+      }
+
+      .page:last-child {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
+    }
+
+    /* Case Study Card Inner Styles */
+    .case-study-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm;
+      align-items: start;
+      width: 100%;
+    }
+
+    .case-study-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-study-sub-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 2mm;
+      letter-spacing: 0.05em;
+    }
+    .case-study-col.problems .case-study-sub-title { color: var(--txt-secondary); }
+    .case-study-col.results .case-study-sub-title { color: var(--accent-teal); }
+
+    .case-study-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5mm;
+    }
+
+    .case-study-bullets li {
+      position: relative;
+      padding-left: 3.5mm;
+      font-size: 8.6pt;
+      line-height: 1.35;
+      color: var(--txt-secondary);
+      font-weight: 500;
+    }
+
+    .case-study-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1.5mm;
+      width: 1.5mm;
+      height: 1.5mm;
+      border-radius: 50%;
+    }
+    .case-study-col.problems li::before { background: #94A3B8; }
+    .case-study-col.results li::before { background: var(--accent-teal); }
+
+    /* Page Heights and Containers for Case Studies */
+    .page-p5 .horizontal-cards-container,
+    .page-p6 .horizontal-cards-container,
+    .page-p7 .horizontal-cards-container,
+    .page-p8 .horizontal-cards-container {
+      gap: 4mm;
+    }
+    .page-p5 .horizontal-card,
+    .page-p6 .horizontal-card,
+    .page-p7 .horizontal-card,
+    .page-p8 .horizontal-card {
+      height: 62mm;
+    }
+
+    .page-p9 .horizontal-card {
+      height: 62mm;
+      margin-bottom: 4mm;
+    }
+
+    .page-p9 .summary-metric-card {
+      height: 60mm;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════════════════════════════
+     PAGE 1: COVER / HERO PAGE
+     ════════════════════════════════ -->
+  <div class="page cover">
+    <!-- Dark Banner covering top 40% -->
+    <div class="cover-header-banner">
+      <div class="header-banner-nav">
+        <span>Executive Portfolio</span>
+        <span>Operational Solutions</span>
+      </div>
+      <div class="cover-header-top">
+        <div class="cover-eyebrow">Executive Consulting Portfolio</div>
+        <h1 class="cover-title">Case Studies</h1>
+        <p class="cover-subtitle">Operational Governance, Digital Foundations, and Scalability Frameworks in Retail Jewellery</p>
+      </div>
+    </div>
+
+    <!-- Light Background Content below banner -->
+    <div class="cover-intro-box">
+      Rather than providing isolated consulting services, my work focuses on studying businesses at different stages of growth, identifying hidden operational gaps and designing structured systems that improve governance, intelligence and long-term scalability.
+    </div>
+
+    <div class="cover-bridge-text">
+      Throughout my journey, these are the three transformation areas where I have contributed the most:
+    </div>
+
+    <div class="cover-hero-grid">
+      <!-- Pillar 1 -->
+      <div class="hero-card card-p1">
+        <div>
+          <div class="hero-card-num">01</div>
+          <h2 class="hero-card-title">New Store Openings</h2>
+        </div>
+        <p class="hero-card-desc">Building scalable business systems and operational foundations before showroom doors open to ensure long-term efficiency and Day-1 control.</p>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="hero-card card-p2">
+        <div>
+          <div class="hero-card-num">02</div>
+          <h2 class="hero-card-title">Unorganised → Organised</h2>
+        </div>
+        <p class="hero-card-desc">Transforming family-run, people-dependent operations into structured, systems-driven enterprises built on accountability and data.</p>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="hero-card card-p3">
+        <div>
+          <div class="hero-card-num">03</div>
+          <h2 class="hero-card-title">Challenges Despite Software</h2>
+        </div>
+        <p class="hero-card-desc">Bridging the gap between software investments and business execution by aligning data architectures and re-engineering processes.</p>
+      </div>
+    </div>
+
+    <!-- Running footer matching the other pages -->
+    <div class="running-footer" style="border-top: 1px solid var(--border-color); padding-top: 2.5mm; margin-top: auto;">
+      <span>FOUNDER'S PARTNER • EXECUTIVE ADVISORY</span>
+      <span>SYSTEMS • GOVERNANCE • SCALE</span>
+      <span class="page-number">Page 01</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+     PAGE 2: PILLAR 01 - NEW STORE OPENINGS (List Page)
+     ════════════════════════════════ -->
+  <div class="page page-p2">
+    <div class="header-banner">
+      <div class="header-banner-nav">
+        <span>Operational Blueprint</span>
+        <span>Pillar 01 • Page A</span>
+      </div>
+      <h2 class="header-banner-title">01. New Store Openings</h2>
+      <p class="header-banner-subtitle">Building Scalable Business Systems <span class="accent-text">Before Operations Begin</span></p>
+    </div>
+
+    <div class="page-intro-text">
+      Opening a new jewellery store is more than setting up interiors and inventory. It is about establishing the operational foundation that will determine how efficiently the business functions over the coming years. My involvement begins before operations start, ensuring every critical business function is structured from day one.
+    </div>
+
+    <div class="vertical-stack-container">
+      <h3 class="list-title-header">Immediate Action Protocol</h3>
+      
+      <div class="vertical-action-list two-column-list">
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Standard Showroom SOPs &amp; Policies</strong>: Establish workflow standards, checklists, and daily retail procedures.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Role Clarity &amp; Org Structure</strong>: Define clear departmental boundaries and daily owner check points.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Robust Inventory Controls</strong>: Build master data, stone/metal attributes, barcodes, and tagging standards.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Customer CRM &amp; Follow-up</strong>: Set up lead management, databases, campaigns, and retention frameworks.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>HR &amp; Payroll Governance</strong>: Implement onboarding, role-based KPIs, attendance, and incentive models.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Governance &amp; Approvals</strong>: Structure transaction limits, approval hierarchies, and internal audit controls.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>BI &amp; Executive Reporting</strong>: Create daily MIS reports, sales KPIs, and financial review systems.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Scalable Expansion Blueprint</strong>: Design the operational foundation to support future branch expansions.</div>
+        </div>
+      </div>
+
+      <!-- Strategic Bottom Highlight Card -->
+      <div class="summary-metric-card" style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 6mm; align-items: center;">
+        <div>
+          <div class="summary-metric-label" style="margin-bottom: 1.5mm;">Customised Strategy &amp; Advisory</div>
+          <p class="summary-metric-text" style="font-size: 10.5pt; line-height: 1.4; color: var(--txt-secondary); font-style: normal; font-weight: 500;">
+            "Every store's system needs are unique. Based upon your <strong>spending power</strong> (financial budget) and <strong>human capital</strong> (team capability), I will suggest the optimal systems and tools to implement, ensuring you establish each and everything required to run smoothly without over-engineering."
+          </p>
+        </div>
+        <div style="border-left: 2px solid var(--border-color); padding-left: 6mm;">
+          <div class="summary-metric-label" style="margin-bottom: 1.5mm; color: var(--accent-azure);">Key Strategic Objective</div>
+          <p class="summary-metric-text" style="font-size: 10.5pt; line-height: 1.4; font-style: italic;">
+            "Establish role clarity, transaction boundaries, and inventory specifications before Day 1 to ensure scaling does not multiply operational chaos."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>NEW STORE OPENINGS</span>
+      <span class="page-number">Page 02</span>
+    </div>
+  </div>
+
+
+    <!-- ════════════════════════════════
+     PAGE 3: PILLAR 02 - UNORGANISED TO ORGANISED (List Page)
+     ════════════════════════════════ -->
+  <div class="page page-p4">
+    <div class="header-banner" style="border-bottom-color: var(--accent-teal);">
+      <div class="header-banner-nav" style="color: var(--accent-teal);">
+        <span>Operational Blueprint</span>
+        <span>Pillar 02 • Page A</span>
+      </div>
+      <h2 class="header-banner-title">02. Unorganised → Organised Practices</h2>
+      <p class="header-banner-subtitle">Transforming Businesses Operating on People <span class="accent-text" style="color: #A7F3D0;">into Businesses Operating on Systems</span></p>
+    </div>
+
+    <div class="page-intro-text">
+      Throughout my journey, I have worked with businesses where daily operations depended more on individual experience than structured systems. While these businesses had grown successfully, the absence of operational governance created hidden inefficiencies, inventory leakages, inconsistent decision-making and limited scalability.
+    </div>
+
+    <div class="vertical-stack-container">
+      <h3 class="list-title-header">Transformation Checklist</h3>
+      
+      <div class="vertical-action-list two-column-list">
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Operational Gap Audit</strong>: Conduct in-depth business process studies to identify and plug hidden leakages.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Metal &amp; Stock Accountability</strong>: Establish strict transaction controls for inventory security and metal weight tracking.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Exchange &amp; Repair Governance</strong>: Standardise guidelines and checkpoints for old gold exchange and customer repairs.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Showroom Inventory Audits</strong>: Implement formal, routine stock movement procedures and regular count protocols.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Custom Order Management</strong>: Streamline custom order lifecycles and coordination workflows with workshops.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>CRM Customer Segmentation</strong>: Build database schemas and customer tag systems to drive retention campaigns.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>System-Driven Workflows</strong>: Eliminate manual bottlenecks by implementing standardized operational procedures.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>BI &amp; Performance Reporting</strong>: Introduce executive dashboards, key metrics, and automated KPI tracking.</div>
+        </div>
+      </div>
+
+      <!-- Strategic Bottom Highlight Card -->
+      <div class="summary-metric-card" style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 6mm; align-items: center;">
+        <div>
+          <div class="summary-metric-label" style="margin-bottom: 1.5mm; color: var(--accent-teal);">Customised Strategy &amp; Advisory</div>
+          <p class="summary-metric-text" style="font-size: 10.5pt; line-height: 1.4; color: var(--txt-secondary); font-style: normal; font-weight: 500;">
+            "System implementation must match team readiness. Based upon your <strong>spending power</strong> (financial budget) and <strong>human capital</strong> (team size/capability), I will advise which controls to introduce first to plug leakages without disrupting showroom sales."
+          </p>
+        </div>
+        <div style="border-left: 2px solid var(--border-color); padding-left: 6mm;">
+          <div class="summary-metric-label" style="margin-bottom: 1.5mm; color: var(--accent-teal);">Transformation Metric</div>
+          <p class="summary-metric-text" style="font-size: 10.5pt; line-height: 1.4; font-style: italic;">
+            "Shifting legacy jewellery stores from people-driven to systems-driven operations recovers an average of 3% to 5% in net profit margins by plugging operational leakages."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>UNORGANISED → ORGANISED</span>
+      <span class="page-number">Page 03</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+     PAGE 4: PILLAR 03 - CHALLENGES DESPITE SOFTWARE (List Page)
+     ════════════════════════════════ -->
+  <div class="page page-p6">
+    <div class="header-banner" style="border-bottom-color: var(--accent-coral);">
+      <div class="header-banner-nav" style="color: var(--accent-coral);">
+        <span>Operational Blueprint</span>
+        <span>Pillar 03 • Page A</span>
+      </div>
+      <h2 class="header-banner-title">03. Challenges Despite Software</h2>
+      <p class="header-banner-subtitle">Bridging the Gap Between <span class="accent-text" style="color: #FECACA;">Software Implementation and Business Execution</span></p>
+    </div>
+
+    <div class="page-intro-text">
+      One of the strongest patterns I observed throughout my journey was that many jewellery businesses had already invested in ERP systems, POS software and digital tools, yet continued to experience the same operational problems. This demonstrated that software alone does not transform a business.
+    </div>
+
+    <div class="vertical-stack-container">
+      <h3 class="list-title-header">Optimisation Blueprint</h3>
+      
+      <div class="vertical-action-list two-column-list">
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Software Utilization Audit</strong>: Identify process gaps where daily showroom workflows bypass existing ERP systems.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Clean Master Data Structure</strong>: Restructure SKU databases and inventory attributes before software configuration.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Custom BI Dashboard Design</strong>: Connect customer, inventory, and financial databases into custom analytics reports.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Showroom Tool Optimization</strong>: Improve current software adoption by mapping tools directly to physical showroom processes.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Strategic KPI Dashboards</strong>: Create clean, department-specific KPIs that sync operational data to executive views.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>Data Governance Frameworks</strong>: Define clear transaction approval boundaries to enforce system-based entries.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>System-Driven Operations</strong>: Eliminate manual ledger backups and paper-slip workarounds with digital steps.</div>
+        </div>
+        <div class="vertical-action-item">
+          <div class="vertical-action-bullet"></div>
+          <div class="vertical-action-text"><strong>ROI on Technology</strong>: Transform your software from a simple record-keeper into a strategic efficiency engine.</div>
+        </div>
+      </div>
+
+      <!-- Strategic Bottom Highlight Card -->
+      <div class="summary-metric-card" style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 6mm; align-items: center;">
+        <div>
+          <div class="summary-metric-label" style="margin-bottom: 1.5mm; color: var(--accent-coral);">Customised Strategy &amp; Advisory</div>
+          <p class="summary-metric-text" style="font-size: 10.5pt; line-height: 1.4; color: var(--txt-secondary); font-style: normal; font-weight: 500;">
+            "Technology investments succeed only when aligned with team readiness. Based on your <strong>spending power</strong> (financial budget) and <strong>human capital</strong> (team size/capability), I will help configure your existing software to drive maximum adoption and control."
+          </p>
+        </div>
+        <div style="border-left: 2px solid var(--border-color); padding-left: 6mm;">
+          <div class="summary-metric-label" style="margin-bottom: 1.5mm; color: var(--accent-coral);">The Systems Gap</div>
+          <p class="summary-metric-text" style="font-size: 10.5pt; line-height: 1.4; font-style: italic;">
+            "Good software automated on top of broken processes only accelerates chaos. We align operational workflows first, then configure technology to automate them."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>CHALLENGES DESPITE SOFTWARE</span>
+      <span class="page-number">Page 04</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+     PAGE 5: OPERATIONAL GOVERNANCE CASE STUDIES - PART A
+     ════════════════════════════════ -->
+  <div class="page page-p5">
+    <div class="header-banner" style="border-bottom-color: var(--blue-slate);">
+      <div class="header-banner-nav" style="color: var(--accent-azure);">
+        <span>Operational Governance</span>
+        <span>Case Studies • Part A</span>
+      </div>
+      <h2 class="header-banner-title">Operational Governance Case Studies</h2>
+      <p class="header-banner-subtitle">Real-World Jewelry Retail Transformation <span class="accent-text" style="color: #93C5FD;">• Part A</span></p>
+    </div>
+
+    <div class="page-intro-text" style="border-left: 4px solid var(--blue-slate); background: rgba(30, 77, 140, 0.05); padding: 3.5mm 5mm; border-bottom: none; border-radius: 0 6px 6px 0; color: var(--blue-navy); font-weight: 600; font-size: 11.5pt; margin-bottom: 4mm;">
+      Detailed analysis of structural leakages, accountability gaps, and digital solutions implemented across critical retail jewelry operations.
+    </div>
+
+    <div class="horizontal-cards-container">
+      <!-- Case Study 1 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #0F2A55 0%, #1A4A8A 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #93C5FD; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">1. Customer Repair Process Governance</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Repair transactions managed in Excel despite ERP.</li>
+                <li>Karigar slips hand-written, lacking digital check.</li>
+                <li>No end-to-end tracking of items to delivery.</li>
+                <li>No before/after weight lifecycle accountability.</li>
+                <li>Buffing/polishing loss thresholds not defined.</li>
+                <li>Unresolved metal variances from audit.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Digitised complete workflow: registration to delivery.</li>
+                <li>Uniquely traceable &amp; auditable transactions.</li>
+                <li>Complete metal accountability across all stages.</li>
+                <li>Eliminated dependency on Excel/paper slips.</li>
+                <li>Identified discrepancy at transaction level.</li>
+                <li>Improved transparency (showroom, workshop, karigars).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 2 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #5A1A00 0%, #9A3412 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #FCA5A5; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scale"><path d="m16 16 3-8 3 8c-.87.65-2.24 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-2.24 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h18"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">2. Old Gold Purchase &amp; Melting</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Frequent disputes over collection weight.</li>
+                <li>No records to verify customer claims.</li>
+                <li>Inconsistent/bypassed purity testing.</li>
+                <li>Personal relation buybacks (incorrect 100%).</li>
+                <li>Melting output vs collection variances.</li>
+                <li>Unaccounted old gold vulnerability to theft.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Token-based tracking for every purchase.</li>
+                <li>End-to-end transparency: receipt to melting.</li>
+                <li>Standardised purity verification and valuation.</li>
+                <li>Established reconciliation &amp; audit timelines.</li>
+                <li>Reduced disputes and improved trust.</li>
+                <li>Monitored recoverable metal; tracked variances.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>CASE STUDIES • PART A</span>
+      <span class="page-number">Page 05</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+     PAGE 6: OPERATIONAL GOVERNANCE CASE STUDIES - PART B
+     ════════════════════════════════ -->
+  <div class="page page-p6">
+    <div class="header-banner" style="border-bottom-color: var(--blue-slate);">
+      <div class="header-banner-nav" style="color: var(--accent-azure);">
+        <span>Operational Governance</span>
+        <span>Case Studies • Part B</span>
+      </div>
+      <h2 class="header-banner-title">Operational Governance Case Studies</h2>
+      <p class="header-banner-subtitle">Real-World Jewelry Retail Transformation <span class="accent-text" style="color: #93C5FD;">• Part B</span></p>
+    </div>
+
+    <div class="page-intro-text" style="border-left: 4px solid var(--blue-slate); background: rgba(30, 77, 140, 0.05); padding: 3.5mm 5mm; border-bottom: none; border-radius: 0 6px 6px 0; color: var(--blue-navy); font-weight: 600; font-size: 11.5pt; margin-bottom: 4mm;">
+      Structured workflows and technology-driven operations designed to secure custom orders and customer scheme margins.
+    </div>
+
+    <div class="horizontal-cards-container">
+      <!-- Case Study 3 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #312E81 0%, #5B21B6 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #C4B5FD; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gem"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l3 13"/><path d="M13 3l3 9-3 10"/><path d="M2 9h20"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">3. Custom Order Management</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Miscommunication between showroom and karigars.</li>
+                <li>Finished jewellery differed from expectations.</li>
+                <li>Orders pending due to lack of karigar assignment.</li>
+                <li>Lack of follow-up caused delivery delays.</li>
+                <li>Frequent sales vs karigar responsibility disputes.</li>
+                <li>No ownership throughout order lifecycle.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Structured order registration &amp; assignment workflows.</li>
+                <li>Order tracking from booking to final delivery.</li>
+                <li>Improved showroom-workshop communication.</li>
+                <li>Accountability established at every execution stage.</li>
+                <li>Reduced delays via follow-up mechanisms.</li>
+                <li>Delivered transparent, streamlined order management.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 4 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #78350F 0%, #D97706 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #FDE68A; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coins"><circle cx="8" cy="8" r="6"/><circle cx="18" cy="18" r="4"/><path d="M12 18a6 6 0 0 0-6-6"/><path d="M20 12a4 4 0 0 0-4-4"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">4. Customer Savings Schemes</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Monthly follow-up depended on single employees.</li>
+                <li>Reminders stopped when staff left organization.</li>
+                <li>High customer drop-outs due to no communication.</li>
+                <li>Premature closure deductions compliance risks.</li>
+                <li>Manual processes led to inconsistent experience.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Technology-driven scheme follow-up workflows.</li>
+                <li>Automated customer reminder processes.</li>
+                <li>Standardised documentation &amp; terms in enrolment.</li>
+                <li>Improved continuity independent of staff changes.</li>
+                <li>Increased transparency and reduced manual dependency.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>CASE STUDIES • PART B</span>
+      <span class="page-number">Page 06</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+     PAGE 7: OPERATIONAL GOVERNANCE CASE STUDIES - PART C
+     ════════════════════════════════ -->
+  <div class="page page-p7">
+    <div class="header-banner" style="border-bottom-color: var(--blue-slate);">
+      <div class="header-banner-nav" style="color: var(--accent-azure);">
+        <span>Operational Governance</span>
+        <span>Case Studies • Part C</span>
+      </div>
+      <h2 class="header-banner-title">Operational Governance Case Studies</h2>
+      <p class="header-banner-subtitle">Real-World Jewelry Retail Transformation <span class="accent-text" style="color: #93C5FD;">• Part C</span></p>
+    </div>
+
+    <div class="page-intro-text" style="border-left: 4px solid var(--blue-slate); background: rgba(30, 77, 140, 0.05); padding: 3mm 5mm; border-bottom: none; border-radius: 0 6px 6px 0; color: var(--blue-navy); font-weight: 500; font-size: 10.2pt; margin-bottom: 4mm; line-height: 1.45;">
+      <strong>Executive Business Outcome:</strong> By shifting from stock-level reporting to transaction-level financial intelligence, management gained complete visibility into capital investment, inventory category returns, procurement profitability, and operational performance, transforming inventory from a static asset into a strategic financial driver.
+    </div>
+
+    <div class="horizontal-cards-container">
+      <!-- Case Study 5 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #064E3B 0%, #059669 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #6EE7B7; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 11 2 2 4-4"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">5. Inventory Accountability &amp; Controls</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Missing components from partly sold inventory.</li>
+                <li>Aged stock identified during audits with no explanation.</li>
+                <li>Unexplained weight differences across inventory.</li>
+                <li>Inventory discrepancies routinely justified without inquiry.</li>
+                <li>Weak transaction accountability enabled manipulation.</li>
+                <li>Limited audit visibility over precious metal movement.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Strengthened inventory accountability across movements.</li>
+                <li>Established structured audit &amp; verification procedures.</li>
+                <li>Improved traceability of inventory discrepancies.</li>
+                <li>Increased management visibility into inventory variances.</li>
+                <li>Reduced opportunities for unnoticed inventory leakages.</li>
+                <li>Enhanced overall operational governance via systems.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 5B / 6 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #1E3A5F 0%, #0D6EBD 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #BAE6FD; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calculator"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">6. Financial &amp; Cost Accounting</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Inventory costs viewed only at overall stock level.</li>
+                <li>Limited visibility into actual item-level cost composition.</li>
+                <li>Wastage, labour and operations not consistently attributed.</li>
+                <li>Dealer-wise cost comparisons for similar products unavailable.</li>
+                <li>Profitability measured broadly instead of by design/product.</li>
+                <li>Inventory investment decisions relied on assumptions.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Structured transaction-level costing across lifecycle.</li>
+                <li>Established detailed cost attribution for every transaction.</li>
+                <li>Enabled accurate profitability analysis by design &amp; category.</li>
+                <li>Created dealer-wise cost comparison for similar inventory.</li>
+                <li>Improved visibility into capital allocation and returns.</li>
+                <li>Supported data-driven purchase planning &amp; optimization.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>CASE STUDIES • PART C</span>
+      <span class="page-number">Page 07</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+     PAGE 8: CUSTOMER INTELLIGENCE & CRM CASE STUDIES - PART A
+     ════════════════════════════════ -->
+  <div class="page page-p8">
+    <div class="header-banner" style="border-bottom-color: var(--accent-azure);">
+      <div class="header-banner-nav" style="color: var(--accent-azure);">
+        <span>Customer Intelligence</span>
+        <span>Case Studies • Part A</span>
+      </div>
+      <h2 class="header-banner-title">Customer Intelligence &amp; CRM Case Studies</h2>
+      <p class="header-banner-subtitle">Data-Driven Lead &amp; Lifecycle Management <span class="accent-text" style="color: #93C5FD;">• Part A</span></p>
+    </div>
+
+    <div class="page-intro-text" style="border-left: 4px solid var(--accent-azure); background: rgba(59, 130, 246, 0.05); padding: 3.5mm 5mm; border-bottom: none; border-radius: 0 6px 6px 0; color: var(--blue-navy); font-weight: 600; font-size: 11.5pt; margin-bottom: 4mm;">
+      Transitioning showroom sales from simple walk-in dependency to active, data-driven customer acquisition and lifecycle retention.
+    </div>
+
+    <div class="horizontal-cards-container">
+      <!-- Case Study 6 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #134E4A 0%, #0F766E 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #99F6E4; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-call"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><path d="M14.05 2a9 9 0 0 1 8 8M14.05 5A5 5 0 0 1 19 10"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">1. CRM &amp; Lead Management</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Revenue relied almost entirely on walk-ins.</li>
+                <li>Digital and phone enquiries managed independently.</li>
+                <li>No structured lead registration or team ownership.</li>
+                <li>Customer enquiries forgotten after first interaction.</li>
+                <li>Lack of systematic follow-up lost sales opportunities.</li>
+                <li>No visibility into conversion rates or loss reasons.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Designed omni-channel framework for all touchpoints.</li>
+                <li>Established structured lead registration &amp; ownership.</li>
+                <li>Implemented systematic workflows and reminders.</li>
+                <li>Introduced lead stage tracking: enquiry to conversion.</li>
+                <li>Enabled multi-period lead performance reporting.</li>
+                <li>Created KPIs for conversion &amp; opportunity loss.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 7 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #831843 0%, #BE185D 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #FBCFE8; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">2. Customer Lifecycle Management</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Relationships ended immediately post-purchase.</li>
+                <li>Databases existed but lacked segmentation.</li>
+                <li>Inconsistent, identical blasts sent to all customers.</li>
+                <li>No strategy for repeat purchases or engagement.</li>
+                <li>No behaviour or customer lifetime value visibility.</li>
+                <li>Existing customers remained underutilised source.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Designed complete customer lifecycle framework.</li>
+                <li>Behavioral segmentation (spending, occasions, interests).</li>
+                <li>Built targeted engagement strategies for all segments.</li>
+                <li>Established customer retention &amp; reactivation workflows.</li>
+                <li>Personalised communication via intelligence data.</li>
+                <li>Generated repeat revenue from existing client base.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>CASE STUDIES • PART A</span>
+      <span class="page-number">Page 08</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+     PAGE 9: CUSTOMER DATA INTELLIGENCE & BUSINESS OUTCOMES
+     ════════════════════════════════ -->
+  <div class="page page-p9">
+    <div class="header-banner" style="border-bottom-color: var(--accent-azure);">
+      <div class="header-banner-nav" style="color: var(--accent-azure);">
+        <span>Customer Intelligence</span>
+        <span>Case Studies • Part B</span>
+      </div>
+      <h2 class="header-banner-title">Customer Intelligence &amp; CRM Case Studies</h2>
+      <p class="header-banner-subtitle">Data Standardization &amp; <span class="accent-text" style="color: #93C5FD;">Executive Outcomes</span></p>
+    </div>
+
+    <div class="page-intro-text" style="border-left: 4px solid var(--accent-azure); background: rgba(59, 130, 246, 0.05); padding: 3.5mm 5mm; border-bottom: none; border-radius: 0 6px 6px 0; color: var(--blue-navy); font-weight: 600; font-size: 11.5pt; margin-bottom: 4mm;">
+      Setting the standard for data-driven campaign planning, customer targeting, and predictive executive insights.
+    </div>
+
+    <div class="horizontal-cards-container" style="flex-grow: 1;">
+      <!-- Case Study 8 -->
+      <div class="horizontal-card">
+        <div class="horizontal-card-left" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: none; padding: 4mm; text-align: center; height: 100%; background: linear-gradient(145deg, #1E1B4B 0%, #4338CA 100%); border-radius: 6px 0 0 6px;">
+          <div style="color: #A5B4FC; margin-bottom: 2mm; display: flex; align-items: center; justify-content: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+          </div>
+          <h4 class="horizontal-card-title" style="font-size: 11pt; font-weight: 800; color: #FFFFFF;">3. Customer Data Intelligence</h4>
+        </div>
+        <div class="horizontal-card-right" style="padding: 3mm 6mm; height: 100%; display: flex; align-items: center;">
+          <div class="case-study-split">
+            <div class="case-study-col problems">
+              <h5 class="case-study-sub-title">Problems Identified</h5>
+              <ul class="case-study-bullets">
+                <li>Lacked clarity on what customer data to capture.</li>
+                <li>Departments collected inconsistent customer details.</li>
+                <li>Important behavioural &amp; business data was unrecorded.</li>
+                <li>Customer data failed to support targeted marketing.</li>
+              </ul>
+            </div>
+            <div class="case-study-col results">
+              <h5 class="case-study-sub-title" style="color: var(--accent-teal);">Results Delivered</h5>
+              <ul class="case-study-bullets">
+                <li>Defined structured data collection at all touchpoints.</li>
+                <li>Standardised customer info: showroom, CRM, digital.</li>
+                <li>Built intelligence architecture, not simple records.</li>
+                <li>Enabled data-driven campaign targeting &amp; planning.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Executive Business Outcome Card -->
+      <div class="summary-metric-card" style="display: flex; flex-direction: column; justify-content: center; padding: 4mm 6mm; background: linear-gradient(135deg, #F0F6FF 0%, #FFFFFF 65%, #F4F7FB 100%); border-left: 5px solid var(--accent-azure); border-radius: 6px;">
+        <div class="summary-metric-label" style="color: var(--accent-azure); margin-bottom: 1.5mm; font-family: 'JetBrains Mono', monospace; font-size: 9.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;">Executive Business Outcome</div>
+        <p class="summary-metric-text" style="font-size: 10.1pt; line-height: 1.4; color: var(--txt-primary); font-style: normal; font-weight: 500;">
+          Instead of waiting for customers to walk into the showroom, the business gained the ability to identify, nurture, convert and retain customers through structured customer intelligence. Every enquiry became measurable, every customer interaction became actionable, and every stage of the customer lifecycle contributed towards predictable and sustainable revenue generation.
+        </p>
+      </div>
+    </div>
+
+    <div class="running-footer">
+      <span>THE SYSTEMS ARCHITECTURE PLAYBOOK</span>
+      <span>CASE STUDIES • PART B</span>
+      <span class="page-number">Page 09</span>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════
+     PAGE 10: BACK COVER / PHILOSOPHY PAGE
+     ════════════════════════════════ -->
+  <div class="page back-cover">
+    <!-- Dark Banner covering top 40% -->
+    <div class="back-header-banner">
+      <div class="header-banner-nav" style="color: var(--accent-teal);">
+        <span>Executive Portfolio</span>
+        <span>Core Philosophy</span>
+      </div>
+      <div class="back-header-top">
+        <h1 class="back-title">My Philosophy</h1>
+        <p class="back-subtitle">
+          "Businesses rarely struggle because they lack software. They struggle because operational governance, data
+          architecture and decision-making frameworks are not designed before technology is implemented. My work focuses on
+          helping businesses build structured operating systems where <strong>people, processes, data and technology</strong> work together to
+          create measurable accountability, actionable business intelligence and sustainable growth."
+        </p>
+      </div>
+    </div>
+
+    <!-- Call to Action below banner -->
+    <!-- My Promise Card -->
+    <div class="promise-card" style="background: linear-gradient(135deg, #0B1E2E 0%, #1E4D8C 100%); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 6mm 9mm; display: grid; grid-template-columns: 1.4fr 8.6fr; gap: 6mm; align-items: center; box-shadow: 0 10px 30px rgba(11, 30, 46, 0.15); height: auto; margin: 2.5mm 0; position: relative; overflow: hidden;">
+      
+      <!-- Subtle Decorative Glow overlays inside the card -->
+      <div style="position: absolute; top: -20mm; right: -20mm; width: 50mm; height: 50mm; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 70%); pointer-events: none;"></div>
+      <div style="position: absolute; bottom: -15mm; left: -15mm; width: 50mm; height: 50mm; background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 70%); pointer-events: none;"></div>
+
+      <!-- Left Column: Bespoke Crest -->
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.06); border: 1.5px solid rgba(255, 255, 255, 0.2); border-radius: 50%; padding: 1.5mm; width: 22mm; height: 22mm; margin: 0 auto; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);">
+        <svg viewBox="0 0 100 100" style="width: 16mm; height: 16mm; display: block;">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#FFFFFF" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.6" />
+          <circle cx="50" cy="50" r="36" fill="none" stroke="#FFFFFF" stroke-width="0.8" opacity="0.8" />
+          <path d="M25 65 C22 50 30 35 40 32 C38 42 32 55 25 65 Z" fill="#D4AF37" opacity="0.8" />
+          <path d="M75 65 C78 50 70 35 60 32 C62 42 68 55 75 65 Z" fill="#D4AF37" opacity="0.8" />
+          <path d="M37 34 L63 34 C63 34 63 55 50 68 C37 55 37 34 37 34 Z" fill="rgba(255, 255, 255, 0.1)" stroke="#D4AF37" stroke-width="1.5" />
+          <path d="M45 42 L55 42 M45 59 L55 59 M48 42 L48 59 M52 42 L52 59" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" fill="none" />
+          <polygon points="50,37 51.5,39.5 54,39.5 52,41.2 52.8,43.7 50,42.2 47.2,43.7 48,41.2 46,39.5 48.5,39.5" fill="#D4AF37" />
+        </svg>
+      </div>
+
+      <!-- Right Column: Content -->
+      <div style="display: flex; flex-direction: column; justify-content: center; height: 100%;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5mm; border-bottom: 1px solid rgba(255, 255, 255, 0.15); padding-bottom: 1.5mm;">
+          <div style="display: flex; flex-direction: column;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11pt; font-weight: 800; color: #FFFFFF; text-transform: uppercase; letter-spacing: 0.18em; line-height: 1;">MY PROMISE</span>
+            <span style="font-family: 'Inter', sans-serif; font-size: 7.5pt; font-weight: 600; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.8mm; line-height: 1;">Strategic Executive Guarantee</span>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 8pt; font-weight: 700; color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.5); background: rgba(212, 175, 55, 0.12); padding: 0.5mm 1.5mm; border-radius: 3px; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1;">Executive Trust</span>
+        </div>
+
+        <p style="font-family: 'Inter', sans-serif; font-size: 12.5pt; line-height: 1.55; color: rgba(255, 255, 255, 0.95); margin: 0; font-weight: 400; font-style: italic; letter-spacing: -0.01em;">
+          "I help you understand what your business is truly capable of. By connecting <strong style="color: #FFFFFF; font-weight: 700; font-style: normal;">inventory, customers, finance, operations, and technology into one intelligent system</strong>, I uncover <strong style="color: #D4AF37; font-weight: 700; font-style: normal;">hidden opportunities</strong>, expose <strong style="color: #D4AF37; font-weight: 700; font-style: normal;">operational inefficiencies</strong>, and identify the actions that create the <strong style="color: #FFFFFF; font-weight: 700; font-style: normal;">greatest business impact</strong>. Together, we prioritize the right investments, allocate resources where they matter most, and build the <strong style="color: #D4AF37; font-weight: 700; font-style: normal;">operational structure required for sustainable, profitable growth—before scaling.</strong>"
+        </p>
+
+        <div style="margin-top: 3.5mm; background: rgba(0, 0, 0, 0.18); border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 4px; padding: 1.8mm 4mm; display: flex; align-items: center; gap: 2.5mm;">
+          <svg viewBox="0 0 24 24" style="width: 3.8mm; height: 3.8mm; fill: #D4AF37; flex-shrink: 0; opacity: 0.95;">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+          <span style="font-family: 'Manrope', sans-serif; font-size: 10pt; font-weight: 700; color: #FFFFFF; letter-spacing: -0.01em; line-height: 1.2; margin: 0;">
+            Before scaling a business, <span style="color: #D4AF37; font-weight: 800;">together we build the structure</span> that makes scaling sustainable.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-cta-card">
+      <div class="back-cta-left">
+        <h4 class="back-cta-title">Multi Domain Expertise Professional</h4>
+        <p class="back-cta-desc">Evolving through multiple business areas expertise and problems.</p>
+      </div>
+      <a href="https://wa.me/919160863406?text=Hi%20Abraham%2C%20I%20just%20saw%20your%20profile%20and%20would%20like%20to%20discuss%20more%20about%20your%20consulting%20on%20retail%20systems" target="_blank" rel="noopener noreferrer" class="back-cta-button">Connect Now</a>
+    </div>
+
+    <!-- Running footer matching the other pages -->
+    <div class="running-footer" style="border-top: 1px solid var(--border-color); padding-top: 2.5mm; margin-top: auto;">
+      <span>FOUNDER'S PARTNER • EXECUTIVE ADVISORY</span>
+      <span>SYSTEMS • GOVERNANCE • SCALE</span>
+      <span class="page-number">Page 10</span>
+    </div>
+  </div>
+</body>
+</html>

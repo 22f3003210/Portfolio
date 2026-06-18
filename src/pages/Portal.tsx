@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { sha256 } from '../lib/sha256';
 import { 
   Lock, 
   AlertCircle, 
@@ -551,13 +552,7 @@ const renderEngineIcon = (iconName: string) => {
   }
 };
 
-// Helper to hash string to SHA-256 hex
-async function sha256(message: string) {
-  const msgBuffer = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
+// Helper functions
 
 export function Portal() {
   const { isPortalAuthenticated, setPortalAuthenticated, hidePortal, isPortalVisible } = usePortal();
@@ -685,7 +680,7 @@ export function Portal() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const inputHash = await sha256(passcode);
+    const inputHash = sha256(passcode);
     const correctHash = '1824b346dfd511433da2bc62b5e59b98a2e635b132fc71df1c1d9eccd5d1fad7'; // Dhonijohny
     
     if (inputHash === correctHash) {

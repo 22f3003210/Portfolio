@@ -17,9 +17,13 @@ interface PortalContextType {
 const PortalContext = createContext<PortalContextType | null>(null);
 
 export function PortalProvider({ children }: { children: ReactNode }) {
-  // Pure in-memory state — resets automatically on every page refresh.
-  const [isPortalVisible, setIsPortalVisible] = useState(false);
-  const [isPortalAuthenticated, setIsPortalAuthenticated] = useState(false);
+  // Read initial states from localStorage to survive page refreshes
+  const [isPortalVisible, setIsPortalVisible] = useState(() => {
+    return localStorage.getItem('portal_link_visible') === 'true';
+  });
+  const [isPortalAuthenticated, setIsPortalAuthenticated] = useState(() => {
+    return localStorage.getItem('portal_authenticated') === 'true';
+  });
 
   const showPortal = () => {
     setIsPortalVisible(true);
@@ -31,7 +35,13 @@ export function PortalProvider({ children }: { children: ReactNode }) {
     setIsPortalVisible(false);
     setIsPortalAuthenticated(false);
     localStorage.setItem('portal_link_visible', 'false');
+    localStorage.setItem('portal_authenticated', 'false');
     window.dispatchEvent(new Event('portal_locked'));
+  };
+
+  const setPortalAuthenticated = (val: boolean) => {
+    setIsPortalAuthenticated(val);
+    localStorage.setItem('portal_authenticated', val ? 'true' : 'false');
   };
 
   return (
@@ -41,7 +51,7 @@ export function PortalProvider({ children }: { children: ReactNode }) {
         isPortalAuthenticated,
         showPortal,
         hidePortal,
-        setPortalAuthenticated: setIsPortalAuthenticated,
+        setPortalAuthenticated,
       }}
     >
       {children}

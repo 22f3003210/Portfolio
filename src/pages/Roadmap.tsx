@@ -17,14 +17,7 @@ import {
   Users
 } from 'lucide-react';
 import { usePortal } from '../context/PortalContext';
-
-// Helper to hash string to SHA-256 hex
-async function sha256(message: string) {
-  const msgBuffer = new TextEncoder().encode(message);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
+import { sha256 } from '../lib/sha256';
 
 interface JourneyStep {
   name: string;
@@ -53,7 +46,7 @@ export function Roadmap() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const inputHash = await sha256(passcode);
+    const inputHash = sha256(passcode);
     const correctHash = '1824b346dfd511433da2bc62b5e59b98a2e635b132fc71df1c1d9eccd5d1fad7'; // Dhonijohny
     
     if (inputHash === correctHash) {
