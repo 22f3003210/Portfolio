@@ -17,9 +17,9 @@ const fadeUp = (delay = 0) => ({
 
 export function CorePhilosophySection() {
   return (
-    <section className="relative bg-[#0B1E2E] pt-14 pb-16 px-6 overflow-hidden border-b border-white/5">
+    <section className="relative bg-[#0B1E2E] pt-20 pb-24 px-6 overflow-hidden border-b border-white/5">
       {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[radial-gradient(white_1px,transparent_1px)] [background-size:24px_24px]" />
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(white_1px,transparent_1px)] [background-size:24px_24px]" />
       
       {/* Ambient colored glows */}
       <div className="absolute -top-60 -left-60 w-[600px] h-[600px] bg-[#8BC63F]/5 rounded-full blur-[130px] pointer-events-none" />
@@ -27,18 +27,21 @@ export function CorePhilosophySection() {
       
       <div className="max-w-[1000px] mx-auto relative z-10 text-center">
         <motion.div {...fadeUp(0)}>
-          <span className="inline-block text-[10px] font-black uppercase tracking-[0.25em] text-[#8BC63F] border border-[#8BC63F]/30 px-4 py-1.5 mb-8">
+          <span className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.25em] text-[#8BC63F] border border-[#8BC63F]/30 bg-[#8BC63F]/5 px-4 py-1.5 mb-8 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8BC63F] animate-ping" />
             Core Positioning
           </span>
         </motion.div>
 
         <motion.h1 
           {...fadeUp(0.08)} 
-          className="font-extrabold text-white tracking-tight leading-tight mb-6" 
-          style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)' }}
+          className="font-extrabold text-white tracking-tight leading-tight mb-12 animate-fade-in" 
+          style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)' }}
         >
           The Future Belongs to Businesses <br className="hidden md:inline" />
-          <span className="text-[#8BC63F]">That Understand Their Data.</span>
+          <span className="bg-gradient-to-r from-[#8BC63F] via-emerald-400 to-sky-400 bg-clip-text text-transparent">
+            That Understand Their Data.
+          </span>
         </motion.h1>
 
         {/* Split Content: Left side pointwise list, Right side visual diagram */}
@@ -47,12 +50,15 @@ export function CorePhilosophySection() {
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 text-left max-w-[1000px] mx-auto my-10"
         >
           {/* Left Column: Point-wise List (lg:col-span-7) */}
-          <div className="lg:col-span-7 space-y-4">
-            <div className="space-y-3 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-sm h-full flex flex-col justify-between">
+          <div className="lg:col-span-7">
+            <div className="bg-gradient-to-br from-white/[0.07] to-white/[0.01] hover:from-white/[0.09] hover:to-white/[0.02] border border-white/10 hover:border-[#8BC63F]/30 rounded-2xl p-6 md:p-8 backdrop-blur-md h-full flex flex-col justify-between transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(140,198,63,0.15)]">
               <div>
-                <span className="text-[9px] font-black uppercase tracking-widest text-[#8BC63F] block mb-4 font-mono">Architecture Objectives</span>
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#8BC63F] animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#8BC63F] font-mono">Architecture Objectives</span>
+                </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {[
                     "Know what exists and what needs to be measured before making decisions.",
                     "Determine what data should be collected and why it matters.",
@@ -60,87 +66,104 @@ export function CorePhilosophySection() {
                     "Visualize trends and answer key business questions.",
                     "Understand why outcomes happened, not just what happened."
                   ].map((point, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <CheckCircle className="w-4 h-4 text-[#8BC63F] shrink-0 mt-0.5" />
-                      <span className="text-xs md:text-sm text-slate-300 leading-relaxed font-medium">{point}</span>
+                    <div 
+                      key={idx} 
+                      className="group flex items-start gap-4 p-3 rounded-xl hover:bg-white/[0.03] border border-transparent hover:border-white/5 transition-all duration-300"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-[#8BC63F]/10 flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 group-hover:scale-110 group-hover:bg-[#8BC63F]/20">
+                        <CheckCircle className="w-4 h-4 text-[#8BC63F] transition-all duration-300 group-hover:drop-shadow-[0_0_4px_rgba(140,198,63,0.6)]" />
+                      </div>
+                      <span className="text-xs md:text-sm text-slate-300 leading-relaxed font-medium transition-colors duration-300 group-hover:text-white">{point}</span>
                     </div>
                   ))}
                 </div>
               </div>
               
               {/* Conclusion point */}
-              <div className="pt-4 mt-6 border-t border-white/10 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#8BC63F]/10 border border-[#8BC63F]/20 flex items-center justify-center shrink-0">
-                  <TrendingUp className="w-4 h-4 text-[#8BC63F]" />
+              <div className="pt-5 mt-6 border-t border-white/10">
+                <div className="p-4 rounded-xl bg-gradient-to-r from-[#8BC63F]/10 via-[#0170B9]/5 to-transparent border border-white/5 flex items-center gap-4 transition-all duration-300 hover:border-[#8BC63F]/20">
+                  <div className="w-9 h-9 rounded-lg bg-[#8BC63F]/20 border border-[#8BC63F]/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(140,198,63,0.15)]">
+                    <TrendingUp className="w-5 h-5 text-[#8BC63F]" />
+                  </div>
+                  <p className="text-xs md:text-sm font-semibold text-slate-200 leading-normal">
+                    And thus, a detailed <span className="text-white font-bold underline decoration-[#8BC63F] decoration-2 underline-offset-4">Intelligence Architecture</span> is ready.
+                  </p>
                 </div>
-                <p className="text-xs md:text-sm font-bold text-white">
-                  And thus, a detailed <span className="text-[#8BC63F]">Intelligence Architecture</span> is ready.
-                </p>
               </div>
             </div>
           </div>
 
           {/* Right Column: Visual Pipeline Diagram (lg:col-span-5) */}
           <div className="lg:col-span-5">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden h-full flex flex-col justify-between backdrop-blur-sm">
+            <div className="bg-gradient-to-br from-white/[0.07] to-white/[0.01] hover:from-white/[0.09] hover:to-white/[0.02] border border-white/10 hover:border-sky-500/30 rounded-2xl p-6 md:p-8 relative overflow-hidden h-full flex flex-col justify-between backdrop-blur-md transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(12,139,224,0.15)]">
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#0170B9]/5 rounded-full blur-xl pointer-events-none" />
               <div className="space-y-6">
                 <div>
-                  <span className="text-[9px] font-black uppercase tracking-widest text-sky-400 block mb-2 font-mono">Core Philosophy</span>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400 font-mono">Core Philosophy</span>
+                  </div>
                   <h3 className="text-xl md:text-2xl font-black text-white leading-tight">
-                    Intelligence is the output. <br />
-                    <span className="text-[#8BC63F]">Data is the input.</span>
+                    Intelligence is the <span className="bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">output.</span> <br />
+                    Data is the <span className="bg-gradient-to-r from-[#8BC63F] to-emerald-400 bg-clip-text text-transparent">input.</span>
                   </h3>
-                  <span className="block text-xs font-bold text-[#8BC63F]/80 mt-2 italic font-mono uppercase tracking-wider">
-                    You never know what you can't see.
-                  </span>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 mt-4 rounded-md bg-black/30 border border-white/5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#8BC63F] animate-ping" />
+                    <span className="text-[9.5px] font-bold font-mono uppercase tracking-widest text-[#8BC63F] drop-shadow-[0_0_6px_rgba(140,198,63,0.4)]">
+                      you never know what you can't see.
+                    </span>
+                  </div>
                 </div>
                 
                 {/* Data Flow Pipeline Diagram */}
-                <div className="space-y-3 bg-white/[0.02] border border-white/5 rounded-xl p-4">
-                  <p className="text-[9px] font-black uppercase tracking-widest text-[#8BC63F] font-mono">Data Pipeline Flow</p>
-                  <div className="flex flex-col gap-3">
+                <div className="space-y-4 bg-black/25 border border-white/5 rounded-2xl p-5">
+                  <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                    <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono">Data Pipeline Flow</p>
+                    <span className="text-[9px] px-2 py-0.5 bg-[#8BC63F]/10 border border-[#8BC63F]/20 text-[#8BC63F] rounded-full font-mono font-bold uppercase tracking-wider animate-pulse">Live</span>
+                  </div>
+                  
+                  <div className="flex flex-col">
                     
                     {/* Step 1: Input */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#8BC63F]/10 border border-[#8BC63F]/20 flex items-center justify-center shrink-0">
-                        <Database className="w-4 h-4 text-[#8BC63F]" />
+                    <div className="group/step flex items-center gap-4 p-2 rounded-xl transition-all duration-300 hover:bg-white/[0.02]">
+                      <div className="w-9 h-9 rounded-xl bg-[#8BC63F]/10 border border-[#8BC63F]/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(140,198,63,0.05)] transition-all duration-300 group-hover/step:bg-[#8BC63F]/20 group-hover/step:border-[#8BC63F]/40 group-hover/step:shadow-[0_0_15px_rgba(140,198,63,0.2)]">
+                        <Database className="w-5 h-5 text-[#8BC63F] transition-transform duration-300 group-hover/step:rotate-12" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[11px] font-bold text-white leading-none">INPUT: Operational Data</p>
-                        <p className="text-[9.5px] text-slate-400 font-medium mt-0.5 truncate">User activities, sales, transactions, cycles</p>
+                        <p className="text-[11px] font-bold text-white uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-[#8BC63F]">INPUT: Operational Data</p>
+                        <p className="text-[10px] text-slate-400 font-medium mt-1 truncate">User activities, sales, transactions, cycles</p>
                       </div>
                     </div>
 
-                    {/* Arrow connector */}
-                    <div className="pl-3.5 flex items-center">
-                      <div className="h-4 w-0.5 bg-gradient-to-b from-[#8BC63F] to-[#0170B9] opacity-50" />
+                    {/* Laser line Connector 1 */}
+                    <div className="pl-[17px] my-1">
+                      <div className="h-6 w-[2px] bg-slate-800 rounded-full laser-line" />
                     </div>
 
                     {/* Step 2: Database Structure */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-[#0170B9]/10 border border-[#0170B9]/20 flex items-center justify-center shrink-0">
-                        <Layers className="w-4 h-4 text-[#0170B9]" />
+                    <div className="group/step flex items-center gap-4 p-2 rounded-xl transition-all duration-300 hover:bg-white/[0.02]">
+                      <div className="w-9 h-9 rounded-xl bg-[#0170B9]/10 border border-[#0170B9]/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(1,112,185,0.05)] transition-all duration-300 group-hover/step:bg-[#0170B9]/20 group-hover/step:border-[#0170B9]/40 group-hover/step:shadow-[0_0_15px_rgba(1,112,185,0.2)]">
+                        <Layers className="w-5 h-5 text-[#0170B9] transition-transform duration-300 group-hover/step:rotate-12" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[11px] font-bold text-white leading-none">PIPELINE: Database Architecture</p>
-                        <p className="text-[9.5px] text-slate-400 font-medium mt-0.5 truncate">Entities, relationships, dimensional modeling</p>
+                        <p className="text-[11px] font-bold text-white uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-sky-400">PIPELINE: Database Architecture</p>
+                        <p className="text-[10px] text-slate-400 font-medium mt-1 truncate">Entities, relationships, dimensional modeling</p>
                       </div>
                     </div>
 
-                    {/* Arrow connector */}
-                    <div className="pl-3.5 flex items-center">
-                      <div className="h-4 w-0.5 bg-gradient-to-b from-[#0170B9] to-[#8BC63F] opacity-50" />
+                    {/* Laser line Connector 2 */}
+                    <div className="pl-[17px] my-1">
+                      <div className="h-6 w-[2px] bg-slate-800 rounded-full laser-line" />
                     </div>
 
                     {/* Step 3: Output */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
-                        <TrendingUp className="w-4 h-4 text-emerald-400" />
+                    <div className="group/step flex items-center gap-4 p-2 rounded-xl transition-all duration-300 hover:bg-white/[0.02]">
+                      <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.05)] transition-all duration-300 group-hover/step:bg-emerald-500/20 group-hover/step:border-emerald-500/40 group-hover/step:shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                        <TrendingUp className="w-5 h-5 text-emerald-400 transition-transform duration-300 group-hover/step:translate-y-[-2px] group-hover/step:translate-x-[2px]" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-[11px] font-bold text-white leading-none">OUTPUT: Pure Intelligence</p>
-                        <p className="text-[9.5px] text-slate-400 font-medium mt-0.5 truncate">Predictive analytics, business decisions, AI agents</p>
+                        <p className="text-[11px] font-bold text-white uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-emerald-400">OUTPUT: Pure Intelligence</p>
+                        <p className="text-[10px] text-slate-400 font-medium mt-1 truncate">Predictive analytics, business decisions, AI agents</p>
                       </div>
                     </div>
 
@@ -152,12 +175,12 @@ export function CorePhilosophySection() {
         </motion.div>
 
         {/* Call to Action Button */}
-        <motion.div {...fadeUp(0.18)} className="flex justify-center mt-12">
+        <motion.div {...fadeUp(0.18)} className="flex justify-center mt-16">
           <Link 
             to="/#contact" 
-            className="inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-wider text-[#0B1E2E] bg-[#8BC63F] px-8 py-4 hover:bg-white hover:text-[#0B1E2E] transition-colors duration-300 shadow-lg shadow-[#8BC63F]/10 rounded-sm"
+            className="group inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#0B1E2E] bg-[#8BC63F] px-10 py-4 hover:bg-white hover:text-[#0B1E2E] transition-all duration-300 shadow-xl shadow-[#8BC63F]/10 rounded-sm hover:scale-[1.02] active:scale-[0.98]"
           >
-            Build Your Intelligence Infrastructure <ArrowRight className="w-4 h-4" />
+            Build Your Intelligence Infrastructure <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
         </motion.div>
       </div>
