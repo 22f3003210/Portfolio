@@ -17,13 +17,13 @@ const fadeUp = (delay = 0) => ({
 
 export function CorePhilosophySection() {
   return (
-    <section className="relative bg-[#0B1E2E] pt-20 pb-24 px-6 overflow-hidden border-b border-white/5">
+    <section className="relative bg-[#F8FAFC] pt-20 pb-24 px-6 overflow-hidden border-b border-border-light">
       {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(white_1px,transparent_1px)] [background-size:24px_24px]" />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#0170B9_1.5px,transparent_1.5px)] [background-size:24px_24px] z-0" />
       
       {/* Ambient colored glows */}
-      <div className="absolute -top-60 -left-60 w-[600px] h-[600px] bg-[#8BC63F]/5 rounded-full blur-[130px] pointer-events-none" />
-      <div className="absolute -bottom-40 right-0 w-[450px] h-[450px] bg-[#0170B9]/8 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute -top-60 -left-60 w-[600px] h-[600px] bg-[#8BC63F]/5 rounded-full blur-[130px] pointer-events-none z-0" />
+      <div className="absolute -bottom-40 right-0 w-[450px] h-[450px] bg-[#0170B9]/5 rounded-full blur-[120px] pointer-events-none z-0" />
       
       <div className="max-w-[1000px] mx-auto relative z-10 text-center">
         <motion.div {...fadeUp(0)}>
@@ -35,7 +35,7 @@ export function CorePhilosophySection() {
 
         <motion.h1 
           {...fadeUp(0.08)} 
-          className="font-extrabold text-white tracking-tight leading-tight mb-12 animate-fade-in" 
+          className="font-extrabold text-[#0B1E2E] tracking-tight leading-tight mb-12 animate-fade-in" 
           style={{ fontSize: 'clamp(2.25rem, 5vw, 3.5rem)' }}
         >
           The Future Belongs to Businesses <br className="hidden md:inline" />
@@ -51,7 +51,7 @@ export function CorePhilosophySection() {
         >
           {/* Left Column: Point-wise List (lg:col-span-7) */}
           <div className="lg:col-span-7">
-            <div className="bg-gradient-to-br from-white/[0.07] to-white/[0.01] hover:from-white/[0.09] hover:to-white/[0.02] border border-white/10 hover:border-[#8BC63F]/30 rounded-2xl p-6 md:p-8 backdrop-blur-md h-full flex flex-col justify-between transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(140,198,63,0.15)]">
+            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-md h-full flex flex-col justify-between transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(140,198,63,0.15)]">
               <div>
                 <div className="flex items-center gap-2 mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8BC63F] animate-pulse" />
@@ -95,7 +95,7 @@ export function CorePhilosophySection() {
 
           {/* Right Column: Visual Pipeline Diagram (lg:col-span-5) */}
           <div className="lg:col-span-5">
-            <div className="bg-gradient-to-br from-white/[0.07] to-white/[0.01] hover:from-white/[0.09] hover:to-white/[0.02] border border-white/10 hover:border-sky-500/30 rounded-2xl p-6 md:p-8 relative overflow-hidden h-full flex flex-col justify-between backdrop-blur-md transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(12,139,224,0.15)]">
+            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 hover:border-sky-500/30 rounded-2xl p-6 md:p-8 relative overflow-hidden h-full flex flex-col justify-between backdrop-blur-md transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(12,139,224,0.15)]">
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#0170B9]/5 rounded-full blur-xl pointer-events-none" />
               <div className="space-y-6">
                 <div>
@@ -178,7 +178,7 @@ export function CorePhilosophySection() {
         <motion.div {...fadeUp(0.18)} className="flex justify-center mt-16">
           <Link 
             to="/#contact" 
-            className="group inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#0B1E2E] bg-[#8BC63F] px-10 py-4 hover:bg-white hover:text-[#0B1E2E] transition-all duration-300 shadow-xl shadow-[#8BC63F]/10 rounded-sm hover:scale-[1.02] active:scale-[0.98]"
+            className="group inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-[#0B1E2E] bg-[#8BC63F] px-10 py-4 hover:bg-[#0B1E2E] hover:text-white transition-all duration-300 shadow-xl shadow-[#8BC63F]/10 rounded-sm hover:scale-[1.02] active:scale-[0.98]"
           >
             Build Your Intelligence Infrastructure <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </Link>
