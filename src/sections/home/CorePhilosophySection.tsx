@@ -51,7 +51,7 @@ export function CorePhilosophySection() {
         >
           {/* Left Column: Point-wise List (lg:col-span-7) */}
           <div className="lg:col-span-7 flex flex-col">
-            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-md h-full flex flex-col justify-between transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(140,198,63,0.15)]">
+            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-md flex-1 flex flex-col justify-between transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(140,198,63,0.15)]">
               <div>
                 <div className="flex items-center gap-2 mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8BC63F] animate-pulse" />
@@ -95,7 +95,7 @@ export function CorePhilosophySection() {
 
           {/* Right Column: Visual Pipeline Diagram (lg:col-span-5) */}
           <div className="lg:col-span-5 flex flex-col">
-            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 hover:border-sky-500/30 rounded-2xl p-6 md:p-8 relative overflow-hidden h-full flex flex-col justify-between backdrop-blur-md transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(12,139,224,0.15)]">
+            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 hover:border-sky-500/30 rounded-2xl p-6 md:p-8 relative overflow-hidden flex-1 flex flex-col justify-between backdrop-blur-md transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(12,139,224,0.15)]">
               <div className="absolute top-0 right-0 w-24 h-24 bg-[#0170B9]/5 rounded-full blur-xl pointer-events-none" />
               
               <div>
