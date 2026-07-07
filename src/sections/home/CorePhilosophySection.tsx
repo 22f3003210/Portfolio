@@ -51,7 +51,7 @@ export function CorePhilosophySection() {
         >
           {/* Left Column: Point-wise List (lg:col-span-7) */}
           <div className="lg:col-span-7 flex flex-col">
-            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-md flex-1 flex flex-col justify-between transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(140,198,63,0.22)]">
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-6 md:p-8 backdrop-blur-md flex-1 flex flex-col justify-between transition-all duration-500 shadow-md hover:shadow-[0_20px_50px_-12px_rgba(140,198,63,0.12)]">
               <div>
                 <div className="flex items-center gap-2 mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8BC63F] animate-pulse" />
@@ -68,28 +68,28 @@ export function CorePhilosophySection() {
                   ].map((point, idx) => (
                     <div 
                       key={idx} 
-                      className="group relative flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-[#8BC63F]/35 hover:bg-white/[0.04] transition-all duration-300 shadow-md"
+                      className="group relative flex items-center gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100/80 hover:border-[#8BC63F]/35 hover:bg-slate-50/80 transition-all duration-300 shadow-sm"
                     >
-                      <div className="absolute top-3 right-4 font-mono text-[9px] font-bold text-slate-500 group-hover:text-[#8BC63F] transition-colors">
+                      <div className="absolute top-3 right-4 font-mono text-[9px] font-bold text-slate-400 group-hover:text-[#8BC63F] transition-colors">
                         0{idx + 1}
                       </div>
                       <div className="w-8 h-8 rounded-lg bg-[#8BC63F]/10 flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-[#8BC63F]/20 group-hover:scale-105">
                         <CheckCircle className="w-4.5 h-4.5 text-[#8BC63F] transition-all duration-300 group-hover:drop-shadow-[0_0_6px_rgba(140,198,63,0.7)]" />
                       </div>
-                      <span className="text-xs md:text-sm text-slate-300 leading-relaxed font-medium pr-6 transition-colors group-hover:text-white">{point}</span>
+                      <span className="text-xs md:text-sm text-slate-600 leading-relaxed font-medium pr-6 transition-colors group-hover:text-[#0B1E2E]">{point}</span>
                     </div>
                   ))}
                 </div>
               </div>
               
               {/* Conclusion point */}
-              <div className="pt-5 mt-6 border-t border-white/10">
-                <div className="p-4 rounded-xl bg-gradient-to-r from-[#8BC63F]/10 via-[#0170B9]/5 to-transparent border border-white/5 border-l-2 border-l-[#8BC63F] flex items-center gap-4 transition-all duration-300 hover:border-l-4 hover:border-l-[#8BC63F] hover:border-white/10">
-                  <div className="w-9 h-9 rounded-lg bg-[#8BC63F]/20 border border-[#8BC63F]/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(140,198,63,0.15)]">
+              <div className="pt-5 mt-6 border-t border-slate-100">
+                <div className="p-4 rounded-xl bg-gradient-to-r from-[#8BC63F]/5 via-[#0170B9]/3 to-transparent border border-slate-100 border-l-2 border-l-[#8BC63F] flex items-center gap-4 transition-all duration-300 hover:border-l-4 hover:border-l-[#8BC63F] hover:border-slate-200">
+                  <div className="w-9 h-9 rounded-lg bg-[#8BC63F]/10 border border-[#8BC63F]/20 flex items-center justify-center shrink-0 shadow-[0_4px_10px_rgba(140,198,63,0.1)]">
                     <TrendingUp className="w-5 h-5 text-[#8BC63F]" />
                   </div>
-                  <p className="text-xs md:text-sm font-semibold text-slate-200 leading-normal">
-                    And thus, a detailed <span className="text-white font-bold underline decoration-[#8BC63F] decoration-2 underline-offset-4">Intelligence Architecture</span> is ready.
+                  <p className="text-xs md:text-sm font-semibold text-slate-600 leading-normal">
+                    And thus, a detailed <span className="text-[#0B1E2E] font-bold underline decoration-[#8BC63F] decoration-2 underline-offset-4">Intelligence Architecture</span> is ready.
                   </p>
                 </div>
               </div>
@@ -98,19 +98,19 @@ export function CorePhilosophySection() {
 
           {/* Right Column: Visual Pipeline Diagram (lg:col-span-5) */}
           <div className="lg:col-span-5 flex flex-col">
-            <div className="bg-gradient-to-br from-[#0B1E2E] to-[#04101A] border border-white/10 hover:border-sky-500/30 rounded-2xl p-6 md:p-8 relative overflow-hidden flex-1 flex flex-col justify-center gap-8 backdrop-blur-md transition-all duration-500 shadow-2xl hover:shadow-[0_0_50px_-12px_rgba(12,139,224,0.22)]">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-[#0170B9]/5 rounded-full blur-xl pointer-events-none" />
+            <div className="bg-white border border-slate-200/80 hover:border-sky-500/20 rounded-2xl p-6 md:p-8 relative overflow-hidden flex-1 flex flex-col justify-center gap-8 backdrop-blur-md transition-all duration-500 shadow-md hover:shadow-[0_20px_50px_-12px_rgba(12,139,224,0.12)]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#0170B9]/3 rounded-full blur-xl pointer-events-none" />
               
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-400 font-mono">Core Philosophy</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-500 font-mono">Core Philosophy</span>
                 </div>
-                <h3 className="text-xl md:text-2xl font-black text-white leading-tight">
-                  Intelligence is the <span className="bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">output.</span> <br />
+                <h3 className="text-xl md:text-2xl font-black text-[#0B1E2E] leading-tight">
+                  Intelligence is the <span className="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">output.</span> <br />
                   Data is the <span className="bg-gradient-to-r from-[#8BC63F] to-emerald-400 bg-clip-text text-transparent">input.</span>
                 </h3>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 mt-4 rounded-md bg-black/30 border border-white/5">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 mt-4 rounded-md bg-slate-50 border border-slate-100">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8BC63F] animate-ping" />
                   <span className="text-[9.5px] font-bold font-mono uppercase tracking-widest text-[#8BC63F] drop-shadow-[0_0_6px_rgba(140,198,63,0.4)]">
                     you never know what you can't see.
@@ -119,54 +119,54 @@ export function CorePhilosophySection() {
               </div>
               
               {/* Data Flow Pipeline Diagram */}
-              <div className="space-y-4 bg-black/25 border border-white/5 rounded-2xl p-5 relative z-10">
-                <div className="flex items-center justify-between border-b border-white/5 pb-3">
-                  <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 font-mono">Data Pipeline Flow</p>
+              <div className="space-y-4 bg-slate-50/50 border border-slate-100 rounded-2xl p-5 relative z-10">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-slate-500 font-mono">Data Pipeline Flow</p>
                   <span className="text-[9px] px-2 py-0.5 bg-[#8BC63F]/10 border border-[#8BC63F]/20 text-[#8BC63F] rounded-full font-mono font-bold uppercase tracking-wider animate-pulse">Live</span>
                 </div>
                 
                 <div className="flex flex-col">
                   
                   {/* Step 1: Input */}
-                  <div className="group/step flex items-center gap-4 p-3.5 rounded-xl bg-white/[0.01] border-l-2 border-l-[#8BC63F]/40 border-y border-r border-transparent hover:border-white/5 hover:border-l-2 hover:border-l-[#8BC63F] hover:bg-white/[0.03] transition-all duration-300">
+                  <div className="group/step flex items-center gap-4 p-3.5 rounded-xl bg-white border-l-2 border-l-[#8BC63F]/40 border-y border-r border-slate-100 hover:border-slate-200 hover:border-l-2 hover:border-l-[#8BC63F] hover:bg-slate-50/60 transition-all duration-300 shadow-sm">
                     <div className="w-9 h-9 rounded-xl bg-[#8BC63F]/10 border border-[#8BC63F]/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(140,198,63,0.05)] transition-all duration-300 group-hover/step:bg-[#8BC63F]/20 group-hover/step:border-[#8BC63F]/40 group-hover/step:shadow-[0_0_15px_rgba(140,198,63,0.25)]">
                       <Database className="w-5 h-5 text-[#8BC63F] transition-transform duration-300 group-hover/step:rotate-12" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-bold text-white uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-[#8BC63F]">INPUT: Operational Data</p>
-                      <p className="text-[10px] text-slate-400 font-medium mt-1.5 leading-normal">User activities, sales, transactions, cycles</p>
+                      <p className="text-[11px] font-bold text-[#0B1E2E] uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-[#8BC63F]">INPUT: Operational Data</p>
+                      <p className="text-[10px] text-slate-500 font-medium mt-1.5 leading-normal">User activities, sales, transactions, cycles</p>
                     </div>
                   </div>
 
                   {/* Laser line Connector 1 */}
                   <div className="pl-[19px] my-1">
-                    <div className="h-8 w-[2px] bg-slate-800 rounded-full laser-line" />
+                    <div className="h-8 w-[2px] bg-slate-200 rounded-full" />
                   </div>
 
                   {/* Step 2: Database Structure */}
-                  <div className="group/step flex items-center gap-4 p-3.5 rounded-xl bg-white/[0.01] border-l-2 border-l-[#0170B9]/40 border-y border-r border-transparent hover:border-white/5 hover:border-l-2 hover:border-l-[#0170B9] hover:bg-white/[0.03] transition-all duration-300">
+                  <div className="group/step flex items-center gap-4 p-3.5 rounded-xl bg-white border-l-2 border-l-[#0170B9]/40 border-y border-r border-slate-100 hover:border-slate-200 hover:border-l-2 hover:border-l-[#0170B9] hover:bg-slate-50/60 transition-all duration-300 shadow-sm">
                     <div className="w-9 h-9 rounded-xl bg-[#0170B9]/10 border border-[#0170B9]/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(1,112,185,0.05)] transition-all duration-300 group-hover/step:bg-[#0170B9]/20 group-hover/step:border-[#0170B9]/40 group-hover/step:shadow-[0_0_15px_rgba(1,112,185,0.25)]">
                       <Layers className="w-5 h-5 text-[#0170B9] transition-transform duration-300 group-hover/step:rotate-12" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-bold text-white uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-sky-400">PIPELINE: Database Architecture</p>
-                      <p className="text-[10px] text-slate-400 font-medium mt-1.5 leading-normal">Entities, relationships, dimensional modeling</p>
+                      <p className="text-[11px] font-bold text-[#0B1E2E] uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-sky-400">PIPELINE: Database Architecture</p>
+                      <p className="text-[10px] text-slate-500 font-medium mt-1.5 leading-normal">Entities, relationships, dimensional modeling</p>
                     </div>
                   </div>
 
                   {/* Laser line Connector 2 */}
                   <div className="pl-[19px] my-1">
-                    <div className="h-8 w-[2px] bg-slate-800 rounded-full laser-line" />
+                    <div className="h-8 w-[2px] bg-slate-200 rounded-full" />
                   </div>
 
                   {/* Step 3: Output */}
-                  <div className="group/step flex items-center gap-4 p-3.5 rounded-xl bg-white/[0.01] border-l-2 border-l-emerald-500/40 border-y border-r border-transparent hover:border-white/5 hover:border-l-2 hover:border-l-emerald-500 hover:bg-white/[0.03] transition-all duration-300">
+                  <div className="group/step flex items-center gap-4 p-3.5 rounded-xl bg-white border-l-2 border-l-emerald-500/40 border-y border-r border-slate-100 hover:border-slate-200 hover:border-l-2 hover:border-l-emerald-500 hover:bg-slate-50/60 transition-all duration-300 shadow-sm">
                     <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.05)] transition-all duration-300 group-hover/step:bg-emerald-500/20 group-hover/step:border-emerald-500/40 group-hover/step:shadow-[0_0_15px_rgba(16,185,129,0.25)]">
                       <TrendingUp className="w-5 h-5 text-emerald-400 transition-transform duration-300 group-hover/step:translate-y-[-2px] group-hover/step:translate-x-[2px]" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[11px] font-bold text-white uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-emerald-400">OUTPUT: Pure Intelligence</p>
-                      <p className="text-[10px] text-slate-400 font-medium mt-1.5 leading-normal">Predictive analytics, business decisions, AI agents</p>
+                      <p className="text-[11px] font-bold text-[#0B1E2E] uppercase tracking-wider leading-none transition-colors duration-300 group-hover/step:text-emerald-400">OUTPUT: Pure Intelligence</p>
+                      <p className="text-[10px] text-slate-500 font-medium mt-1.5 leading-normal">Predictive analytics, business decisions, AI agents</p>
                     </div>
                   </div>
 
