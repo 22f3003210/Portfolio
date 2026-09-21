@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { BusinessOSSection } from '../sections/home/BusinessOSSection';
-import { FoundersOfficeSection } from '../sections/home/FoundersOfficeSection';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -342,9 +341,6 @@ export function Consulting() {
           </div>
         </div>
       </section>
-
-      {/* Founder's Office Positioning Statement */}
-      <FoundersOfficeSection />
 
       {/* Mission & Vision Section (White / Soft Gray Backgrounds) */}
       <section className="py-20 md:py-28 px-6 bg-white border-b border-slate-100">

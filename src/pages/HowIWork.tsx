@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { FoundersOfficeSection } from '../sections/home/FoundersOfficeSection';
 import {
   Search,
   Database,
@@ -231,89 +232,8 @@ export function HowIWork() {
     <div className="bg-white font-sans overflow-hidden text-[#0B1E2E]">
 
       {/* ══ PAGE TITLE HERO ═══════════════════════════════════ */}
-      <section className="relative bg-[#0B1E2E] pt-20 pb-16 px-6 overflow-hidden border-b border-white/5">
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(white_1px,transparent_1px)] [background-size:24px_24px]" />
-        
-        {/* Ambient glows */}
-        <div className="absolute -top-40 -left-40 w-[400px] h-[400px] bg-[#0170B9]/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute -bottom-20 right-0 w-[300px] h-[300px] bg-[#8BC63F]/5 rounded-full blur-[80px] pointer-events-none" />
-
-        <div className="max-w-[850px] mx-auto relative z-10 text-center space-y-8">
-          
-          {/* How I Work badge */}
-          <motion.div {...fadeUp(0)}>
-            <span className="inline-block text-[10px] font-black uppercase tracking-[0.25em] text-[#8BC63F] border border-[#8BC63F]/30 px-4 py-1.5 font-mono">
-              How I Work
-            </span>
-          </motion.div>
-
-          {/* 1. Highlight Sam Altman's Message (Focal Point) */}
-          <motion.div 
-            {...fadeUp(0.06)}
-            className="bg-[#0170B9]/5 border border-[#0170B9]/20 rounded-2xl p-6 md:p-8 max-w-[750px] mx-auto relative overflow-hidden backdrop-blur-sm shadow-2xl"
-          >
-            {/* Soft decorative visual background ring */}
-            <div className="absolute -right-10 -bottom-10 w-28 h-28 bg-[#8BC63F]/10 rounded-full blur-xl pointer-events-none" />
-            
-            <p className="text-sm md:text-base text-slate-200 leading-relaxed italic font-medium">
-              "We are moving toward a world where intelligence becomes a utility—much like electricity, water, or internet connectivity."
-            </p>
-            <div className="mt-3.5 flex items-center justify-center gap-2">
-              <span className="h-px w-6 bg-slate-600" />
-              <span className="text-[10px] text-[#8BC63F] font-black uppercase tracking-wider font-mono">Sam Altman</span>
-            </div>
-          </motion.div>
-
-          {/* 2. Core Philosophy & Rich Supporting Context */}
-          <div className="space-y-6 pt-4 max-w-[700px] mx-auto text-left">
-            <div className="text-center space-y-2">
-              <motion.h2 
-                {...fadeUp(0.12)}
-                className="text-2xl md:text-3xl font-extrabold text-white tracking-tight leading-tight"
-              >
-                Intelligence is the output. <br className="sm:hidden" />
-                <span className="text-[#8BC63F]">Data is the input.</span>
-              </motion.h2>
-              
-              <motion.p 
-                {...fadeUp(0.18)}
-                className="text-xs md:text-sm text-[#8BC63F] font-black uppercase tracking-wider font-mono"
-              >
-                You never know what you can't see.
-              </motion.p>
-            </div>
-            
-            <motion.div 
-              {...fadeUp(0.24)}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/[0.02] border border-white/5 p-6 rounded-2xl"
-            >
-              {[
-                "Know what exists and what needs to be measured before making decisions.",
-                "Determine what data should be collected and why it matters.",
-                "Convert business activities into meaningful performance metrics.",
-                "Visualize trends and answer key business questions.",
-                "Understand why outcomes happened, not just what happened."
-              ].map((point, idx) => (
-                <div key={idx} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-[#8BC63F] shrink-0 mt-0.5" />
-                  <span className="text-xs text-slate-300 leading-relaxed font-medium">{point}</span>
-                </div>
-              ))}
-              
-              <div className="md:col-span-2 pt-4 border-t border-white/5 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#8BC63F]/10 border border-[#8BC63F]/20 flex items-center justify-center shrink-0">
-                  <TrendingUp className="w-4 h-4 text-[#8BC63F]" />
-                </div>
-                <p className="text-xs md:text-sm font-bold text-white">
-                  And thus, a detailed <span className="text-[#8BC63F]">Intelligence Architecture</span> is ready.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-          
-        </div>
-      </section>
+      {/* ══ PAGE TITLE HERO (FOUNDER'S OFFICE MODEL) ═══════════════════════ */}
+      <FoundersOfficeSection />
 
       {/* ══ 3. METHODOLOGY: DATA INTELLIGENCE LIFECYCLE (Below Hero) ═══════════════════════ */}
       <section className="relative bg-[#071624] py-14 px-6 overflow-hidden border-b border-white/5">
