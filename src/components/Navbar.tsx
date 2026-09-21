@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LogIn, ShieldCheck, Users, ChevronDown } from 'lucide-react';
+import { Menu, X, LogIn, ShieldCheck, Users, ChevronDown, ArrowRight } from 'lucide-react';
 import { usePortal } from '../context/PortalContext';
 
 const navLinks = [
@@ -65,6 +66,18 @@ export function Navbar() {
     setLoginDropdownOpen(false);
     setMobileOpen(false);
   }, [location.pathname]);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileOpen]);
 
   const isActive = (to: string) => {
     if (to === '/') return location.pathname === '/' && !location.hash;
@@ -210,13 +223,61 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="md:hidden fixed inset-0 top-[70px] bg-[#0b2341] z-40 border-t border-white/10 animate-in fade-in slide-in-from-top-4 duration-250">
-          <div className="px-6 py-8">
-            <div className="flex flex-col gap-2">
+      {/* Mobile Menu Portal */}
+      {mobileOpen && typeof document !== 'undefined' && createPortal(
+        <div className="md:hidden fixed inset-0 z-[99999] bg-[#0b2341] flex flex-col h-[100dvh] w-screen overflow-hidden">
+          {/* Top Header inside Portal */}
+          <div className="flex items-center justify-between px-6 h-16 border-b border-white/10 bg-[#0b2341] shrink-0">
+            <Link 
+              to="/" 
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-3"
+            >
+              <svg viewBox="0 0 100 100" className="w-8 h-8 flex-shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="18,80 47,20 59,20 30,80" fill="white" />
+                <polygon points="53,20 82,80 70,80 41,20" fill="#8bc34a" />
+                <polygon points="26,58 35,58 65,58 74,58 68,64 32,64" fill="white" />
+              </svg>
+              <div className="flex flex-col">
+                <span className="text-[14px] font-extrabold leading-tight text-white tracking-tight">
+                  SCALE WITH ABRAHAM
+                </span>
+                <span className="text-[8px] font-bold uppercase tracking-[0.12em] text-[#8bc34a] leading-tight mt-0.5">
+                  SYSTEMS & RETAIL CONSULTING
+                </span>
+              </div>
+            </Link>
+
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 text-white hover:bg-white/20 transition-colors"
+              aria-label="Close menu"
+            >
+              <X className="w-5 h-5 text-white" />
+            </button>
+          </div>
+
+          {/* Scrollable Navigation Body */}
+          <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col justify-between bg-[#0b2341]">
+            <div className="flex flex-col gap-1.5">
               {visibleLinks.map((link) => {
                 const active = isActive(link.to);
+                const isContact = link.label === 'Get in Touch';
+
+                if (isContact) {
+                  return (
+                    <div key={link.to} className="pt-3 mt-2 border-t border-white/10">
+                      <Link
+                        to={link.to}
+                        onClick={() => setMobileOpen(false)}
+                        className="w-full text-center py-3.5 px-4 text-xs font-black uppercase tracking-wider bg-[#8bc34a] text-[#0b2341] hover:bg-[#9ed852] rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all"
+                      >
+                        GET IN TOUCH <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  );
+                }
+
                 return (
                   <Link
                     key={link.to}
@@ -227,46 +288,60 @@ export function Navbar() {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }
                     }}
-                    className={`px-4 py-2.5 rounded-none text-xs font-black uppercase tracking-wider transition-colors block ${
+                    className={`flex items-center justify-between px-4 py-3 rounded-lg text-xs font-black uppercase tracking-wider transition-all ${
                       active
-                        ? 'text-white bg-white/10 font-bold'
-                        : 'text-slate-300 hover:text-white hover:bg-white/5'
+                        ? 'text-[#8bc34a] bg-white/10 border border-[#8bc34a]/30 font-bold'
+                        : 'text-white/90 hover:text-white hover:bg-white/5 border border-transparent'
                     }`}
                   >
-                    {link.label}
+                    <span>{link.label}</span>
+                    {active && (
+                      <span className="w-2 h-2 rounded-full bg-[#8bc34a]" />
+                    )}
                   </Link>
                 );
               })}
 
               {/* Mobile Login section */}
               {isPortalVisible && (
-                <div className="border-t border-white/10 mt-2 pt-3">
-                  <span className="px-4 text-[9px] font-black text-[#8bc34a] uppercase tracking-widest block mb-2">Login</span>
-                  <Link
-                    to="/admin"
-                    onClick={() => setMobileOpen(false)}
-                    className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-colors ${
-                      location.pathname === '/admin' ? 'text-[#d4af37] bg-white/10' : 'text-slate-300 hover:text-[#d4af37] hover:bg-white/5'
-                    }`}
-                  >
-                    <ShieldCheck className="w-4 h-4" />
-                    Admin Login
-                  </Link>
-                  <Link
-                    to="/tracker"
-                    onClick={() => setMobileOpen(false)}
-                    className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-colors ${
-                      location.pathname === '/tracker' ? 'text-[#8bc34a] bg-white/10' : 'text-slate-300 hover:text-[#8bc34a] hover:bg-white/5'
-                    }`}
-                  >
-                    <Users className="w-4 h-4" />
-                    Client Portal
-                  </Link>
+                <div className="border-t border-white/10 mt-3 pt-3">
+                  <span className="px-4 text-[9px] font-black text-[#8bc34a] uppercase tracking-widest block mb-2 font-mono">
+                    Portals
+                  </span>
+                  <div className="grid grid-cols-1 gap-2">
+                    <Link
+                      to="/admin"
+                      onClick={() => setMobileOpen(false)}
+                      className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 rounded-lg transition-colors ${
+                        location.pathname === '/admin' ? 'text-[#d4af37] bg-white/10' : 'text-slate-300 hover:text-[#d4af37] hover:bg-white/5'
+                      }`}
+                    >
+                      <ShieldCheck className="w-4 h-4 text-[#d4af37]" />
+                      Admin Login
+                    </Link>
+                    <Link
+                      to="/tracker"
+                      onClick={() => setMobileOpen(false)}
+                      className={`px-4 py-2.5 text-xs font-black uppercase tracking-wider flex items-center gap-2.5 rounded-lg transition-colors ${
+                        location.pathname === '/tracker' ? 'text-[#8bc34a] bg-white/10' : 'text-slate-300 hover:text-[#8bc34a] hover:bg-white/5'
+                      }`}
+                    >
+                      <Users className="w-4 h-4 text-[#8bc34a]" />
+                      Client Portal
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
+
+            {/* Subtle Footer inside Menu */}
+            <div className="pt-6 border-t border-white/10 mt-6 text-center text-xs text-white/40">
+              <p className="font-semibold text-white/70">Scale With Abraham</p>
+              <p className="text-[10px] mt-0.5 tracking-wider uppercase">Systems & Retail Consulting</p>
+            </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </nav>
   );
