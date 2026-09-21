@@ -1,15 +1,22 @@
-const CACHE_NAME = 'scale-with-abraham-v1';
+const CACHE_NAME = 'scale-with-abraham-v2';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(clients.claim());
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          return caches.delete(cacheName);
+        })
+      );
+    }).then(() => self.clients.claim())
+  );
 });
 
 self.addEventListener('fetch', (event) => {
-  // Let the browser handle standard network requests
   event.respondWith(
     fetch(event.request).catch(() => {
       return caches.match(event.request);
