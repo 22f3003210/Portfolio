@@ -12,22 +12,22 @@ export function CTASection() {
       <div className="w-full px-6">
         <div className="max-w-[1200px] mx-auto">
           <ScrollReveal>
-            <div className="bg-navy rounded-none p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <div className="bg-[#0b2341] rounded-none p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 shadow-xl">
               {/* Left - Contact info */}
               <div className="flex flex-col gap-6">
                 <h2 className="text-3xl md:text-4xl font-bold text-white">
                   Ready to plug the leaks?
                 </h2>
-                <p className="text-base text-white/70">
+                <p className="text-base text-slate-200">
                   Let's map your end-to-end revenue engine. Strategy + execution + dashboards.
                 </p>
                 <ul className="space-y-3">
-                  <li className="flex items-center gap-3 text-sm text-white/80">
-                    <Phone className="w-4 h-4 text-gold" />
+                  <li className="flex items-center gap-3 text-sm text-white">
+                    <Phone className="w-4 h-4 text-[#8bc34a]" />
                     +91 9160863406
                   </li>
-                  <li className="flex items-center gap-3 text-sm text-white/80">
-                    <MapPin className="w-4 h-4 text-gold" />
+                  <li className="flex items-center gap-3 text-sm text-white">
+                    <MapPin className="w-4 h-4 text-[#8bc34a]" />
                     Hyderabad, Telangana
                   </li>
                   <li>
@@ -35,9 +35,9 @@ export function CTASection() {
                       href="https://linkedin.com/in/abrahamsayed"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-sm text-white/80 hover:text-white transition-colors"
+                      className="flex items-center gap-3 text-sm text-slate-200 hover:text-white transition-colors"
                     >
-                      <Linkedin className="w-4 h-4 text-gold" />
+                      <Linkedin className="w-4 h-4 text-[#8bc34a]" />
                       /in/abrahamsayed
                     </a>
                   </li>

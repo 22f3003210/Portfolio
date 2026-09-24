@@ -13,7 +13,7 @@ interface GoldButtonProps {
 }
 
 export function GoldButton({ children, to, href, onClick, className = '', fullWidth = false, icon, type = 'button' }: GoldButtonProps) {
-  const baseClasses = `inline-flex items-center justify-center gap-2 px-6 py-3 bg-gold text-white font-semibold text-sm rounded-none transition-all duration-200 hover:bg-gold-light hover:shadow-gold ${fullWidth ? 'w-full' : ''} ${className}`;
+  const baseClasses = `inline-flex items-center justify-center gap-2 px-6 py-3 bg-gold text-[#0B1E2E] font-bold text-sm rounded-none transition-all duration-200 hover:bg-gold-light hover:shadow-gold ${fullWidth ? 'w-full' : ''} ${className}`;
 
   if (to) {
     return (

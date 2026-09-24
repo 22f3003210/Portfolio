@@ -162,7 +162,7 @@ export function OutcomeEngineSection() {
 
         {/* Module Badge */}
         <ScrollReveal>
-          <span className="text-[10px] font-extrabold uppercase tracking-widest text-gold bg-gold/10 px-2.5 py-0.5 border border-gold/25 self-start inline-block mb-4">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#2d6215] bg-[#2d6215]/10 px-3 py-1 border border-[#2d6215]/25 self-start inline-block mb-4">
             03 . OUTCOME ENGINE &amp; PROCESS LEAK AUDIT
           </span>
         </ScrollReveal>
@@ -170,7 +170,7 @@ export function OutcomeEngineSection() {
         {/* Section Title */}
         <ScrollReveal delay={0.05}>
           <h2 className="font-extrabold text-2xl sm:text-[2.25rem] text-navy tracking-tight leading-tight mb-4">
-            Stop fighting the market. <span className="text-gold">Engineer it.</span>
+            Stop fighting the market. <span className="text-[#0170B9]">Engineer it.</span>
           </h2>
         </ScrollReveal>
 
@@ -335,7 +335,7 @@ export function OutcomeEngineSection() {
                 </svg>
               </div>
 
-              <span className="text-[10px] font-bold text-text-muted tracking-widest uppercase font-mono mt-3">
+              <span className="text-xs font-bold text-slate-500 tracking-widest uppercase font-mono mt-3">
                 Hover or Tap Wedges to Interact
               </span>
             </div>
@@ -345,13 +345,13 @@ export function OutcomeEngineSection() {
 
               <div className="flex flex-col gap-4">
                 {/* Active petal header */}
-                <div className="border-l-2 border-gold pl-3">
-                  <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block">
+                <div className="border-l-2 border-[#8a6320] pl-3">
+                  <span className="text-xs font-black text-[#8a6320] uppercase tracking-widest font-mono block">
                     {petals[activePetal].subtitle}
                   </span>
-                  <h4 className="text-xl font-black text-navy uppercase tracking-tight mt-1">
+                  <h3 className="text-xl font-black text-navy uppercase tracking-tight mt-1">
                     {petals[activePetal].title}
-                  </h4>
+                  </h3>
                 </div>
 
                 {/* Description */}
@@ -361,13 +361,13 @@ export function OutcomeEngineSection() {
 
                 {/* Bullet list */}
                 <div>
-                  <span className="text-[10px] font-black text-text-muted uppercase tracking-widest font-mono block mb-2.5">
+                  <span className="text-xs font-black text-slate-500 uppercase tracking-widest font-mono block mb-2.5">
                     {petals[activePetal].bulletHeader}
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {petals[activePetal].bullets.map((bullet, idx) => (
                       <div key={idx} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-[#8CC63F] shrink-0" />
+                        <span className="w-1.5 h-1.5 bg-[#2d6215] shrink-0" />
                         <span className="text-xs text-navy font-semibold">{bullet}</span>
                       </div>
                     ))}
@@ -377,10 +377,10 @@ export function OutcomeEngineSection() {
 
               <div className="flex flex-col gap-3 mt-2">
                 {/* Key Question */}
-                <div className="bg-amber-50 border border-gold/30 p-4 flex items-start gap-3">
-                  <HelpCircle className="w-5 h-5 text-gold shrink-0 mt-0.5" />
+                <div className="bg-amber-50 border border-[#8a6320]/30 p-4 flex items-start gap-3">
+                  <HelpCircle className="w-5 h-5 text-[#8a6320] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[9px] font-black text-gold uppercase tracking-widest block mb-1 font-mono">
+                    <span className="text-xs font-black text-[#8a6320] uppercase tracking-widest block mb-1 font-mono">
                       Key Audit Question
                     </span>
                     <p className="text-xs sm:text-[13px] text-navy leading-relaxed font-semibold italic">
@@ -390,10 +390,10 @@ export function OutcomeEngineSection() {
                 </div>
 
                 {/* Outcome */}
-                <div className="bg-green-50 border border-[#8CC63F]/30 p-4 flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#8CC63F] shrink-0 mt-0.5" />
+                <div className="bg-green-50 border border-[#2d6215]/30 p-4 flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#2d6215] shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[9px] font-black text-[#4a7a1e] uppercase tracking-widest block mb-1 font-mono">
+                    <span className="text-xs font-black text-[#2d6215] uppercase tracking-widest block mb-1 font-mono">
                       Target Outcome
                     </span>
                     <p className="text-xs sm:text-[13px] text-navy leading-relaxed font-semibold">
@@ -410,7 +410,7 @@ export function OutcomeEngineSection() {
         {/* Footer */}
         <ScrollReveal delay={0.2}>
           <div className="mt-8 pt-6 border-t border-border-light flex justify-center text-center">
-            <p className="text-xs sm:text-sm text-[#4a7a1e] font-bold max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#2d6215] font-bold max-w-2xl leading-relaxed">
               If your operational infrastructure is holding back your growth, it's time to rebuild.
             </p>
           </div>

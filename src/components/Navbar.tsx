@@ -109,7 +109,7 @@ export function Navbar() {
               <span className="text-[15px] font-extrabold leading-tight text-white tracking-tight">
                 SCALE WITH ABRAHAM
               </span>
-              <span className="text-[8.5px] font-bold uppercase tracking-[0.12em] text-[#8bc34a] leading-tight mt-0.5">
+              <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#8bc34a] leading-tight mt-0.5">
                 SYSTEMS & RETAIL CONSULTING
               </span>
             </div>
@@ -124,7 +124,7 @@ export function Navbar() {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className="text-[10px] font-black uppercase tracking-wider bg-white text-[#0b2341] px-5 py-2.5 transition-all duration-300 hover:bg-[#8bc34a] hover:text-white rounded-sm shadow-sm flex items-center gap-1.5"
+                    className="text-xs font-black uppercase tracking-wider bg-white text-[#0b2341] px-5 py-2.5 transition-all duration-300 hover:bg-[#8bc34a] hover:text-white rounded-sm shadow-sm flex items-center gap-1.5"
                   >
                     GET IN TOUCH <span className="text-xs">&rarr;</span>
                   </Link>
@@ -242,7 +242,7 @@ export function Navbar() {
                 <span className="text-[14px] font-extrabold leading-tight text-white tracking-tight">
                   SCALE WITH ABRAHAM
                 </span>
-                <span className="text-[8px] font-bold uppercase tracking-[0.12em] text-[#8bc34a] leading-tight mt-0.5">
+                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#8bc34a] leading-tight mt-0.5">
                   SYSTEMS & RETAIL CONSULTING
                 </span>
               </div>
@@ -336,8 +336,8 @@ export function Navbar() {
 
             {/* Subtle Footer inside Menu */}
             <div className="pt-6 border-t border-white/10 mt-6 text-center text-xs text-white/40">
-              <p className="font-semibold text-white/70">Scale With Abraham</p>
-              <p className="text-[10px] mt-0.5 tracking-wider uppercase">Systems & Retail Consulting</p>
+              <p className="font-semibold text-white/80">Scale With Abraham</p>
+              <p className="text-xs mt-0.5 tracking-wider uppercase text-white/60">Systems & Retail Consulting</p>
             </div>
           </div>
         </div>,

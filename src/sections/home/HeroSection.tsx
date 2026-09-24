@@ -87,7 +87,7 @@ export function HeroSection() {
             {/* Badge */}
             <motion.span
               {...fadeUp(0)}
-              className="self-start px-3 py-[5px] text-[11px] font-black uppercase tracking-[0.14em] border rounded-sm"
+              className="self-start px-3 py-[5px] text-xs font-black uppercase tracking-[0.14em] border rounded-sm"
               style={{ color: BLUE, borderColor: `${BLUE}55` }}
             >
               Retail Business Management Consultant
@@ -136,7 +136,7 @@ export function HeroSection() {
             <motion.div {...fadeUp(0.25)} className="flex flex-wrap gap-3 pt-1 clear-both">
               <Link
                 to="/#contact"
-                className="inline-flex items-center gap-2 text-white text-[12px] font-black uppercase tracking-wider px-6 py-[13px] transition-opacity hover:opacity-90 shadow-md rounded-sm"
+                className="inline-flex items-center gap-2 text-[#0B1E2E] text-xs font-black uppercase tracking-wider px-6 py-[13px] transition-opacity hover:opacity-90 shadow-md rounded-sm"
                 style={{ background: GREEN }}
               >
                 <Calendar className="w-4 h-4" />
@@ -179,19 +179,19 @@ export function HeroSection() {
                     <div className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300
                       ${isBlue 
                         ? 'bg-blue-50/60 text-[#1f5fbf] border-blue-100/50 group-hover:bg-[#1f5fbf] group-hover:text-white group-hover:border-[#1f5fbf]' 
-                        : 'bg-green-50/60 text-[#8bc34a] border-green-100/50 group-hover:bg-[#8bc34a] group-hover:text-white group-hover:border-[#8bc34a]'
+                        : 'bg-green-50/60 text-[#2d6215] border-green-100/50 group-hover:bg-[#2d6215] group-hover:text-white group-hover:border-[#2d6215]'
                       }`}
                     >
                       <IconComponent size={18} strokeWidth={2.2} />
                     </div>
                   </div>
                   <p
-                    className="text-[10.5px] font-black uppercase tracking-wide leading-tight whitespace-pre-line"
+                    className="text-xs font-black uppercase tracking-wide leading-tight whitespace-pre-line"
                     style={{ color: NAVY }}
                   >
                     {cap.title}
                   </p>
-                  <p className="text-[10px] text-gray-500 leading-relaxed">{cap.desc}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed">{cap.desc}</p>
                   <div className="w-8 h-[2px] rounded-full mt-auto transition-all duration-300 group-hover:w-12" style={{ background: GREEN }} />
                 </div>
               );

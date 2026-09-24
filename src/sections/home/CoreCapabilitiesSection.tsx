@@ -203,25 +203,25 @@ function CapabilityModal({ cap, onClose }: { cap: Capability; onClose: () => voi
           <ContourPattern color="rgba(255,255,255,1)" />
           <div className="relative z-10 flex justify-between items-start">
             <div>
-              <span className="text-[9px] font-black uppercase tracking-widest text-white/70 font-mono block mb-1.5">
+              <span className="text-xs font-black uppercase tracking-widest text-white/90 font-mono block mb-1.5">
                 {tag}
               </span>
               <h3 className="text-xl font-extrabold text-white uppercase tracking-tight leading-tight">
                 {title}
               </h3>
             </div>
-            <button onClick={onClose} className="text-white/70 hover:text-white p-1" aria-label="Close">
+            <button onClick={onClose} className="text-white/90 hover:text-white p-1" aria-label="Close">
               <X className="w-5 h-5" />
             </button>
           </div>
-          <p className="relative z-10 text-sm text-white/80 font-medium leading-relaxed mt-3">
+          <p className="relative z-10 text-sm text-white font-medium leading-relaxed mt-3">
             {description}
           </p>
         </div>
 
         {/* Sub-capabilities */}
         <div className="p-6">
-          <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 font-mono block mb-4">
+          <span className="text-xs font-black uppercase tracking-widest text-slate-500 font-mono block mb-4">
             Sub-Capabilities
           </span>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -268,7 +268,7 @@ function CapabilityCard({ cap, onOpen }: { cap: Capability; onOpen: () => void }
       {/* Content */}
       <div className="relative z-10 flex flex-col flex-1 gap-3">
         {/* Tag */}
-        <span className="text-[9px] font-black uppercase tracking-widest text-white/60 font-mono">
+        <span className="text-xs font-black uppercase tracking-widest text-white/90 font-mono">
           {tag}
         </span>
 
@@ -278,7 +278,7 @@ function CapabilityCard({ cap, onOpen }: { cap: Capability; onOpen: () => void }
         </h3>
 
         {/* Description */}
-        <p className="text-[13px] text-white/80 font-medium leading-relaxed">
+        <p className="text-xs md:text-sm text-white/95 font-medium leading-relaxed">
           {description}
         </p>
       </div>
@@ -288,8 +288,8 @@ function CapabilityCard({ cap, onOpen }: { cap: Capability; onOpen: () => void }
         <div className="opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-300">
           {icons[id]}
         </div>
-        <span className="flex items-center gap-1 text-[10px] font-black uppercase tracking-widest text-white/60 group-hover:text-white/90 transition-colors">
-          View Capabilities <ChevronRight className="w-3 h-3" />
+        <span className="flex items-center gap-1 text-xs font-black uppercase tracking-widest text-white/90 group-hover:text-white transition-colors">
+          View Capabilities <ChevronRight className="w-3.5 h-3.5" />
         </span>
       </div>
     </button>
@@ -307,14 +307,14 @@ export function CoreCapabilitiesSection() {
 
         {/* Header */}
         <div className="mb-12 max-w-3xl">
-          <span className="text-[10px] font-black text-gold uppercase tracking-widest font-mono block mb-3">
+          <span className="text-xs font-black text-[#2d6215] uppercase tracking-widest font-mono block mb-3">
             Core Capabilities
           </span>
           <h2 className="text-3xl md:text-4xl font-black text-navy uppercase tracking-tight leading-tight mb-4">
             A Structured Approach to{' '}
             <span className="text-[#0170B9]">Business Excellence</span>
           </h2>
-          <p className="text-sm text-gray-500 font-medium leading-relaxed max-w-2xl">
+          <p className="text-sm text-slate-600 font-medium leading-relaxed max-w-2xl">
             A structured approach to understanding business challenges, improving operational
             performance, and enabling sustainable growth through systems thinking, process
             excellence, and decision intelligence.
@@ -338,7 +338,7 @@ export function CoreCapabilitiesSection() {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-gray-400 font-medium mt-12 max-w-2xl mx-auto leading-relaxed border-t border-gray-200 pt-8">
+        <p className="text-center text-xs text-slate-600 font-medium mt-12 max-w-2xl mx-auto leading-relaxed border-t border-gray-200 pt-8">
           Combining business insight, operational excellence, performance intelligence, and
           technology enablement to create scalable, high-performing organizations.
         </p>

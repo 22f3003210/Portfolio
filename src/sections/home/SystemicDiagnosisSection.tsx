@@ -339,10 +339,10 @@ export function SystemicDiagnosisSection() {
                             <div className="flex items-center justify-between gap-2">
                               {/* Replaced 'Core Symptom' with Descriptive Theme Tag */}
                               <span className={cn(
-                                "text-[9px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-none border transition-colors duration-300",
+                                "text-xs font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-none border transition-colors duration-300",
                                 isActive 
                                   ? "bg-white/10 text-white border-white/20"
-                                  : "bg-slate-50 text-slate-400 border-slate-200"
+                                  : "bg-slate-50 text-slate-600 border-slate-300"
                               )}>
                                 {theme.name}
                               </span>
@@ -351,7 +351,7 @@ export function SystemicDiagnosisSection() {
                                 "w-8 h-8 rounded-none flex items-center justify-center border transition-all duration-300",
                                 isActive 
                                   ? "bg-white/10 text-white border-white/20 scale-110"
-                                  : "bg-slate-50 text-slate-400 border-slate-200"
+                                  : "bg-slate-50 text-slate-600 border-slate-300"
                               )}>
                                 <Icon className="w-4 h-4" />
                               </div>
@@ -369,7 +369,7 @@ export function SystemicDiagnosisSection() {
                             
                             <p className={cn(
                               "text-xs sm:text-sm leading-relaxed transition-colors duration-300",
-                              isActive ? "text-white/90" : "text-slate-600"
+                              isActive ? "text-white/90" : "text-slate-700"
                             )}>
                               {problem.statement}
                             </p>
@@ -377,14 +377,14 @@ export function SystemicDiagnosisSection() {
                             {/* Bullets (2 columns on tablet/desktop) */}
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 pt-2">
                               {problem.bullets.map((bullet, bIdx) => (
-                                <li key={bIdx} className="flex items-start gap-2 text-[10.5px] sm:text-xs font-medium leading-snug group/item">
+                                <li key={bIdx} className="flex items-start gap-2 text-xs font-medium leading-snug group/item">
                                   <span className={cn(
                                     "w-1.5 h-1.5 rounded-none mt-1.5 shrink-0 transition-colors duration-300",
-                                    isActive ? "bg-white" : "bg-slate-400"
+                                    isActive ? "bg-white" : "bg-slate-500"
                                   )} />
                                   <span className={cn(
                                     "transition-colors duration-300",
-                                    isActive ? "text-white/95" : "text-slate-600"
+                                    isActive ? "text-white/95" : "text-slate-700"
                                   )}>{bullet}</span>
                                 </li>
                               ))}
@@ -399,14 +399,14 @@ export function SystemicDiagnosisSection() {
                               : "bg-slate-50/40 border-slate-200"
                           )}>
                             <span className={cn(
-                              "text-[8px] font-black uppercase tracking-widest block",
-                              isActive ? theme.impactTextColor : "text-red-600"
+                              "text-xs font-black uppercase tracking-widest block",
+                              isActive ? theme.impactTextColor : "text-red-700"
                             )}>
                               OPERATIONAL IMPACT
                             </span>
                             <p className={cn(
-                              "text-[10.5px] sm:text-[11px] font-semibold leading-snug mt-0.5",
-                              isActive ? "text-white" : "text-slate-700"
+                              "text-xs sm:text-sm font-semibold leading-snug mt-0.5",
+                              isActive ? "text-white" : "text-slate-800"
                             )}>
                               {problem.impact}
                             </p>

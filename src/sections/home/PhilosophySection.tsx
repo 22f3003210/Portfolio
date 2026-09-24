@@ -19,7 +19,7 @@ export function PhilosophySection() {
           <ScrollReveal delay={0.1}>
             <h2 className="text-3xl md:text-5xl font-black mb-6 text-slate-900 uppercase tracking-tight leading-tight">
               "What gets measured can be <span className="text-blue-700">understood</span>.<br />
-              What gets understood can be <span className="text-[#558b2f]">improved</span>."
+              What gets understood can be <span className="text-[#2d6215]">improved</span>."
             </h2>
           </ScrollReveal>
 

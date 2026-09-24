@@ -8,7 +8,7 @@ export function WhatsAppButton() {
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       {/* Permanent separate card with 'Chat on WhatsApp' text */}
-      <div className="mb-3 px-4 py-2 rounded-xl bg-slate-950/95 text-white text-[10px] font-extrabold tracking-wider shadow-2xl border border-white/10 whitespace-nowrap select-none flex items-center gap-2">
+      <div className="mb-3 px-4 py-2 rounded-xl bg-slate-950/95 text-white text-xs font-bold tracking-wider shadow-2xl border border-white/10 whitespace-nowrap select-none flex items-center gap-2">
         {/* Active status indicator dot */}
         <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse" />
         <span>Chat on WhatsApp</span>

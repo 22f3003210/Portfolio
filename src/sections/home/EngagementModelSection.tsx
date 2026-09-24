@@ -80,11 +80,11 @@ export function EngagementModelSection() {
             >
               {/* Cartoon Illustration Container */}
               <div
-                className="border-2 border-dashed border-navy/20 bg-white p-3 mb-5 aspect-[4/3] w-full flex items-center justify-center overflow-hidden transition-all duration-300 hover:border-gold/40"
+                className="border-2 border-dashed border-navy/20 bg-white p-3 mb-5 aspect-[4/3] w-full flex items-center justify-center overflow-hidden transition-all duration-300 hover:border-[#0170B9]/40"
               >
                 <img
                   src={step.img}
-                  alt={step.title}
+                  alt={`Illustration of engagement step: ${step.title}`}
                   className="max-h-full max-w-full object-contain transition-transform duration-500 hover:scale-[1.05]"
                   loading="lazy"
                 />
@@ -92,7 +92,7 @@ export function EngagementModelSection() {
 
               {/* Number */}
               <div
-                className="text-[48px] font-extrabold leading-none text-navy opacity-30"
+                className="text-[48px] font-extrabold leading-none text-navy/60"
               >
                 {step.num}
               </div>
@@ -104,13 +104,13 @@ export function EngagementModelSection() {
 
               {/* Timeline Subtitle */}
               <div
-                className="mt-2 text-[12px] font-semibold uppercase tracking-[0.08em] text-gold"
+                className="mt-2 text-xs font-bold uppercase tracking-[0.08em] text-[#0170B9]"
               >
                 {step.timeline}
               </div>
 
               {/* Description */}
-              <p className="mt-3 text-[15px] font-normal text-text-secondary leading-[1.6]">
+              <p className="mt-3 text-[15px] font-normal text-slate-600 leading-[1.6]">
                 {step.desc}
               </p>
             </motion.div>
